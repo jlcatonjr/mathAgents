@@ -1,12 +1,12 @@
 {
   "gate": "G-KERNEL",
   "verdict": "PASS",
-  "checked_at": "2026-10-01T22:34:15+00:00",
-  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "checked_at": "2026-11-10T19:11:05+00:00",
+  "lean_version": "Lean (version 4.34.1, arm64-apple-darwin24.6.0, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
   "toolchain_pin": "leanprover/lean4:v4.34.1",
-  "commit": "6fdbd26ad134ba6a411836e3a57b776021024aca",
+  "commit": "e760f696420ffa8f39cca868f6c769aaf225ffbb",
   "dirty": false,
-  "source_sha256": "831ca7740149e182a026f69dd2b0dff47a057a38bc71e1122a92a854b37735f6",
+  "source_sha256": "aec568910a1d7456aa2a2c1451382efdd3b4c32093414325db5e3f23a4796289",
   "lean_namespace": "MathAgents.P3DutchBook",
   "declarations": [
     {

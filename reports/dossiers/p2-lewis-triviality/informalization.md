@@ -2,7 +2,7 @@
 
 > **Produced by:** `@lean-informalization` · 2026-10-01
 > **Target reader:** working mathematicians and philosophers of science familiar with probability on Boolean algebras and with the probabilities-of-conditionals literature. Statement-level narration only; no proof internals.
-> **Source of truth:** `lean/MathAgents/P2LewisTriviality.lean`, namespace `MathAgents.P2LewisTriviality`. Statuses and axioms are from the G-KERNEL report `reports/kernel/latest.json` (verdict PASS, checked 2026-10-01T22:34:15Z, commit `6fdbd26`, `dirty: false`), frozen in `kernel-snapshot.json`.
+> **Source of truth:** `lean/MathAgents/P2LewisTriviality.lean`, namespace `MathAgents.P2LewisTriviality`. Statuses and axioms are from the G-KERNEL report `reports/kernel/latest.json` (verdict PASS, checked 2026-11-10T19:11:05Z, commit `e760f696`, `dirty: false`), frozen in `kernel-snapshot.json`.
 > **Statement of record (D29, flagged):** the SEP version of Lewis's Triviality Theorem in Egré and Rott 2026, as quoted in `problem-card.md` and `statement.md` §0. Lewis 1976 is paywalled and was not consulted.
 
 ## 1. Setting and notation
@@ -72,9 +72,9 @@ These carry no author exposition; they are narrated from their statements only. 
 
 ## 5. Foundational envelope (G4)
 
-- **Status.** All 16 declarations of `MathAgents.P2LewisTriviality` (5 definitions, 3 main theorems, 8 `Aux` lemmas) have status `proved` in `reports/kernel/latest.json`; the report lists no findings and no open markers.
+- **Status.** All 16 declarations of `MathAgents.P2LewisTriviality` (5 definitions, 3 main theorems, 8 `Aux` lemmas) have status `proved` in `reports/kernel/latest.json`; the report lists no findings, and none of its open markers is in `lean/MathAgents/P2LewisTriviality.lean`.
 - **Axioms.** Every one depends on exactly `propext`, `Classical.choice`, `Quot.sound`, Lean's standard classical axioms. No `sorry`, no project `axiom`, no `native_decide`. Factorization and Stalnaker's Hypothesis enter only as theorem hypotheses (G-AX-P2-5 `hypothesis`), never as axioms.
-- **Kernel report provenance.** The report was taken on a clean tree at commit `6fdbd26`; the dossier's `kernel-snapshot.json` (Stage 8 assembly) is the binding record.
+- **Kernel report provenance.** The report was taken on a clean tree at commit `e760f696`, the first commit of the public repository's fresh history, where the snapshot was re-taken on 2026-11-10; the dossier's `kernel-snapshot.json` (Stage 8 assembly) is the binding record.
 - **Fidelity.** No kernel-as-judge waiver applies (`preferences.toml` `fidelity.kernel_as_judge = "never"`); the statements went through the operator's G-FID review.
 
 ## 6. What the formal results do not establish

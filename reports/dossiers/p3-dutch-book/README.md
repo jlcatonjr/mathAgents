@@ -3,7 +3,7 @@
 Result status: proved
 
 All three statements were checked by the Lean kernel and approved by the operator at G-FID. None is
-fidelity-waived. The frozen record is in `kernel-snapshot.json` (commit `6fdbd26`, clean tree). The
+fidelity-waived. The frozen record is in `kernel-snapshot.json` (commit `e760f696`, clean tree). The
 axiom envelope is `propext`, `Classical.choice` and `Quot.sound`, with no `sorry`, no added axioms and
 no `native_decide`.
 
