@@ -104,13 +104,17 @@ wait_for_green_ci() {
   head=$("$GH" pr view "$pr" -R "$GH_REPO" --json headRefOid --jq .headRefOid)
   base=$("$GH" pr view "$pr" -R "$GH_REPO" --json baseRefName --jq .baseRefName)
   [[ "$head" =~ ^[0-9a-f]{40}$ ]] || die "cannot read #$pr's head commit"
-  behind=$("$GH" api "repos/$GH_REPO/compare/$base...$head" --jq .behind_by)
+  [[ "$base" =~ ^(main|dev|release/[0-9]+\.[0-9]+)$ ]] || die "#$pr targets $base, not main, dev or release/X.Y"
+  # (gh api takes OWNER/REPO, not the host-qualified GH_REPO that -R takes)
+  behind=$("$GH" api "repos/jlcatonjr/mathAgents/compare/$base...$head" --jq .behind_by) || die "cannot compare #$pr with $base"
   [[ "$behind" == 0 ]] || die "#$pr is $behind commit(s) behind $base: update it, then dispatch Gates on its head"
   echo "no PR checks registered on #$pr; looking for a Gates run dispatched on its head ${head:0:10}"
   run=""
   for i in $(/usr/bin/seq 1 480); do   # up to 4 hours: the long suites take about two
-    run=$("$GH" api "repos/$GH_REPO/actions/workflows/gates.yml/runs?head_sha=$head" \
-            --jq '[.workflow_runs[] | select(.head_sha == "'"$head"'")] | sort_by(.created_at) | last | "\(.id) \(.status) \(.conclusion)"' 2>/dev/null || true)
+    run=$("$GH" api "repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$head" \
+            --jq '[.workflow_runs[] | select(.head_sha == "'"$head"'")] | sort_by(.created_at) | last | "\(.id) \(.status) \(.conclusion)"') \
+      || die "cannot list Gates runs for #$pr's head"
+    [[ "$i" == 20 && "$run" == "null null null" ]] && die "no Gates run on #$pr's head $head after 10 minutes: dispatch one (gh workflow run gates.yml --ref <branch>)"
     case "$run" in
       *" completed "*|*" completed") break ;;
     esac
@@ -118,7 +122,8 @@ wait_for_green_ci() {
   done
   [[ "$run" =~ ^[0-9]+\ completed\ success$ ]] || die "no successful Gates run on #$pr's head $head (latest: ${run:-none})"
   run="${run%% *}"
-  jobs=$("$GH" api "repos/$GH_REPO/actions/runs/$run/jobs" --jq '[.jobs[] | "\(.name)=\(.conclusion)"] | join(" ")')
+  jobs=$("$GH" api "repos/jlcatonjr/mathAgents/actions/runs/$run/jobs" --jq '[.jobs[] | "\(.name)=\(.conclusion)"] | join(" ")') \
+    || die "cannot read the jobs of run $run"
   echo "Gates run $run on ${head:0:10}: $jobs"
   case " $jobs " in *" gates=success "*) ;; *) die "gates did not pass in run $run" ;; esac
   if [[ "$want" == long ]]; then
@@ -127,6 +132,10 @@ wait_for_green_ci() {
   for i in $jobs; do
     case "${i#*=}" in success|skipped) ;; *) die "job ${i%%=*} is ${i#*=} in run $run" ;; esac
   done
+  # The head and the base must not have moved while the run was awaited.
+  [[ "$("$GH" pr view "$pr" -R "$GH_REPO" --json headRefOid --jq .headRefOid)" == "$head" ]] || die "#$pr's head moved past $head"
+  behind=$("$GH" api "repos/jlcatonjr/mathAgents/compare/$base...$head" --jq .behind_by) || die "cannot compare #$pr with $base"
+  [[ "$behind" == 0 ]] || die "$base moved while waiting: #$pr is $behind commit(s) behind"
 }
 # version_at <rev>: the package version at <rev>
 version_at() {

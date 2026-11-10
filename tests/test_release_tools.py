@@ -193,3 +193,18 @@ def test_the_signers_awk_reads_pyproject_as_tomllib_does():
     assert run(tag_awk, "-v", "k=version") == project["version"]
     assert run(lib_awk) == project["version"]
     assert text.count("\n[project]\n") + text.startswith("[project]\n") == 1  # one [project] table
+
+def test_wait_for_green_ci_fallback_uses_owner_repo_api_paths():
+    """@security review of PR #1 (2026-11-10): `gh api` takes OWNER/REPO; GH_REPO is host-qualified for `gh -R`, so
+    `repos/$GH_REPO/...` would be an invalid path. The dispatch fallback reads the run on the PR's exact head."""
+    lib = (ROOT / "scripts" / "operator" / "lib_release.sh").read_text()
+    assert 'GH_REPO="github.com/jlcatonjr/mathAgents"' in lib and "repos/$GH_REPO" not in lib
+    body = lib[lib.index("wait_for_green_ci() {"):lib.index("# version_at <rev>:")]
+    assert 'repos/jlcatonjr/mathAgents/compare/$base...$head' in body
+    assert 'repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$head' in body
+    assert 'select(.head_sha == "\'"$head"\'")' in body
+    assert '^(main|dev|release/[0-9]+\\.[0-9]+)$' in body
+    assert body.count('compare/$base...$head') == 2  # behind_by checked before and after the wait
+    assert '" long-suites=success "' in body
+    rms = (ROOT / "scripts" / "operator" / "release-merge-and-sign.sh").read_text()
+    assert 'wait_for_green_ci "$PR" long' in rms
