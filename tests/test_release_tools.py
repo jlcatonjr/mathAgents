@@ -91,7 +91,9 @@ def test_tag_release_signs_in_a_fresh_clone_not_the_working_checkout():
 def test_tag_release_requires_a_green_long_suites_run_on_the_commit():
     """D46: the long suites run before every release; the tag script refuses a commit they have not passed."""
     script = TAG_RELEASE.read_text()
-    assert 'head_sha=$COMMIT&status=success&event=push' in script
+    assert 'head_sha=$COMMIT&status=success' in script
+    # a push run, or a workflow_dispatch run on exactly this commit (D45 condition 4, third text)
+    assert '.head_sha == "\'"$COMMIT"\'" and (.event == "push" or .event == "workflow_dispatch")' in script
     assert '.name == "long-suites" and .conclusion == "success"' in script
     assert 'die "no successful Gates run on $COMMIT passed long-suites' in script
     assert script.index("LONG_OK") < script.index('tag -s "$TAG"')  # checked before anything is signed
