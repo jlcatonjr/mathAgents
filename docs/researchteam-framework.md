@@ -1,0 +1,416 @@
+# ResearchTeam framework & CLI reference
+
+This document is **framework infrastructure**: it describes the `researchteam` tooling itself and
+is synced to every derived repository by `researchteam update`. It is the same in every instance —
+your project's own identity lives in `README.md`, `CLAUDE.md`, and `brief.json`, not here.
+
+## What researchteam is
+
+`researchteam` is a pip-installable framework that scaffolds and maintains an agent-based research
+project: a team of governance and domain agents (generated from `brief.json` by the companion
+`agentteams` tool), plus the docs, scripts, and checklists that support them. A derived repository
+describes **its own project**; the framework keeps the shared infrastructure current without
+touching your research content.
+
+## Installation
+
+```bash
+# base CLI only — layer-2 file sync, no agent regeneration
+pip install "researchteam @ git+https://github.com/jlcatonjr/researchteam.git@v1.0.2"
+
+# recommended — pulls agentteams in, enabling the layer-1 (agent-team) pass
+pip install "researchteam[update] @ git+https://github.com/jlcatonjr/researchteam.git@v1.0.2"
+
+# adds agentteams' research extra (web search, curated-source rating, claim verification)
+pip install "researchteam[research] @ git+https://github.com/jlcatonjr/researchteam.git@v1.0.2"
+```
+
+These install the signed `v1.0.2` tag, the newest `v1.0.N` (1.0.1 or later is required to resume the
+AgentTeams Autosync). For a verified install (a separate checkout of the tag, its
+signature checked with repository config neutralised), see researchteam `docs/CONTRIBUTING.md`, "Using researchteam".
+
+`agentteams` is not on PyPI and is never installed standalone — routing it through the `[update]`
+extra keeps the two pinned to a compatible pair in one environment. Run `researchteam doctor` to
+verify both resolve in the active interpreter.
+
+**Pinned toolchain (derived repos).** `toolchain.lock` records the researchteam and agentteams
+commits the repo was last synced and verified with; the AgentTeams Autosync rewrites it after each
+green sync. To run exactly that pair:
+
+```bash
+bash scripts/bootstrap_toolchain.sh          # .venv with the pinned commits (gitignored)
+bash scripts/bootstrap_toolchain.sh --local  # editable installs from your own checkouts
+python3 scripts/check_toolchain.py           # installed vs toolchain.lock vs upstream main (not for release-locked pins)
+```
+
+The bootstrap installs researchteam *without* the `[update]` extra, because that extra pins the
+agentteams commit researchteam was released with, which can differ from this repo's lock. It installs
+agentteams *with* its `[signing]` extra (`cryptography`, under the S-10 vetted pins), so signed decision rows
+verify in `.venv`. researchteam runs the `agentteams` installed beside it, so
+`.venv/bin/researchteam` works without activating the venv; it falls back to `PATH` only when none
+is installed beside it, and says so. To be warned at the start of each Claude session, merge
+`.claude/settings.toolchain.example.json` into `.claude/settings.json` (an operator step;
+researchteam never edits `settings.json`). `researchteam doctor` reports both.
+
+## CLI reference
+
+| Command | Description |
+|---|---|
+| `researchteam init [name]` | Scaffold a new project: extract the template, seed a placeholder `brief.json`, and generate a project-specific `README.md` / `CLAUDE.md`. |
+| `researchteam personalize [--force]` | Regenerate `README.md` and `CLAUDE.md`'s project header from the current `brief.json`. |
+| `researchteam materialize [--yes] [--dry-run] [--copilot-only] [--adopt-orphans] [--discard-user-regions] [--no-codex]` | Re-render the agent team on every surface (copilot-vscode plus native claude/goose teams) from `brief.json` after a domain/identity change (cleared `--overwrite` pass per surface), then re-personalize the identity files. |
+| `researchteam update [--yes] [--dry-run] [--layer2-only] [--layer1-only] [--ref REF] [--accept-upstream PATH] [--no-codex]` | Sync framework files from upstream, then merge agent infrastructure: copilot-vscode, then each native claude/goose surface the instance already carries (merge mode, never overwrite), then Codex (native, orchestrator-only; refused otherwise; `--no-codex` leaves Codex unchanged). |
+| `researchteam status` | Show marker info and CLI version. |
+| `researchteam doctor [--drift]` | Diagnose the researchteam ↔ agentteams toolchain, the toolchain pin and frozen fences; `--drift` also checks seeded files and bridges (see *Drift report*). |
+
+## The two-layer update model
+
+| Layer | Covers | Mechanism |
+|---|---|---|
+| **Layer-1** (agentteams-managed) | `.github/agents/`, `.github/copilot-instructions.md`, `AGENTS.md` | `agentteams --update --merge` |
+| **Layer-2** (researchteam-managed) | framework `docs/`, `scripts/`, `.claude/`, the managed block of `CLAUDE.md`, `.gitignore`; for scholarly instances also the interpretation-advisor above its Notes (`above-notes`), the methodology-guide template, and the `researchteam:notes` blocks inside the Notes of four agents on `.github`/`.claude`/`.goose` (agentteams preserves Notes, so the two layers never write the same region) | `researchteam update --layer2-only` |
+
+**User-owned, never overwritten:** `brief.json`, `Projects/`, `references/`.
+
+**Layer-2-only repositories.** A repository whose agent files are maintained by hand has no
+agentteams descriptor (`brief.json` / `.github/agents/_build-description.json`). It can declare
+`layer1 = off` in `.researchteam`. `update` (including the derived autosync) then syncs layer 2
+only, `materialize` refuses, and `doctor` says so. Without that line, a missing descriptor is an
+error that names both ways out: describe the project in `brief.json`, or add `layer1 = off`.
+
+**Project identity — generated, not synced:** `README.md` and the title + *Project Purpose* header
+of `CLAUDE.md` are generated from `brief.json` and are **not** part of layer-2 sync. `update` will
+never re-impose the framework's identity on them. Re-render them with `researchteam personalize`.
+Each generated file (and, in `CLAUDE.md`, its header region) carries a `researchteam:generated`
+marker with a hash of its generated body; `personalize` refreshes a file that is still untouched
+and refuses to overwrite one you have edited unless you pass `--force`.
+
+### CLAUDE.md is dual-managed
+
+`CLAUDE.md` uses the `fenced-preserve` strategy. The block between the
+`<!-- >>> researchteam:managed -->` / `<!-- <<< researchteam:managed -->` markers is framework
+governance, synced from upstream. Everything above the opening marker (the title and *Project
+Purpose*) is project-owned, generated by `personalize`, and preserved across every `update`.
+
+### The interpretation-advisor and upstream-written Notes
+
+`update` syncs the interpretation-advisor
+(`.github/agents/interpretation-advisor.agent.md`) and the methodology-guide template
+(`.github/agents/references/methodology/_TEMPLATE.methodology.guide.md`) for scholarly instances.
+Before, `init` copied them in once and nothing updated them after that.
+
+- **The template** is replaced wholesale, because each repo keeps its filled guides elsewhere.
+- **The advisor** uses the `above-notes` strategy. Upstream owns everything from line 1, front
+  matter included, down to its `## Project-Specific Notes` heading. That heading and everything
+  after it belong to the repo. When the upstream part changes, `update` saves the previous file
+  under the gitignored `tmp/researchteam-backups/` and prints the diff, even in unattended runs.
+  It does so only while the local part still matches upstream's at the pinned researchteam
+  commit. A repo that customised it keeps its version, even under `--yes`, until it runs
+  `researchteam update --accept-upstream <path>`.
+
+Rules that researchteam itself writes into an agent's Notes now reach every derived repo. Until
+now they reached derived repos only when someone copied them by hand. These rules cover the
+historical-context, literature-library and news-perspective protocols and the interpretive
+directives. They live in a block at the top of the Notes section:
+
+```markdown
+## Project-Specific Notes
+
+> ⚙️ **USER-EDITABLE** — ...
+
+<!-- >>> researchteam:notes — upstream-authored; synced by `researchteam update`. Edit upstream. -->
+### Historical setting (`docs/historical-context-protocol.md`)
+...
+<!-- <<< researchteam:notes -->
+
+### A rule of your own            ← outside the block: never touched
+```
+
+The block covers the interpretation-advisor and the topic-scoping, literature-review and
+main-analysis experts. A surface gets the block only if its copy of the agent has a Notes section.
+For example, a bridge-generated `.claude` advisor stub has none, so it is skipped with a message.
+
+- **Where it is written.** `update` writes the block into each of these agents on every surface
+  the repo carries: `.github/agents`, `.claude/agents`, and `.goose/recipes`, where it is indented
+  inside `instructions:`. researchteam does not write the block into Codex: since agentteams #210, Codex is
+  rendered natively from the brief, not projected from `.github`.
+- **First adoption.** Hand-copied duplicates are removed: any `###` subsection with a heading that
+  matches one in the block, and any top-level bullet identical to one in the block. Nothing else
+  outside the block changes.
+- **Editing the rules.** Edit the block upstream. A local edit inside the block is replaced at the
+  next `update`, and the previous file is saved under `tmp/researchteam-backups/`.
+- **Agents that get no block.** The block is written for researchteam's own agent. In a repo that
+  retargeted the agent it would become live instructions that do not apply, so `update` skips the
+  agent on every surface and leaves its files byte-identical, with no duplicate folding and no
+  backup. It does this in two cases:
+  - *Customised.* The agent's `.github` file uses the `above-notes` strategy (today, the advisor),
+    and its part above Notes differs from upstream's at the pinned researchteam commit. This is
+    the same test that keeps a customised advisor. A file that cannot be checked (a failed fetch,
+    an unsafe pinned ref) is skipped too. `update` prints
+    `[notes] <agent>: customised locally (...); researchteam notes block not synced (left unchanged)`.
+    After `--accept-upstream <path>`, the file is upstream's again, so it gets the block.
+  - *Excluded.* `brief.json` lists the agent:
+
+    ```json
+    "researchteam_notes": {"exclude": ["interpretation-advisor"]}
+    ```
+
+    The list is read before anything is fetched. A slug that is not one of the agents above is
+    ignored with a note. If the key is not an object whose `exclude` is a list of strings, no
+    block is synced into any agent until it is fixed.
+
+  `--dry-run` prints the same lines and writes nothing.
+
+## `brief.json` fields that shape the instance
+
+- **`layer2_profile`** (`"scholarly"` | `"generic"`; default when absent: `"scholarly"`). A
+  `generic` project receives only the framework-neutral layer-2 files; the scholarly tooling
+  (citation-claim audit protocol, literature-library scripts, news-perspective protocol,
+  historical-context protocol, methodology/historical-context/citation-integrity checks) is not
+  synced. Switching an already-scaffolded instance to
+  `generic` stops those files being re-synced; any copies placed at `init` remain on disk and can be
+  removed by hand.
+- **`methodology_coverage`** (optional object). Tells `scripts/check_methodology_coverage.sh` (and
+  `scripts/check_historical_context.sh`, which reads the same maps) where
+  interpretation maps live. `units_dir` is the directory whose subdirectories are the units
+  (default `Projects`, which keeps the scholarly "research project" heuristic). `map_path` is the
+  per-unit map path (default `interpretation/interpretive-map.md`). Example for a
+  per-theorem-dossier project:
+  `{"units_dir": "reports/dossiers", "map_path": "interpretation.md"}`.
+- **`enforce_decision_signing`** (`true` | `false`). Governs agentteams' destructive-operation
+  security gate. The scaffold ships `true`, which is agentteams' secure default. With it on, an
+  *unsigned* clearance is refused.
+  - **Limitation.** The HMAC key is read from the verifying process's environment, and no key is
+    pinned. A process that can run shell commands can therefore sign its own clearance with a key it
+    chooses. Strict signing stops accidental or naive self-clearance and leaves an audit trail, but
+    it is **not** a boundary against an agent with shell access. See the agentteams request
+    `2026-09-30-agentteams-decision-trust-anchoring.md` (F-1).
+  - **Propagation.** The brief value is re-emitted into each surface's
+    `references/agent-privilege.json` by any `update` (a `--merge` suffices) or render. With signing
+    off, a clearance is trusted on its author name alone.
+  - **Log schema.** agentteams treats signing as active whenever a decisions log has a `signature`
+    column, whatever the flag says.
+
+- **`vulnerability_scanning`** (object; agentteams 1.1). This project's own dependency-scanning intent. `level` is
+  `off`, `scan` (dependency names and versions are checked against OSV.dev) or `remediate` (findings may also
+  be offered to the operator's remediation agent, inside a signed grant). Optional keys: `exclude_paths`,
+  `private_packages` (names never sent to OSV, PyPI or npm), `include_dev`, `delivery` (`pr` | `plan`) and
+  `base_branch`. The scaffold ships `{"level": "scan"}`, and `researchteam init --vulnscan-level off|scan`
+  sets it. A brief without the block is reported as *unanswered*.
+  - **Who may change it.** `brief.json` is user-owned: no update layer writes the block. The operator command
+    `agentteams --set-vulnscan` edits only this block (it shows the diff and asks y/N). That is an operator
+    action, the only one that writes `remediate`, and it is not part of `researchteam update`.
+  - **Where it is read.** `update` copies brief fields into `.github/agents/_build-description.json`
+    (`_reconcile_manifest_back`), so the block appears there too. agentteams' scanner reads the rich
+    `brief.json` first and the stub only when there is no brief.
+  - The block holds intent only: no host names, URLs, IP addresses or absolute paths (agentteams refuses them).
+
+### Rosters across surfaces (known 1.0 limitation)
+
+The native renders (claude, goose, codex) pass `--project .`, so agentteams scans the repo and fills in
+whatever `brief.json` leaves out. The copilot-vscode render uses the descriptor alone. A field the brief
+omits can therefore give the surfaces different agent rosters. The two that matter:
+
+- `retrieval_integration` decides whether `@retrieval-integrator` exists. Declare it, or set
+  `{"mode": "none"}`.
+- `tools`: without it, the scan adds tool agents from dependency manifests such as `pyproject.toml`
+  and `package.json`.
+
+`researchteam update` warns when either is missing and a native surface is present. Declare both in
+`brief.json` to get one roster everywhere. One scan rule for every surface (masterTeacher ticket 4.4)
+was planned for 1.0.1 but has not shipped (not in 1.0.1, 1.0.2 or the 1.1.0 release candidates); until it does,
+declare both fields.
+
+### Decision signing: the first `materialize`
+
+`materialize` runs the gated `--overwrite` pass, so a new instance needs one operator-signed
+clearance before its first render:
+
+```bash
+read -rsp "Signing key: " AGENTTEAMS_DECISION_SIGNING_KEY; echo; export AGENTTEAMS_DECISION_SIGNING_KEY  # never commit it or give it to an agent
+for log in .github/agents .claude/agents .goose/recipes; do   # one clearance per surface present
+  python scripts/sign_security_decision.py --action overwrite --conditions "first render of fresh scaffold" \
+    --log "$log/references/security-decisions.log.csv"
+done
+researchteam materialize --yes
+```
+
+The helper appends an HMAC-signed `PASS` row to
+`.github/agents/references/security-decisions.log.csv`, adding a `signature` column if the log does
+not have one yet. It then verifies the new row with agentteams' own gate before exiting. Run
+`materialize` in the same shell: the key must be present when the signature is verified. Anyone
+who holds the key can sign, so share it only with co-approvers. Never export the key in a shell
+that launches an agent harness: the agent would inherit it and could sign its own clearance. Sign
+and materialize in a separate terminal, then close it or `unset` the key. A review by `@security` should
+precede the signature.
+
+## Frozen surfaces (`frozen_surfaces`)
+
+A repository can keep one or more agent surfaces exactly as they are by listing them in `brief.json`:
+
+```json
+{"frozen_surfaces": ["goose", "codex"]}
+```
+
+This is a contract shared with agentteams 1.0.x, so both tools read the key the same way.
+
+- **Ids.** `copilot-vscode`, `copilot-cli`, `claude`, `goose`, `agents-md`, `codex`, `grok`. An absent key or `[]`
+  freezes nothing. An unknown id, a duplicate or a non-array value stops `update` and `materialize` before they
+  change anything.
+- **What researchteam won't write.** For every listed surface, researchteam never renders, merges, projects,
+  bridges, Notes-syncs or managed-syncs into the paths that surface owns:
+  - `copilot-*`: `.github/agents/`;
+  - `claude`: `.claude/agents/`;
+  - `goose`: `.goose/`, `.goosehints`, `scripts/goose-run-resilient.py`, `scripts/goose-openrouter-route-proxy.py`
+    and `scripts/goose-coordination-mcp.py` (the Goose emitter writes these outside `.goose/`);
+  - `codex`: `.codex/` and `.agents/skills/` (the same as `--no-codex`);
+  - `grok`: `.grok/`.
+  The root `AGENTS.md` is frozen whenever `codex`, `goose` or `agents-md` is listed. Every bridge merge writes
+  `AGENTS.md`, so while it is frozen, no bridge is refreshed.
+- **Checked on every run.** `update` and `materialize` hash every frozen path before they start and check it on every
+  exit, including a failed run. If an unfrozen render wrote a frozen `AGENTS.md`, its earlier bytes are restored. Any
+  other change under a frozen path fails the run closed: exit 1, and the autosync opens no PR. `doctor` reports
+  the frozen set and any pending unfreeze.
+- **Unfreezing is constraint-relaxing.** researchteam records the set it honoured in `.researchteam`. A surface that
+  was frozen counts as being unfrozen when it is missing from `brief.json`. "Was frozen" means recorded in
+  `.researchteam`, or listed at git HEAD in `brief.json` or `.researchteam`. researchteam renders into it again only
+  when the pinned agentteams' own security gate confirms an `unfreeze-<surface>` decision row:
+  - the row clears the gate;
+  - agentteams itself derives it as constraint-relaxing, never self-declared;
+  - it is Ed25519-signed by the operator;
+  - it is a decision row, not a waiver.
+
+  researchteam asks the pinned agentteams to derive that and refuses the unfreeze if it cannot. agentteams v1.0.0
+  (which researchteam v1.0.2's extras pin) cannot, so under it every unfreeze is refused; frozen-surfaces support
+  ships in agentteams from v1.0.1 on the 1.0 line and in every 1.1 tag. That is the intended fail-closed behaviour.
+- **Known limitation.** A reviewed commit that removes a surface from `frozen_surfaces` and drops its
+  `.researchteam` record in the same commit bypasses the check. Reviewers must treat any removal as an unfreeze that
+  needs a signed row. agentteams' hash-tracked freeze manifest (1.0.x) and its aggregate cap close this on the
+  agentteams side.
+
+## Why `update` cannot re-brand an instance (use `materialize`)
+
+`researchteam update` runs `agentteams --update --merge --shrink-policy preserve` on the copilot-vscode team and on every native surface that already has a native agentteams build-log (`.claude/agents`, `.goose/recipes`; a bare bridge or an interop projection marker is skipped), adding `--framework <fw> --project . --materialize-native` for the native ones. A failure on any surface stops the run (non-zero exit, so an autosync opens no PR) and names the surfaces done and not attempted. `--merge` is
+content-preserving and `preserve` is pinned on purpose, so an already-enriched agent body is never
+silently replaced. That protects your research content — but it also means a plain `update` will
+**not** re-brand agent bodies after you change the project's domain or identity in `brief.json`.
+The explicit, cleared re-render path for that is `researchteam materialize`. It runs the
+destructive `--overwrite` pass on the copilot-vscode team and on every native surface that carries
+a rendered team (`.claude/agents`, `.goose/recipes`, detected by their `references/build-log.json`).
+All surfaces are rendered from the same reconciled descriptor, so they share one roster. Each
+surface's gate reads that surface's own decisions log, so each needs its own clearance.
+`--copilot-only` restores the single-surface render. `--adopt-orphans` keeps bespoke agents (files with no agentteams template) in every
+surface's roster. agentteams does not persist adoption, so pass it on every render. When the
+instance has a Codex surface (`.codex/agents`), `materialize` then refreshes Codex (see *Codex is
+orchestrator-only* below); `--no-codex` skips this. While `enforce_decision_signing` is `true`, each
+surface's overwrite pass needs a signed clearance (see *Decision signing* above).
+
+The overwrite carries every user-editable `## Project-Specific Notes` (agents) and
+`## Project-Specific Rules` (instruction files) region into the re-rendered files (agentteams P5a,
+f113f5d); `--discard-user-regions` drops them instead. Before the confirmation prompt, `materialize`
+refuses an agentteams that predates P5a. Every layer-1 run (`update` and `materialize`) also checks
+the provenance of the `agentteams` that will execute (the one installed beside this researchteam,
+else the first one on `PATH`) and prints its source
+and commit: an editable checkout must be on `origin/main` with no uncommitted sources, and a checkout
+that shadows the installed copy is refused. A VCS install from `github.com/jlcatonjr/agentteams` pinned to
+a commit on its `main` or a `release/*` branch (the `update` extra) passes; GitHub also serves a fork's commits
+under that URL, so a commit GitHub reports is on neither is treated as unverified (refused unless
+`RESEARCHTEAM_ALLOW_UNVERIFIED_AGENTTEAMS=1`), and one it cannot check (offline or
+rate-limited) runs with a warning; a local-folder snapshot (no commit recorded) is refused unless
+`RESEARCHTEAM_ALLOW_AGENTTEAMS_SNAPSHOT=1` is set, which runs it with a warning. A VCS install from any other
+repository (a fork or mirror, including a non-default `AGENTTEAMS_GIT` in the autosync gate), a remote archive
+install and an index install (agentteams is not on PyPI) are refused unless
+`RESEARCHTEAM_ALLOW_UNVERIFIED_AGENTTEAMS=1` is set, which also runs it with a warning. Plain `researchteam doctor`
+does not run this check; `doctor --drift` runs it when it checks bridges
+not covered by `write_policy: orchestrator-only`.
+
+### Codex is orchestrator-only
+
+Release policy section 5 makes Codex (and Codex `AGENTS.md`) orchestrator-only in every repository
+for 1.0. Since agentteams #210 (1.0.0rc10), agentteams refuses to project narrow-grant agents onto
+Codex outside its role gate, and the cooperative opt-in (`--interop-allow-cooperative`) is not part
+of 1.0. So when `.codex/agents` exists, `update` and `materialize` handle Codex as follows:
+
+- **Covered:** the brief turns the switch on for codex. Codex is rendered natively from the brief
+  (`--framework codex --materialize-native`), with read-only agents, proposals and the role gate.
+  The Claude skills are still projected into `.agents/skills` with `--interop-skills-only`, which
+  #210 does not check.
+- **Not covered:** nothing runs and the command exits non-zero, with nothing under `.codex`
+  changed. `--dry-run` prints the same message and continues.
+- **Frozen:** a repository whose roster includes adopted (bespoke) agents keeps its Codex surface
+  frozen for 1.0 (release policy section 5); agentteams 1.0 supports write_policy interop for claude
+  and goose only, and Codex interop comes as a 1.0.x backport. Pass `--no-codex` to `update` (or
+  `materialize`): the Codex step is skipped entirely (no native render, no skills projection, no
+  leftover warning) and `.codex` is left as it is, without setting it aside by hand.
+
+To cover codex, set these keys in `brief.json`:
+
+```json
+"write_policy": "orchestrator-only",
+"write_policy_frameworks": ["codex"],
+"privilege_profile": "confined"
+```
+
+agentteams requires the explicit `privilege_profile` (`confined` or `exclusive`). The switch holds
+only when Codex is launched through `.codex/confined-run.example.sh` (Linux or macOS). An explicit
+`privilege_profile` also flips Claude's constitutional-gate hook to fail-closed on the next Claude
+render.
+
+## Drift report
+
+Some drift used to go unnoticed until someone found it by hand. `update` and `doctor` now report
+it:
+
+- **Frozen fences.** `update` pins `--shrink-policy preserve`. When a template rewords a section,
+  the shrink guard can keep the old body indefinitely. Every layer-1 run therefore asks agentteams
+  for its shrink review report (`tmp/agentteams-shrink-report*.json`/`.md`, gitignored). `update`
+  prints how many sections were kept, and `doctor` lists each one with how long it has been frozen
+  (first-seen dates are kept in `tmp/frozen-fences.state.json`). For each section, `doctor` also
+  prints the exact `AGENTTEAMS_SHRINK_ALLOW` entry that releases it after review. To keep a section
+  frozen on purpose, list it in `.github/agents/references/intentional-pins.json`. That file is
+  repo-owned and never synced:
+
+  ```json
+  {"pins": [{"section": "references/ref-bibtex-reference.md:content",
+             "reason": "holds filled tool docs the template would reset to placeholders"}]}
+  ```
+
+  `section` is `<file>:<fence>`, exactly as the report prints it.
+  The file turns warnings into OKs, so review changes to it as you would a security change.
+- **Toolchain pin.** `doctor` runs `scripts/check_toolchain.py` for its own interpreter (see
+  *Pinned toolchain*).
+- **`doctor --drift`** (opt-in, because it needs the network and agentteams):
+  - It compares each file that `init` seeds but `update` never syncs with upstream at the pinned
+    researchteam commit (`toolchain.lock`, else the marker ref). `## Project-Specific Notes` is
+    ignored in that comparison. There are currently no such files: the interpretation-advisor and
+    the methodology template are now managed (see above).
+  - It runs `agentteams --bridge-check` for each bridge recorded under `references/bridges/`. That
+    rewrites the gitignored `bridge-check.report.md` files.
+- **Bridges are refreshed by `update`.** Layer 1 rewrites canonical agents on every run; for
+  example, the live vulnerability-watch section of `security.agent.md` changes each time. So after
+  layer 1, `update` runs the non-destructive `agentteams --bridge-merge` for each recorded bridge.
+  A failed merge is reported, and that bridge is left as it was. Under `write_policy: orchestrator-only`
+  (the orchestrator-only-writes pilot), bridges are **not** refreshed into the frameworks the switch
+  covers: `write_policy_frameworks`, or claude, goose and codex when that field is unset. The
+  native surface is authoritative there, and a bridge would re-create agents that keep dispatch and
+  write tools. **Changes still propagate:** covered Claude and Goose teams are re-rendered natively from
+  the brief on every `update` (merge mode), and Codex is rendered natively (see *Codex is
+  orchestrator-only*). Claude skills are still projected into `.agents/skills`. If a covered framework has no native team yet, `update` warns that changes
+  no longer reach it; create one with `researchteam materialize`. The switch is read from `brief.json`, falling back to
+  `_build-description.json`. `update` lists the bridge agents still present in covered frameworks.
+  `doctor --drift` **fails** on them, because the pilot's guarantee doesn't hold until they are
+  gone. Neither command deletes them: review them, then remove them through `@cleanup` with a
+  recorded clearance.
+
+Drift findings are warnings and never fail `doctor`, with one exception: under
+`write_policy: orchestrator-only`, bridge agents left in a covered framework fail `doctor --drift`
+(above).
+
+## Derived-repo CI
+
+Projects created with `researchteam init` receive `.github/workflows/agentteams-sync.yml`, which
+runs weekly (Monday 06:00 UTC) and on `workflow_dispatch`: it installs the CLI and runs the managed
+`scripts/agentteams_autosync_gate.sh --mode derived`. The gate SHA-gates on agentteams, installs the
+pinned commit, runs a full `researchteam update --yes` and the blocking validation gates, and the
+workflow then opens or updates one evergreen PR (`chore/agentteams-autosync`). See
+`docs/agentteams-update-policy.md`.

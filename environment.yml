@@ -1,0 +1,19 @@
+# mathAgents shared environment — standardizes non-Lean libraries across machines.
+# Lean itself is pinned by lean/lean-toolchain (installed via elan) and Mathlib by
+# lean/lakefile.toml + lean/lake-manifest.json. Create with:
+#   conda env create -f environment.yml    (update: conda env update -f environment.yml --prune)
+name: mathagents
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandoc=3.12
+  - graphviz=14.1
+  - pygraphviz=2.0
+  - jsonschema=4.26
+  - pyyaml=6.0
+  - pytest=8
+  - pip
+  - pip:
+      - leanblueprint==0.0.20
+      - -e .            # the mathagents Python API (pyproject.toml)

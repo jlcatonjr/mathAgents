@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "default_logic": "classical-hol",
+  "logics": [
+    {
+      "id": "classical-hol",
+      "name": "Classical higher-order logic (Lean 4 + Mathlib)",
+      "family": "classical",
+      "proof_systems": [
+        "Lean dependent type theory with Classical.choice"
+      ],
+      "semantics": [],
+      "embedding": "native",
+      "lean_module": null,
+      "status": "available",
+      "pilot": null,
+      "cross_checks": [],
+      "sources": [
+        "https://lean-lang.org/doc/reference/latest/"
+      ]
+    },
+    {
+      "id": "modal-k",
+      "name": "Normal modal logic K (then S4)",
+      "family": "modal",
+      "proof_systems": [
+        "Hilbert system K"
+      ],
+      "semantics": [
+        "Kripke frames"
+      ],
+      "embedding": "deep",
+      "lean_module": null,
+      "status": "planned",
+      "pilot": "P4",
+      "cross_checks": [
+        "https://github.com/FormalizedFormalLogic/ModalLogic"
+      ],
+      "sources": []
+    },
+    {
+      "id": "finite-probability",
+      "name": "Probability theory on a finite algebra of propositions (a classical-hol theory; see C3)",
+      "family": "classical",
+      "proof_systems": [
+        "classical metatheory (Lean/Mathlib)"
+      ],
+      "semantics": [
+        "probability axioms: non-negativity, normalization, finite additivity"
+      ],
+      "embedding": "shallow",
+      "lean_module": "MathAgents.FiniteProbability",
+      "status": "available",
+      "pilot": "P3",
+      "cross_checks": [],
+      "sources": [
+        "Vineberg2022",
+        "Egre2026"
+      ]
+    },
+    {
+      "id": "stalnaker-conditional",
+      "name": "Stalnaker conditional (selection-function semantics)",
+      "family": "conditional",
+      "proof_systems": [],
+      "semantics": [
+        "possible worlds with a selection function"
+      ],
+      "embedding": "deep",
+      "lean_module": null,
+      "status": "planned",
+      "pilot": "P2",
+      "cross_checks": [],
+      "sources": [
+        "Egre2026"
+      ]
+    }
+  ]
+}

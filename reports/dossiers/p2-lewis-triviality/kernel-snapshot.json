@@ -1,0 +1,270 @@
+{
+  "gate": "G-KERNEL",
+  "verdict": "PASS",
+  "checked_at": "2026-10-01T22:34:15+00:00",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "toolchain_pin": "leanprover/lean4:v4.34.1",
+  "commit": "6fdbd26ad134ba6a411836e3a57b776021024aca",
+  "dirty": false,
+  "source_sha256": "831ca7740149e182a026f69dd2b0dff47a057a38bc71e1122a92a854b37735f6",
+  "lean_namespace": "MathAgents.P2LewisTriviality",
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.condProb_compl_inf",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "7491473211732025902",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.condProb_inf_self",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "7707210891581760821",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.condProb_isFinAddProb",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "9983561656151306095",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.expansion",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "7224517130982468060",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.pos_of_inf_pos",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "5518342621651534380",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.prob_bot",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "9444114270265291726",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.prob_mono",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "9492901691147138298",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.Aux.stalnaker_closed_implies_factorization",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "7246122568416057618",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.FactorizationAt",
+        "MathAgents.P2LewisTriviality.StalnakerHyp",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.ClosedUnderConditioning",
+      "kind": "def",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "3398235271",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.FactorizationAt",
+      "kind": "def",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "3328036036",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.IsFinAddProb",
+      "kind": "def",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "1042052663",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.StalnakerHyp",
+      "kind": "def",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "396932892",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.condProb",
+      "kind": "def",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "1832776815",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.triviality_R2",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "17275635798550986712",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.FactorizationAt",
+        "MathAgents.P2LewisTriviality.IsFinAddProb",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.triviality_R3_all",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "9166164072295025361",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.IsFinAddProb",
+        "MathAgents.P2LewisTriviality.StalnakerHyp",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P2LewisTriviality.triviality_R3_closed",
+      "kind": "theorem",
+      "module": "MathAgents.P2LewisTriviality",
+      "private": false,
+      "statement_fingerprint": "8429219804342893751",
+      "statement_uses": [
+        "MathAgents.P2LewisTriviality.ClosedUnderConditioning",
+        "MathAgents.P2LewisTriviality.IsFinAddProb",
+        "MathAgents.P2LewisTriviality.StalnakerHyp",
+        "MathAgents.P2LewisTriviality.condProb"
+      ],
+      "status": "proved"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+cmd="${1:-help}"
+
+print_help() {
+  cat <<'EOF'
+Claude ResearchTeam Bridge
+
+Usage:
+  bash scripts/claude_researchteam_bridge.sh <command>
+
+Commands:
+  help          Show this help message
+  status        Show git status and current branch
+  validate      Run repository validator (if available), then each executable
+                in scripts/validate.d/ (repo-owned local checks, in name order)
+  open-claude-dir Print path to Claude support folder
+  plan-path     Print current ISO-week plan directory path
+  methodology-check [project]
+                Run the interpretation-advisor methodology-coverage detector
+                (advisory: surfaces projects missing an interpretive map / guide).
+                No arg scans all research projects; a name checks one.
+  history-check [project]
+                Run the historical-context detector: every interpretive map needs a
+                "## Historical setting" register whose rows give a date and a basis.
+                Structural only (WELL-FORMED, not verified). See
+                docs/historical-context-protocol.md.
+  citation-audit [project] [--bib PATH]
+                Run the 2-fold citation & claim integrity detector: bibliography /
+                URL structural integrity + an in-text citation-backing signal.
+                DEFECT (dup key / missing title|author / no link / ref w/o URL / no .bib) blocks; NEEDS-REVIEW is
+                advisory. No arg scans all research projects; a name checks one.
+                This is the mechanical layer; the full doubled semantic audit is in
+                docs/citation-claim-audit-protocol.md.
+  library-build <project>
+                (Re)build the project's vectorized literature library (stdlib TF-IDF over the
+                agents' relevance summaries). Records ship UNVERIFIED; navigation not evidence.
+  library-query <project> "<terms>"
+                Lexical-similarity candidates from the library (NAVIGATION only, NOT evidence).
+  library-check <project>
+                Integrity gate for the library: a DEFECT exits 1; no library yet (NEEDS-BUILD) exits 0.
+                See docs/literature-library-protocol.md for the full protocol + honest ceiling.
+  code-query "<terms>" [--code-kind local|api|doc|all] [--code-query-k N]
+                Retrieval surface #2 (agentteams code & API index) — ranked candidates for
+                "where is this function / which API does this script call". NAVIGATION ONLY, not
+                evidence. Needs the optional `agentteams` extra. See docs/retrieval-surfaces.md.
+EOF
+}
+
+command_status() {
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "[git] branch: $(git rev-parse --abbrev-ref HEAD)"
+    echo "[git] head:   $(git rev-parse --short HEAD)"
+    echo "[git] status:"
+    git status --short
+  else
+    echo "Not inside a git worktree."
+  fi
+}
+
+# Repo-owned checks: every executable regular file directly in scripts/validate.d/, run from the repo root
+# in name order. All of them run; validate fails if any fails. The directory is not managed, so `update`
+# never touches it, and the autosync gate calls validate_agentteams_update.sh directly, so these never run
+# inside its write-permission job.
+run_local_validators() {
+  local dir="scripts/validate.d" f failed=()
+  [[ -d "$dir" ]] || return 0
+  while IFS= read -r f; do
+    if [[ ! -x "$f" ]]; then
+      echo "Skipping $f (not executable)"
+      continue
+    fi
+    echo "Running $f ..."
+    "./$f" || failed+=("$f")
+  done < <(find "$dir" -mindepth 1 -maxdepth 1 -type f ! -name '.*' | LC_ALL=C sort)
+  if (( ${#failed[@]} )); then
+    printf 'Local validator failed: %s\n' "${failed[@]}" >&2
+    exit 1
+  fi
+}
+
+command_validate() {
+  if [[ -x "scripts/validate_agentteams_update.sh" ]]; then
+    echo "Running scripts/validate_agentteams_update.sh ..."
+    # General edits: skip the update-run scope allowlist (derived repos legitimately change files
+    # outside it). After an update run, call scripts/validate_agentteams_update.sh directly.
+    VALIDATION_SKIP_SCOPE=1 bash scripts/validate_agentteams_update.sh
+    run_local_validators
+    echo "Validation completed."
+  else
+    echo "Validator not found at scripts/validate_agentteams_update.sh"
+    exit 1
+  fi
+}
+
+command_open_claude_dir() {
+  echo "$ROOT_DIR/.claude"
+}
+
+command_plan_path() {
+  week="$(date +%G-W%V)"
+  echo "$ROOT_DIR/tmp/by-week/$week"
+}
+
+command_methodology_check() {
+  # -f (not -x): the script is invoked via `bash`, which does not require the executable
+  # bit — and `researchteam update` may sync it without one on some platforms.
+  if [[ -f "scripts/check_methodology_coverage.sh" ]]; then
+    bash scripts/check_methodology_coverage.sh "$@"
+  else
+    echo "Methodology-coverage detector not found at scripts/check_methodology_coverage.sh" >&2
+    exit 1
+  fi
+}
+
+command_history_check() {
+  if [[ -f "scripts/check_historical_context.sh" ]]; then
+    bash scripts/check_historical_context.sh "$@"
+  else
+    echo "Historical-context detector not found at scripts/check_historical_context.sh" >&2
+    exit 1
+  fi
+}
+
+command_citation_audit() {
+  if [[ -f "scripts/check_citation_integrity.sh" ]]; then
+    bash scripts/check_citation_integrity.sh "$@"
+  else
+    echo "Citation-integrity detector not found at scripts/check_citation_integrity.sh" >&2
+    exit 1
+  fi
+}
+
+command_library_build() {
+  if [[ -f "scripts/build_literature_library.py" ]]; then
+    python3 scripts/build_literature_library.py "$@"
+  else
+    echo "Literature-library builder not found at scripts/build_literature_library.py" >&2
+    exit 1
+  fi
+}
+
+command_library_query() {
+  if [[ -f "scripts/query_literature_library.py" ]]; then
+    python3 scripts/query_literature_library.py "$@"
+  else
+    echo "Literature-library query not found at scripts/query_literature_library.py" >&2
+    exit 1
+  fi
+}
+
+command_library_check() {
+  if [[ -f "scripts/check_literature_library_integrity.sh" ]]; then
+    bash scripts/check_literature_library_integrity.sh "$@"
+  else
+    echo "Literature-library gate not found at scripts/check_literature_library_integrity.sh" >&2
+    exit 1
+  fi
+}
+
+command_code_query() {
+  # Surface #2 (code index) — thin convenience over `agentteams --query-code`. NAVIGATION ONLY:
+  # a hit is a candidate to open, never evidence and never a claim/link anchor. See
+  # docs/retrieval-surfaces.md. Unlike the library-* commands (which guard a LOCAL script), this
+  # shells to the external `agentteams` console script — the optional `update` extra that may be
+  # absent or stale in a derived repo — so guard on the BINARY, message modeled on
+  # researchteam/_update_cmd.py::_preflight_agentteams.
+  if ! command -v agentteams >/dev/null 2>&1; then
+    echo "[code-query] needs 'agentteams' (the optional 'update' extra), which is not on PATH." >&2
+    echo "  Install the update extra (agentteams pinned to a merged commit) into an env on your PATH:" >&2
+    echo "    pip install \"researchteam[update] @ git+https://github.com/jlcatonjr/researchteam.git\"" >&2
+    echo "  An editable checkout also works for update/materialize only while it is on origin/main" >&2
+    echo "  and clean (do NOT 'pip install -e' from a temporary git worktree). Then: researchteam doctor" >&2
+    exit 1
+  fi
+  if [[ $# -lt 1 ]]; then
+    echo 'usage: code-query "<query text>" [--code-kind local|api|doc|all] [--code-query-k N]' >&2
+    exit 2
+  fi
+  local query="$1"; shift
+  # Explicit --description + --output so the descriptor and the cache location
+  # (.github/agents/references/code-index) always resolve — do NOT rely on the framework-default
+  # --output. The query auto-refreshes a stale/absent partition first (query-time staleness).
+  agentteams --query-code "$query" --description brief.json --output .github/agents "$@"
+}
+
+case "$cmd" in
+  help)
+    print_help
+    ;;
+  status)
+    command_status
+    ;;
+  validate)
+    command_validate
+    ;;
+  open-claude-dir)
+    command_open_claude_dir
+    ;;
+  plan-path)
+    command_plan_path
+    ;;
+  methodology-check)
+    shift
+    command_methodology_check "$@"
+    ;;
+  history-check)
+    shift
+    command_history_check "$@"
+    ;;
+  citation-audit)
+    shift
+    command_citation_audit "$@"
+    ;;
+  library-build)
+    shift
+    command_library_build "$@"
+    ;;
+  library-query)
+    shift
+    command_library_query "$@"
+    ;;
+  library-check)
+    shift
+    command_library_check "$@"
+    ;;
+  code-query)
+    shift
+    command_code_query "$@"
+    ;;
+  *)
+    echo "Unknown command: $cmd"
+    echo
+    print_help
+    exit 2
+    ;;
+esac

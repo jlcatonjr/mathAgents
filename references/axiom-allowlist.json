@@ -1,0 +1,10 @@
+{
+  "note": "The G-AX axiom envelope, defined here once (spec DD-38): base_axioms (Lean's standard axioms only) plus axioms approved under the G-AX human gate. Every entry needs an approval record (who, when, why, dossier). Empty by default: adding one is a G-AX decision, never an agent's.",
+  "base_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "approved_axioms": [],
+  "approvals": []
+}

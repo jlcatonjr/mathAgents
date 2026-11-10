@@ -1,0 +1,308 @@
+name: Gates (G-KERNEL, G-FID, G-CX, registries)
+
+# Runs the fail-closed gates of reports/02-harness-spec.md in CI (spec DD-41; decision D18):
+# on every push to main or a release/** branch and every pull request into main, dev or release/** that touches
+# the Lean library, the gate
+# scripts, the registries, the dossiers or the agent definitions on any surface (IA-02); on every v* tag (GitHub
+# does not apply path filters to tag pushes); and weekly, so a toolchain or Mathlib cache drift is caught
+# even in a quiet week. Every step must pass; no step may set continue-on-error
+# (checked by scripts/tests/test_ci_workflow.py).
+# The long suites (the G-KERNEL gate tests and the Lean half of the G-AX tests, over an hour) run in `long-suites`
+# only where they can matter (charter D46, superseding D36): releases, manual dispatch, the monthly schedule, pull
+# requests that change their inputs (scripts/ci_long_suite_inputs.txt), and a push to main that its PR's run did not
+# already cover. scripts/ci_long_suites.py decides, fail-closed. G-KERNEL itself runs on every push in `gates`.
+
+on:
+  push:
+    branches: [main, "release/**"]  # release lines (STABILITY.md); tags below build each signed release
+    tags: ["v*"]
+    paths:
+      - "lean/**"
+      - "scripts/**"
+      - "references/**"
+      - "reports/dossiers/**"
+      - ".github/agents/**"
+      - ".claude/**"
+      - ".codex/**"
+      - ".goose/**"
+      - ".agents/**"
+      - "AGENTS.md"
+      - "blueprint/**"
+      - ".github/workflows/gates.yml"
+      - "brief.json"
+      - "mathagents/**"
+      - "tests/**"
+      - "docs/api-reference/**"
+      - "pyproject.toml"
+      - "toolchain.lock"
+  # Integration-branch model (2026-11-06, mirrors agentteams): PR CI runs for PRs into main, dev and release
+  # lines. Only contributor fork PRs and automation PRs target `dev` (the autosync PR uses GITHUB_TOKEN, so it
+  # starts no workflow); maintainer work merges into `dev` locally behind the local gate and triggers nothing.
+  # Never add `dev` to `push`; never a '**' trigger.
+  pull_request:
+    branches: [main, dev, "release/**"]
+    paths:
+      - "lean/**"
+      - "scripts/**"
+      - "references/**"
+      - "reports/dossiers/**"
+      - ".github/agents/**"
+      - ".claude/**"
+      - ".codex/**"
+      - ".goose/**"
+      - ".agents/**"
+      - "AGENTS.md"
+      - "blueprint/**"
+      - ".github/workflows/gates.yml"
+      - "brief.json"
+      - "mathagents/**"
+      - "tests/**"
+      - "docs/api-reference/**"
+      - "pyproject.toml"
+      - "toolchain.lock"
+  schedule:
+    - cron: "0 5 * * 2"   # weekly, Tuesday 05:00 UTC: `gates` only (scripts/ci_long_suites.py WEEKLY_CRON)
+    - cron: "0 6 1 * *"   # monthly, the 1st at 06:00 UTC: `gates` and `long-suites` (MONTHLY_CRON; D46)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read   # the dossier validator's base: the last commit with a successful Gates run (IA-01)
+
+# A newer push to a PR cancels that PR's older run (operator decision 2026-10-02, IA-01; narrowed to PRs
+# 2026-11-06 for the integration-branch model). That costs no coverage: every gate checks the final state,
+# and the dossier validator compares every commit since the last verified one with its parent. Every other
+# event gets its own group (the run id), so a push to main, a release line or a tag is never cancelled
+# (scripts/ci_base.sh and scripts/ci_long_suites.py read main's successful push runs).
+concurrency:
+  group: gates-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # Hosted image pinned to ubuntu-24.04 (2026-10-23, remediation A2; backlog #13). When `ubuntu-latest` moved to
+  # ubuntu-26.04 (between runs 39372668386 and 39614373669) the G-KERNEL gate tests went from about 88 to 170 minutes on
+  # unchanged code, against a 180-minute limit. If long-suites on 24.04 takes more than 110 minutes, revert this pin
+  # and shard the job instead. Revisit before 24.04 is retired, or with a measured fix for 26.04.
+  # D46 (operator decision 2026-10-28, superseding D36/IA-08): the long suites run where they can matter; see the
+  # header and scripts/ci_long_suites.py. Every other gate, G-KERNEL itself included, runs on every push in `gates`.
+  changes:
+    # GitHub-hosted only: D45 retired the operator's self-hosted fallback runner (D37).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      long_suites: ${{ steps.decide.outputs.long_suites }}
+    steps:
+      - name: Hosted-runner guard (GitHub-hosted only; D45)
+        if: runner.environment != 'github-hosted'
+        run: |
+          echo "::error::mathAgents CI runs only on GitHub-hosted runners (D45 retired the self-hosted fallback)"
+          exit 1
+      - name: Checkout (full history for the base comparison)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether the long suites run (D46; fail closed)
+        id: decide
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          SCHEDULE: ${{ github.event.schedule }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          # fail closed: if the decision script itself cannot run, the suites run
+          if ! t="$(python3 scripts/ci_long_suites.py)"; then t=true; fi
+          [ "$t" = false ] || t=true
+          echo "long_suites=$t" >> "$GITHUB_OUTPUT"
+
+  # The long suites rebuild the Lean library many times (over an hour on a hosted runner), so they run as their own
+  # job in parallel; every other gate reports from `gates`.
+  long-suites:
+    needs: changes
+    # Fail closed: if the decision job did not succeed (e.g. cancelled by a runner outage), run the suite.
+    if: ${{ !cancelled() && (needs.changes.result != 'success' || needs.changes.outputs.long_suites == 'true') }}
+    # GitHub-hosted only: D45 retired the operator's self-hosted fallback runner (D37).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: Hosted-runner guard (GitHub-hosted only; D45)
+        if: runner.environment != 'github-hosted'
+        run: |
+          echo "::error::mathAgents CI runs only on GitHub-hosted runners (D45 retired the self-hosted fallback)"
+          exit 1
+      - name: Checkout (full history for the append-only counterexample check)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies (pinned as in environment.yml)
+        run: python -m pip install "jsonschema==4.26.*" "pyyaml==6.0.*"
+
+      # Only the toolchain is cached. Saving lean/.lake/packages (Mathlib, several GB) always failed
+      # (`tar` exit 2) and on 2026-10-04 filled the runner's disk after every gate had passed;
+      # `lake exe cache get` below fetches Mathlib's build either way.
+      - name: Cache the Lean toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.elan/toolchains
+          key: elan-${{ runner.os }}-${{ hashFiles('lean/lean-toolchain') }}
+
+      - name: Install elan and the pinned toolchain (pinned, SHA-256-verified installer)
+        run: |
+          bash scripts/install_lean.sh --no-build
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch Mathlib build cache
+        working-directory: lean
+        run: lake exe cache get
+
+      - name: G-KERNEL gate tests
+        run: bash scripts/tests/test_mathagents_gates.sh
+
+      - name: G-AX governance tests (Lean probes)
+        run: bash scripts/tests/test_axiom_governance.sh --part lean
+
+  gates:
+    # GitHub-hosted only: D45 retired the operator's self-hosted fallback runner (D37).
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Hosted-runner guard (GitHub-hosted only; D45)
+        if: runner.environment != 'github-hosted'
+        run: |
+          echo "::error::mathAgents CI runs only on GitHub-hosted runners (D45 retired the self-hosted fallback)"
+          exit 1
+      - name: Checkout (full history for the append-only counterexample check)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies (pinned as in environment.yml)
+        run: python -m pip install "jsonschema==4.26.*" "pyyaml==6.0.*" "pytest==8.*"
+
+      # Only the toolchain is cached. Saving lean/.lake/packages (Mathlib, several GB) always failed
+      # (`tar` exit 2) and on 2026-10-04 filled the runner's disk after every gate had passed;
+      # `lake exe cache get` below fetches Mathlib's build either way.
+      - name: Cache the Lean toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.elan/toolchains
+          key: elan-${{ runner.os }}-${{ hashFiles('lean/lean-toolchain') }}
+
+      - name: Install elan and the pinned toolchain (pinned, SHA-256-verified installer)
+        run: |
+          bash scripts/install_lean.sh --no-build
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch Mathlib build cache
+        working-directory: lean
+        run: lake exe cache get
+
+      - name: G-KERNEL (build, replay, axiom envelope)
+        run: bash scripts/check_proof_integrity.sh
+
+      - name: Mathlib name index (for G-NAME and G-BLUEPRINT)
+        run: python3 scripts/build_name_index.py
+
+      - name: G-FID gate tests
+        run: bash scripts/tests/test_fidelity_gate.sh
+
+      - name: G-CX gate tests
+        run: bash scripts/tests/test_counterexample_gate.sh
+
+      - name: G-AX governance tests (registry and dossier validator; the Lean half runs in long-suites)
+        run: bash scripts/tests/test_axiom_governance.sh --part validator
+
+      - name: Dossier-structure gate tests
+        run: bash scripts/tests/test_dossier_gate.sh
+
+      - name: G-NAME tests
+        run: bash scripts/tests/test_lean_bindings.sh
+
+      - name: G-BLUEPRINT tests
+        run: bash scripts/tests/test_blueprint_gate.sh
+
+      - name: G-NAME (Lean name bindings in assembled dossiers)
+        run: python3 scripts/check_lean_bindings.py --assembled-only
+
+      - name: G-BLUEPRINT (when a blueprint exists)
+        run: |
+          if [ -d lean/blueprint ] || [ -d blueprint ]; then python3 scripts/check_blueprint_consistency.py; else echo "no blueprint yet"; fi
+
+      - name: Python API (doc parity and tests; DD-29 boundary)
+        run: |
+          python3 scripts/check_api_doc_parity.py --strict
+          python3 -m pytest -q tests/test_api_doc_parity.py tests/test_api_doc_signatures.py tests/test_api_functional.py tests/test_api_boundary.py tests/test_api_site.py tests/test_pilots_registry.py tests/test_ci_long_suites.py tests/test_release_tools.py
+
+      - name: Registry validation
+        run: python3 scripts/validate_registries.py
+
+      - name: Preferences (project defaults and dossier choices)
+        run: python3 scripts/preferences.py check
+
+      - name: Preferences tests
+        run: bash scripts/tests/test_preferences.sh
+
+      - name: Stage-agent roster and tool postures
+        run: bash scripts/tests/test_stage_agents.sh
+
+      - name: CI workflow self-check
+        run: python3 scripts/tests/test_ci_workflow.py
+
+      - name: Dossier validator (G-FID, G-CX; every commit since the last verified one)
+        env:
+          EVENT: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          # IA-01: the base is the last verified commit (scripts/ci_base.sh); the validator then compares
+          # every later commit with its parent.
+          BASE="$(bash scripts/ci_base.sh)"
+          echo "dossier validator base: $BASE"
+          python3 scripts/validate_dossier.py --base "$BASE"
+
+  surface-projection:
+    # mathagents sync's agent projection against the real agentteams at the lock (tests/test_surfaces.py's
+    # MATHAGENTS_TEST_AGENTTEAMS tests): the Goose grant-mode export and the frozen Codex surface broke on agentteams
+    # 1.0.0rc12+ while these tests only ran locally. No Lean needed.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Hosted-runner guard (GitHub-hosted only; D45)
+        if: runner.environment != 'github-hosted'
+        run: |
+          echo "::error::mathAgents CI runs only on GitHub-hosted runners (D45 retired the self-hosted fallback)"
+          exit 1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies and agentteams at the locked commit (no deps; build pins vetted for S-10)
+        run: |
+          python -m pip install "jsonschema==4.26.*" "pyyaml==6.0.*" "pytest==8.*"
+          sha="$(sed -n 's#^agentteams=jlcatonjr/agentteams@\([0-9a-f]\{40\}\)$#\1#p' toolchain.lock)"
+          test -n "$sha"
+          printf 'setuptools==84.0.0\nwheel==0.48.0\npackaging==26.3\n' > "$RUNNER_TEMP/build-constraints.txt"
+          PIP_CONSTRAINT="$RUNNER_TEMP/build-constraints.txt" python -m pip install --no-deps \
+            "agentteams @ git+https://github.com/jlcatonjr/agentteams.git@$sha"
+          agentteams --version
+
+      - name: Surface projection tests against the real agentteams
+        run: MATHAGENTS_TEST_AGENTTEAMS="$(command -v agentteams)" python -m pytest -q -rs tests/test_surfaces.py

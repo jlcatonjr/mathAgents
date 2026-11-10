@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "slug": "p4-thirty-divides-n5-minus-n",
+  "lean_namespace": "MathAgents.P4ThirtyDividesN5MinusN",
+  "intake_sha256": "0bfd8907b3165f44fe64e5eb0b83dc7060a65a737a6aa3e038a302fe56068deb",
+  "declarations": [
+    {
+      "decl": "MathAgents.P4ThirtyDividesN5MinusN.thirty_dvd_pow_five_sub_self_int_R1",
+      "statement_fingerprint": "2249006667",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-18"
+    },
+    {
+      "decl": "MathAgents.P4ThirtyDividesN5MinusN.thirty_dvd_pow_five_sub_self_nat_R2",
+      "statement_fingerprint": "3359412615",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-18"
+    }
+  ]
+}

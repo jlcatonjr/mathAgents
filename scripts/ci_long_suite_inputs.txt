@@ -1,0 +1,40 @@
+# Inputs of the long CI suites (charter D46): a change to any of these makes a pull request run `long-suites`.
+# One repository-relative path per line; a trailing "/" means everything under it. tests/test_ci_long_suites.py
+# fails when a file the suites import or read is missing from this list.
+# The suites: scripts/tests/test_mathagents_gates.sh and scripts/tests/test_axiom_governance.sh --part lean.
+lean/lean-toolchain
+lean/lake-manifest.json
+lean/lakefile.toml
+lean/MathAgents.lean
+lean/MathAgentsWIP.lean
+scripts/lean/
+scripts/install_lean.sh
+scripts/check_proof_integrity.sh
+scripts/tests/test_mathagents_gates.sh
+scripts/tests/test_axiom_governance.sh
+scripts/proof_integrity.py
+scripts/validate_dossier.py
+scripts/validate_registries.py
+scripts/axiom_allowlist.py
+scripts/instance_root.py
+scripts/lean_pin.py
+scripts/dossier_structure.py
+scripts/preferences.py
+scripts/build_name_index.py
+scripts/check_blueprint_consistency.py
+scripts/check_lean_bindings.py
+# references/: only the registries the suites read (not the logs and records kept there; operator, 2026-10-29).
+references/schemas/
+references/axiom-allowlist.json
+references/object-logics.json
+references/prover-engines.json
+references/preferences.toml
+references/pilots.json
+docs/charter/
+# The decision itself: a change here always runs the suites (security review 2026-10-28).
+.github/workflows/gates.yml
+scripts/tests/test_ci_workflow.py
+scripts/ci_long_suites.py
+scripts/ci_long_suite_inputs.txt
+scripts/ci_base.sh
+tests/test_ci_long_suites.py

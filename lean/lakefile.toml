@@ -1,0 +1,23 @@
+# mathAgents proof library. Toolchain and Mathlib are pinned to the same stable tag
+# (policy: stable tags only; bump in a dedicated toolchain-bump wave, re-running G-KERNEL).
+name = "mathAgents"
+defaultTargets = ["MathAgents", "MathAgentsWIP"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.34.1"
+
+[[lean_lib]]
+name = "MathAgents"
+globs = ["MathAgents", "MathAgents.+"]
+
+# Open work: theorem stubs and partial proofs. `sorry` is tolerated here as an open marker;
+# MathAgents (the proved library) must never import it. See docs/kernel-gate.md.
+[[lean_lib]]
+name = "MathAgentsWIP"
+globs = ["MathAgentsWIP", "MathAgentsWIP.+"]

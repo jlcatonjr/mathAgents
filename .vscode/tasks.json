@@ -1,0 +1,734 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "script: agentteams_autosync_gate",
+      "type": "shell",
+      "command": "bash scripts/agentteams_autosync_gate.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: bootstrap_env",
+      "type": "shell",
+      "command": "bash scripts/bootstrap_env.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: bootstrap_toolchain",
+      "type": "shell",
+      "command": "bash scripts/bootstrap_toolchain.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: check_historical_context",
+      "type": "shell",
+      "command": "bash scripts/check_historical_context.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: check_literature_library_integrity",
+      "type": "shell",
+      "command": "bash scripts/check_literature_library_integrity.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: check_methodology_coverage",
+      "type": "shell",
+      "command": "bash scripts/check_methodology_coverage.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: check_proof_integrity",
+      "type": "shell",
+      "command": "bash scripts/check_proof_integrity.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: ci_base",
+      "type": "shell",
+      "command": "bash scripts/ci_base.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: claude_researchteam_bridge",
+      "type": "shell",
+      "command": "bash scripts/claude_researchteam_bridge.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: install_lean",
+      "type": "shell",
+      "command": "bash scripts/install_lean.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "script: validate_agentteams_update",
+      "type": "shell",
+      "command": "bash scripts/validate_agentteams_update.sh",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Adversarial",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/adversarial.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Agent Refactor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/agent-refactor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Agent Updater",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/agent-updater.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Axiom Auditor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/axiom-auditor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Cleanup",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/cleanup.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Code Hygiene",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/code-hygiene.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Cohesion Repairer",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/cohesion-repairer.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Conflict Auditor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/conflict-auditor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Conflict Resolution",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/conflict-resolution.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Content Enricher",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/content-enricher.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Counterexample Hunter",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/counterexample-hunter.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Engine Advisor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/engine-advisor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Harness Evaluation Expert",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/evaluation-expert.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Fidelity Auditor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/fidelity-auditor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Format Converter",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/format-converter.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Git Operations",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/git-operations.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Harness Specification Expert",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/harness-spec-expert.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Interpretation Advisor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/interpretation-advisor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Lean Informalization",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/lean-informalization.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Lean Prover",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/lean-prover.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Logic Articulator",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/logic-articulator.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Methods Literature Review Expert",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/methods-review-expert.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Navigator",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/navigator.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Orchestrator",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/orchestrator.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Output Compiler",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/output-compiler.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Post Production Auditor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/post-production-auditor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Primary Producer",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/primary-producer.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Proof Dossiers Expert",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/proof-dossiers-expert.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Proof Library Expert",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/proof-library-expert.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Proof Strategist",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/proof-strategist.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Quality Auditor",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/quality-auditor.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Reference Manager",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/reference-manager.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Repo Liaison",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/repo-liaison.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Research Analyst",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/research-analyst.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Retrieval Integrator",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/retrieval-integrator.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Security",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/security.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Statement Formalizer",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/statement-formalizer.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Tactic Planner",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/tactic-planner.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Team Builder",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/team-builder.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Technical Validator",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/technical-validator.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Visual Designer",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/visual-designer.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "Goose: Work Summarizer",
+      "type": "shell",
+      "command": "zsh -c '. ~/.config/goose/goose-backend.sh && goose-or run --recipe .goose/recipes/work-summarizer.yaml'",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "agentteams: update agents",
+      "type": "shell",
+      "command": "agentteams --update --merge",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "agentteams: dry-run check",
+      "type": "shell",
+      "command": "agentteams --update --dry-run",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
+      "label": "agentteams: fleet update (all)",
+      "type": "shell",
+      "command": "agentteams --fleet . --fleet-frameworks all --update --merge",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    }
+  ]
+}

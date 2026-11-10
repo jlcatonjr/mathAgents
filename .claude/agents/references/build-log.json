@@ -1,0 +1,1005 @@
+{
+  "schema_version": "1.5",
+  "agentteams_version": "1.1.0",
+  "agentteams_source": {
+    "kind": "vcs-pin",
+    "commit": "9b16fb544c03aad636d3839c37873624f6efbd37",
+    "branch": null,
+    "dirty": false
+  },
+  "generated_at": "2026-11-10T01:54:39.995813+00:00",
+  "project_name": "mathAgents",
+  "framework": "claude",
+  "project_type": "research",
+  "archetypes": [
+    "primary-producer",
+    "quality-auditor",
+    "cohesion-repairer",
+    "technical-validator",
+    "format-converter",
+    "reference-manager",
+    "output-compiler",
+    "visual-designer",
+    "post-production-auditor",
+    "retrieval-integrator",
+    "research-analyst"
+  ],
+  "components": [
+    "methods-review",
+    "harness-spec",
+    "proof-dossiers",
+    "proof-library",
+    "evaluation"
+  ],
+  "files_written": [
+    ".claude/agents/references/security-vulnerability-watch.reference.md",
+    ".claude/agents/references/security-vulnerability-watch.json",
+    ".claude/agents/references/framework-watch.reference.md",
+    ".claude/agents/security.md"
+  ],
+  "manual_required": 7,
+  "template_hashes": {
+    "universal/orchestrator.template.md": "7e350d6cb17aac72",
+    "universal/navigator.template.md": "3d28148430bddfdf",
+    "universal/security.template.md": "b738b65b9a3edecd",
+    "universal/code-hygiene.template.md": "8c53882027a0aa40",
+    "universal/adversarial.template.md": "0c7b7cb909b089a0",
+    "universal/conflict-auditor.template.md": "a6199323e4d1add3",
+    "universal/conflict-resolution.template.md": "4542fdba8f977079",
+    "universal/cleanup.template.md": "6a404be5ad0bfbe9",
+    "universal/agent-updater.template.md": "fceaeaa65379ff06",
+    "universal/agent-refactor.template.md": "b1417e2f09b84022",
+    "universal/repo-liaison.template.md": "70331bea47521df8",
+    "universal/git-operations.template.md": "9f3fcbd9167a8833",
+    "domain/work-summarizer.template.md": "4124536ef03c333d",
+    "domain/primary-producer.template.md": "278ed220891ba707",
+    "domain/quality-auditor.template.md": "3dd911ae905e8b28",
+    "domain/cohesion-repairer.template.md": "30f6320e49652bcf",
+    "domain/technical-validator.template.md": "0c8c489fb67c5891",
+    "domain/format-converter.template.md": "c63fb3473e7c3fb0",
+    "domain/reference-manager.template.md": "299f437acd33eff9",
+    "domain/output-compiler.template.md": "7ec6b1533cae4aaf",
+    "domain/visual-designer.template.md": "c639dcf21cfabf63",
+    "domain/post-production-auditor.template.md": "b03ba06eb95f2c00",
+    "domain/retrieval-integrator.template.md": "0cfb9cd3138cfd1d",
+    "domain/research-analyst.template.md": "a6565b6bbe8fcfcd",
+    "domain/tool-specific.doc.template.md": "d64a53ebf12e6547",
+    "domain/tool-cli.doc.template.md": "060ea142104f20e0",
+    "domain/code-hygiene-rules-reference.template.md": "891dd19f0d09cea0",
+    "domain/unix-philosophy-mapping-reference.template.md": "702af6b4e9e2b952",
+    "universal/security-vulnerability-watch.reference.template.md": "269cdacb3d94fdfa",
+    "universal/security-vulnerability-watch.json.template": "ebcec1b04ad46caa",
+    "universal/security-linux-hardening.reference.template.md": "4845cf83b84615f4",
+    "universal/security-macos-hardening.reference.template.md": "78fd2835ec2d8869",
+    "universal/security-windows-hardening.reference.template.md": "5885668f48e4c295",
+    "universal/security-infrastructure-layers.reference.template.md": "5c4c67f28d67149b",
+    "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
+    "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
+    "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
+    "universal/github-workflows-merge.reference.template.md": "aa26e7db5d333f1f",
+    "universal/branch-lifecycle.reference.template.md": "8f199043003804b3",
+    "universal/work-summary-spec.reference.template.md": "d29ca7e680ad715d",
+    "universal/work-summary-tooling.reference.template.md": "62e643b1a9711af6",
+    "universal/work-summary-backfill.reference.template.md": "5730bac043dc2874",
+    "universal/parallelization.reference.template.md": "12111b7bb9a9aa10",
+    "universal/sandbox-handoff.reference.template.md": "fe27b3ca2d7de60d",
+    "universal/instruction-authority.reference.template.md": "a73a355a8da0c15f",
+    "universal/orchestrator-spawn-authority.reference.template.md": "221ebb904e4f4e48",
+    "universal/redteam-methodology.reference.template.md": "a0443337a9796294",
+    "universal/retrospective-remediation.reference.template.md": "1965ac5f52cf72f0",
+    "universal/cli-tool-discovery.reference.template.md": "203004e771c8b2fd",
+    "universal/skill-generation.reference.template.md": "df8ffe189f09e491",
+    "universal/external-retrieval-quality-gate.reference.template.md": "3922b0a2e99e75a3",
+    "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
+    "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
+    "workstream-expert.template.md": "19e099ff5eaf447b",
+    "copilot-instructions.template.md": "d3fcc564166c5285",
+    "builder/team-builder-claude.template.md": "f18ed3516005d223",
+    "domain/content-enricher.template.md": "25b7c467ae7a8978"
+  },
+  "output_files_map": [
+    {
+      "path": "orchestrator.agent.md",
+      "template": "universal/orchestrator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "navigator.agent.md",
+      "template": "universal/navigator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "security.agent.md",
+      "template": "universal/security.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "code-hygiene.agent.md",
+      "template": "universal/code-hygiene.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "adversarial.agent.md",
+      "template": "universal/adversarial.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "conflict-auditor.agent.md",
+      "template": "universal/conflict-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "conflict-resolution.agent.md",
+      "template": "universal/conflict-resolution.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "cleanup.agent.md",
+      "template": "universal/cleanup.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "agent-updater.agent.md",
+      "template": "universal/agent-updater.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "agent-refactor.agent.md",
+      "template": "universal/agent-refactor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "repo-liaison.agent.md",
+      "template": "universal/repo-liaison.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "git-operations.agent.md",
+      "template": "universal/git-operations.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "work-summarizer.agent.md",
+      "template": "domain/work-summarizer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "primary-producer.agent.md",
+      "template": "domain/primary-producer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "quality-auditor.agent.md",
+      "template": "domain/quality-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "cohesion-repairer.agent.md",
+      "template": "domain/cohesion-repairer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "technical-validator.agent.md",
+      "template": "domain/technical-validator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "format-converter.agent.md",
+      "template": "domain/format-converter.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "reference-manager.agent.md",
+      "template": "domain/reference-manager.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "output-compiler.agent.md",
+      "template": "domain/output-compiler.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "visual-designer.agent.md",
+      "template": "domain/visual-designer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "post-production-auditor.agent.md",
+      "template": "domain/post-production-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "retrieval-integrator.agent.md",
+      "template": "domain/retrieval-integrator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "research-analyst.agent.md",
+      "template": "domain/research-analyst.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "../skills/tool-lean-4/SKILL.md",
+      "template": "domain/tool-language.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-lean-4"
+    },
+    {
+      "path": "../skills/tool-mathlib/SKILL.md",
+      "template": "domain/tool-library.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-mathlib"
+    },
+    {
+      "path": "../skills/tool-pandoc/SKILL.md",
+      "template": "domain/tool-cli.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-pandoc"
+    },
+    {
+      "path": "../skills/tool-leanblueprint/SKILL.md",
+      "template": "domain/tool-cli.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-leanblueprint"
+    },
+    {
+      "path": "references/code-hygiene-rules.reference.md",
+      "template": "domain/code-hygiene-rules-reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/unix-philosophy-mapping.reference.md",
+      "template": "domain/unix-philosophy-mapping-reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-vulnerability-watch.reference.md",
+      "template": "universal/security-vulnerability-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-vulnerability-watch.json",
+      "template": "universal/security-vulnerability-watch.json.template",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-linux-hardening.reference.md",
+      "template": "universal/security-linux-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-macos-hardening.reference.md",
+      "template": "universal/security-macos-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-windows-hardening.reference.md",
+      "template": "universal/security-windows-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-infrastructure-layers.reference.md",
+      "template": "universal/security-infrastructure-layers.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/ai-bad-habits-watch.reference.md",
+      "template": "universal/ai-bad-habits-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/framework-watch.reference.md",
+      "template": "universal/framework-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/adjacent-repos.md",
+      "template": "universal/adjacent-repos.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/github-workflows-merge.reference.md",
+      "template": "universal/github-workflows-merge.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/branch-lifecycle.reference.md",
+      "template": "universal/branch-lifecycle.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-spec.reference.md",
+      "template": "universal/work-summary-spec.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-tooling.reference.md",
+      "template": "universal/work-summary-tooling.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-backfill.reference.md",
+      "template": "universal/work-summary-backfill.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/parallelization.reference.md",
+      "template": "universal/parallelization.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/sandbox-handoff.reference.md",
+      "template": "universal/sandbox-handoff.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/instruction-authority.reference.md",
+      "template": "universal/instruction-authority.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/orchestrator-spawn-authority.reference.md",
+      "template": "universal/orchestrator-spawn-authority.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/redteam-methodology.reference.md",
+      "template": "universal/redteam-methodology.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrospective-remediation.reference.md",
+      "template": "universal/retrospective-remediation.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/cli-tool-discovery.reference.md",
+      "template": "universal/cli-tool-discovery.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/skill-generation.reference.md",
+      "template": "universal/skill-generation.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/external-retrieval-quality-gate.reference.md",
+      "template": "universal/external-retrieval-quality-gate.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrieval-integration.reference.md",
+      "template": "universal/retrieval-integration.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrieval-trigger-contract.reference.md",
+      "template": "universal/retrieval-trigger-contract.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "methods-review-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "methods-review"
+    },
+    {
+      "path": "harness-spec-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "harness-spec"
+    },
+    {
+      "path": "proof-dossiers-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "proof-dossiers"
+    },
+    {
+      "path": "proof-library-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "proof-library"
+    },
+    {
+      "path": "evaluation-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "evaluation"
+    },
+    {
+      "path": "../CLAUDE.md",
+      "template": "copilot-instructions.template.md",
+      "type": "instructions",
+      "component_slug": null
+    },
+    {
+      "path": "team-builder.agent.md",
+      "template": "builder/team-builder-claude.template.md",
+      "type": "builder",
+      "component_slug": null
+    },
+    {
+      "path": "SETUP-REQUIRED.md",
+      "template": "",
+      "type": "setup-required",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-graph.md",
+      "template": "",
+      "type": "graph",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-graph.svg",
+      "template": "",
+      "type": "graph-svg",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-handoffs.svg",
+      "template": "",
+      "type": "graph-svg",
+      "component_slug": null
+    },
+    {
+      "path": "content-enricher.agent.md",
+      "template": "domain/content-enricher.template.md",
+      "type": "agent",
+      "component_slug": null
+    }
+  ],
+  "agent_slug_list": [
+    "orchestrator",
+    "navigator",
+    "security",
+    "code-hygiene",
+    "adversarial",
+    "conflict-auditor",
+    "conflict-resolution",
+    "cleanup",
+    "agent-updater",
+    "agent-refactor",
+    "repo-liaison",
+    "git-operations",
+    "work-summarizer",
+    "primary-producer",
+    "quality-auditor",
+    "cohesion-repairer",
+    "technical-validator",
+    "format-converter",
+    "reference-manager",
+    "output-compiler",
+    "visual-designer",
+    "post-production-auditor",
+    "retrieval-integrator",
+    "research-analyst",
+    "methods-review-expert",
+    "harness-spec-expert",
+    "proof-dossiers-expert",
+    "proof-library-expert",
+    "evaluation-expert",
+    "axiom-auditor",
+    "counterexample-hunter",
+    "engine-advisor",
+    "fidelity-auditor",
+    "interpretation-advisor",
+    "lean-informalization",
+    "lean-prover",
+    "logic-articulator",
+    "proof-strategist",
+    "statement-formalizer",
+    "tactic-planner"
+  ],
+  "governance_agents": [
+    "navigator",
+    "security",
+    "code-hygiene",
+    "adversarial",
+    "conflict-auditor",
+    "conflict-resolution",
+    "cleanup",
+    "agent-updater",
+    "agent-refactor",
+    "repo-liaison",
+    "git-operations"
+  ],
+  "manifest_fingerprint": "e88a48a31fdbc906",
+  "fingerprint_algo_version": 1,
+  "file_hashes": {
+    "references/security-vulnerability-watch.reference.md": "f49405f856ed5156",
+    "references/security-vulnerability-watch.json": "14a7476115937a4a",
+    "references/framework-watch.reference.md": "2d8e8df83972c912",
+    "security.md": "ea385448ad3dee8c",
+    "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
+    "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
+    "../CLAUDE.md": "b0089726d0607cec",
+    "references/runtime-handoffs.json": "73306a5217a45b1f",
+    "orchestrator.md": "4719123e9c03dc04",
+    "navigator.md": "508287eb74d0b808",
+    "code-hygiene.md": "08be39d6d775c969",
+    "adversarial.md": "1a4a1c0914731d55",
+    "conflict-auditor.md": "9d395c24100261c0",
+    "conflict-resolution.md": "af0f7709be0da353",
+    "cleanup.md": "2631197713342a5b",
+    "agent-updater.md": "0f0edc30e99ee29a",
+    "agent-refactor.md": "623b2276090a9e42",
+    "repo-liaison.md": "686c93141d189b44",
+    "git-operations.md": "31e94cdcb55be41c",
+    "work-summarizer.md": "b34dd444fd5d22c5",
+    "primary-producer.md": "c51f731d78b2efac",
+    "quality-auditor.md": "f57580c9e1a6e93c",
+    "cohesion-repairer.md": "4228e62669a05cbe",
+    "technical-validator.md": "b691ac5b70a4a461",
+    "format-converter.md": "57cb5017c43097ca",
+    "reference-manager.md": "d249f379fc88e191",
+    "output-compiler.md": "a3ef48ef0f505361",
+    "visual-designer.md": "bc01dbb7d5d7bf31",
+    "post-production-auditor.md": "91cc994b44863799",
+    "retrieval-integrator.md": "7e490925bae0bb4f",
+    "research-analyst.md": "bba5d06996138e0d",
+    "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
+    "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
+    "references/work-summary-spec.reference.md": "96232231a1f7c6be",
+    "references/work-summary-tooling.reference.md": "f3656972717153a9",
+    "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
+    "references/parallelization.reference.md": "fbd84bddbf5f6c13",
+    "references/instruction-authority.reference.md": "ca0812420b64ade7",
+    "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
+    "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
+    "references/skill-generation.reference.md": "2721d15d64d12081",
+    "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
+    "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
+    "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
+    "methods-review-expert.md": "ade466072dbe9be4",
+    "harness-spec-expert.md": "25f2d1a4c33ec4c5",
+    "proof-dossiers-expert.md": "5829bb6eba0e454e",
+    "proof-library-expert.md": "5649e0f65e2261f4",
+    "evaluation-expert.md": "347776059403292e",
+    "team-builder.md": "bd7c4461274ae7f9",
+    "SETUP-REQUIRED.md": "b6c16adfbb523442",
+    "content-enricher.md": "7a991305d1b007f0",
+    "references/write-policy.reference.md": "d5d003ec5740b609",
+    "references/mcp-need.reference.md": "15c753f1a114601e",
+    "references/authorized-verify-keys/README.md": "badf32b421079acf",
+    "references/pipeline-graph.md": "662997c4f9bf7a4e"
+  },
+  "front_matter_baseline": {
+    "security.md": {
+      "name": "Security \u2014 mathAgents",
+      "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "../skills/tool-lean-4/SKILL.md": {
+      "name": "tool-lean-4",
+      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
+    },
+    "../skills/tool-mathlib/SKILL.md": {
+      "name": "tool-mathlib",
+      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
+    },
+    "orchestrator.md": {
+      "name": "Orchestrator \u2014 mathAgents",
+      "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
+      "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task"
+    },
+    "navigator.md": {
+      "name": "Navigator \u2014 mathAgents",
+      "description": "\"Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "code-hygiene.md": {
+      "name": "Code Hygiene \u2014 mathAgents",
+      "description": "\"Read-only auditor that enforces modular architecture, file hygiene, script lifecycle, anti-sprawl rules, and agent documentation quality. Delegates removals to @cleanup; delegates structural extraction to @agent-refactor.\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "adversarial.md": {
+      "name": "Adversarial \u2014 mathAgents",
+      "description": "\"Presupposition critic: challenges the assumptions underlying any plan, proposal, or diagnosis produced by the agent team. Traces how justified changes in presuppositions cascade through dependent logic.\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "conflict-auditor.md": {
+      "name": "Conflict Auditor \u2014 mathAgents",
+      "description": "\"Detects logical conflicts across deliverables, agent documentation, reference files, and source material in mathAgents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "conflict-resolution.md": {
+      "name": "Conflict Resolution \u2014 mathAgents",
+      "description": "\"Makes ACCEPT/REJECT/REVISE decisions on conflicts flagged by the conflict auditor in mathAgents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "cleanup.md": {
+      "name": "Cleanup \u2014 mathAgents",
+      "description": "\"Removes stale drafts, build artifacts, and orphaned files from mathAgents with mandatory safety checks\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "agent-updater.md": {
+      "name": "Agent Updater \u2014 mathAgents",
+      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "agent-refactor.md": {
+      "name": "Agent Refactor \u2014 mathAgents",
+      "description": "\"Extracts shared data to reference files and enforces spec compliance across all agent documentation in mathAgents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "repo-liaison.md": {
+      "name": "Repo Liaison \u2014 mathAgents",
+      "description": "\"Tracks agent documentation in repositories adjacent to mathAgents, communicates cross-repository impacts, maintains the adjacent-repos registry, and coordinates between orchestrators when this project's activity affects neighboring agent infrastructures.\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "git-operations.md": {
+      "name": "Git Operations \u2014 mathAgents",
+      "description": "\"Executes and governs Git and GitHub operations in mathAgents, including commit/push, pull/merge/rebase, conflict handling, and recovery workflows.\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "work-summarizer.md": {
+      "name": "Work Summarizer \u2014 mathAgents",
+      "description": "\"Synthesizes daily, weekly, and monthly work summaries from canonical plan artifacts and git evidence for mathAgents; supports append-first daily capture, legacy tmp/ fallback, and required adversarial/conflict audits\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "primary-producer.md": {
+      "name": "Primary Producer \u2014 mathAgents",
+      "description": "\"Drafts and revises deliverables in mathAgents from Component Briefs provided by workstream expert agents\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "quality-auditor.md": {
+      "name": "Quality Auditor \u2014 mathAgents",
+      "description": "\"Read-only audit agent that inspects deliverables in mathAgents for structural defects, logical inconsistencies, and LLM-generated prose patterns; does not rewrite\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "cohesion-repairer.md": {
+      "name": "Cohesion Repairer \u2014 mathAgents",
+      "description": "\"Repairs within-section cohesion failures in mathAgents deliverables \u2014 disjointedness, broken transitions, and missing argumentative spine; does not reorganize across sections\"",
+      "tools": "Read"
+    },
+    "technical-validator.md": {
+      "name": "Technical Validator \u2014 mathAgents",
+      "description": "\"Read-only audit agent that verifies technical accuracy in mathAgents \u2014 code examples, file excerpts, API references, and tool invocations match what exists on disk\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "format-converter.md": {
+      "name": "Format Converter \u2014 mathAgents",
+      "description": "\"Converts deliverables from their source format to Markdown with Chicago author-date citations; Lean 4 sources; generated blueprint for final output in mathAgents\"",
+      "tools": "Read"
+    },
+    "reference-manager.md": {
+      "name": "Reference Manager \u2014 mathAgents",
+      "description": "\"Manages the bibliography and reference database for mathAgents \u2014 CRUD operations, citation verification, anti-fabrication enforcement\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "output-compiler.md": {
+      "name": "Output Compiler \u2014 mathAgents",
+      "description": "\"Assembles all converted components into a final deliverable package for mathAgents \u2014 dependency check, ordering, build manifest\"",
+      "tools": "Read"
+    },
+    "visual-designer.md": {
+      "name": "Visual Designer \u2014 mathAgents",
+      "description": "\"Creates and revises diagrams and figures for mathAgents using the approved diagram toolchain\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "post-production-auditor.md": {
+      "name": "Post-Production Auditor \u2014 mathAgents",
+      "description": "\"Outcome-verification specialist for mathAgents: validates claimed completed work against source-of-truth state using risk-tiered sampling and evidence-backed verdicts\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "retrieval-integrator.md": {
+      "name": "Retrieval Integrator \u2014 mathAgents",
+      "description": "\"Validates retrieval integration contracts in mathAgents \u2014 query entrypoints, maintenance entrypoints, trigger channels, and freshness obligations\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "research-analyst.md": {
+      "name": "Research Analyst \u2014 mathAgents",
+      "description": "\"Orchestrates the optional agentteams[research] runtime library in mathAgents \u2014 web search, reputable-source rating, and dual-lens claim verification\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "methods-review-expert.md": {
+      "name": "Methods Literature Review Expert \u2014 mathAgents",
+      "description": "\"Component expert for Methods Literature Review in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "harness-spec-expert.md": {
+      "name": "Harness Specification Expert \u2014 mathAgents",
+      "description": "\"Component expert for Harness Specification in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "proof-dossiers-expert.md": {
+      "name": "Proof Dossiers Expert \u2014 mathAgents",
+      "description": "\"Component expert for Proof Dossiers in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "proof-library-expert.md": {
+      "name": "Proof Library Expert \u2014 mathAgents",
+      "description": "\"Component expert for Proof Library in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "evaluation-expert.md": {
+      "name": "Harness Evaluation Expert \u2014 mathAgents",
+      "description": "\"Component expert for Harness Evaluation in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob"
+    },
+    "team-builder.md": {
+      "tools": "Read, Grep, Glob",
+      "name": "Team Builder \u2014 Agent Teams Module",
+      "description": "\"Interactively constructs a complete agent team for a new or existing Claude project by conducting an intake interview and invoking the build_team pipeline\""
+    },
+    "content-enricher.md": {
+      "name": "Content Enricher \u2014 mathAgents",
+      "description": "\"Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials\"",
+      "tools": "Read, Grep, Glob"
+    }
+  },
+  "front_matter_baseline_version": 2,
+  "write_policy": "orchestrator-only",
+  "prompt_root_hashes": {
+    ".claude/CLAUDE.md": {
+      "project_overview": "2e5d490c645705421ee3c2b6bb6c24ce6e852a879d1b7b0b298c9f69771d8442",
+      "directory_structure": "7ba6c4977b7f0601ac878ff3fc14deeadc11c7442d1085d652a1901db1f50d17",
+      "output_conventions": "78d817d7f5914ccbd35923755326cdcea132178bc9bf0750325141f83ef69f29",
+      "agent_team": "f46b14526624e1ce7c6c1782c5d6899398d40f6f01bf21875099f22b806adc93",
+      "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
+      "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
+      "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
+      "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
+      "write_policy": "0baf736c166d97cd042e76c7fa009b1ce45e4f06435fc2ebfb141332fca3e0cf"
+    },
+    ".claude/agents/SETUP-REQUIRED.md": {
+      "content": "b6c16adfbb523442d18139d65e04a23f85ff35591d247df014c88781920b87d8"
+    },
+    ".claude/agents/adversarial.md": {
+      "content": "1089da788007619bdd69030586d267f2fee9337f7f662ccceecf8e54b693a4ad"
+    },
+    ".claude/agents/agent-refactor.md": {
+      "content": "9b5729853bcf28c5326137f7c2ac8f011cdcbeaa9b23b3d4cb7e7d76d2197309"
+    },
+    ".claude/agents/agent-updater.md": {
+      "content": "7e27078b151bcb7c28c67263c5e3d635202ae46212fad52a320f5e1bb1715e8d"
+    },
+    ".claude/agents/axiom-auditor.md": {
+      "*": "2e345cf45bca06f426c602d5f001f4525dd73067d19b7c7ae94a7808fd5d159f"
+    },
+    ".claude/agents/cleanup.md": {
+      "content": "84af0717872c4996889bebb9ebccf9404b9a5ee6c037edff1fe91afddfa012c9"
+    },
+    ".claude/agents/code-hygiene.md": {
+      "content": "2ceb9e47e9bcbf12a91e47acce97b2c2193d279060053356a731850a838e9b4e"
+    },
+    ".claude/agents/cohesion-repairer.md": {
+      "content": "2739ef2d7879bca7ecf196f92d7d10c6418c034dfee49f556d91dad5e41d39c3"
+    },
+    ".claude/agents/conflict-auditor.md": {
+      "invariant_core": "9b62e5b358ee6726ec3600c39b2c57fb451c623a4fb6ade7f4776c2570e836dc",
+      "typed_handoff_audit": "fc72a6ded9e4248c0c174d24b21d57fe6ddd2bc09cf71feba6f5ddeac4802f67",
+      "behavioral_spec_cross_check": "d33518a32d59fa60e97f94e60df6934397e5e937e4716aea6a8e28f6fefbe597",
+      "memory_index_consultation": "d73e2eb4b3c7d5d30693d0f8f8d088d74ef4be6f0292e816083e774d29c563c2",
+      "authority_sources_list": "0774ddf7dbf47f934f9dbf5db9a001200ef84861345943d5f037269e6a802059",
+      "rules": "9667b10268dd7a058c0dbeb757bbaf7937550a95bc459e2bdefcb4989b79b9a2",
+      "handoff_payload_conflict_codes": "506c97de1dfef1269beed438b6055154cd3a439047084983f9ac0a80353b7b51",
+      "handoff_payload_codes": "38a1bcd36aa352b02b6d96b38af008454e46d34b558188c323241ef43c3f3e1a",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/conflict-resolution.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "memory_index_consultation": "1f9ab4e9c464b9123c74b5416a22acd7c1086b5f4d8311ac68c5c22969411f9b",
+      "rules": "5a133df68a1d37204898e3310a3756bb9bf7dbd1ede35e31e2b5800dcef55e65",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/content-enricher.md": {
+      "content": "a983455252742ffae7990aeead26731462a98f6ebe1d49d942da86c09ec490e5"
+    },
+    ".claude/agents/counterexample-hunter.md": {
+      "*": "e32af4a26dc95dfdf9f2279d7047f5c241249ede7648839bf00bebc2c5be93c6"
+    },
+    ".claude/agents/engine-advisor.md": {
+      "*": "1badec05005e520646bbee9e1a1b9679ad8c788037f96843487939b1fe0dcaf0"
+    },
+    ".claude/agents/evaluation-expert.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "component_spec": "fc1d3541b5a9d47be85c181fc7010483f5f6db02b1f8b4b061a9384706db47cd",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/fidelity-auditor.md": {
+      "*": "44785e0691e2210193dc6715048ebb2e0bebec8a571b47ebbafec2a5f3ba17e2"
+    },
+    ".claude/agents/format-converter.md": {
+      "content": "c1e6028a5c5eaf689c561cf2c2f343870f53b5af5d048d5f86ea216839ecc254"
+    },
+    ".claude/agents/git-operations.md": {
+      "content": "6e13a9a5cbed63f39c4754f8e23c0eb316d847c78196ff7c87338ebedc713380"
+    },
+    ".claude/agents/harness-spec-expert.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "component_spec": "0eeaa0d29076fa65c1ebf28730062e641a2d0cc6d45535ba233363e5a72be849",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/interpretation-advisor.md": {
+      "*": "032a4c7fc6769c39ec716aa2b68d91caa389659581908dbd98d0c7d1e780a139"
+    },
+    ".claude/agents/lean-informalization.md": {
+      "*": "8b6b2805b783a756c75298153fd467f32dbbf59262bfc1650b034406164a2307"
+    },
+    ".claude/agents/lean-prover.md": {
+      "*": "05cb3ae0e90f33fc425a41df86a54cfa657d6b36be59cefceb42b4e2b71cad9e"
+    },
+    ".claude/agents/logic-articulator.md": {
+      "*": "910b8197eaa98c9a556437a36cede041d0d457e2f4c8c7d7e8a3d60b3fa2c1ab"
+    },
+    ".claude/agents/methods-review-expert.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "component_spec": "fb49724ab331f8d581e5536c718f80bb8b0d361e369671d43152466a9de24a51",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/navigator.md": {
+      "invariant_core": "05aac7cabeea587ef7f6a7071f606bed85d271c26453655455db5122fe2fb52a",
+      "workstream_source_map": "17c14e9a0096a09da4e5a39b686c5d9c98a293e74f6e5d276419e0977fc09d81",
+      "invariant_rules": "9f02cd5b924adde05a397c1b80f155200b00f523ebc2e4ddce10fc55dffb80bd",
+      "code_index_consultation": "560588e20a4a7fccd2004323c8aa94422d41e8aa7ebf8ff48ab7dcbc5142ff41",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/orchestrator.md": {
+      "constitutional_core": "f05ead693f33d316cc83453eb195d232f5ac76cd36d8cce45b3605e14747def4",
+      "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
+      "routing_table_rows": "995fba63874caed4e036ab822330e1f2c08c35347adafd027d5d8546c365beac",
+      "update_compatibility_source_pack": "24662ea1c046bf2831dfa898b937114683aa5e9ca695b243aaf3241ca6ab34ea",
+      "available_workflows": "8de1b9009bbb3bcc7311385950da68387e089af7e7a04227669eb6bee5638239",
+      "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d"
+    },
+    ".claude/agents/output-compiler.md": {
+      "content": "e34d558d470719efe668528d826138a1d46142ef7691896721ff813c8d7f6d08"
+    },
+    ".claude/agents/post-production-auditor.md": {
+      "content": "1df821b06fa2f5fcb708e433ac102b37e4acad997ae973ed1486f1f6adffc0f0"
+    },
+    ".claude/agents/primary-producer.md": {
+      "content": "4898d6fc57f3ef0d193e136505496fe830a28d5ecdf6bcf8622722a12ea9a50d"
+    },
+    ".claude/agents/proof-dossiers-expert.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "component_spec": "1d17518c000b99f276788878c2b124a57ec96b71e44553874560930485f9d9e1",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/proof-library-expert.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "component_spec": "70fd6206243abca3937c1744a1d4951a1d7f3427c0c6ff9156569dbf06b9b53c",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/proof-strategist.md": {
+      "*": "ccb7e976645815ad31322e50ef4a0a94341f6aae7cee9cbf7e2cc1484f755681"
+    },
+    ".claude/agents/quality-auditor.md": {
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "defect_taxonomy": "e9468640170cbdc1e966b0c589f2d1e4926c1fde9ca792f49923fae80e903b79",
+      "memory_index_consultation": "f9040d9f95fdeec1cddaf21ba6a5764730ea3cf3590ab7d90d3aafe48bc84043",
+      "audit_protocol": "6f7dd04ad5bc4fdc90898a08269ca14eca4e0bd5826af0444d66debf313e1498",
+      "output_format": "4d2983fcb4a1bb09df289219928ea3844d56fed192f91098c702e458b5eb0e6e",
+      "boundary_rules": "91444ed2e3202780cdc752d5e4cefb5aea17e9d58c0d6dd6b009dcbf51e7f64c",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/reference-manager.md": {
+      "content": "7b0d0c7b102a6cf83513cb0b2ab5682f420dd20be2342b92deba496f9ed24692"
+    },
+    ".claude/agents/repo-liaison.md": {
+      "purpose": "65e469952189f945e12b09729dc825c1424c7cd3a6cbceaa179116fdbc5c0b55",
+      "invariant_core": "fced04c1bec7ae3c202590dd7c101ab599edbf1f0e626fa1d9f15169c5aa5507",
+      "protocols": "a0b9eed4073bff4caebf3410b0a5e5d183331cff5715a0e75dcc6097d1341597",
+      "output_format": "92a7ecbd969c55a1ba9b02c7d56b9e23c4a65d486eeb6a0ae775690d3fbd6a46",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/research-analyst.md": {
+      "a_note_on_what_you_orchestrate": "a29ed82747ee6ab724f33e69855718c16dd9fa0289da6ab61fd62b68989e2029",
+      "invariant_core": "335ad3c0f668cb985c409ad570c0d734c1f7434470deb18959bc2e4e8480f674",
+      "memory_index_consultation": "75c24a1268805ce7a248e353dfde27fe49c649afc6be216ac0fe1129d9fcccaf",
+      "procedure": "f5fdd70bde5a761b09aae5d78717c47d193350b093efae076a137096be65554a",
+      "external_retrieval_quality_gate": "77f54ec03535c1bc9ce99cc3090889913fa3441c6261c7df3d9562288aed1ef6",
+      "output_format": "f751fcb4fa4f36501bc3ec3bba179f2483438521a4bb529a6e3ef7a1e73fe218",
+      "external_retrieval_quality_gate_output": "5b130293ed8b3531d99ad4e53bf2ec6d9cddcba11cc28df28e962a185e16c04a",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/retrieval-integrator.md": {
+      "invariant_core": "c6e2ebd81a8bf4709f2e941bc865ef0e063a86a8c87d85e9eee3ae26db803205",
+      "memory_index_consultation": "d2b225360709018676d13dd25afa66da1b2047759b7a5b97c29c66e8b9c6b23e",
+      "code_index_consultation": "e661688f593d1e0ad46895f7436b88e2f0f4340b85ef84636584c2e395f34a90",
+      "validation_procedure": "c374434c6ac0802c268d92c106adfa99ea03a91d245b5c377133a1f26c19bb99",
+      "output_format": "e4df9c1a28d1b6e98e6b5f32314f029582dbc702862314bac792b4a4b998dfab",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/security.md": {
+      "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
+      "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
+      "security_rules_invariant": "d117bbfdbef263d9152dcad4b10c691f98458d1219e7a9e4134ee65d31e9d081",
+      "threat_intelligence": "f59be50a53a574bdc7ee2e1a2274edfd3b6e2b58010eced45b26a01049fc1f51",
+      "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/statement-formalizer.md": {
+      "*": "55717284fdb9a4ec47eb5b00bbff7964c232e64af94fb64d56b627f0fac583c3"
+    },
+    ".claude/agents/tactic-planner.md": {
+      "*": "a25564bbb633e99c0c6093f79d7c2c75410bda8514356fd004415aa95bf7bbcd"
+    },
+    ".claude/agents/team-builder.md": {
+      "content": "c73556804f3236e52a48366b914e5cdab66f42f992a6da53049c244ae93473bc"
+    },
+    ".claude/agents/technical-validator.md": {
+      "authority_sources_list": "0774ddf7dbf47f934f9dbf5db9a001200ef84861345943d5f037269e6a802059",
+      "invariant_core": "7adfc511ccfd9b2a91c93a9a441afdc6b9650de80c17bfa4751125e09075621f",
+      "accuracy_rules": "cf7b9555eed3b39638fa1c1016f84caa590691686fdf6b47aeabc8ea8b2b0417",
+      "memory_index_consultation": "52ec6bf27003097b9c859c6f179946fd38b01fcb45a85f776398d22242442aa3",
+      "cross_reference_rules": "a98aee0f1402dd069e280347dd6eb751d7de27c4f05884aa43aebb4b484cd92e",
+      "output_format": "7bf8d1da76afa8db69ae4e2382d560767ef4c7a7831cc4d60f4917edc553272c",
+      "boundary_rules": "633e41e63ba35fde70c573320cc6ddbe6983a5b5644ad52a08dfd6a330768cda",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    ".claude/agents/visual-designer.md": {
+      "content": "ccfc2a0b786fbafddd018a1ecf9a911ba2c11e15e41aa46b8507ea2a78b369ba"
+    },
+    ".claude/agents/work-summarizer.md": {
+      "content": "1d4e5598eaa949169d7641fe520e1cb487517e99d5dd34490ea46279a37e1986"
+    }
+  }
+}

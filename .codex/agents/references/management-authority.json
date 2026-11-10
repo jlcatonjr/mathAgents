@@ -1,0 +1,7 @@
+{
+  "is_management_repo": false,
+  "authorized_managers": [
+    "infrastructure-management"
+  ],
+  "note": "Management-repository endowment: names this repo's management status and the manager teams authorized to issue signed, scoped management directives. See references/instruction-authority.reference.md."
+}

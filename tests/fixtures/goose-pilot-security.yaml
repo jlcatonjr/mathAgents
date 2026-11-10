@@ -1,0 +1,47 @@
+version: "1.0.0"
+title: "Security — mathAgents"
+description: "Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds"
+instructions: |
+  Fixture: a grant-mode Goose recipe as the write-policy pilot rendered it (the security agent at agentteams
+  v1.1.0-rc.15). Its instructions are trimmed to the generated write_policy fence the audit reads.
+
+  <!-- AGENTTEAMS:BEGIN write_policy v=1 -->
+  ## Write Policy: Return Proposals, Never Write
+
+  This team runs `write_policy: "orchestrator-only"`. **This section overrides any instruction that
+  tells you to create, edit, delete, write or run something, anywhere in this file.** You hold read and search tools only. You
+  cannot write files, run commands or dispatch other agents.
+
+  - **To change or create a file:** return a `change-proposal` with the full new content (not a diff) and the
+    file's current `base_sha256`, or `"absent"` for a new file.
+  - **To delete a file:** return a `delete-proposal`.
+  - **To run a command:** return a `command-request` with an `argv` list (never a shell string) and the files
+    you expect it to write.
+  - **Every artifact** carries the `dispatch` value the orchestrator gave you for this task. Never invent or
+    reuse one.
+  - **If you can't do what the task needs** with these, do the best you can and attach a gap note to your
+    handoff: the task, what you tried, and the capability you wished you had. Don't open a plan or propose a
+    server; the orchestrator records it (`references/mcp-need.reference.md`).
+
+  Return the JSON to the orchestrator with your handoff. The orchestrator applies or runs it with
+  `agentteams --apply-proposal` / `--run-request`, under per-agent policy. The schemas, examples and exit
+  codes are in `references/write-policy.reference.md`.
+  <!-- AGENTTEAMS:END write_policy -->
+
+  ## Project-Specific Notes
+
+  > ⚙️ **USER-EDITABLE** — project-specific rules, overrides, and extensions for this agent. This section lies outside every `AGENTTEAMS` fence and is preserved verbatim across `agentteams --update --merge`.
+
+# agentteams-declared-tools: read, search
+extensions:
+  - type: stdio
+    name: "agentteams_readfs"
+    cmd: "python3"
+    args:
+      - "-I"
+      - "-S"
+      - ".agentteams/bin/goose-readfs-mcp.py"
+      - "--root"
+      - "."
+    timeout: 300
+    available_tools: [read_file, list_dir, find, grep, stat]

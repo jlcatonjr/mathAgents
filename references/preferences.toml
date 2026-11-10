@@ -1,0 +1,97 @@
+# mathAgents — project preferences (defaults for every dossier)
+#
+# Every decision the operator made about HOW this project works lives here as a setting you can
+# change. Each setting is a table:
+#
+#   choice       = the value in force
+#   alternatives = the other values you may switch to (choice must be one of choice ∪ alternatives)
+#   decision     = the charter decision that recorded the original choice (docs/charter/03-decisions.md)
+#
+# The comment above each setting explains every option. To change a setting, move the value you want
+# into `choice` (and the old one into `alternatives`). To change it for ONE dossier only, put the same
+# table in reports/dossiers/<slug>/preferences.toml; a dossier's setting overrides this file.
+#
+# Check your edit:   python3 scripts/preferences.py check
+# See what applies:  python3 scripts/preferences.py show <slug>
+#
+# Enforcement: readings.selected, intake.domain, intake.object_logic, intake.engines and
+# fidelity.kernel_as_judge are ENFORCED (the dossier validator compares them with the problem card
+# and the waiver records). sources.*, readings.selection and gax.* are ADVISORY: agents follow them,
+# and the human G-FID review checks the statement honours them. `preferences.py show` labels each.
+#
+# Changing a setting never rewrites past work. The gates make the consequences visible: a problem card
+# that no longer matches its dossier's preferences fails the dossier validator, and a statement changed
+# to follow a new choice lapses its G-FID approval and needs a G-AX record (DD-37).
+
+schema_version = 1
+
+[sources]
+
+# What counts as the statement of record when the primary text cannot be obtained (paywalled, and no
+# access). An openly available primary text is always used when it exists.
+#   "survey-statement-flagged"   formalize the statement exactly as an authoritative survey gives it,
+#                                quoted verbatim and labelled with the survey; fidelity to the original
+#                                author stays a recorded open item until a primary copy is available
+#   "two-independent-quotations" accept the author's wording when at least two independent open
+#                                sources quote it verbatim with page numbers
+#   "wait-for-primary"           keep the problem blocked at intake until someone supplies the pages
+[sources.primary_unavailable]
+choice = "survey-statement-flagged"
+alternatives = ["two-independent-quotations", "wait-for-primary"]
+decision = "D29"
+
+# How a non-English source is quoted.
+#   "verbatim-plus-our-translation"  the original-language text is the evidence; any English rendering
+#                                    is marked "[our translation]" and never quoted as the source
+#   "published-translation"          use a published English translation when an open copy exists,
+#                                    falling back to the option above
+[sources.translation]
+choice = "verbatim-plus-our-translation"
+alternatives = ["published-translation"]
+decision = "D29"
+
+[readings]
+
+# How the reading of an informal statement is chosen when its Interpretation Brief lists several.
+#   "ask-at-intake"       whoever initializes the project is shown the brief's readings and chooses;
+#                         the choice is recorded in the dossier's preferences and on its problem card
+#   "all-formalizable"    formalize every reading that can be formalized now, each as its own theorem
+#   "recommended-default" use the orchestrator's recommended reading, recorded as operator-delegated
+[readings.selection]
+choice = "ask-at-intake"
+alternatives = ["all-formalizable", "recommended-default"]
+decision = "D30"
+
+[intake]
+
+# Object logic a problem gets when its card does not declare one (an id in references/object-logics.json).
+#   "classical-hol"          classical higher-order logic (Lean's own logic); available
+#   "finite-probability"     finite probability as a classical theory (available: MathAgents.FiniteProbability)
+#   "modal-k"                normal modal logic K, deeply embedded (planned)
+#   "stalnaker-conditional"  Stalnaker's conditional logic, deeply embedded (planned)
+[intake.default_object_logic]
+choice = "classical-hol"
+alternatives = ["finite-probability", "modal-k", "stalnaker-conditional"]
+decision = "D4"
+
+# Engines offered by default (ids in references/prover-engines.json). Lean's kernel always judges;
+# every other engine's output is a hint until the kernel re-checks it (D6).
+#   ["lean-builtin"]          Lean's own automation only
+#   ["lean-builtin", "z3"]    plus the z3 SMT solver for counterexample search
+#   (any list of registered ids is allowed; @engine-advisor offers only what the machine has)
+[intake.default_engines]
+choice = ["lean-builtin"]
+alternatives = [["lean-builtin", "z3"], ["lean-builtin", "z3", "cvc5"]]
+decision = "D6"
+
+[fidelity]
+
+# The kernel-as-judge override (D5, D26): may the operator waive the human G-FID / G-CX sign-off within
+# a conversation, letting the kernel's verdict stand (results labelled "proved, fidelity-waived")?
+#   "offer"  yes: agents offer the override whenever they request feedback; G-AX only by the operator's
+#            explicit in-session extension (D26)
+#   "never"  no: every statement and verdict needs the human; the validator rejects any waiver record
+[fidelity.kernel_as_judge]
+choice = "offer"
+alternatives = ["never"]
+decision = "D26"

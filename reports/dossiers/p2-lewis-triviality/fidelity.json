@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "slug": "p2-lewis-triviality",
+  "lean_namespace": "MathAgents.P2LewisTriviality",
+  "intake_sha256": "01fb88734dd3e22cef5d9d391363d21469e0b35f1bce7f59a2345552bde91e22",
+  "declarations": [
+    {
+      "decl": "MathAgents.P2LewisTriviality.ClosedUnderConditioning",
+      "statement_fingerprint": "3398235271",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.FactorizationAt",
+      "statement_fingerprint": "3328036036",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.IsFinAddProb",
+      "statement_fingerprint": "1042052663",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.StalnakerHyp",
+      "statement_fingerprint": "396932892",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.condProb",
+      "statement_fingerprint": "1832776815",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.triviality_R2",
+      "statement_fingerprint": "17275635798550986712",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.triviality_R3_all",
+      "statement_fingerprint": "9166164072295025361",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P2LewisTriviality.triviality_R3_closed",
+      "statement_fingerprint": "8429219804342893751",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    }
+  ]
+}

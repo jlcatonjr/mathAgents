@@ -1,0 +1,2 @@
+timestamp,requesting_agent,action_reviewed,verdict,conditions,conditions_verified,signature,consumed
+2026-09-30T17:09:55Z,security,overwrite,PASS,operator-signed: goose surface render,verified,bc2e917a813b930be683ba8c6fe28404ce68ecebb282c1e997dfbc80229360c3,yes

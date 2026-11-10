@@ -1,0 +1,5 @@
+# Optional prover engines (install per machine; availability is recorded by
+# scripts/probe_machine.py, never assumed). Non-Lean results are hints until the
+# Lean kernel re-checks them.
+z3-solver==5.1.0.0
+cvc5==1.4.1

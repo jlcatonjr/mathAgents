@@ -1,0 +1,253 @@
+{
+  "gate": "G-KERNEL",
+  "verdict": "PASS",
+  "checked_at": "2026-10-01T22:34:15+00:00",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "toolchain_pin": "leanprover/lean4:v4.34.1",
+  "commit": "6fdbd26ad134ba6a411836e3a57b776021024aca",
+  "dirty": false,
+  "source_sha256": "831ca7740149e182a026f69dd2b0dff47a057a38bc71e1122a92a854b37735f6",
+  "lean_namespace": "MathAgents.P3DutchBook",
+  "declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.book_additivity",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "17674181361796187518",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.book_neg",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "5857547109278131146",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.book_univ",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "16675009893404821390",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.isDutchBook_of_const",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "14783259069664640933",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.IsDutchBook",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.not_fap_cases",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "780138415832312690",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.represent",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "8458728109802371557",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk",
+        "MathAgents.FiniteProbability.pointMass"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.sum_finset_singletons",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "4077709500829163790",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.weighted_neg",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "2662479262",
+      "statement_uses": [],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.Aux.weights_sum",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "2876346011377906820",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.converse_R2",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "6943047732065357242",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.IsDutchBook",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.dutchBook_R1",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "6372944151975572447",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.IsDutchBook",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "decl": "MathAgents.P3DutchBook.dutchBook_R3",
+      "kind": "theorem",
+      "module": "MathAgents.P3DutchBook",
+      "private": false,
+      "statement_fingerprint": "6965868094698404562",
+      "statement_uses": [
+        "MathAgents.FiniteProbability.Bet",
+        "MathAgents.FiniteProbability.Bet.event",
+        "MathAgents.FiniteProbability.Bet.mk",
+        "MathAgents.FiniteProbability.Bet.stake",
+        "MathAgents.FiniteProbability.IsDutchBook",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb",
+        "MathAgents.FiniteProbability.IsFinitelyAdditiveProb.mk",
+        "MathAgents.FiniteProbability.netPayoff",
+        "MathAgents.FiniteProbability.payoff"
+      ],
+      "status": "proved"
+    }
+  ]
+}

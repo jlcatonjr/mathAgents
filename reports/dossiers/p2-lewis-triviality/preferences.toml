@@ -1,0 +1,193 @@
+# P2 — Lewis triviality: dossier preferences (override references/preferences.toml for this dossier)
+#
+# Same format as the project file: each setting has `choice`, `alternatives` and the `decision` that
+# recorded it. Change a choice here to change it for P2 only. After a change:
+#   python3 scripts/preferences.py check            (the file is well formed)
+#   python3 scripts/validate_dossier.py p2-lewis-triviality
+# Enforcement: readings.selected, intake.domain, intake.object_logic, intake.engines and
+# fidelity.kernel_as_judge are ENFORCED (the dossier validator compares them with the problem card
+# and the waiver records). sources.*, readings.selection and gax.* are ADVISORY: agents follow them,
+# and the human G-FID review checks the statement honours them. `preferences.py show` labels each.
+#
+# A changed reading, logic or G-AX choice changes what Stage 1 formalizes: the problem card must be
+# updated to match, and an already-approved statement that changes lapses and needs a G-AX record.
+
+schema_version = 1
+slug = "p2-lewis-triviality"
+
+[readings]
+
+# P2 is a worked example, so it formalizes every reading that can be formalized now (D30).
+[readings.selection]
+choice = "all-formalizable"
+alternatives = ["ask-at-intake", "recommended-default"]
+decision = "D30"
+
+# The readings formalized, each as its own theorem (ids from interpretation.md; "R3:<variant>" names a
+# variant of R3).
+#   R2                            Factorization as a hypothesis on one fixed probability function
+#   R3:all                        the hypotheses hold for every probability function on the algebra
+#   R3:closed-under-conditioning  ... for every member of a class closed under conditioning
+# Not selected (alternatives you can add):
+#   R1  Adams's Thesis, simple conditionals only
+#   R4  Import-Export in place of Factorization
+#   R5  Bradley's Preservation reading (needs Bradley 2000's statement)
+#   R6  finite possible worlds with imaging (needs the selection-function properties, G-AX-P2-11)
+[readings.selected]
+choice = ["R2", "R3:all", "R3:closed-under-conditioning"]
+alternatives = ["R1", "R4", "R5", "R6"]
+decision = "D30"
+
+[sources]
+
+# Lewis 1976 is paywalled; the statement of record is the SEP version (Egré and Rott 2026), flagged.
+[sources.primary_unavailable]
+choice = "survey-statement-flagged"
+alternatives = ["two-independent-quotations", "wait-for-primary"]
+decision = "D29"
+
+[intake]
+
+[intake.domain]
+choice = "philosophy-of-science"
+alternatives = ["applied-modeling", "research-math", "competition", "logic-foundations"]
+decision = "D2"
+
+#   "classical-hol"          the conditional > is an uninterpreted operation on a Boolean algebra
+#   "stalnaker-conditional"  a deep embedding of Stalnaker's selection-function semantics (planned)
+[intake.object_logic]
+choice = "classical-hol"
+alternatives = ["stalnaker-conditional", "finite-probability"]
+decision = "D31"
+
+[intake.engines]
+choice = ["lean-builtin", "z3"]
+alternatives = [["lean-builtin"]]
+decision = "D31"
+
+[fidelity]
+
+# The operator reviews every P2 statement; no kernel-as-judge waiver.
+[fidelity.kernel_as_judge]
+choice = "never"
+alternatives = ["offer"]
+decision = "D31"
+
+[gax]
+
+# Answers to the hypotheses the survey leaves unstated (G-AX candidates in interpretation.md).
+
+# G-AX-P2-1: the probability axioms Pr satisfies.
+#   "finitely-additive"   Pr on a Boolean algebra: 0 ≤ Pr ≤ 1, Pr(⊤) = 1, additive on incompatible pairs
+#   "countably-additive"  a probability measure on a σ-algebra (Mathlib MeasureTheory)
+#   "finite-space"        Pr on the subsets of a finite set of worlds (adds finiteness, G-AX-P2-10)
+[gax."P2-1"]
+choice = "finitely-additive"
+alternatives = ["countably-additive", "finite-space"]
+decision = "D31"
+
+# G-AX-P2-2: conditional probability.
+#   "ratio"      Pr(C | A) = Pr(A∧C) / Pr(A), used only when Pr(A) > 0
+#   "primitive"  two-place conditional probability as primitive (Popper-style)
+[gax."P2-2"]
+choice = "ratio"
+alternatives = ["primitive"]
+decision = "D31"
+
+# G-AX-P2-3: the domain of Pr and of conditioning.
+#   "algebra-closed-under-conditional"  propositions form a Boolean algebra closed under >
+#   "simple-conditionals-only"          > applies to non-conditional propositions only (R1's setting)
+[gax."P2-3"]
+choice = "algebra-closed-under-conditional"
+alternatives = ["simple-conditionals-only"]
+decision = "D31"
+
+# G-AX-P2-4: Expansion (the law of total probability) at the proof's first step.
+#   "prove"   derive it from the axioms of G-AX-P2-1; nothing is assumed
+#   "assume"  take it as a hypothesis
+[gax."P2-4"]
+choice = "prove"
+alternatives = ["assume"]
+decision = "D31"
+
+# G-AX-P2-5: the status of Factorization.
+#   "hypothesis"  a hypothesis of the theorem statement (no axiom, no allowlist entry)
+#   "axiom"       a Lean axiom (needs a G-AX allowlist approval; every result then depends on it)
+[gax."P2-5"]
+choice = "hypothesis"
+alternatives = ["axiom"]
+decision = "D31"
+
+# G-AX-P2-12 (reading R2): the survey states Factorization "for every probability function".
+#   "one-fixed-Pr"  R2 assumes it of the one Pr in the theorem (a narrowing, accepted)
+#   "reject"        do not formalize R2; keep only the universal readings
+[gax."P2-12"]
+choice = "one-fixed-Pr"
+alternatives = ["reject"]
+decision = "D31"
+
+# --- Stage 1 candidates (statement.md; answered at the G-FID review, D33) ---
+
+# G-AX-P2-6: closure under conditioning (R3:closed).
+#   "conditioning-on-positive-events"  for P in K and B with P(B) > 0, X ↦ P(B⊓X)/P(B) is in K
+#   "restricted-family"                conditioning only on a sub-family of events
+[gax."P2-6"]
+choice = "conditioning-on-positive-events"
+alternatives = ["restricted-family"]
+decision = "D33"
+
+# G-AX-P2-7: which class "every probability function" ranges over (R3:all).
+#   "fixed-algebra"   every finitely additive Pr on the one fixed algebra and conditional
+#   "vary-algebra"    also quantify over algebras
+[gax."P2-7"]
+choice = "fixed-algebra"
+alternatives = ["vary-algebra"]
+decision = "D33"
+
+# G-AX-P2-13: Factorization instances assumed by R2.
+#   "two-instances"  only the two the SEP's displayed proof uses (weaker hypothesis, stronger theorem)
+#   "full-schema"    Factorization for all A, B for the fixed Pr
+[gax."P2-13"]
+choice = "two-instances"
+alternatives = ["full-schema"]
+decision = "D33"
+
+# G-AX-P2-14: hypotheses of R3.
+#   "stalnaker-only"           Stalnaker's Hypothesis; Factorization derived in Stage 2
+#   "stalnaker-and-factorization"  assume both (weaker theorem)
+[gax."P2-14"]
+choice = "stalnaker-only"
+alternatives = ["stalnaker-and-factorization"]
+decision = "D33"
+
+# G-AX-P2-15: range of Stalnaker's Hypothesis.
+#   "all-A-C"                 every A, C, conditionals included ("possibly complex")
+#   "simple-antecedents-only"  conditional-free A, C
+[gax."P2-15"]
+choice = "all-A-C"
+alternatives = ["simple-antecedents-only"]
+decision = "D33"
+
+# G-AX-P2-16: constraints on the conditional >.
+#   "unconstrained"          any binary operation
+#   "stalnaker-axioms"       selection-function properties (needs stalnaker-conditional, planned)
+[gax."P2-16"]
+choice = "unconstrained"
+alternatives = ["stalnaker-axioms"]
+decision = "D33"
+
+# G-AX-P2-17: congruence: propositions as a Boolean (Lindenbaum) algebra, so > and Pr respect equivalence.
+#   "boolean-algebra"   accepted (standard; unused by the proof)
+#   "sentences"         a syntactic language with equivalence as an assumption
+[gax."P2-17"]
+choice = "boolean-algebra"
+alternatives = ["sentences"]
+decision = "D33"
+
+# G-AX-P2-18: the "class is trivial" corollary condProb P C A = P C under R3.
+#   "not-now"   three theorems only
+#   "add"       draft a fourth theorem
+[gax."P2-18"]
+choice = "not-now"
+alternatives = ["add"]
+decision = "D33"

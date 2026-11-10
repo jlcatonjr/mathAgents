@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "slug": "p3-dutch-book",
+  "lean_namespace": "MathAgents.P3DutchBook",
+  "intake_sha256": "abbb5b1a0035a58b466fa2e7a67878fda5af68e243c4d48472a2c2ff469e97af",
+  "declarations": [
+    {
+      "decl": "MathAgents.P3DutchBook.converse_R2",
+      "statement_fingerprint": "6943047732065357242",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P3DutchBook.dutchBook_R1",
+      "statement_fingerprint": "6372944151975572447",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    },
+    {
+      "decl": "MathAgents.P3DutchBook.dutchBook_R3",
+      "statement_fingerprint": "6965868094698404562",
+      "status": "approved",
+      "approver": "operator",
+      "date": "2026-10-01"
+    }
+  ]
+}

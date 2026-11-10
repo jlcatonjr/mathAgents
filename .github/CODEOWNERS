@@ -1,0 +1,9 @@
+# The files that decide which CI gates run (charter D46). Enforced once branch protection requires code-owner review
+# (docs/release/runbook.md step 7, on the public repository).
+/.github/workflows/gates.yml          @jlcatonjr
+/scripts/tests/test_ci_workflow.py    @jlcatonjr
+/scripts/ci_long_suites.py            @jlcatonjr
+/scripts/ci_long_suite_inputs.txt     @jlcatonjr
+/scripts/ci_base.sh                   @jlcatonjr
+/tests/test_ci_long_suites.py         @jlcatonjr
+/.github/CODEOWNERS                   @jlcatonjr

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "note": "The pilot register: the single source of pilot numbers (charter D11; P6 by D44). A pilot's dossier slug is fixed once intake exists, because G-FID records bind it, so a slug may carry an older label (p4-thirty-divides-n5-minus-n is pilot P6). object-logics.json 'pilot' fields must name an id here. Checked by scripts/validate_registries.py.",
+  "pilots": [
+    {"id": "P1", "title": "IMO 1959 Problem 1", "dossier": null, "decision": "D11"},
+    {"id": "P2", "title": "Lewis triviality", "dossier": "p2-lewis-triviality", "decision": "D11"},
+    {"id": "P3", "title": "Finite Dutch book", "dossier": "p3-dutch-book", "decision": "D11"},
+    {"id": "P4", "title": "Modal K/S4 soundness", "dossier": null, "decision": "D11"},
+    {"id": "P5", "title": "AgenticCapital count_optimality", "dossier": null, "decision": "D11"},
+    {"id": "P6", "title": "Thirty divides n^5 - n (the M6 measured dossier)", "dossier": "p4-thirty-divides-n5-minus-n", "decision": "D44"}
+  ]
+}

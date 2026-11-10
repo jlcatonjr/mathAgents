@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mathAgents prover-engine registry",
+  "description": "Engines @engine-advisor may offer. Capability claims (strengths, suited_domains, unsuited_for) must cite bibliography keys or documentation URLs in `sources`; scripts/validate_registries.py enforces this. Per-machine availability is NOT recorded here — see .machine/profile.json.",
+  "type": "object",
+  "required": ["schema_version", "default_engine", "engines"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "default_engine": {"type": "string"},
+    "engines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "result_trust", "evidence_status", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "name": {"type": "string"},
+          "kind": {"enum": ["lean-tactic", "smt", "atp", "llm-prover", "interaction-layer"]},
+          "logic_fragment": {"type": "string"},
+          "strengths": {"type": "array", "items": {"type": "string"}},
+          "suited_domains": {"type": "array", "items": {"enum": ["applied-modeling", "research-math", "competition", "logic-foundations", "philosophy-of-science"]}},
+          "unsuited_for": {"type": "array", "items": {"type": "string"}},
+          "install": {"type": "string"},
+          "probe": {"type": "string", "description": "Key in .machine/profile.json executables/python_modules that marks this engine present."},
+          "resource_needs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "gpu_required": {"type": "boolean"},
+              "params_billion": {"type": "number"},
+              "variants": {"type": "array", "items": {"type": "object", "required": ["name", "weights_gb"], "properties": {"name": {"type": "string"}, "weights_gb": {"type": "number"}}}},
+              "notes": {"type": "string"}
+            }
+          },
+          "result_trust": {"enum": ["kernel-checked", "hint-until-kernel-recheck"]},
+          "evidence_status": {"enum": ["verified", "pending-review"]},
+          "sources": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

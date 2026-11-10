@@ -1,0 +1,924 @@
+{
+  "schema_version": "1.5",
+  "agentteams_version": "1.1.0",
+  "agentteams_source": {
+    "kind": "vcs-pin",
+    "commit": "9b16fb544c03aad636d3839c37873624f6efbd37",
+    "branch": null,
+    "dirty": false
+  },
+  "generated_at": "2026-11-10T01:56:00.791758+00:00",
+  "project_name": "mathAgents",
+  "framework": "codex",
+  "project_type": "research",
+  "archetypes": [
+    "primary-producer",
+    "quality-auditor",
+    "cohesion-repairer",
+    "technical-validator",
+    "format-converter",
+    "reference-manager",
+    "output-compiler",
+    "visual-designer",
+    "post-production-auditor",
+    "retrieval-integrator",
+    "research-analyst"
+  ],
+  "components": [
+    "methods-review",
+    "harness-spec",
+    "proof-dossiers",
+    "proof-library",
+    "evaluation"
+  ],
+  "files_written": [
+    ".codex/agents/references/code-hygiene-rules.reference.md",
+    ".codex/agents/references/unix-philosophy-mapping.reference.md",
+    ".codex/agents/references/security-vulnerability-watch.reference.md",
+    ".codex/agents/references/security-vulnerability-watch.json",
+    ".codex/agents/references/security-linux-hardening.reference.md",
+    ".codex/agents/references/security-macos-hardening.reference.md",
+    ".codex/agents/references/security-windows-hardening.reference.md",
+    ".codex/agents/references/security-infrastructure-layers.reference.md",
+    ".codex/agents/references/ai-bad-habits-watch.reference.md",
+    ".codex/agents/references/framework-watch.reference.md",
+    ".codex/agents/references/adjacent-repos.md",
+    ".codex/agents/references/github-workflows-merge.reference.md",
+    ".codex/agents/references/branch-lifecycle.reference.md",
+    ".codex/agents/references/work-summary-spec.reference.md",
+    ".codex/agents/references/work-summary-tooling.reference.md",
+    ".codex/agents/references/work-summary-backfill.reference.md",
+    ".codex/agents/references/parallelization.reference.md",
+    ".codex/agents/references/sandbox-handoff.reference.md",
+    ".codex/agents/references/instruction-authority.reference.md",
+    ".codex/agents/references/orchestrator-spawn-authority.reference.md",
+    ".codex/agents/references/redteam-methodology.reference.md",
+    ".codex/agents/references/retrospective-remediation.reference.md",
+    ".codex/agents/references/cli-tool-discovery.reference.md",
+    ".codex/agents/references/skill-generation.reference.md",
+    ".codex/agents/references/external-retrieval-quality-gate.reference.md",
+    ".codex/agents/references/retrieval-integration.reference.md",
+    ".codex/agents/references/retrieval-trigger-contract.reference.md",
+    ".codex/agents/SETUP-REQUIRED.md",
+    ".codex/agents/references/write-policy.reference.md",
+    ".codex/agents/references/mcp-need.reference.md",
+    ".codex/confined-run.example.sh",
+    ".agentteams/bin/codex-role-gate.py",
+    ".codex/hooks.json",
+    ".codex/agents/references/pipeline-graph.md",
+    ".codex/agents/references/pipeline-graph.svg",
+    ".codex/agents/references/pipeline-handoffs.svg"
+  ],
+  "manual_required": 7,
+  "template_hashes": {
+    "universal/orchestrator.template.md": "7e350d6cb17aac72",
+    "universal/navigator.template.md": "3d28148430bddfdf",
+    "universal/security.template.md": "b738b65b9a3edecd",
+    "universal/code-hygiene.template.md": "8c53882027a0aa40",
+    "universal/adversarial.template.md": "0c7b7cb909b089a0",
+    "universal/conflict-auditor.template.md": "a6199323e4d1add3",
+    "universal/conflict-resolution.template.md": "4542fdba8f977079",
+    "universal/cleanup.template.md": "6a404be5ad0bfbe9",
+    "universal/agent-updater.template.md": "fceaeaa65379ff06",
+    "universal/agent-refactor.template.md": "b1417e2f09b84022",
+    "universal/repo-liaison.template.md": "70331bea47521df8",
+    "universal/git-operations.template.md": "9f3fcbd9167a8833",
+    "domain/work-summarizer.template.md": "4124536ef03c333d",
+    "domain/primary-producer.template.md": "278ed220891ba707",
+    "domain/quality-auditor.template.md": "3dd911ae905e8b28",
+    "domain/cohesion-repairer.template.md": "30f6320e49652bcf",
+    "domain/technical-validator.template.md": "0c8c489fb67c5891",
+    "domain/format-converter.template.md": "c63fb3473e7c3fb0",
+    "domain/reference-manager.template.md": "299f437acd33eff9",
+    "domain/output-compiler.template.md": "7ec6b1533cae4aaf",
+    "domain/visual-designer.template.md": "c639dcf21cfabf63",
+    "domain/post-production-auditor.template.md": "b03ba06eb95f2c00",
+    "domain/retrieval-integrator.template.md": "0cfb9cd3138cfd1d",
+    "domain/research-analyst.template.md": "a6565b6bbe8fcfcd",
+    "domain/tool-specific.doc.template.md": "d64a53ebf12e6547",
+    "domain/tool-cli.doc.template.md": "060ea142104f20e0",
+    "domain/code-hygiene-rules-reference.template.md": "891dd19f0d09cea0",
+    "domain/unix-philosophy-mapping-reference.template.md": "702af6b4e9e2b952",
+    "universal/security-vulnerability-watch.reference.template.md": "269cdacb3d94fdfa",
+    "universal/security-vulnerability-watch.json.template": "ebcec1b04ad46caa",
+    "universal/security-linux-hardening.reference.template.md": "4845cf83b84615f4",
+    "universal/security-macos-hardening.reference.template.md": "78fd2835ec2d8869",
+    "universal/security-windows-hardening.reference.template.md": "5885668f48e4c295",
+    "universal/security-infrastructure-layers.reference.template.md": "5c4c67f28d67149b",
+    "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
+    "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
+    "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
+    "universal/github-workflows-merge.reference.template.md": "aa26e7db5d333f1f",
+    "universal/branch-lifecycle.reference.template.md": "8f199043003804b3",
+    "universal/work-summary-spec.reference.template.md": "d29ca7e680ad715d",
+    "universal/work-summary-tooling.reference.template.md": "62e643b1a9711af6",
+    "universal/work-summary-backfill.reference.template.md": "5730bac043dc2874",
+    "universal/parallelization.reference.template.md": "12111b7bb9a9aa10",
+    "universal/sandbox-handoff.reference.template.md": "fe27b3ca2d7de60d",
+    "universal/instruction-authority.reference.template.md": "a73a355a8da0c15f",
+    "universal/orchestrator-spawn-authority.reference.template.md": "221ebb904e4f4e48",
+    "universal/redteam-methodology.reference.template.md": "a0443337a9796294",
+    "universal/retrospective-remediation.reference.template.md": "1965ac5f52cf72f0",
+    "universal/cli-tool-discovery.reference.template.md": "203004e771c8b2fd",
+    "universal/skill-generation.reference.template.md": "df8ffe189f09e491",
+    "universal/external-retrieval-quality-gate.reference.template.md": "3922b0a2e99e75a3",
+    "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
+    "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
+    "workstream-expert.template.md": "19e099ff5eaf447b",
+    "copilot-instructions.template.md": "d3fcc564166c5285",
+    "builder/team-builder-copilot-vscode.template.md": "799171f781e58676",
+    "domain/content-enricher.template.md": "25b7c467ae7a8978"
+  },
+  "output_files_map": [
+    {
+      "path": "orchestrator.agent.md",
+      "template": "universal/orchestrator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "navigator.agent.md",
+      "template": "universal/navigator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "security.agent.md",
+      "template": "universal/security.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "code-hygiene.agent.md",
+      "template": "universal/code-hygiene.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "adversarial.agent.md",
+      "template": "universal/adversarial.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "conflict-auditor.agent.md",
+      "template": "universal/conflict-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "conflict-resolution.agent.md",
+      "template": "universal/conflict-resolution.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "cleanup.agent.md",
+      "template": "universal/cleanup.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "agent-updater.agent.md",
+      "template": "universal/agent-updater.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "agent-refactor.agent.md",
+      "template": "universal/agent-refactor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "repo-liaison.agent.md",
+      "template": "universal/repo-liaison.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "git-operations.agent.md",
+      "template": "universal/git-operations.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "work-summarizer.agent.md",
+      "template": "domain/work-summarizer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "primary-producer.agent.md",
+      "template": "domain/primary-producer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "quality-auditor.agent.md",
+      "template": "domain/quality-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "cohesion-repairer.agent.md",
+      "template": "domain/cohesion-repairer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "technical-validator.agent.md",
+      "template": "domain/technical-validator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "format-converter.agent.md",
+      "template": "domain/format-converter.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "reference-manager.agent.md",
+      "template": "domain/reference-manager.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "output-compiler.agent.md",
+      "template": "domain/output-compiler.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "visual-designer.agent.md",
+      "template": "domain/visual-designer.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "post-production-auditor.agent.md",
+      "template": "domain/post-production-auditor.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "retrieval-integrator.agent.md",
+      "template": "domain/retrieval-integrator.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "research-analyst.agent.md",
+      "template": "domain/research-analyst.template.md",
+      "type": "agent",
+      "component_slug": null
+    },
+    {
+      "path": "../../.agents/skills/tool-lean-4/SKILL.md",
+      "template": "domain/tool-language.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-lean-4"
+    },
+    {
+      "path": "../../.agents/skills/tool-mathlib/SKILL.md",
+      "template": "domain/tool-library.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-mathlib"
+    },
+    {
+      "path": "../../.agents/skills/tool-pandoc/SKILL.md",
+      "template": "domain/tool-cli.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-pandoc"
+    },
+    {
+      "path": "../../.agents/skills/tool-leanblueprint/SKILL.md",
+      "template": "domain/tool-cli.doc.template.md",
+      "fallback_template": "domain/tool-specific.doc.template.md",
+      "type": "skill",
+      "component_slug": null,
+      "tool_slug": "tool-leanblueprint"
+    },
+    {
+      "path": "references/code-hygiene-rules.reference.md",
+      "template": "domain/code-hygiene-rules-reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/unix-philosophy-mapping.reference.md",
+      "template": "domain/unix-philosophy-mapping-reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-vulnerability-watch.reference.md",
+      "template": "universal/security-vulnerability-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-vulnerability-watch.json",
+      "template": "universal/security-vulnerability-watch.json.template",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-linux-hardening.reference.md",
+      "template": "universal/security-linux-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-macos-hardening.reference.md",
+      "template": "universal/security-macos-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-windows-hardening.reference.md",
+      "template": "universal/security-windows-hardening.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/security-infrastructure-layers.reference.md",
+      "template": "universal/security-infrastructure-layers.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/ai-bad-habits-watch.reference.md",
+      "template": "universal/ai-bad-habits-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/framework-watch.reference.md",
+      "template": "universal/framework-watch.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/adjacent-repos.md",
+      "template": "universal/adjacent-repos.reference.template.md",
+      "type": "artifact",
+      "component_slug": null
+    },
+    {
+      "path": "references/github-workflows-merge.reference.md",
+      "template": "universal/github-workflows-merge.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/branch-lifecycle.reference.md",
+      "template": "universal/branch-lifecycle.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-spec.reference.md",
+      "template": "universal/work-summary-spec.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-tooling.reference.md",
+      "template": "universal/work-summary-tooling.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/work-summary-backfill.reference.md",
+      "template": "universal/work-summary-backfill.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/parallelization.reference.md",
+      "template": "universal/parallelization.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/sandbox-handoff.reference.md",
+      "template": "universal/sandbox-handoff.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/instruction-authority.reference.md",
+      "template": "universal/instruction-authority.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/orchestrator-spawn-authority.reference.md",
+      "template": "universal/orchestrator-spawn-authority.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/redteam-methodology.reference.md",
+      "template": "universal/redteam-methodology.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrospective-remediation.reference.md",
+      "template": "universal/retrospective-remediation.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/cli-tool-discovery.reference.md",
+      "template": "universal/cli-tool-discovery.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/skill-generation.reference.md",
+      "template": "universal/skill-generation.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/external-retrieval-quality-gate.reference.md",
+      "template": "universal/external-retrieval-quality-gate.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrieval-integration.reference.md",
+      "template": "universal/retrieval-integration.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "references/retrieval-trigger-contract.reference.md",
+      "template": "universal/retrieval-trigger-contract.reference.template.md",
+      "type": "reference",
+      "component_slug": null
+    },
+    {
+      "path": "methods-review-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "methods-review"
+    },
+    {
+      "path": "harness-spec-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "harness-spec"
+    },
+    {
+      "path": "proof-dossiers-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "proof-dossiers"
+    },
+    {
+      "path": "proof-library-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "proof-library"
+    },
+    {
+      "path": "evaluation-expert.agent.md",
+      "template": "workstream-expert.template.md",
+      "type": "agent",
+      "component_slug": "evaluation"
+    },
+    {
+      "path": "../copilot-instructions.md",
+      "template": "copilot-instructions.template.md",
+      "type": "instructions",
+      "component_slug": null
+    },
+    {
+      "path": "team-builder.agent.md",
+      "template": "builder/team-builder-copilot-vscode.template.md",
+      "type": "builder",
+      "component_slug": null
+    },
+    {
+      "path": "SETUP-REQUIRED.md",
+      "template": "",
+      "type": "setup-required",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-graph.md",
+      "template": "",
+      "type": "graph",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-graph.svg",
+      "template": "",
+      "type": "graph-svg",
+      "component_slug": null
+    },
+    {
+      "path": "references/pipeline-handoffs.svg",
+      "template": "",
+      "type": "graph-svg",
+      "component_slug": null
+    },
+    {
+      "path": "content-enricher.agent.md",
+      "template": "domain/content-enricher.template.md",
+      "type": "agent",
+      "component_slug": null
+    }
+  ],
+  "agent_slug_list": [
+    "orchestrator",
+    "navigator",
+    "security",
+    "code-hygiene",
+    "adversarial",
+    "conflict-auditor",
+    "conflict-resolution",
+    "cleanup",
+    "agent-updater",
+    "agent-refactor",
+    "repo-liaison",
+    "git-operations",
+    "work-summarizer",
+    "primary-producer",
+    "quality-auditor",
+    "cohesion-repairer",
+    "technical-validator",
+    "format-converter",
+    "reference-manager",
+    "output-compiler",
+    "visual-designer",
+    "post-production-auditor",
+    "retrieval-integrator",
+    "research-analyst",
+    "methods-review-expert",
+    "harness-spec-expert",
+    "proof-dossiers-expert",
+    "proof-library-expert",
+    "evaluation-expert"
+  ],
+  "governance_agents": [
+    "navigator",
+    "security",
+    "code-hygiene",
+    "adversarial",
+    "conflict-auditor",
+    "conflict-resolution",
+    "cleanup",
+    "agent-updater",
+    "agent-refactor",
+    "repo-liaison",
+    "git-operations"
+  ],
+  "manifest_fingerprint": "c8ca4ec6ab084233",
+  "fingerprint_algo_version": 1,
+  "file_hashes": {
+    "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
+    "references/unix-philosophy-mapping.reference.md": "98380a74b954cd46",
+    "references/security-vulnerability-watch.reference.md": "cd3742b855cef1ca",
+    "references/security-vulnerability-watch.json": "a45999d33d1ed11b",
+    "references/security-linux-hardening.reference.md": "9a670efe190347ec",
+    "references/security-macos-hardening.reference.md": "7fa4efd0a07759e5",
+    "references/security-windows-hardening.reference.md": "cf1d896e7d962ebb",
+    "references/security-infrastructure-layers.reference.md": "37def34e964633e8",
+    "references/ai-bad-habits-watch.reference.md": "32543aa395a0b308",
+    "references/framework-watch.reference.md": "2d8e8df83972c912",
+    "references/adjacent-repos.md": "855bd3dee7b9380c",
+    "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
+    "references/branch-lifecycle.reference.md": "40c1047ac13cbe68",
+    "references/work-summary-spec.reference.md": "96232231a1f7c6be",
+    "references/work-summary-tooling.reference.md": "f3656972717153a9",
+    "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
+    "references/parallelization.reference.md": "fbd84bddbf5f6c13",
+    "references/sandbox-handoff.reference.md": "82e8d2e535443368",
+    "references/instruction-authority.reference.md": "ca0812420b64ade7",
+    "references/orchestrator-spawn-authority.reference.md": "76b1889804d1fd29",
+    "references/redteam-methodology.reference.md": "3c36b8d11bfcf964",
+    "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
+    "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
+    "references/skill-generation.reference.md": "2721d15d64d12081",
+    "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
+    "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
+    "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
+    "SETUP-REQUIRED.md": "b6c16adfbb523442",
+    "references/write-policy.reference.md": "d5d003ec5740b609",
+    "references/mcp-need.reference.md": "15c753f1a114601e",
+    "../confined-run.example.sh": "0d0aca72a2cdca97",
+    "../../.agentteams/bin/codex-role-gate.py": "8e2a3bea7a3b0022",
+    "../hooks.json": "440226be258249e4",
+    "references/pipeline-graph.md": "662997c4f9bf7a4e",
+    "references/pipeline-graph.svg": "fca0eb5fae81859d",
+    "references/pipeline-handoffs.svg": "21ced32c3aa143c1",
+    "orchestrator.toml": "ca8653a125a8be07",
+    "navigator.toml": "b05d9a19ce492a5f",
+    "security.toml": "befe722082db0141",
+    "code-hygiene.toml": "d9558ff50a10ab04",
+    "adversarial.toml": "3615002c264d9613",
+    "conflict-auditor.toml": "67694ceca20c3a60",
+    "conflict-resolution.toml": "cbf6b98aaf3310f4",
+    "cleanup.toml": "71aabf57e1a2d343",
+    "agent-updater.toml": "c510985cf18044d8",
+    "agent-refactor.toml": "e74a67a4730c05b2",
+    "repo-liaison.toml": "26882847b0573871",
+    "git-operations.toml": "4812b21218240642",
+    "work-summarizer.toml": "42e8fd8565d6ad64",
+    "primary-producer.toml": "c9e1ba561058bb88",
+    "quality-auditor.toml": "3e8c24b670a81df2",
+    "cohesion-repairer.toml": "c9caec19d48962f9",
+    "technical-validator.toml": "eba507850bab152f",
+    "format-converter.toml": "6948ea3c1fd6b6bb",
+    "reference-manager.toml": "2cb30c00db5dcffd",
+    "output-compiler.toml": "a71eae6a12cee14f",
+    "visual-designer.toml": "9fa2ffa2bb66b9a9",
+    "post-production-auditor.toml": "6415c856ee4644d2",
+    "retrieval-integrator.toml": "00750e3ff916cdff",
+    "research-analyst.toml": "7a1c615914718657",
+    "methods-review-expert.toml": "18d972bd913f2457",
+    "harness-spec-expert.toml": "552e029c0c03085a",
+    "proof-dossiers-expert.toml": "7c102c62ddb05d42",
+    "proof-library-expert.toml": "e1b96fc1965bc2a9",
+    "evaluation-expert.toml": "749566b7b7debfd7",
+    "../../AGENTS.md": "8a74207c5afb455f",
+    "team-builder.toml": "67112b2ee5aec8d9",
+    "content-enricher.toml": "3c9084a432be8c99",
+    "../../.agents/skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
+    "../../.agents/skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
+    "../../.agents/skills/tool-pandoc/SKILL.md": "ee738a290d2c238d",
+    "../../.agents/skills/tool-leanblueprint/SKILL.md": "f98348a9f0eeb42a"
+  },
+  "front_matter_baseline": {
+    "../../.agents/skills/tool-lean-4/SKILL.md": {
+      "name": "tool-lean-4",
+      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
+    },
+    "../../.agents/skills/tool-mathlib/SKILL.md": {
+      "name": "tool-mathlib",
+      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
+    },
+    "../../.agents/skills/tool-pandoc/SKILL.md": {
+      "name": "tool-pandoc",
+      "description": "\"Pandoc operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Pandoc.\""
+    },
+    "../../.agents/skills/tool-leanblueprint/SKILL.md": {
+      "name": "tool-leanblueprint",
+      "description": "\"leanblueprint operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with leanblueprint.\""
+    }
+  },
+  "front_matter_baseline_version": 2,
+  "write_policy": "orchestrator-only",
+  "prompt_root_hashes": {
+    ".codex/agents/adversarial.toml": {
+      "content": "30c70a7ce62e05b3dfc6cbe30a72661989ec6344fc716774b86e41ba17ba2c0e",
+      "codex_translation": "eac96ea9f7722ef88c76402c3d2dbf72d4a3295d53739187cd489e104a5f15e2"
+    },
+    ".codex/agents/agent-refactor.toml": {
+      "content": "d847db16711e1f9d1c4be15abf025b25434e70690def462a22197f353cc59c75",
+      "codex_translation": "0b6bf591718b40bdbc310cacec13a8225e30f00e0985115dad11f5a021c5ade5"
+    },
+    ".codex/agents/agent-updater.toml": {
+      "content": "fc9d88319259e4552d462b745c38e31f299552a00bcba1b7cced670e303e4518",
+      "codex_translation": "a5087d08429c64794c32801b8214640e0052f4c8ed9ee1c840f0b8f985c1025a"
+    },
+    ".codex/agents/axiom-auditor.toml": {
+      "codex_translation": "9aa27b39a0e1f6d4f6fe17f945c61ba009b2e0ae458e2851b6e9f28adaeed330"
+    },
+    ".codex/agents/cleanup.toml": {
+      "content": "15ad0b097e669ab3b0753c4de59cf4251b0ce9d0713c2b6d0083f5633d21efc7",
+      "codex_translation": "f91f79b7972581facd26b33dc1e42fbfb244a83eb9116a2be030dedbaa80203e"
+    },
+    ".codex/agents/code-hygiene.toml": {
+      "content": "a751c3282d0362342860f4afd65ce5abcd2e6263a08c226f421ea46e26db7795",
+      "codex_translation": "99e06c975c93818ee93f1c082e9b4f379886ef432038b1a16281683df19f833a"
+    },
+    ".codex/agents/cohesion-repairer.toml": {
+      "content": "3e107f7be261374ab754864d418f2db80905e7499ca6073322ab78cca369e6f2",
+      "codex_translation": "7d9e2678d26e0aae83d0f611462b94cb176f6a1cd33db5bc1eabd680492b136d"
+    },
+    ".codex/agents/conflict-auditor.toml": {
+      "typed_handoff_audit": "fc72a6ded9e4248c0c174d24b21d57fe6ddd2bc09cf71feba6f5ddeac4802f67",
+      "behavioral_spec_cross_check": "d33518a32d59fa60e97f94e60df6934397e5e937e4716aea6a8e28f6fefbe597",
+      "memory_index_consultation": "e70c549b93edbeb0da5d518a4833aac8d524d8d1477b0fd5e40d7852c23f68ad",
+      "authority_sources_list": "0774ddf7dbf47f934f9dbf5db9a001200ef84861345943d5f037269e6a802059",
+      "rules": "9667b10268dd7a058c0dbeb757bbaf7937550a95bc459e2bdefcb4989b79b9a2",
+      "handoff_payload_conflict_codes": "506c97de1dfef1269beed438b6055154cd3a439047084983f9ac0a80353b7b51",
+      "handoff_payload_codes": "38a1bcd36aa352b02b6d96b38af008454e46d34b558188c323241ef43c3f3e1a",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "dcc9b6ddb950462cecc9763fca14cc5784ca440b968fc02c7887c7cc0aa2788c",
+      "codex_translation": "5c2dc64a15ab7eec62f9dd12330bd6daad6f8157c1c5a7426fa05f9f39ca9d14"
+    },
+    ".codex/agents/conflict-resolution.toml": {
+      "memory_index_consultation": "67275b5cfbd2fbcc58c3874d4ff725c5f5e65b5b5a7fb97739f1aa907ac8ff6c",
+      "rules": "5a133df68a1d37204898e3310a3756bb9bf7dbd1ede35e31e2b5800dcef55e65",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "2930db633da7a615076a92b91c3cc332e57e708185a88cd458f09437d441e406"
+    },
+    ".codex/agents/content-enricher.toml": {
+      "content": "17f48d34719ddbf61ddb428d0427a4b1982b665047c875414c3983ef13c63d00",
+      "codex_translation": "b00724a4e356510e26d3e462e284c45fa322533deda771694b7bfd59ec756e6e"
+    },
+    ".codex/agents/counterexample-hunter.toml": {
+      "codex_translation": "0b73305a523500055e8e15fa0d0f11f02b1727a34a1487fc20bf51d796f4c687"
+    },
+    ".codex/agents/engine-advisor.toml": {
+      "codex_translation": "7b0b8471e2a3997a4c82a437c078ed968b4420f8bc098b7203e3c33c4360b95b"
+    },
+    ".codex/agents/evaluation-expert.toml": {
+      "component_spec": "fc1d3541b5a9d47be85c181fc7010483f5f6db02b1f8b4b061a9384706db47cd",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "c517da120ea57b028ebdccfba907802511dce959c34e4c2712dbe18bf84fa096"
+    },
+    ".codex/agents/fidelity-auditor.toml": {
+      "codex_translation": "86d144c5855528966ab5a8819868a129e4eb283440021f6dbf61f4d8d494b3ce"
+    },
+    ".codex/agents/format-converter.toml": {
+      "content": "e41be746a4d88ff90b6204207bdc475a1420015e1faadd247feeb25b074926d2",
+      "codex_translation": "4f0b9dc1928ea70c2d27e7dec99bb4f5e05c0f9dde31c80a99522442289514fd"
+    },
+    ".codex/agents/git-operations.toml": {
+      "content": "5e0f56752a44be9646db085ec4e93776532d553986efe5abe26f2107c0a5e429",
+      "codex_translation": "2581e2b5d888283b4b903482b4a0dfec36fe6935dfc990161c9f8cce3a20fcc9"
+    },
+    ".codex/agents/harness-spec-expert.toml": {
+      "component_spec": "0eeaa0d29076fa65c1ebf28730062e641a2d0cc6d45535ba233363e5a72be849",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "d91d1d32b32bc40f2868cc487cf9a6521c9d13513de08d9f52dbb2eef875f145"
+    },
+    ".codex/agents/interpretation-advisor.toml": {
+      "codex_translation": "244c399881e0637c114d5ffc498aa63d81fdd6a202b459fe8d45c96180f41e2d"
+    },
+    ".codex/agents/lean-informalization.toml": {
+      "codex_translation": "14b40e6e8792c4187c6b85763503806402f59c7148031063ca14c3ee94390612"
+    },
+    ".codex/agents/lean-prover.toml": {
+      "codex_translation": "4e5cd9380f5d9a2817b3df3c31a5bdbda3a66bf9fff6f4749086cbe6fe8b26e0"
+    },
+    ".codex/agents/logic-articulator.toml": {
+      "codex_translation": "54c2386eef9258ca1de1c1897007c4bab8c09e7c30d894d67aed134bba469860"
+    },
+    ".codex/agents/methods-review-expert.toml": {
+      "component_spec": "fb49724ab331f8d581e5536c718f80bb8b0d361e369671d43152466a9de24a51",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "f5e225cbdbeea92105fb8b0ca442c412de39e6b97930591a1541487c70da026e"
+    },
+    ".codex/agents/navigator.toml": {
+      "workstream_source_map": "17c14e9a0096a09da4e5a39b686c5d9c98a293e74f6e5d276419e0977fc09d81",
+      "invariant_rules": "9f02cd5b924adde05a397c1b80f155200b00f523ebc2e4ddce10fc55dffb80bd",
+      "code_index_consultation": "146bd87f3f58669bdc6e9c9ec847eddd67362c13c4ca86d7acecd4bdf256a6bb",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "35f4a5b7094571fbdbc576f6e9900904b263e3b11992138bfd07365206c4b933",
+      "codex_translation": "1ece54b456d4bd629fb7de0178cde92f4c7b99a7d50366bea70207081f6162c7"
+    },
+    ".codex/agents/orchestrator.toml": {
+      "constitutional_core": "f05ead693f33d316cc83453eb195d232f5ac76cd36d8cce45b3605e14747def4",
+      "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
+      "routing_table_rows": "9ad485cbe3884b04478a08c25ec00a543d3160c84e24adf0f462a800b3268ec3",
+      "update_compatibility_source_pack": "24662ea1c046bf2831dfa898b937114683aa5e9ca695b243aaf3241ca6ab34ea",
+      "available_workflows": "bbc4993e6e885a619f72b5aa45ddb196d85278a9b0d383f2567ad254f7ddb94e",
+      "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d",
+      "codex_translation": "e33e39e0eb2f7f992292848e0d9f68c85cebc07e42d08430f7967c512d4febaf"
+    },
+    ".codex/agents/output-compiler.toml": {
+      "content": "e84a70143a1ed9897e9391e83974898ff2704d72664577343538fa37b7261555",
+      "codex_translation": "aeb238d8d08b6a4277695d2e6656f3717d8eb340490aeeee2e3b2aa822618e02"
+    },
+    ".codex/agents/post-production-auditor.toml": {
+      "content": "8492d518cabfeb325bb82c1de8a314ad2fa801f24602a187dfa296125c3d0914",
+      "codex_translation": "70cab1f82753c2796c1148c60824243ae70610669c5a5b39c55ad1ef1f4186fa"
+    },
+    ".codex/agents/primary-producer.toml": {
+      "content": "b3ab7bcc9bd3388cfbc7928411b8df840ccf4e7d72c15c2931b8f49711122f36",
+      "codex_translation": "20b723635daa77bc4409e53a81db2bd3fde9264e683965c0d22b1e1d843e2579"
+    },
+    ".codex/agents/proof-dossiers-expert.toml": {
+      "component_spec": "1d17518c000b99f276788878c2b124a57ec96b71e44553874560930485f9d9e1",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "37e7259d78c7f4edb0a40019884eb10f4275f9c5cec3914c6c5cd882506c3c56"
+    },
+    ".codex/agents/proof-library-expert.toml": {
+      "component_spec": "70fd6206243abca3937c1744a1d4951a1d7f3427c0c6ff9156569dbf06b9b53c",
+      "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "cf0d8880fc4baf581546f7bf91a6444971bab9be1c0ccdb0756d22585f4b1812"
+    },
+    ".codex/agents/proof-strategist.toml": {
+      "codex_translation": "93b8c7b5818536cae9fb919837c0568c0284a7037930458026bbf56980a0ca60"
+    },
+    ".codex/agents/quality-auditor.toml": {
+      "defect_taxonomy": "e9468640170cbdc1e966b0c589f2d1e4926c1fde9ca792f49923fae80e903b79",
+      "memory_index_consultation": "a241caacd58e1962c23f54095c2e1b003b3beb3d601506ae5afef229c72eecd9",
+      "audit_protocol": "6f7dd04ad5bc4fdc90898a08269ca14eca4e0bd5826af0444d66debf313e1498",
+      "output_format": "4d2983fcb4a1bb09df289219928ea3844d56fed192f91098c702e458b5eb0e6e",
+      "boundary_rules": "91444ed2e3202780cdc752d5e4cefb5aea17e9d58c0d6dd6b009dcbf51e7f64c",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
+      "codex_translation": "3fa8525bd1e512a96e5f8501ddd2cc2eefafeb695eefa95e60dcae4568c83658"
+    },
+    ".codex/agents/reference-manager.toml": {
+      "content": "83418ef9ed5437fa555b9fd86c62082c64fd1a7a6c2b51636213bb3f0e24aeca",
+      "codex_translation": "71fa26073a2cf7fce0a933fcd12fba90dd5c218c0ff7a3dffeeb070946e6eb77"
+    },
+    ".codex/agents/repo-liaison.toml": {
+      "purpose": "65e469952189f945e12b09729dc825c1424c7cd3a6cbceaa179116fdbc5c0b55",
+      "protocols": "a0b9eed4073bff4caebf3410b0a5e5d183331cff5715a0e75dcc6097d1341597",
+      "output_format": "92a7ecbd969c55a1ba9b02c7d56b9e23c4a65d486eeb6a0ae775690d3fbd6a46",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "fced04c1bec7ae3c202590dd7c101ab599edbf1f0e626fa1d9f15169c5aa5507",
+      "codex_translation": "72d2af82a8d074d3a1a17ae33a54bca1211174fd5c14846ea466d7d9b094a193"
+    },
+    ".codex/agents/research-analyst.toml": {
+      "a_note_on_what_you_orchestrate": "a29ed82747ee6ab724f33e69855718c16dd9fa0289da6ab61fd62b68989e2029",
+      "memory_index_consultation": "ee3edb475f2788bc9e9e896cd358825ce99af1ae4e02acc8b61600a27ee697f2",
+      "procedure": "f5fdd70bde5a761b09aae5d78717c47d193350b093efae076a137096be65554a",
+      "external_retrieval_quality_gate": "77f54ec03535c1bc9ce99cc3090889913fa3441c6261c7df3d9562288aed1ef6",
+      "output_format": "f751fcb4fa4f36501bc3ec3bba179f2483438521a4bb529a6e3ef7a1e73fe218",
+      "external_retrieval_quality_gate_output": "5b130293ed8b3531d99ad4e53bf2ec6d9cddcba11cc28df28e962a185e16c04a",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "335ad3c0f668cb985c409ad570c0d734c1f7434470deb18959bc2e4e8480f674",
+      "codex_translation": "40f8c8ecb16205a880156d9ab3472990146bff93a80f73f66a3eba06c9524520"
+    },
+    ".codex/agents/retrieval-integrator.toml": {
+      "memory_index_consultation": "40e1aab5f4f2c1895702c7d47d8a05a6cb8a532e379d0b6a618cabf22309c609",
+      "code_index_consultation": "5a5a2dcec60986bf6281979d3aa9b4a606ad38cd840e1cd6fb2216f650e088cd",
+      "validation_procedure": "c374434c6ac0802c268d92c106adfa99ea03a91d245b5c377133a1f26c19bb99",
+      "output_format": "e4df9c1a28d1b6e98e6b5f32314f029582dbc702862314bac792b4a4b998dfab",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "c6e2ebd81a8bf4709f2e941bc865ef0e063a86a8c87d85e9eee3ae26db803205",
+      "codex_translation": "d061f8bc90570f0339754e9e8fd4802a2a35213cd3a3bdc7dc9138d62d36cf3f"
+    },
+    ".codex/agents/security.toml": {
+      "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
+      "security_rules_invariant": "4a07a6d9c929cf75a0724063b86b9217ffd8c08840014a5bca50ce344ae02a2b",
+      "threat_intelligence": "81defa9719fde85d20416cc0f5bf51f33775a5859349f9504c6c53332641f0e5",
+      "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
+      "codex_translation": "98cd2d9b928f75a45ab2db39f6215138e0900cfb8afccaa839d3eea5f424efcd"
+    },
+    ".codex/agents/statement-formalizer.toml": {
+      "codex_translation": "e9e0d3caf2bef6c47750c79b2236b1eb86d1c73389a4e706f0025752cfd80e0f"
+    },
+    ".codex/agents/tactic-planner.toml": {
+      "codex_translation": "a00d18dfd399566c8b767f4335def46c201ff2087f12e838342528a07f27cf4e"
+    },
+    ".codex/agents/team-builder.toml": {
+      "content": "a88bdaca8cf1eddfbacd85256271b3fc0ef6f14b785a33ee8a1a38cc3fc48977",
+      "codex_translation": "af8a8d3360dea77e678ef3dc6d8197dd534fddc69304797eb0f90ab14e20c110"
+    },
+    ".codex/agents/technical-validator.toml": {
+      "authority_sources_list": "0774ddf7dbf47f934f9dbf5db9a001200ef84861345943d5f037269e6a802059",
+      "accuracy_rules": "cf7b9555eed3b39638fa1c1016f84caa590691686fdf6b47aeabc8ea8b2b0417",
+      "memory_index_consultation": "848d090e0d52da196652ea08ae111bc2999801cf48caccf5f17e28ac03486610",
+      "cross_reference_rules": "a98aee0f1402dd069e280347dd6eb751d7de27c4f05884aa43aebb4b484cd92e",
+      "output_format": "7bf8d1da76afa8db69ae4e2382d560767ef4c7a7831cc4d60f4917edc553272c",
+      "boundary_rules": "633e41e63ba35fde70c573320cc6ddbe6983a5b5644ad52a08dfd6a330768cda",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
+      "invariant_core": "7adfc511ccfd9b2a91c93a9a441afdc6b9650de80c17bfa4751125e09075621f",
+      "codex_translation": "9dd9910452deebcbf701629604b5363fcccdc6b2007417d9dd7edd2ecd8f4151"
+    },
+    ".codex/agents/visual-designer.toml": {
+      "content": "26bc24221031477be2dbac1858b8a184c6723331c736a7c8ea169587c169656e",
+      "codex_translation": "b8b3ce3f4802ce0fc3e307c73c121abaa6da5be533b56211cccd65c815962885"
+    },
+    ".codex/agents/work-summarizer.toml": {
+      "content": "85cc860613ec540a77c25448bda593053344267b6d330a5b0213f7ea447b367b",
+      "codex_translation": "c8b9f257995488cb733e365866a23a446820e25f1ffa6a712325eeb69ea8a4ea"
+    },
+    "AGENTS.md": {
+      "project_overview": "2e5d490c645705421ee3c2b6bb6c24ce6e852a879d1b7b0b298c9f69771d8442",
+      "directory_structure": "7ba6c4977b7f0601ac878ff3fc14deeadc11c7442d1085d652a1901db1f50d17",
+      "output_conventions": "78d817d7f5914ccbd35923755326cdcea132178bc9bf0750325141f83ef69f29",
+      "agent_team": "f46b14526624e1ce7c6c1782c5d6899398d40f6f01bf21875099f22b806adc93",
+      "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
+      "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
+      "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
+      "constitutional_rules_baseline": "37bfbafafaba1bf3c46ff89f6124f482efeb583faaf851326bf1aebdb693cf25",
+      "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
+      "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
+    }
+  }
+}

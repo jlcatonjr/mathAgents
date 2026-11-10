@@ -1,0 +1,176 @@
+{
+  "artifact_type": "eval-suite",
+  "eval_suite_schema_version": "1.0",
+  "project_name": "mathAgents",
+  "framework": "claude",
+  "generated_from": "manifest",
+  "scenarios": [
+    {
+      "id": "routing-orchestrator-knows-all-experts",
+      "category": "routing",
+      "claim": "The orchestrator's agents: list includes every workstream expert, so it can route to each declared component.",
+      "predicate": {
+        "kind": "frontmatter-list-contains-all",
+        "file": "orchestrator.agent.md",
+        "field": "agents",
+        "values": [
+          "methods-review-expert",
+          "harness-spec-expert",
+          "proof-dossiers-expert",
+          "proof-library-expert",
+          "evaluation-expert"
+        ]
+      }
+    },
+    {
+      "id": "routing-expert-count-matches-components",
+      "category": "routing",
+      "claim": "Exactly 5 workstream-expert agent file(s) are emitted for 5 declared component(s).",
+      "predicate": {
+        "kind": "agent-count",
+        "suffix": "-expert.agent.md",
+        "count": 5
+      }
+    },
+    {
+      "id": "governance-methods-review-triad-and-return",
+      "category": "governance",
+      "claim": "methods-review-expert wires the worker-governance triad (primary-producer, adversarial, reference-manager) and includes a 'Return to Orchestrator' edge.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "methods-review-expert.agent.md",
+        "agents_contains_all": [
+          "primary-producer",
+          "adversarial",
+          "reference-manager"
+        ],
+        "body_contains": "Return to Orchestrator"
+      }
+    },
+    {
+      "id": "handoff-harness-spec",
+      "category": "handoff",
+      "claim": "harness-spec-expert receives upstream from methods-review-expert and returns to the orchestrator (coordination is orchestrator-mediated, not peer-to-peer).",
+      "predicate": {
+        "kind": "handoff-chain",
+        "chain": [
+          "methods-review-expert",
+          "harness-spec-expert"
+        ],
+        "returns_to": "orchestrator"
+      }
+    },
+    {
+      "id": "governance-harness-spec-triad-and-return",
+      "category": "governance",
+      "claim": "harness-spec-expert wires the worker-governance triad (primary-producer, adversarial, reference-manager) and includes a 'Return to Orchestrator' edge.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "harness-spec-expert.agent.md",
+        "agents_contains_all": [
+          "primary-producer",
+          "adversarial",
+          "reference-manager"
+        ],
+        "body_contains": "Return to Orchestrator"
+      }
+    },
+    {
+      "id": "handoff-proof-dossiers",
+      "category": "handoff",
+      "claim": "proof-dossiers-expert receives upstream from harness-spec-expert, proof-library-expert and returns to the orchestrator (coordination is orchestrator-mediated, not peer-to-peer).",
+      "predicate": {
+        "kind": "handoff-chain",
+        "chain": [
+          "harness-spec-expert",
+          "proof-library-expert",
+          "proof-dossiers-expert"
+        ],
+        "returns_to": "orchestrator"
+      }
+    },
+    {
+      "id": "governance-proof-dossiers-triad-and-return",
+      "category": "governance",
+      "claim": "proof-dossiers-expert wires the worker-governance triad (primary-producer, adversarial, reference-manager) and includes a 'Return to Orchestrator' edge.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "proof-dossiers-expert.agent.md",
+        "agents_contains_all": [
+          "primary-producer",
+          "adversarial",
+          "reference-manager"
+        ],
+        "body_contains": "Return to Orchestrator"
+      }
+    },
+    {
+      "id": "handoff-proof-library",
+      "category": "handoff",
+      "claim": "proof-library-expert receives upstream from proof-dossiers-expert and returns to the orchestrator (coordination is orchestrator-mediated, not peer-to-peer).",
+      "predicate": {
+        "kind": "handoff-chain",
+        "chain": [
+          "proof-dossiers-expert",
+          "proof-library-expert"
+        ],
+        "returns_to": "orchestrator"
+      }
+    },
+    {
+      "id": "governance-proof-library-triad-and-return",
+      "category": "governance",
+      "claim": "proof-library-expert wires the worker-governance triad (primary-producer, adversarial, reference-manager) and includes a 'Return to Orchestrator' edge.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "proof-library-expert.agent.md",
+        "agents_contains_all": [
+          "primary-producer",
+          "adversarial",
+          "reference-manager"
+        ],
+        "body_contains": "Return to Orchestrator"
+      }
+    },
+    {
+      "id": "handoff-evaluation",
+      "category": "handoff",
+      "claim": "evaluation-expert receives upstream from harness-spec-expert, proof-dossiers-expert and returns to the orchestrator (coordination is orchestrator-mediated, not peer-to-peer).",
+      "predicate": {
+        "kind": "handoff-chain",
+        "chain": [
+          "harness-spec-expert",
+          "proof-dossiers-expert",
+          "evaluation-expert"
+        ],
+        "returns_to": "orchestrator"
+      }
+    },
+    {
+      "id": "governance-evaluation-triad-and-return",
+      "category": "governance",
+      "claim": "evaluation-expert wires the worker-governance triad (primary-producer, adversarial, reference-manager) and includes a 'Return to Orchestrator' edge.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "evaluation-expert.agent.md",
+        "agents_contains_all": [
+          "primary-producer",
+          "adversarial",
+          "reference-manager"
+        ],
+        "body_contains": "Return to Orchestrator"
+      }
+    },
+    {
+      "id": "escalation-delegate-query-funnels-to-prime",
+      "category": "escalation",
+      "claim": "A delegated (spawned) orchestrator routes user-facing questions up to its prime via the Spawn-Authority Query Funnel; it does not prompt the user directly.",
+      "predicate": {
+        "kind": "frontmatter-and-body",
+        "file": "orchestrator.agent.md",
+        "agents_contains_all": [],
+        "body_contains": "Spawn-Authority Query Funnel"
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+# >>> researchteam:managed — do not edit inside this block; `researchteam update` replaces it
+# wholesale from upstream. Add derived-repo-only ignore patterns BELOW the closing marker, where
+# they are preserved across every sync. See docs/agentteams-update-policy.md.
+#
+# Ignore all files in tmp (plan artifacts, logs, and local scratch)
+tmp/
+
+# Environment files hold secrets: never tracked (baseAgent @security S-1). Placeholder templates may be.
+.env
+.env.*
+*.env
+!.env.example
+!.env.template
+
+# agentteams update/migration backups (local rollback artifacts)
+.github/agents/.agentteams-backups/
+
+# Python package build and virtual environment artifacts
+.venv/
+*.egg-info/
+dist/
+build/
+__pycache__/
+*.pyc
+
+# Archival update backups (any location) — never tracked (update-policy)
+**/.agentteams-backups/
+
+# agentteams local artifacts — do not commit
+.agentteams-backups/
+.agentteams-fleet/
+bridge-*.report.md
+**/bridge-*.report.md
+*.bak
+*.bak.*
+*.prelabel.bak
+.DS_Store
+
+# researchteam layer-1 union temp descriptor (created+removed during agentteams merge)
+.rt-descriptor-*.json
+
+# Per-project literature library — optional out-of-band full-text corpus + bulky vector store are
+# regenerable and never committed (the durable pins are literature.jsonl + *.provenance.json).
+# The base index (literature.jsonl / term-vectors.jsonl / library-manifest.json) IS committed.
+# See docs/literature-library-protocol.md.
+**/references/library/corpus/*.txt
+**/references/library/vectors/store/
+
+# agentteams code & API index (F-CODEIDX) — a gitignored local cache (manifest.json + per-kind
+# partitions) that embeds machine-specific resolved paths/versions; regenerable, NEVER committed and
+# NEVER drift-tracked. Both patterns are load-bearing: the root-anchored one, and the `**/` one that
+# matches the actual cache location `.github/agents/references/code-index/`. Query-time staleness keeps
+# it fresh. See docs/retrieval-surfaces.md and docs/code-index-integration-plan.md.
+references/code-index/
+**/references/code-index/
+
+# agentteams autosync gate — transient PR-body scratch (never committed)
+.autosync-pr-body.md
+**/.autosync-pr-body.md
+
+# Full-text source corpus (retrieval surface #5) — the extracted text, per-chunk/per-page rows and
+# the vector store are large, high-churn, machine-local and regenerable from sources/ +
+# scripts/build_source_corpus.py. The COMMITTED durable layer is the compact manifests
+# (sources-manifest.jsonl, corpus-extract-manifest.json, corpus-vector-manifest.json,
+# quality-manifest.json) plus the dedup/triage report and the bibliography.
+#
+# These live UPSTREAM deliberately. .gitignore is a layer-2 MANAGED file: `researchteam update`
+# overwrites this fenced block wholesale from upstream with no merge, so a pattern that exists only
+# in a derived repo must live BELOW the closing marker (or upstream, here) to be durable. On
+# 2026-08-07 a sync dropped derived-only lines and exposed 1041 corpus files (198 MB) that had been
+# correctly ignored moments before — the incident this fence exists to prevent.
+**/references/corpus/text/
+**/references/corpus/vectors/
+**/references/corpus/chunk-texts.jsonl
+**/references/corpus/chunks.jsonl
+**/references/corpus/quality.jsonl
+
+# LaTeX build droppings under Projects/ — regenerable compiler output, never source of truth. The
+# .tex source and the built .pdf/.html are the deliverables and stay tracked; these do not.
+Projects/**/*.aux
+Projects/**/*.log
+Projects/**/*.toc
+Projects/**/*.synctex.gz
+# <<< researchteam:managed
+#
+# Anything BELOW this line is derived-repo-owned and preserved across `researchteam update`.
+# Add machine-local or project-specific ignore patterns here (e.g. a hidden local-only Project
+# directory, a local output dir). This region is never overwritten by an upstream sync.
+
+# Local-only project scratch — removed from tracking; kept out of the repo going forward.
+# (Prior contents remain recoverable in git history.)
+.projects/**
+
+# Operator-owned Claude Code config — machine-local sandbox/hook wiring, never committed
+# (agentteams convention gitignores .claude/settings.json; added 2026-W40 sandbox launch).
+.claude/settings.json
+.claude/settings.local.json
+
+# --- mathAgents (derived-repo patterns; preserved across researchteam update) ---
+# Lake build products and the downloaded Mathlib cache
+lean/.lake/
+# Per-machine hardware/engine profile written by scripts/probe_machine.py
+.machine/
+# Generated blueprint output
+lean/blueprint/web/
+lean/blueprint/print/
+# Per-run gate report (dossiers snapshot their own copy)
+reports/kernel/latest.json
+reports/kernel/name-index.txt
+reports/kernel/name-index.tmp
+
+# machine-local settings, e.g. MATHAGENTS_ENABLED=0 (mathagents/config.py); never committed
+.env
+
+# agentteams runner state (the operator's live --serve-requests runner: lock, heartbeat, queues);
+# .agentteams/bin/ (the packaged goose-readfs server) stays tracked. Added 2026-10-08.
+.agentteams/runner.*
+.agentteams/queue-claimed/
+.agentteams/queue-results/
+# agentteams runner and pilot state written during M6 (dispatch nonces, the proposal ledger, staged writes, the
+# queue) and Claude hook notices: machine-local evidence, never committed. Added 2026-10-16.
+.agentteams/dispatches.*
+.agentteams/proposal-ledger.*
+.agentteams/staged/
+.agentteams-queue/
+.claude/hook-notices/
+
+# agentteams runtime status directory: its own .gitignore un-ignores itself, which tripped the autosync gate's
+# file-scope check in the v1.0.1 soak (run 39817544064). Never committed.
+/.agentteams-status/
+
+# Docs site: generated by scripts/build_api_site.py (rebuilt by .github/workflows/docs.yml), and the build output
+docs_src/api-reference/
+docs_src/cli-reference.md
+docs_src/stability.md
+docs_src/changelog.md
+docs_src/getting-started.md
+docs_src/explorer/api.json
+docs_src/explorer/library.json
+_site/

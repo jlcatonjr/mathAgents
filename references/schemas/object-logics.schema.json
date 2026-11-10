@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mathAgents object-logic registry",
+  "description": "Logics a problem may declare at intake. Non-classical logics are deep embeddings inside Lean's classical metatheory.",
+  "type": "object",
+  "required": ["schema_version", "default_logic", "logics"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "default_logic": {"type": "string"},
+    "logics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "family", "embedding", "status", "sources"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "name": {"type": "string"},
+          "family": {"enum": ["classical", "intuitionistic", "modal", "deontic", "conditional", "probabilistic", "substructural", "paraconsistent", "other"]},
+          "proof_systems": {"type": "array", "items": {"type": "string"}},
+          "semantics": {"type": "array", "items": {"type": "string"}},
+          "embedding": {"enum": ["native", "deep", "shallow"]},
+          "lean_module": {"type": ["string", "null"]},
+          "status": {"enum": ["available", "planned", "in-progress"]},
+          "pilot": {"type": ["string", "null"]},
+          "cross_checks": {"type": "array", "items": {"type": "string"}},
+          "sources": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

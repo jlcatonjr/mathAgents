@@ -1,0 +1,19 @@
+# Toolchain pin: the researchteam / agentteams commits this repository renders with (D43; plan
+# docs/reports/2026-10-14-versioning-and-stable-agentteams.md). Same format as researchteam's toolchain.lock.
+# scripts/lib/agentteams_provenance.py refuses a render on any other agentteams commit; the rendered .github and .claude
+# build-logs must name it (tests/test_refresh_guard.py). Move it only in a release, with an @security row (on main, which
+# is no release line, also by an operator decision that brings it in line with what main already carries):
+#   both lines pin the peeled commit of a verified signed tag (docs/release-policy.md §3). On main both follow the 1.1
+#   line (operator-signed rows release-line-agentteams-1.1 and release-line-researchteam-1.1, PR #78): agentteams
+#   v1.1.0 + researchteam v1.1.0 (rows pin-agentteams-v1.1.0, pin-researchteam-v1.1.0), under the S-10 exemptions s10-release-key-exemption-1.1 and
+#   s10-release-key-exemption-researchteam-1.1 (docs/release/). release/1.0 stays on agentteams v1.0.0 + researchteam v1.0.1.
+#   Lean and Mathlib are pinned separately: lean/lean-toolchain and lean/lake-manifest.json (scripts/lean_pin.py).
+# Release-locked (the .tag= lines): researchteam's managed scripts/agentteams_autosync_gate.sh follows the locked tags'
+# release line, verified, and never rewrites this file to main. The schedule resumes only by its own PR and the
+# operator's signed Rule 11 row (docs/release-policy.md §4).
+# researchteam tag v1.1.0 (tag object 4f0fb292, signed SHA256:IPdnLwlF…, verified 2026-11-09)
+researchteam=jlcatonjr/researchteam@938dd66317c5bad1fbda9738a3909b202474b082
+researchteam.tag=v1.1.0
+# agentteams tag v1.1.0 (tag object 093c38fd, signed SHA256:IPdnLwlF…, verified 2026-11-09)
+agentteams=jlcatonjr/agentteams@9b16fb544c03aad636d3839c37873624f6efbd37
+agentteams.tag=v1.1.0

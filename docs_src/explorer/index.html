@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>mathAgents explorer</title>
+  <link rel="icon" href="../assets/images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <a href="../">mathAgents</a>
+      <span class="sep">/</span>
+      <span>Explorer</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Explorer views">
+      <button role="tab" id="tab-api" aria-controls="view-api" aria-selected="true">API</button>
+      <button role="tab" id="tab-library" aria-controls="view-library" aria-selected="false">Proof library</button>
+      <button role="tab" id="tab-pipeline" aria-controls="view-pipeline" aria-selected="false">Pipeline &amp; registries</button>
+    </nav>
+  </header>
+
+  <main>
+    <p class="notice" id="load-status" role="status">Loading data…</p>
+
+    <section id="view-api" role="tabpanel" aria-labelledby="tab-api">
+      <div class="controls">
+        <label class="search">
+          <span class="visually-hidden">Search the API</span>
+          <input type="search" id="api-query" placeholder="Search names, signatures, summaries" autocomplete="off">
+        </label>
+        <label>Module
+          <select id="api-module"><option value="">All modules</option></select>
+        </label>
+        <label>Kind
+          <select id="api-kind"><option value="">All kinds</option></select>
+        </label>
+      </div>
+      <p class="count" id="api-count" aria-live="polite"></p>
+      <div class="split">
+        <ul class="list" id="api-list" aria-label="Public names"></ul>
+        <article class="detail" id="api-detail" aria-live="polite">
+          <p class="muted">Choose a name to see its signature, summary and source.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="view-library" role="tabpanel" aria-labelledby="tab-library" hidden>
+      <div class="banner">
+        <strong>How to read this.</strong>
+        A dossier's result is its <code>Result status:</code> line, shown word for word. A declaration's status is
+        the one the G-KERNEL gate (the Lean kernel check) recorded in the dossier's kernel snapshot, at the commit
+        and date shown: it is not a fresh check, and it is greyed out when the Lean sources have changed since. A
+        G-FID approval is a person's sign-off that the formal statement says what the informal one means. The
+        project's proof standard is Blueprint + Lean, and no dossier has a blueprint yet, so no result here meets
+        the full standard. <a href="../proof-library/">How to read a result</a>.
+      </div>
+      <div id="library-pins" class="pins"></div>
+      <div id="library-list"></div>
+    </section>
+
+    <section id="view-pipeline" role="tabpanel" aria-labelledby="tab-pipeline" hidden>
+      <h2>Pipeline stages</h2>
+      <p class="muted">From <code>mathagents.dossiers.STAGES</code>: the agents that run each stage and the dossier
+        artifacts it produces.</p>
+      <div class="table-wrap"><table id="stages-table"></table></div>
+      <h2>Gates</h2>
+      <p class="muted">From <code>mathagents.gates.GATES</code>, the gates <code>run_gates()</code> runs, in order.</p>
+      <ul class="chips" id="gates-list"></ul>
+      <h2>Object logics</h2>
+      <div class="table-wrap"><table id="logics-table"></table></div>
+      <h2>Prover engines</h2>
+      <p class="muted">Lean is the default. Every other engine's output is a hint until the Lean kernel re-checks it.</p>
+      <div class="table-wrap"><table id="engines-table"></table></div>
+      <h2>Axioms</h2>
+      <div id="axioms"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Generated from the repository's records by <code>scripts/build_api_site.py</code>, mostly through the
+      documented <code>mathagents</code> API. This page runs no gate and re-derives nothing.
+      <a href="../">Documentation</a> · <a href="../api-reference/">API reference</a></p>
+  </footer>
+</body>
+</html>

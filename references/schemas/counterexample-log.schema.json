@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mathAgents G-CX counterexample log",
+  "description": "reports/dossiers/<slug>/counterexamples.json. Stage 6 counterexample candidates and the human G-CX verdicts on them, keyed to each target declaration's statement_fingerprint from reports/kernel/latest.json (spec DD-15, DD-16, DD-39). Agents log candidates; no agent writes a verdict approval (DD-29). A waiver records an operator kernel-as-judge override for one conversation (D5, D26); a waived refutation needs a kernel-proved Lean witness and yields the label 'refuted, verdict-waived' (DD-59).",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "slug",
+    "lean_namespace",
+    "counterexamples"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "lean_namespace": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.]*$",
+      "description": "Lean namespace holding this dossier's declarations; every target and witness must lie under it."
+    },
+    "counterexamples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "decl",
+          "statement_fingerprint",
+          "method",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^CX-[0-9]+$"
+          },
+          "decl": {
+            "type": "string",
+            "description": "Fully-qualified Lean name of the statement the candidate targets."
+          },
+          "statement_fingerprint": {
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "description": "Fingerprint of the target statement when the candidate was logged. A later change means the statement was revised after this counterexample."
+          },
+          "method": {
+            "enum": [
+              "decide",
+              "small-model",
+              "smt",
+              "atp",
+              "manual"
+            ]
+          },
+          "engine": {
+            "type": "string",
+            "description": "Engine id from references/prover-engines.json, when an engine found it."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lean_witness": {
+            "type": "string",
+            "description": "Fully-qualified Lean theorem re-establishing the counterexample, written `theorem cx_<n> : ¬ (type_of% @<target>)` under `<lean_namespace>.CX` (or, for a target revised since logging, with the logged statement written out in full); its kernel-report negates_fingerprint must equal this entry's statement_fingerprint. Required for decide/smt/atp refutations (DD-16) and for waived refutes or revise verdicts (DD-59). Recorded only by `scripts/log_counterexample.py witness`."
+          },
+          "logged_by": {
+            "type": "string"
+          },
+          "logged_date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "toolchain_pin": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The instance's lean/lean-toolchain when this was recorded (docs/lean-version-governance.md R6). Optional; stamped by `log_counterexample.py add`. Not compared with the current pin: the log is append-only, so an entry keeps the pin it was logged under."
+          },
+          "mathlib_rev": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The Mathlib commit (lake-manifest.json rev) when this was recorded (R6). Optional; stamped and kept like toolchain_pin."
+          },
+          "verdict": {
+            "type": "object",
+            "required": [
+              "decision",
+              "statement_fingerprint"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "decision": {
+                "enum": [
+                  "refutes",
+                  "spurious",
+                  "revise"
+                ],
+                "description": "refutes: the statement is false; spurious: the candidate does not refute it; revise: the counterexample is accepted and the statement was revised."
+              },
+              "statement_fingerprint": {
+                "type": "string",
+                "pattern": "^[0-9]+$",
+                "description": "Fingerprint of the statement as it stands when the verdict is given; for 'revise', the revised statement's fingerprint."
+              },
+              "approver": {
+                "type": "string",
+                "minLength": 1
+              },
+              "date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "waiver": {
+                "type": "object",
+                "required": [
+                  "conversation",
+                  "date"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "conversation": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "plan": {
+                    "type": "string"
+                  },
+                  "date": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

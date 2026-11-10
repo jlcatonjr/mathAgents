@@ -1,0 +1,45 @@
+# mathagents: the mathAgents proof-development harness as an installable package (D35).
+# Installed from the public repository by git URL (D45); it is not published to PyPI. The trove classifier
+# "Private :: Do Not Upload" makes PyPI reject any upload of it.
+#
+# The wheel carries the harness (gate scripts, Lean templates, schemas, registries, charter, pipeline
+# agents) under mathagents/_harness/ via the build hook in setup.py; an editable install uses this checkout.
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathagents"
+version = "1.1.0.dev0"
+description = "The mathAgents proof-development harness: Lean gates, dossier pipeline and its agents, for use from other repositories"
+readme = "docs/module.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.18,<5"]
+classifiers = [
+    "Private :: Do Not Upload",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "build"]
+
+[project.scripts]
+mathagents = "mathagents.cli:main"
+
+[tool.setuptools]
+packages = ["mathagents"]
+
+[tool.pytest.ini_options]
+# the API and module suites; tests/test_init_personalization.py and test_update_gitignore_preserve.py are
+# researchteam-synced and need the researchteam toolchain
+testpaths = ["tests/test_api_doc_parity.py", "tests/test_api_doc_signatures.py", "tests/test_api_functional.py",
+             "tests/test_api_boundary.py", "tests/test_module_packaging.py",
+             "tests/test_toolchain_bump.py", "tests/test_learned_blocks.py", "tests/test_surfaces.py",
+             "tests/test_lean_docs.py", "tests/test_lean_version_governance.py",
+             "tests/test_refresh_guard.py",
+             "tests/test_p5_prep.py", "tests/test_api_site.py", "tests/test_pilots_registry.py"]

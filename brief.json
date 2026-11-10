@@ -1,0 +1,754 @@
+{
+  "authorized_managers": ["infrastructure-management"],
+  "project_name": "mathAgents",
+  "project_goal": "Develop, verify, and explain mathematical and logical proofs across applied/modeling mathematics, research-level mathematics, competition problems, logic and foundations, and proofs used in the philosophy of science. Every proof is articulated through an explicit symbolic-logic pipeline (formal statement with fidelity check, proof-strategy blueprint, named-rule derivations, tactic plans) and is accepted only as Blueprint + Lean: a blueprint whose nodes are name-linked to Lean 4 declarations that build with no sorry, admit, or unapproved axiom. The Lean kernel judges validity; a human judges statement fidelity. Harness design decisions are derived from, and cited to, research on automated and LLM-assisted theorem proving, with Chicago author-date citations to verified sources.",
+  "layer2_profile": "scholarly",
+  "enforce_decision_signing": false,
+  "deliverables": [
+    "Proof dossiers (Markdown, Chicago author-date)",
+    "Lean 4 proof library (Lake package)",
+    "Generated proof blueprint (web and PDF)",
+    "Methods literature review",
+    "Harness specification",
+    "Harness evaluation report",
+    "BibTeX bibliography"
+  ],
+  "output_format": "Markdown with Chicago author-date citations; Lean 4 sources; generated blueprint",
+  "primary_output_dir": "reports/",
+  "build_output_dir": "output/",
+  "figures_dir": "figures/",
+  "reference_db_path": "reports/references/bibliography.bib",
+  "reference_key_convention": "AuthorYear",
+  "authority_sources": [
+    {
+      "name": "Lean kernel verification report (G-KERNEL)",
+      "path": "scripts/check_proof_integrity.sh",
+      "scope": "whether a Lean declaration is proved (per-declaration status) and its axiom envelope; the per-run report is written to reports/kernel/latest.json and snapshotted into each dossier",
+      "rank": 1
+    },
+    {
+      "name": "Lean 4 language reference",
+      "path": "https://lean-lang.org/doc/reference/",
+      "scope": "Lean syntax, semantics, and tactic behaviour, in the edition matching the target's lean/lean-toolchain (resolve with python3 scripts/lean_docs.py; never latest)",
+      "rank": 1
+    },
+    {
+      "name": "Mathlib documentation",
+      "path": "https://leanprover-community.github.io/mathlib4_docs/",
+      "scope": "Mathlib declarations, names, and signatures; these docs track Mathlib master, so names are confirmed against the pinned source in lean/lake-manifest.json (python3 scripts/lean_docs.py) or the pinned name index",
+      "rank": 1
+    },
+    {
+      "name": "arXiv (cs.LO, cs.AI, math.LO)",
+      "path": "https://arxiv.org",
+      "scope": "theorem-proving, autoformalization, and logic preprints",
+      "rank": 2
+    },
+    {
+      "name": "zbMATH Open",
+      "path": "https://zbmath.org",
+      "scope": "mathematical literature discovery and bibliographic metadata",
+      "rank": 2
+    },
+    {
+      "name": "Stanford Encyclopedia of Philosophy",
+      "path": "https://plato.stanford.edu",
+      "scope": "statements and context of philosophy-of-science results",
+      "rank": 2
+    },
+    {
+      "name": "Semantic Scholar",
+      "path": "https://www.semanticscholar.org",
+      "scope": "cross-disciplinary literature discovery and metadata",
+      "rank": 2
+    },
+    {
+      "name": "JSTOR",
+      "path": "https://www.jstor.org",
+      "scope": "philosophy and social-science journal literature",
+      "rank": 2
+    },
+    {
+      "name": "CrossRef",
+      "path": "https://www.crossref.org",
+      "scope": "DOI resolution and bibliographic metadata verification",
+      "rank": 3
+    }
+  ],
+  "style_rules": [
+    "All citations follow Chicago Author-Date style (17th edition), drawn from references/bibliography.bib.",
+    "Cite Lean declarations as [Lean: Namespace.name] together with the toolchain pin; never paraphrase a theorem beyond what its Lean statement says.",
+    "A result is called proved only when its declaration's status in the G-KERNEL report is `proved`; otherwise it is labelled open or conjectured, or refuted under the G-CX rule.",
+    "Every problem declares its object logic at intake; classical higher-order logic is the default.",
+    "Outputs of non-Lean engines (SMT, ATP, LLM provers) are hints until re-checked by the Lean kernel.",
+    "Every derivation step names its inference rule or the lemma it applies.",
+    "Never fabricate or hallucinate sources, lemmas, or Mathlib declaration names.",
+    "G-FID precondition: before dispatching Stage 2 or later work (@proof-strategist onward) on a dossier, `python3 scripts/validate_dossier.py --require-fid <slug>` must exit 0; a dossier's result is declared only by a `Result status:` line (open | conjectured | proved | proved, fidelity-waived | refuted (<decl>) | refuted, verdict-waived (<decl>)), and no agent writes a G-FID approval or a G-CX verdict.",
+    "G-CX: counterexample candidates go in `reports/dossiers/<slug>/counterexamples.json` only through `python3 scripts/log_counterexample.py add`, and the log is append-only (never edit or remove a logged entry); a witness is `theorem cx_<n> : ¬ (type_of% @<target>)` in `MathAgents.<Slug>.CX` (for a target revised since logging, the logged statement written out in full); a statement is labelled refuted, or revised after a logged counterexample, only once `python3 scripts/validate_dossier.py <slug>` passes on a G-CX verdict carrying its current fingerprint (a human verdict, or an operator kernel-as-judge waiver backed by a kernel-proved Lean witness), and a `decide`, SMT or ATP counterexample counts only through a kernel-proved Lean witness.",
+    "Orchestrator duties in the proof pipeline: Stage 0, write `reports/dossiers/<slug>/problem-card.md` with the operator at intake; the pipeline agents are researchers with no edit tool (D39), so write each artifact they return verbatim at the path they name (under the write-policy pilot, by applying their change-proposals and command-requests through agentteams' runner, D41) (statement, stub, strategy, blueprint, review record, derivations, tactic plan, proof, witness, promotion), and run every command that writes (the record-writing commands, and any command a researcher returns because its surface cannot run it); compute a strategy-review round's `Strategy sha256:` from `strategy.md` as written and give it to @proof-strategist with the review dispatch (it writes the line; you add nothing to a returned artifact); give the agents that run no commands the output of `mathagents status` and `python3 scripts/lean_docs.py` with every dispatch, and of `python3 scripts/validate_dossier.py --require-fid <slug>` when their precondition names it; after writing any returned dossier artifact, run `python3 scripts/validate_dossier.py --require-fid <slug>` (before G-FID is recorded, `python3 scripts/validate_dossier.py <slug>`; and `python3 scripts/check_lean_bindings.py <slug>` once a name index exists) before dispatching the next stage, and return a failure to the authoring agent; Stage 1, dispatch @fidelity-auditor yourself with only the slug and declaration names (never the drafter's prose) and persist its report as `back-translation.md`; Stage 6, run each `python3 scripts/log_counterexample.py add` command @counterexample-hunter returns, and record a witness with `python3 scripts/log_counterexample.py witness <slug> CX-n <decl>` once the G-KERNEL report shows it proved; record a fidelity or G-CX waiver only on the operator's explicit in-session kernel-as-judge directive, naming the conversation (D5, D26); before dispatching any stage N on a dossier, `python3 scripts/validate_dossier.py --require-stage <slug> N` must exit 0; at the start of each working session, consult @engine-advisor and offer the operator the non-default engines it reports (DD-28); route every gate run to @axiom-auditor, which runs G-KERNEL unrecorded (`python3 scripts/proof_integrity.py --no-report`), then run the recording run (`bash scripts/check_proof_integrity.sh`) and `python3 scripts/build_name_index.py` yourself (and take the Stage 8 kernel snapshot, `python3 scripts/snapshot_kernel.py <slug>`, yourself once it reports the preconditions met), and Stage 7 narration to @lean-informalization.",
+    "Preferences (D32): the settings in force for a dossier come from `references/preferences.toml` and its own `reports/dossiers/<slug>/preferences.toml` (see `python3 scripts/preferences.py show <slug>`); follow them (readings, object logic, engines, G-AX choices, kernel-as-judge), never override them on your own; at intake, record the user's choices there and keep the problem card in agreement; when the user changes a setting, edit the `choice` (keeping the old value among the `alternatives`) and run `python3 scripts/preferences.py check`; when recording a G-FID approval in a dossier that has preferences, also record `intake_sha256` (`python3 scripts/preferences.py digest <slug>`, over problem-card.md and preferences.toml), so a later change to either lapses the approval."
+  ],
+  "researchteam_notes": {
+    "exclude": ["interpretation-advisor"]
+  },
+  "retrieval_integration": {
+    "mode": "sparse-vector",
+    "query_entrypoints": [
+      "scripts/query_literature_library.py",
+      "bash scripts/claude_researchteam_bridge.sh library-query reports \"<terms>\""
+    ],
+    "maintenance_entrypoints": [
+      "scripts/build_literature_library.py",
+      "scripts/check_literature_library_integrity.sh"
+    ],
+    "trigger_sources": ["cli", "script", "manual"],
+    "source_of_truth": [
+      "reports/references/bibliography.bib",
+      "reports/references/library/literature.jsonl",
+      "reports/references/library/library-manifest.json"
+    ],
+    "trigger_contract_version": "v1"
+  },
+  "tools": [
+    {
+      "name": "Lean 4",
+      "version": "v4.34.1",
+      "category": "language",
+      "config_files": [
+        "lean/lean-toolchain",
+        "lean/lakefile.toml"
+      ],
+      "needs_specialist_agent": true,
+      "docs_url": "https://lean-lang.org/doc/reference/{version}/",
+      "api_surface": "- `lake build [targets]`: build the library; the kernel checks every declaration.\n- `lake env <cmd>`: run a command in Lake's environment (e.g. `lake env lean File.lean`, `lake env leanchecker Module`).\n- `lake update`: resolve dependencies and rewrite `lake-manifest.json`.\n- `lake exe cache get [files]`: fetch Mathlib build artifacts, optionally only for the given files' import closure.\n- `lean --json`, `lean --deps`, `lean -E <kind>`: machine-readable messages, dependency listing, promote message kinds to errors.\n- `leanchecker <Module>` (bundled with the toolchain): replay a module's declarations through the kernel.\n- `#print axioms <decl>`: the axioms a declaration depends on (G-KERNEL automates this).",
+      "common_patterns": "- Toolchain and Mathlib are pinned together (`lean/lean-toolchain`, `lean/lakefile.toml`); use stable tags only.\n- Lean 4.34 reports ``declaration uses `sorry` `` with backticks; older versions used quotes.\n- `native_decide` mints auxiliary axioms (`<decl>._native.native_decide.ax_*`); it is forbidden in the library.\n- A metaprogram can add an unchecked declaration that \"proves\" `False` with no axioms, so metaprogramming commands are forbidden and `leanchecker` replay is part of the gate.\n- `lake update` on a shallow Mathlib clone fetches all tags; on slow links write the manifest from Mathlib's own manifest instead.\n- Open work goes in `MathAgentsWIP`; the proved library `MathAgents` must never import it.",
+      "version_source": {
+        "file": "lean/lean-toolchain",
+        "pattern": "v(?P<version>[0-9]+\\.[0-9]+\\.[0-9]+(?:-rc[0-9]+)?)",
+        "resolver": "python3 scripts/lean_docs.py --online"
+      }
+    },
+    {
+      "name": "Mathlib",
+      "version": "v4.34.1",
+      "category": "library",
+      "config_files": [
+        "lean/lakefile.toml",
+        "lean/lake-manifest.json"
+      ],
+      "docs_url": "https://github.com/leanprover-community/mathlib4/tree/{version}",
+      "api_surface": "- API docs by module (e.g. `Mathlib.Tactic`), searchable by declaration name.\n- Automation: `simp`, `omega`, `decide`, `aesop`, `linarith`, `nlinarith`, `polyrith`, `norm_num`, `ring`, `positivity`.\n- Search: `exact?`, `apply?`, `rw?`; `#check`/`#print` to inspect declarations.\n- Naming conventions: https://leanprover-community.github.io/contribute/naming.html",
+      "common_patterns": "- Import the narrowest modules needed (e.g. `Mathlib.Tactic.Ring`), not all of `Mathlib`; this keeps source builds fast when the cache is unavailable.\n- Never invent declaration names: confirm each with `#check` or the docs before citing it in a tactic plan or a dossier.\n- `exact?`/`apply?` results are suggestions; keep the explicit term they print, not the search call.",
+      "needs_specialist_agent": true,
+      "version_source": {
+        "file": "lean/lake-manifest.json",
+        "pattern": "\"rev\":\\s*\"(?P<version>[0-9a-f]{40})\",\\s*\"name\":\\s*\"mathlib\"",
+        "resolver": "python3 scripts/lean_docs.py"
+      }
+    },
+    {
+      "name": "Pandoc",
+      "category": "cli",
+      "docs_url": "https://pandoc.org/MANUAL.html",
+      "api_surface": "- `pandoc in.md -o out.html|out.pdf|out.docx`: convert between formats.\n- `--citeproc --bibliography references/bibliography.bib --csl <chicago-author-date.csl>`: render citations.\n- `--standalone`, `--toc`, `--metadata title=...`: document-level options.",
+      "common_patterns": "- Pinned to 3.12 via `environment.yml`.\n- Chicago author-date output needs a CSL style file supplied explicitly with `--csl`.\n- Convert only from the canonical Markdown dossiers; never edit files in `output/`."
+    },
+    {
+      "name": "leanblueprint",
+      "category": "cli",
+      "docs_url": "https://github.com/PatrickMassot/leanblueprint",
+      "api_surface": "- `leanblueprint new`: scaffold `blueprint/` in a Lake project.\n- `leanblueprint pdf` / `web` / `checkdecls` / `all` / `serve`: build the PDF and web versions, check that every `\\lean{}` name exists in Lean, and serve locally.\n- LaTeX macros: `\\lean{decl}`, `\\leanok`, `\\uses{label,...}`, `\\notready`, `\\mathlibok`.",
+      "common_patterns": "- Pinned to 0.0.20 via `environment.yml`; needs graphviz (dependency graph) and a TeX installation (PDF).\n- Run `leanblueprint pdf` before `web`.\n- `\\leanok` claims full formalization. In mathAgents it must agree with the G-KERNEL `proved` status for the named declaration, and `checkdecls` must pass.\n- The blueprint's dependency graph is the Stage 2 lemma DAG; keep `\\uses` in sync with the actual Lean dependencies."
+    }
+  ],
+  "conversion_pipeline": "pandoc --from markdown --to html -o output/{slug}.html",
+  "components": [
+    {
+      "slug": "methods-review",
+      "name": "Methods Literature Review",
+      "number": 1,
+      "output_file": "01-methods-review.md",
+      "description": "Reviews autoformalization, statement fidelity, informal-to-formal pipelines, LLM provers, benchmarks, proof-theoretic representations, and embeddings of non-classical logics. The harness design is derived from it.",
+      "sections": [
+        "Scope and Method",
+        "Autoformalization and Statement Fidelity",
+        "Informal-to-Formal Pipelines and Blueprints",
+        "Provers and Proof Search",
+        "Benchmarks",
+        "Proof-Theoretic Representations",
+        "Non-Classical Logics in Proof Assistants",
+        "Implications for Harness Design"
+      ],
+      "quality_criteria": [
+        "Every source verified by reference-manager",
+        "Each implication is traceable to cited findings",
+        "Unverified systems are labelled as such"
+      ]
+    },
+    {
+      "slug": "harness-spec",
+      "name": "Harness Specification",
+      "number": 2,
+      "output_file": "02-harness-spec.md",
+      "description": "Specifies each pipeline stage, agent, gate, and registry, with a traceability table from design decision to literature finding to source.",
+      "sections": [
+        "Pipeline Stages",
+        "Agent Roster",
+        "Governance Gates",
+        "Engine and Object-Logic Registries",
+        "Traceability Table"
+      ],
+      "quality_criteria": [
+        "Every design decision cites a methods-review finding",
+        "Every gate is fail-closed and testable"
+      ],
+      "cross_refs": [
+        "methods-review"
+      ]
+    },
+    {
+      "slug": "proof-dossiers",
+      "name": "Proof Dossiers",
+      "number": 3,
+      "output_file": "dossiers/README.md",
+      "description": "One dossier per theorem: problem card, formal statement and fidelity record, blueprint DAG, derivations, tactic plan, Lean code references, kernel report, narration, open items.",
+      "sections": [
+        "Problem Card",
+        "Formal Statement and Fidelity Record",
+        "Proof-Strategy Blueprint",
+        "Derivations",
+        "Tactic Plan",
+        "Kernel Report",
+        "Narration",
+        "Open Items"
+      ],
+      "quality_criteria": [
+        "Fidelity sign-off recorded",
+        "G-KERNEL report attached",
+        "Narration introduces no claim absent from Lean"
+      ],
+      "cross_refs": [
+        "harness-spec",
+        "proof-library"
+      ]
+    },
+    {
+      "slug": "proof-library",
+      "name": "Proof Library",
+      "number": 4,
+      "output_file": "proof-library.md",
+      "description": "The reusable Lean 4 Lake package of lemmas and object-logic embeddings, with its generated blueprint.",
+      "sections": [
+        "Package Layout",
+        "Object-Logic Embeddings",
+        "Axiom Envelope Policy",
+        "Blueprint"
+      ],
+      "quality_criteria": [
+        "Builds with no sorry or unapproved axiom",
+        "Toolchain pin recorded"
+      ],
+      "cross_refs": [
+        "proof-dossiers"
+      ]
+    },
+    {
+      "slug": "evaluation",
+      "name": "Harness Evaluation",
+      "number": 5,
+      "output_file": "05-evaluation.md",
+      "description": "Evaluates the harness on benchmark subsets and a curated philosophy-of-science set, reporting success rates, gate interventions, and a failure taxonomy.",
+      "sections": [
+        "Benchmarks and Problem Sets",
+        "Method",
+        "Results",
+        "Failure Taxonomy",
+        "Limitations"
+      ],
+      "quality_criteria": [
+        "Machine and engine configuration recorded per run",
+        "No transfer of published benchmark numbers to local runs"
+      ],
+      "cross_refs": [
+        "harness-spec",
+        "proof-dossiers"
+      ]
+    }
+  ],
+  "capabilities": [
+    "research_verification"
+  ],
+  "team_id": "mathagents",
+  "selected_archetypes": [
+    "primary-producer",
+    "quality-auditor",
+    "cohesion-repairer",
+    "technical-validator",
+    "format-converter",
+    "reference-manager",
+    "output-compiler",
+    "visual-designer",
+    "post-production-auditor",
+    "retrieval-integrator",
+    "research-analyst"
+  ],
+  "methodology_coverage": {
+    "units_dir": "reports/dossiers",
+    "map_path": "interpretation.md"
+  },
+  "write_policy": "orchestrator-only",
+  "write_policy_frameworks": [
+    "claude",
+    "codex"
+  ],
+  "frozen_surfaces": [],
+  "mcp_grants": {
+    "proof-strategist": {"tools": ["read_file_hashed", "write_file"], "approval": "staged"},
+    "tactic-planner": {"tools": ["read_file_hashed", "write_file"], "approval": "staged"},
+    "statement-formalizer": {"tools": ["read_file_hashed", "write_file", "run_command"], "approval": "staged"}
+  },
+  "privilege_profile": "confined",
+  "agent_policies": {
+    "lean-prover": {
+      "write_scopes": [
+        "lean/MathAgentsWIP/",
+        "lean/MathAgentsWIP.lean",
+        "lean/MathAgents/",
+        "lean/MathAgents.lean"
+      ],
+      "commands": [
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py",
+            "--online"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py",
+            "--json"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "env",
+            "lean",
+            "--stdin"
+          ],
+          "cwd": "lean",
+          "stdin_gates": [
+            "lean-draft-scan"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "build",
+            "MathAgentsWIP"
+          ],
+          "cwd": "lean",
+          "timeout": 1800
+        },
+        {
+          "prefix": [
+            "lake",
+            "build",
+            "MathAgents"
+          ],
+          "cwd": "lean",
+          "timeout": 1800
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/proof_integrity.py",
+            "--no-report"
+          ],
+          "timeout": 2400
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py",
+            "--require-fid"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py",
+            "--require-fid"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}",
+            "--conversation",
+            "[A-Za-z0-9][A-Za-z0-9_-]{0,127}"
+          ]
+        }
+      ]
+    },
+    "statement-formalizer": {
+      "write_scopes": [
+        "lean/MathAgentsWIP/",
+        "lean/MathAgentsWIP.lean",
+        "reports/dossiers/*/statement.md"
+      ],
+      "commands": [
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py",
+            "--online"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py",
+            "--json"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "env",
+            "lean",
+            "--stdin"
+          ],
+          "cwd": "lean",
+          "stdin_gates": [
+            "lean-draft-scan"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "env",
+            "lean"
+          ],
+          "cwd": "lean",
+          "args": [
+            "MathAgentsWIP/[A-Z][A-Za-z0-9]{0,63}\\.lean"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "build",
+            "MathAgentsWIP"
+          ],
+          "cwd": "lean",
+          "timeout": 1800
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/proof_integrity.py",
+            "--no-report"
+          ],
+          "timeout": 2400
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py",
+            "--require-stage"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}",
+            "1"
+          ]
+        }
+      ]
+    },
+    "counterexample-hunter": {
+      "commands": [
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py",
+            "--online"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py",
+            "--json"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "env",
+            "lean",
+            "--stdin"
+          ],
+          "cwd": "lean",
+          "stdin_gates": [
+            "lean-draft-scan"
+          ]
+        },
+        {
+          "prefix": [
+            "lake",
+            "build",
+            "MathAgentsWIP"
+          ],
+          "cwd": "lean",
+          "timeout": 1800
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}"
+          ]
+        }
+      ],
+      "write_scopes": [
+        "reports/dossiers/*/stage6-search.md"
+      ]
+    },
+    "axiom-auditor": {
+      "commands": [
+        {
+          "prefix": [
+            "python3",
+            "scripts/proof_integrity.py",
+            "--no-report"
+          ],
+          "timeout": 2400
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_pin.py",
+            "--json"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/lean_docs.py",
+            "--online"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_registries.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py",
+            "--require-stage"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}",
+            "[0-9]{1,2}"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/check_lean_bindings.py"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/check_lean_bindings.py"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}"
+          ]
+        },
+        {
+          "prefix": [
+            "python3",
+            "scripts/check_blueprint_consistency.py"
+          ]
+        }
+      ]
+    },
+    "lean-informalization": {
+      "write_scopes": [
+        "reports/dossiers/*/informalization.md"
+      ],
+      "commands": [
+        {
+          "prefix": [
+            "python3",
+            "scripts/validate_dossier.py",
+            "--require-stage"
+          ],
+          "args": [
+            "[a-z0-9][a-z0-9-]{0,63}",
+            "7"
+          ]
+        }
+      ]
+    },
+    "fidelity-auditor": {
+      "write_scopes": [
+        "reports/dossiers/*/back-translation.md"
+      ]
+    },
+    "proof-strategist": {
+      "write_scopes": [
+        "reports/dossiers/*/strategy.md",
+        "reports/dossiers/*/strategy-review.md",
+        "lean/blueprint/"
+      ]
+    },
+    "logic-articulator": {
+      "write_scopes": [
+        "reports/dossiers/*/derivations.md"
+      ]
+    },
+    "tactic-planner": {
+      "write_scopes": [
+        "reports/dossiers/*/tactic-plan.md"
+      ]
+    },
+    "interpretation-advisor": {
+      "write_scopes": [
+        "reports/dossiers/*/interpretation.md",
+        "reports/dossiers/*/interpretation.claims.csv"
+      ]
+    }
+  },
+  "proposal_gates": {
+    "lean-draft-scan": {
+      "glob": "lean/*.lean",
+      "argv": [
+        "python3",
+        "scripts/scan_lean_draft.py",
+        "{file}"
+      ]
+    },
+    "strategy-sha": {
+      "glob": "reports/dossiers/*/strategy-review.md",
+      "argv": [
+        "python3",
+        "scripts/check_strategy_sha.py",
+        "{file}",
+        "{path}"
+      ]
+    }
+  },
+  "protected_paths": [
+    "reports/dossiers/*/fidelity.json",
+    "reports/dossiers/*/gax.json",
+    "reports/dossiers/*/counterexamples.json",
+    "reports/dossiers/*/kernel-snapshot.json",
+    "references/axiom-allowlist.json",
+    "reports/kernel",
+    "lean/lean-toolchain",
+    "lean/lakefile.toml",
+    "lean/lake-manifest.json",
+    "reports/dossiers/*/problem-card.md",
+    "reports/dossiers/*/preferences.toml",
+    "references/preferences.toml",
+    "references/object-logics.json",
+    "references/prover-engines.json"
+  ],
+  "vulnerability_scanning": {
+    "level": "scan"
+  }
+}

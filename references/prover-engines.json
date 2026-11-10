@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "default_engine": "lean-builtin",
+  "engines": [
+    {
+      "id": "lean-builtin",
+      "name": "Lean 4 / Mathlib built-in automation (simp, omega, decide, aesop, linarith, nlinarith, polyrith, norm_num, exact?, apply?)",
+      "kind": "lean-tactic",
+      "logic_fragment": "Lean dependent type theory (classical via Mathlib)",
+      "install": "scripts/install_lean.sh",
+      "probe": "lake",
+      "resource_needs": {"gpu_required": false},
+      "result_trust": "kernel-checked",
+      "evidence_status": "pending-review",
+      "sources": ["https://lean-lang.org/doc/reference/latest/", "https://leanprover-community.github.io/mathlib4_docs/"]
+    },
+    {
+      "id": "z3",
+      "name": "Z3 SMT solver",
+      "kind": "smt",
+      "install": "pip install -r requirements-engines.txt",
+      "probe": "z3-solver",
+      "resource_needs": {"gpu_required": false},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": []
+    },
+    {
+      "id": "cvc5",
+      "name": "cvc5 SMT solver",
+      "kind": "smt",
+      "install": "pip install -r requirements-engines.txt",
+      "probe": "cvc5-python",
+      "resource_needs": {"gpu_required": false},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": []
+    },
+    {
+      "id": "vampire",
+      "name": "Vampire first-order ATP (TPTP)",
+      "kind": "atp",
+      "install": "binary release; not packaged in environment.yml",
+      "probe": "vampire",
+      "resource_needs": {"gpu_required": false},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": []
+    },
+    {
+      "id": "eprover",
+      "name": "E first-order ATP (TPTP)",
+      "kind": "atp",
+      "install": "system package or source build",
+      "probe": "eprover",
+      "resource_needs": {"gpu_required": false},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": []
+    },
+    {
+      "id": "deepseek-prover-v2-7b",
+      "name": "DeepSeek-Prover-V2-7B",
+      "kind": "llm-prover",
+      "install": "ollama or llama.cpp with a GGUF build",
+      "probe": "ollama",
+      "resource_needs": {
+        "gpu_required": true,
+        "params_billion": 6.91,
+        "variants": [{"name": "Q4_K_M GGUF", "weights_gb": 4.22}, {"name": "Q8_0 GGUF", "weights_gb": 7.35}],
+        "notes": "Long chain-of-thought outputs need KV-cache headroom beyond weight size. Quantized accuracy is unmeasured; do not transfer published pass@k figures."
+      },
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": ["https://huggingface.co/deepseek-ai/DeepSeek-Prover-V2-7B", "https://huggingface.co/mradermacher/DeepSeek-Prover-V2-7B-GGUF", "https://arxiv.org/abs/2504.21801"]
+    },
+    {
+      "id": "goedel-prover-v2-8b",
+      "name": "Goedel-Prover-V2-8B",
+      "kind": "llm-prover",
+      "install": "Hugging Face weights; quantize for small GPUs",
+      "probe": "ollama",
+      "resource_needs": {"gpu_required": true, "params_billion": 8.19},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": ["https://huggingface.co/Goedel-LM/Goedel-Prover-V2-8B", "https://arxiv.org/abs/2508.03613"]
+    },
+    {
+      "id": "kimina-prover-distill-1-7b",
+      "name": "Kimina-Prover-Distill-1.7B",
+      "kind": "llm-prover",
+      "install": "Hugging Face weights",
+      "probe": "ollama",
+      "resource_needs": {"gpu_required": true, "params_billion": 2.03},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": ["https://huggingface.co/AI-MO/Kimina-Prover-Distill-1.7B"]
+    },
+    {
+      "id": "kimina-prover-distill-8b",
+      "name": "Kimina-Prover-Distill-8B",
+      "kind": "llm-prover",
+      "install": "Hugging Face weights; quantize for small GPUs",
+      "probe": "ollama",
+      "resource_needs": {"gpu_required": true, "params_billion": 8.19},
+      "result_trust": "hint-until-kernel-recheck",
+      "evidence_status": "pending-review",
+      "sources": ["https://huggingface.co/AI-MO/Kimina-Prover-Distill-8B"]
+    }
+  ]
+}

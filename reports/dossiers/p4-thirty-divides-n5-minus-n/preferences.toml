@@ -1,0 +1,53 @@
+# P4 — thirty divides n^5 - n: dossier preferences (override references/preferences.toml for this dossier)
+#
+# Same format as the project file: each setting has `choice`, `alternatives` and the `decision` that
+# recorded it. After a change:
+#   python3 scripts/preferences.py check
+#   python3 scripts/validate_dossier.py p4-thirty-divides-n5-minus-n
+# Enforcement: readings.selected, intake.domain, intake.object_logic, intake.engines and
+# fidelity.kernel_as_judge are ENFORCED. sources.* and readings.selection are ADVISORY.
+# Choices recorded with the operator at intake, 2026-10-16 (interactive prompt, session mathagents-1a).
+
+schema_version = 1
+slug = "p4-thirty-divides-n5-minus-n"
+
+[readings]
+
+[readings.selection]
+choice = "ask-at-intake"
+alternatives = ["all-formalizable", "recommended-default"]
+decision = "D43"
+
+#   R1  for every integer n, 30 | n^5 - n
+#   R2  for every natural number n, 30 | n^5 - n (truncated subtraction)
+# Not selected:
+#   R3  the generalization p | n^p - n for a prime p, with R1 as a corollary
+[readings.selected]
+choice = ["R1", "R2"]
+alternatives = ["R3"]
+decision = "D43"
+
+[intake]
+
+[intake.domain]
+choice = "competition"
+alternatives = ["applied-modeling", "research-math", "logic-foundations", "philosophy-of-science"]
+decision = "D43"
+
+[intake.object_logic]
+choice = "classical-hol"
+alternatives = ["finite-probability"]
+decision = "D43"
+
+[intake.engines]
+choice = ["lean-builtin"]
+alternatives = [["lean-builtin", "z3"]]
+decision = "D43"
+
+[fidelity]
+
+# The operator may grant a kernel-as-judge waiver for this toy lemma; by default he still reviews at G-FID.
+[fidelity.kernel_as_judge]
+choice = "offer"
+alternatives = ["never"]
+decision = "D43"

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "description": "Lean toolchains (and Mathlib commits) the mathAgents harness gates are verified on, published with the harness (docs/lean-version-governance.md). `mathagents status` and `mathagents doctor` print an instance's pin against this list and warn when it is not verified. A verification is evidence that the gates ran correctly on that pin under the named harness version; it is not a G-KERNEL result for any instance (R5). Add an entry only with evidence.",
+  "toolchains": [
+    {
+      "toolchain": "leanprover/lean4:v4.34.1",
+      "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+      "mathlib_input_rev": "v4.34.1",
+      "harness_version": "0.2.1",
+      "verified": "2026-10-04",
+      "evidence": "mathAgents' own library (G-KERNEL PASS in CI on lean/); a trial on a copy of baseAgent's Projects/AgenticCapital/lean: G-KERNEL PASS, 649 declarations proved (docs/lean-toolchain-upgrade.md §4)"
+    },
+    {
+      "toolchain": "leanprover/lean4:v4.32.1",
+      "mathlib_rev": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+      "mathlib_input_rev": "v4.32.1",
+      "harness_version": "0.2.1",
+      "verified": "2026-10-06",
+      "evidence": "baseAgent's Projects/AgenticCapital instance: G-KERNEL PASS on 2026-10-06T01:42Z, 661 declarations proved, toolchain_pin and lean_version both v4.32.1 (baseAgent handoff 2026-10-05-from-baseagent-lean-version-governance.md)"
+    }
+  ]
+}

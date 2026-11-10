@@ -1,0 +1,199 @@
+# P3 — finite Dutch book: dossier preferences (override references/preferences.toml for this dossier)
+#
+# Same format as the project file: each setting has `choice`, `alternatives` and the `decision` that
+# recorded it. Change a choice here to change it for P3 only. After a change:
+#   python3 scripts/preferences.py check
+#   python3 scripts/validate_dossier.py p3-dutch-book
+# Enforcement: readings.selected, intake.domain, intake.object_logic, intake.engines and
+# fidelity.kernel_as_judge are ENFORCED (the dossier validator compares them with the problem card
+# and the waiver records). sources.*, readings.selection and gax.* are ADVISORY: agents follow them,
+# and the human G-FID review checks the statement honours them. `preferences.py show` labels each.
+#
+# A changed reading, logic or G-AX choice changes what Stage 1 formalizes: the problem card must be
+# updated to match, and an already-approved statement that changes lapses and needs a G-AX record.
+
+schema_version = 1
+slug = "p3-dutch-book"
+
+[readings]
+
+[readings.selection]
+choice = "all-formalizable"
+alternatives = ["ask-at-intake", "recommended-default"]
+decision = "D30"
+
+# The readings formalized, each as its own theorem (ids from interpretation.md).
+#   R1  forward direction: incoherent quotients admit a Dutch Book
+#   R2  the rough converse: coherent quotients admit none (provable in this finite, strict-loss setting)
+#   R3  both directions under one shared formulation
+# Not selected:
+#   R4  converse with strengthened axioms   (deferred: needs Kemeny or Lehman 1955)
+#   R5  converse with restricted sure loss  (deferred: needs Kemeny or Lehman 1955)
+[readings.selected]
+choice = ["R1", "R2", "R3"]
+alternatives = ["R4", "R5"]
+decision = "D30"
+
+[sources]
+
+# de Finetti 1937 is open (numdam, French): quoted verbatim, translations marked. The converse comes
+# from the survey (Vineberg 2022), flagged, because Kemeny 1955 and Lehman 1955 are paywalled.
+# De Finetti states the converse himself for bets on one partition (p. 8); R2 quantifies over any book,
+# so the survey statement stays the record, with p. 8 noted as partial primary support (D33).
+[sources.primary_unavailable]
+choice = "survey-statement-flagged"
+alternatives = ["two-independent-quotations", "wait-for-primary"]
+decision = "D29"
+
+[sources.translation]
+choice = "verbatim-plus-our-translation"
+alternatives = ["published-translation"]
+decision = "D29"
+
+[intake]
+
+[intake.domain]
+choice = "philosophy-of-science"
+alternatives = ["applied-modeling", "research-math", "competition", "logic-foundations"]
+decision = "D2"
+
+#   "finite-probability"  a reusable finite-probability library, built before P3's Stage 1
+#   "classical-hol"       state P3 directly in plain classical mathematics, without the library
+[intake.object_logic]
+choice = "finite-probability"
+alternatives = ["classical-hol"]
+decision = "D31"
+
+[intake.engines]
+choice = ["lean-builtin", "z3"]
+alternatives = [["lean-builtin"]]
+decision = "D31"
+
+[fidelity]
+
+[fidelity.kernel_as_judge]
+choice = "never"
+alternatives = ["offer"]
+decision = "D31"
+
+[gax]
+
+# Answers to the hypotheses the survey leaves unstated (G-AX candidates in interpretation.md), one
+# setting per candidate so each can be changed on its own. [advisory: followed at Stage 1 and checked
+# at the human G-FID review, where the Lean statement shows whether it honours them]
+
+# G-AX-P3-1: the canonical form of a bet and its payoff.
+#   "S(1_A - q)"        a bet on A at quotient q with stake S pays S·(1_A − q) (de Finetti)
+#   "net-gain-on-A"     a bet pays a fixed net gain if A and loses the price otherwise (odds form)
+[gax."P3-1"]
+choice = "S(1_A - q)"
+alternatives = ["net-gain-on-A"]
+decision = "D31"
+
+# G-AX-P3-2: bet direction and the sign of the stake.
+#   "either-sign"     S may be positive or negative, so the bookie can take either side
+#   "positive-only"   the agent only buys bets (S > 0)
+[gax."P3-2"]
+choice = "either-sign"
+alternatives = ["positive-only"]
+decision = "D31"
+
+# G-AX-P3-3: normalization.
+#   "tautologies"       pr(A) = 1 when A is a tautology
+#   "logical-truths"    pr(A) = 1 for every logical truth
+#   "necessary-truths"  pr(A) = 1 for every necessary truth (needs modal-k, planned)
+[gax."P3-3"]
+choice = "tautologies"
+alternatives = ["logical-truths", "necessary-truths"]
+decision = "D31"
+
+# G-AX-P3-4: the structure of X.
+#   "boolean-algebra"   X closed under ¬, ∧, ∨, ⊤ (the subsets of a state space)
+#   "not-closed"        any set of propositions; the axioms apply to members only
+[gax."P3-4"]
+choice = "boolean-algebra"
+alternatives = ["not-closed"]
+decision = "D31"
+
+# G-AX-P3-5: how many bets a book may contain.
+#   "finitely-many"     finitely many bets (the Kemeny–Lehman setting as the survey reports it)
+#   "countably-many"    countably many bets (changes which additivity the argument yields)
+[gax."P3-5"]
+choice = "finitely-many"
+alternatives = ["countably-many"]
+decision = "D31"
+
+# G-AX-P3-6: what a sure loss is.
+#   "negative-in-every-state"   the net payoff is strictly negative in every state
+#   "restricted"                only losses independent of contingent facts, or by mechanical formula (R5)
+[gax."P3-6"]
+choice = "negative-in-every-state"
+alternatives = ["restricted"]
+decision = "D31"
+
+# G-AX-P3-7: the size of X.
+#   "finite"      X is finite
+#   "countable"   X is countable
+#   "arbitrary"   no size restriction
+[gax."P3-7"]
+choice = "finite"
+alternatives = ["countable", "arbitrary"]
+decision = "D31"
+
+# G-AX-P3-8: which bets the agent accepts.
+#   "fair-only"           bets at its own quotients
+#   "fair-or-favorable"   also bets more favorable than that (Hájek's reformulation)
+[gax."P3-8"]
+choice = "fair-only"
+alternatives = ["fair-or-favorable"]
+decision = "D31"
+
+# --- Stage 1 candidates (statement.md; answered at the G-FID review, D33) ---
+
+# G-AX-P3-11: non-negativity.
+#   "axiom-exploited-by-bets"  an axiom; R1 must exploit its failure by a bet
+#   "derived"                  derive it (de Finetti gives no betting argument)
+[gax."P3-11"]
+choice = "axiom-exploited-by-bets"
+alternatives = ["derived"]
+decision = "D33"
+
+# G-AX-P3-12: form of additivity.
+#   "pairwise-disjoint"   q(A∪B) = qA + qB for disjoint A, B (equivalent here to partition form)
+#   "partition-sums"      probabilities over every finite partition sum to 1
+[gax."P3-12"]
+choice = "pairwise-disjoint"
+alternatives = ["partition-sums"]
+decision = "D33"
+
+# G-AX-P3-13: events a book may bet on.
+#   "any-events"        any events, repetition allowed
+#   "one-partition"     bets on one partition only (de Finetti's proofs)
+[gax."P3-13"]
+choice = "any-events"
+alternatives = ["one-partition"]
+decision = "D33"
+
+# G-AX-P3-14: which side the sure loss falls on.
+#   "agent-loses"         loss to the agent (equivalent to a sure win for one side, given either-sign stakes)
+#   "opponent-wins"       state it as the opponent's sure win
+[gax."P3-14"]
+choice = "agent-loses"
+alternatives = ["opponent-wins"]
+decision = "D33"
+
+# G-AX-P3-15: non-empty state space.
+#   "allow-empty"     no Nonempty Ω (degenerate case harmless)
+#   "nonempty"        assume [Nonempty Ω] (de Finetti's presupposition)
+[gax."P3-15"]
+choice = "allow-empty"
+alternatives = ["nonempty"]
+decision = "D33"
+
+# G-AX-P3-16: domain of the quotients.
+#   "total"     q defined on every event of the finite algebra
+#   "partial"   q on an arbitrary class of events (de Finetti p. 9)
+[gax."P3-16"]
+choice = "total"
+alternatives = ["partial"]
+decision = "D33"
