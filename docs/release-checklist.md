@@ -21,7 +21,8 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    (tag and peeled commit), researchteam (tag and peeled commit), Lean, Mathlib. Add the compare link.
 5. **Gates and suites.** On the release commit, all of these must pass:
    - CI `gates.yml`: G-KERNEL, G-FID, G-CX, registries, G-NAME, G-BLUEPRINT, and `long-suites` (the push to the
-     release line forces it; `tag-release.sh` refuses a commit without it; D46);
+     release line forces it, or, while pushes start no workflow, a Gates run dispatched on the release line (step 6);
+     `tag-release.sh` refuses a commit without it; D46);
    - the full `pytest` suite, with 0 skipped for the review suites;
    - `bash scripts/claude_researchteam_bridge.sh validate`;
    - `agentteams --check-wiring --framework claude` where the write policy is on.
@@ -32,7 +33,7 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    release PR may not change `tag-release.sh`. Without the wrapper: merge with a regular merge (never a squash) and
    push normally (no force), then step 7.
    **While push and pull_request events start no workflow on the public repository** (seen on release day,
-   2026-11-10; D45 condition 4, third text): dispatch Gates on the release PR's head branch before the wrapper (its
+   2026-11-10; D45 condition 4 as amended that day, conditions sha256 9bf9fae1): dispatch Gates on the release PR's head branch before the wrapper (its
    CI wait falls back to that run, and needs `long-suites` green), and right after the wrapper merges, dispatch
    Gates on the release line (`gh workflow run gates.yml --ref release/X.Y`) and leave the wrapper at its "Sign …?"
    prompt until that run on the merge commit has passed `long-suites`; the signer accepts a dispatched run on that

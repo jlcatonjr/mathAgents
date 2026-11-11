@@ -84,7 +84,7 @@ tag_for_version() {  # 1.1.0 -> v1.1.0 ; 1.1.0rc1 -> v1.1.0-rc.1
 # wait_for_green_ci <pr> [long]: wait (up to 10 min) until GitHub has registered at least one check, then watch, then
 # re-check every check. `gh pr checks` reports "no checks reported" (non-zero) in the seconds after a PR opens or
 # its head moves, which is not a CI result (the registration race seen in the operator's run on 2026-10-19).
-# Fallback (D45 condition 4, third text): when no check registers because the repository's pull_request events start
+# Fallback (D45 condition 4 as amended 2026-11-10, conditions sha256 9bf9fae1): when no check registers because the repository's pull_request events start
 # no workflow, a Gates run dispatched on the PR's exact head commit stands in. It must be complete and successful with
 # every job green (long-suites green, not skipped, when the second argument is "long"), and the PR must contain its
 # base's head (up to date). The run is dispatched by the session; this function only reads it.
