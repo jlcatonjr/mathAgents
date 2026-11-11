@@ -31,6 +31,12 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    commit, taken from the merge commit and matching the sha256 the operator computed from `origin/release/X.Y`. The
    release PR may not change `tag-release.sh`. Without the wrapper: merge with a regular merge (never a squash) and
    push normally (no force), then step 7.
+   **While push and pull_request events start no workflow on the public repository** (seen on release day,
+   2026-11-10; D45 condition 4, third text): dispatch Gates on the release PR's head branch before the wrapper (its
+   CI wait falls back to that run, and needs `long-suites` green), and right after the wrapper merges, dispatch
+   Gates on the release line (`gh workflow run gates.yml --ref release/X.Y`) and leave the wrapper at its "Sign …?"
+   prompt until that run on the merge commit has passed `long-suites`; the signer accepts a dispatched run on that
+   exact commit.
 7. **Tag.** Sign from a plain terminal, never from an agent session:
    `TAGGER_EMAIL=<e-mail> scripts/operator/tag-release.sh <40-hex merge commit> <ssh-signing-key>`, where the commit
    is the head of the release branch right after the release merge, and its version differs from its first parent's.

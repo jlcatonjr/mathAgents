@@ -92,7 +92,7 @@ G="$TMP/repo"; mkdir -p "$G/references/schemas" "$G/reports/kernel" "$G/lean/Mat
 cp "$ROOT"/references/schemas/*.json "$G/references/schemas/"
 cp "$ROOT"/references/object-logics.json "$ROOT"/references/prover-engines.json "$G/references/"
 cp "$ROOT/references/axiom-allowlist.json" "$ROOT/references/preferences.toml" "$G/references/"
-mkdir -p "$G/docs/charter" && cp "$ROOT/docs/charter/03-decisions.md" "$G/docs/charter/"
+mkdir -p "$G/docs/charter" && cp "$(python3 -c 'import sys, pathlib; sys.path.insert(0, sys.argv[1]); import instance_root; print(instance_root.charter_path(pathlib.Path(sys.argv[2])))' "$ROOT/scripts" "$ROOT")" "$G/docs/charter/"
 printf '# Problem card\n\n- **Source:** test\n- **Informal statement:** test\n- **Domain:** research-math\n- **Object logic:** classical-hol\n- **Engine:** lean-builtin\n' > "$G/reports/dossiers/ax/problem-card.md"
 printf '[[lean_lib]]\nname = "MathAgents"\n[[lean_lib]]\nname = "MathAgentsWIP"\n' > "$G/lean/lakefile.toml"
 echo "theorem t : True := trivial" > "$G/lean/MathAgents/P.lean"; echo "" > "$G/lean/MathAgents.lean"; echo "" > "$G/lean/MathAgentsWIP.lean"

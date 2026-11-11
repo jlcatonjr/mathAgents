@@ -18,8 +18,9 @@
 #   - pyproject.toml there names "mathagents" ([project] table) and holds a release version that differs from the
 #     version at the commit's first parent (so a later head can't be signed under the previous RC's version);
 #   - the tag doesn't exist on origin;
-#   - a successful Gates run on <commit> passed its `long-suites` job (charter D46: the long suites run before every
-#     release; a push to release/** forces them). Checked through `gh api`, fail-closed;
+#   - a successful Gates run on <commit> (a push run, or a workflow_dispatch run on that exact commit) passed its
+#     `long-suites` job (charter D46: the long suites run before every release; a push to release/** forces them,
+#     and dispatching Gates on release/* runs them on its head). Checked through `gh api`, fail-closed;
 #   - the key's fingerprint is the pinned release key AND ~/.config/agentteams/allowed_signers lists it.
 # The tag is verified (neutralised, stderr only, pinned fingerprint) before it is pushed.
 # Operator notes (@security rev-2 PASS, Rule 12):
@@ -89,8 +90,11 @@ TAG="v${BASH_REMATCH[1]}${BASH_REMATCH[3]:+-rc.${BASH_REMATCH[3]}}"
 # D46: the long suites (G-KERNEL gate tests, G-AX Lean probes) must have passed on exactly this commit.
 command -v gh >/dev/null || die "gh is needed to confirm the long-suites run on $COMMIT (D46)"
 LONG_OK=""
-for run in $(gh api "repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$COMMIT&status=success&event=push" \
-               --jq '.workflow_runs[].id') ; do
+# A push run, or a workflow_dispatch run on exactly this commit (D45 condition 4, third text: the public repository's
+# push and pull_request events started no workflow on release day 2026-11-10). Either way the Gates workflow ran on
+# $COMMIT itself, so D46's requirement is the same: the long suites passed on the commit that is signed.
+for run in $(gh api "repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$COMMIT&status=success" \
+               --jq '.workflow_runs[] | select(.head_sha == "'"$COMMIT"'" and (.event == "push" or .event == "workflow_dispatch")) | .id') ; do
   if gh api "repos/jlcatonjr/mathAgents/actions/runs/$run/jobs" \
        --jq '.jobs[] | select(.name == "long-suites" and .conclusion == "success") | .id' | grep -q .; then
     LONG_OK="$run"; break
