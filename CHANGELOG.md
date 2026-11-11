@@ -62,7 +62,7 @@ links name tags this repository does not have. The release:
 - `toolchain.lock` pins agentteams `v1.1.0` (`9b16fb54`) and researchteam `v1.1.0` (`938dd663`), the peeled commits of
   verified signed tags, and the agent surfaces are re-rendered on them through `scripts/refresh_agent_surfaces.sh`.
   `brief.json` `frozen_surfaces` is empty: Codex is rendered natively with the role gate, and Goose's recipes are
-  grant-scoped, off the write-policy switch (accepted risk, `docs/release/unfreeze-goose.conditions.txt`).
+  grant-scoped, off the write-policy switch (an accepted risk, recorded in the operator's signed unfreeze decision).
 - Native per-provider projection, phase 1: the Copilot-to-Claude bridge is retired, and a fail-closed bridge guard
   runs before and after every agent-surface update.
 - CI follows an integration-branch model: pull requests go into `dev`, and `dev` reaches `main` through a release PR.
