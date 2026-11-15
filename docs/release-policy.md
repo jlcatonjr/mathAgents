@@ -8,6 +8,14 @@ mathAgents in session on 2026-10-15 (D43). mathAgents may add rules to it but ma
 
 How collaborators work within this policy (branches, installs, contributions, backports): [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
+**Rows named here (public repository, from 2026-11-15).** Signed rows that this policy names, other than those it
+marks *public*, are records of the archived private repository (jlcatonjr/mathAgents-private, id 1398425621, archived;
+`history: private`). They document how the 1.0 and 1.1 lines were reached, and they carry **no authority** in this
+repository's log. Their spec and conditions texts (`docs/release/`, `docs/handoffs/`) are private records, kept locally
+under `tmp/private-records/` and not published. In this repository, authority comes only from rows in its own
+`.github/agents/references/security-decisions.log.csv`, all deriving from the public root `release-policy-public-1.1`
+(pr11 P03), which adopts this file at the sha256 that row records.
+
 ## 1. Versions and branches
 
 - SemVer. mathagents 1.x supports agentteams 1.x.
@@ -35,9 +43,12 @@ How collaborators work within this policy (branches, installs, contributions, ba
   `scripts/operator/tag-release.sh`. No agent signs a tag.
 - **Key.** The agentteams release key (`SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM`; it signs the 1.0 and 1.1 lines). Its
   `allowed_signers` line is in agentteams SECURITY.md, under "Release signers".
-  The same key signs the 1.1 line. On `main`, 1.1-line agentteams and researchteam tags are exempt from the S-10
-  cooldown only under the operator-signed rows `s10-release-key-exemption-1.1` and
-  `s10-release-key-exemption-researchteam-1.1`, whose binding texts are in `docs/release/` (PR #78).
+  The same key signs the 1.1 line. In the private history, 1.1-line agentteams and researchteam tags were exempt
+  from the S-10 cooldown under the operator-signed rows `s10-release-key-exemption-1.1` and
+  `s10-release-key-exemption-researchteam-1.1` (PR #78; history: private). Those rows do not carry over. In this
+  public repository the S-10 cooldown applies to every release unless a row in this repository's own log exempts it
+  (planned: the operator-signed toolchain-group exemption for agentteams, researchteam, baseAgent and mathAgents,
+  deriving from `release-policy-public-1.1`; pr11 P08).
 - **Verification.** Against `~/.config/agentteams/allowed_signers`, which is outside every write root. Installing
   or changing it is operator-only. Use the neutralised verify command from agentteams SECURITY.md.
 - **The RC.** mathAgents' RC is the signed tag `v1.0.0-rc.1` on `release/1.0`, so baseAgent can pin it.
@@ -53,7 +64,9 @@ How collaborators work within this policy (branches, installs, contributions, ba
   locked agentteams commit.
 - **Moving a pin.** Each move is an `@security` row naming the tag and its peeled SHA.
   `scripts/lib/agentteams_provenance.py` refuses a render on any other agentteams commit.
-- **Pins today (2026-11-09).** Both are peeled commits of verified signed tags, with `.tag=` lines.
+- **Pins today (2026-11-09).** Both are peeled commits of verified signed tags, with `.tag=` lines. Every row named
+  in this bullet is in the private history (see "Rows named here" above); the next pin move is recorded in this
+  repository's own log.
   - `release/1.0`: agentteams `v1.0.0` (`cc5b8c9e`, moved in Phase T on 2026-10-19 from the joint soak pair
     agentteams `v1.0.0-rc.14` + researchteam `v1.0.0-rc.3`) and researchteam `v1.0.1` (`b55e2307`, for its
     frozen-surfaces fix).
@@ -91,7 +104,7 @@ How collaborators work within this policy (branches, installs, contributions, ba
   run failed for want of the frozen-surfaces fix.
 - **On the public repository (operator ruling, 2026-11-09).** After release day (runbook step 11), the operator may
   turn on "Allow GitHub Actions to create and approve pull requests", provision the `AGENTTEAMS_ALLOWED_SIGNERS`
-  secret, and dispatch the autosync (docs/release/public-repo-setup.md, "After step 11"). The schedule stays off.
+  secret, and dispatch the autosync (docs/release/public-repo-setup.md, "After step 11"; a private record). The schedule stays off.
   - Its pull request targets `dev`, which is protected like `main`.
   - The ruleset requires no approving review (count 0), so a workflow approval adds nothing. CODEOWNERS review applies
     only to the paths in `.github/CODEOWNERS`, and a workflow can't be a code owner.
@@ -111,7 +124,7 @@ How collaborators work within this policy (branches, installs, contributions, ba
   write-policy interop (#210). The earlier orchestrator-only row (`codex-agentsmd-orchestrator-only-210`) is
   superseded.
 - **1.1 line (CX-3, operator ruling 2026-11-09, "Both now, Goose UNENFORCED").** Codex and Goose are unfrozen from
-  the agentteams v1.1.0 pin (MA-6), under the operator's Ed25519-signed Rule 11 rows `unfreeze-codex` and `unfreeze-goose` (one per surface; researchteam verifies each). Goose is reviewed by 2027-02-09.
+  the agentteams v1.1.0 pin (MA-6), under the operator's Ed25519-signed Rule 11 rows `unfreeze-codex` and `unfreeze-goose` (one per surface; researchteam verifies each; history: private). In this public repository both rows are signed afresh in its own log, with the same ids (researchteam verifies exactly `unfreeze-<surface>`), deriving from `release-policy-public-1.1` (pr11 P03); until then `scripts/refresh_agent_surfaces.sh` refuses Codex and Goose renders. Goose is reviewed by 2027-02-09; the operator re-accepted its risk on these terms on 2026-11-15.
   - **Codex** is in `write_policy_frameworks`: agentteams renders it natively under orchestrator-only (role gate,
     hooks, launcher), and the bespoke pipeline agents are imported into that team read-only (#319,
     `scripts/lib/project_bespoke_codex.sh`). The #249 fix scopes Codex's write-policy fence in the shared `AGENTS.md`.
@@ -121,11 +134,11 @@ How collaborators work within this policy (branches, installs, contributions, ba
     which also writes and runs commands (19 in the MA-6 rehearsal; D34's accepted risk, accepted again by the operator
     on 2026-11-09, "Both, accept D34 widening"). Off the switch agentteams also drops the Goose sandbox's write-denies
     on `.agentteams` and `.goose/recipes`, exposing the Codex role gate to Goose sessions (accepted, "Unfreeze both,
-    accept the gap"; `docs/release/unfreeze-goose.conditions.txt` item 3a). Of the three denies agentteams ties to the
+    accept the gap"; `docs/release/unfreeze-goose.conditions.txt` item 3a, a private record). Of the three denies agentteams ties to the
     switch (`.agentteams`, `.agentteams-status`, `.goose/recipes`), the frozen profile carried two, `.agentteams` and
     `.goose/recipes`; the render removed both. This is weaker than the frozen state it replaces, by the operator's
     decision; it is reviewed by 2027-02-09 and ends when agentteams enforces the switch on Goose.
-  - **Superseded text.** `docs/release/cx3-unfreeze-codex-goose.conditions.txt` stays as signed (the `unfreeze-codex`
+  - **Superseded text (private history).** `docs/release/cx3-unfreeze-codex-goose.conditions.txt` stays as signed (the `unfreeze-codex`
     row's `conditions_verified` hashes it), but its Goose half is superseded by `unfreeze-goose.conditions.txt`: its
     item 3 ("no Goose agent gains a tool") does not hold for Goose, and its review date reads "90 days" where
     2027-02-09 is about three months. Its claim, also in the `unfreeze-codex` spec, that Codex renders under its own
