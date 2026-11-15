@@ -51,6 +51,12 @@ Where this differs from the project's real layout, the **Project Layout** sectio
 
 > ⚙️ **USER-EDITABLE** — this project's real layout where it differs from the generated Directory Structure and Output Conventions (for example, deliverables under `Projects/*/` rather than one output folder). Where the two disagree, this section is authoritative. `--update` never overwrites it.
 
+- **Private records (local only, gitignored `tmp/`; operator decision D-0, 2026-11-13).** Plans:
+  `tmp/by-week/`. Work summaries: `tmp/private-records/workSummaries/` (not `workSummaries/`). Private reports,
+  handoffs, decision-spec and conditions texts, and the full charter decisions: `tmp/private-records/docs/reports/`,
+  `docs/handoffs/`, `docs/release/` and `docs/charter/03-decisions.md` under `tmp/private-records/`. The tracked
+  `docs/reports/` holds public reports only.
+
 ---
 
 <!-- AGENTTEAMS:BEGIN output_conventions v=1 -->
@@ -243,6 +249,16 @@ ordering, including where operator instructions and read content sit:
 > Agent persona files receive an equivalent `## Project-Specific Notes` region automatically from
 > `emit`; instruction files do not, so it is declared here. Additions here may extend the
 > Constitutional Rules; they may not weaken the Constitutional Core.
+
+### Private records stay local (operator decision D-0, 2026-11-13)
+
+This repository is public. Its private records live only in the checkout's gitignored `tmp/`, with no backup:
+plans in `tmp/by-week/`, and daily work summaries, handoffs, private reports, decision-spec and conditions texts and
+the full charter decisions in `tmp/private-records/`. Rule 10 daily summaries go to
+`tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`, not the tracked `workSummaries/`. Never commit anything
+under `tmp/` (the pre-commit guard `scripts/hooks/private-paths-guard.sh` refuses it, even after `git add -f`;
+install it with `bash scripts/install_private_paths_guard.sh`), and never run `git clean -x` (or `-X`) in a working
+checkout.
 
 ### Security rows when `.github/` is not writable
 

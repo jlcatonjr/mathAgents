@@ -18,5 +18,5 @@ rows = [r for r in csv.DictReader(open(".github/agents/references/security-decis
         if r.get("action_reviewed") == f"unfreeze-{s}"]
 if not rows or (rows[-1].get("sig_scheme") or "").lower() != "ed25519" or not (rows[-1].get("signature") or "").strip():
     sys.exit(f"[refresh] unfreeze-{s}: no operator Ed25519-signed unfreeze-{s} row "
-             "(docs/release/unfreeze-" + s + ".decision-spec.json)")
+             "(spec: docs/release/unfreeze-" + s + ".decision-spec.json, a private record kept under tmp/private-records/)")
 PY
