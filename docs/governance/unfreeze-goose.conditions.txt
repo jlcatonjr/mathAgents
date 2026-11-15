@@ -1,0 +1,31 @@
+Binding conditions for the operator's Rule 11 row unfreeze-goose in the public repository jlcatonjr/mathAgents (id
+1452811332), deriving from release-policy-public-1.1. It re-establishes, in this repository's own log, the Goose
+unfreeze the operator ruled on 2026-11-09 ("Both now, Goose UNENFORCED"; "Both, accept D34 widening"; "Unfreeze both,
+accept the gap"), re-accepted on 2026-11-15 (D-7) on the same terms and to the same review date. The id is unchanged
+because researchteam's unfreeze check asks for exactly unfreeze-goose.
+Provenance only: archive jlcatonjr/mathAgents-private (id 1398425621) commit 7803a688,
+docs/release/unfreeze-goose.conditions.txt sha256 ddc3c0cc08e7f3740117d593f6c3e9c18d3b3821e7db68cbc23af53b9fb5b020.
+
+1. Scope. goose stays out of brief.json frozen_surfaces and out of write_policy_frameworks (agentteams refuses the
+   switch on Goose: GOOSE_SWITCH_REFUSED). AGENTS.md, which Goose co-owns, is rendered with it.
+2. Goose UNENFORCED, with the D34 widening accepted. Goose renders off the switch; read-only and command-running Goose
+   recipes carry `developer` (Goose's only file tool, which also writes files and runs commands). The bespoke pipeline
+   recipes stay grant-scoped by mathagents' scope-goose. The stage-agent audit reports the count as accepted risk
+   (D34) and must report no other violation.
+3. Not accepted. A recipe on a read-only or command-running agent gaining a grant beyond `developer` and `summon`;
+   `analyze` other than disabled (`available_tools: [__none__]`); an `agentteams_readfs` server other than
+   `python3 -I -S scripts/goose-readfs-mcp.py` matching agentteams' READFS_SHA256; a recipe whose stdio server file is
+   missing; an orchestrator recipe whose sub_recipes name an agent absent from .github/agents.
+3a. Goose sandbox control-plane gap, accepted knowingly. Off the switch, agentteams' Goose seatbelt profile
+   (.goose/sandbox.sb) loses the write-denies on .agentteams, .agentteams-status and .goose/recipes, so a Goose session
+   with a `developer` shell could edit the Codex role gate or its own recipes. Accepted until agentteams protects the
+   shared control plane in the Goose profile whenever any surface is orchestrator-only. Detection only, at the next
+   render (refresh step 2 checks the runner and readfs servers against agentteams' pinned sha256; the render check
+   re-renders the role gate and diffs it).
+4. Review. By 2027-02-09 the operator re-freezes Goose, moves it under the switch once agentteams enforces it there, or
+   records a new signed decision. There is no silent renewal. The registry entry expires then, and an expired active
+   entry makes agentteams refuse every new relaxing activation until it is retired.
+5. Toolchain. Effective only with agentteams v1.1.0 or later and researchteam v1.1.0 or later, release tags pinned in
+   toolchain.lock.
+6. Use. Renders go through scripts/refresh_agent_surfaces.sh only. researchteam's unfreeze check does not consume this
+   row; it stays in force until item 4's date, a HALT, or a superseding row.

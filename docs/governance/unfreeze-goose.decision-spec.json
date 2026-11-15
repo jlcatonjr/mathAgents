@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "unfreeze-goose",
+  "scope": "unfreeze-goose",
+  "derives_from": "release-policy-public-1.1",
+  "effect_relaxes": "brief.json frozen_surfaces: goose (D43); Goose without enforced orchestrator-only (GOOSE_SWITCH_REFUSED); Goose read-only and command-running recipes carry developer (D34 accepted risk); Goose seatbelt profile without the .agentteams, .agentteams-status and .goose/recipes write-denies (control-plane gap, accepted until agentteams fixes it)",
+  "effect_targets": "brief.json; .goose/; scripts/goose-*.py; .goosehints; AGENTS.md; .goose/sandbox.sb; .agentteams/bin (exposed to Goose sessions)",
+  "conditions": "Binding text: docs/governance/unfreeze-goose.conditions.txt. Re-establishes in this log the operator's 2026-11-09 Goose unfreeze, UNENFORCED, re-accepted 2026-11-15 (D-7): D34 widening and the item 3a control-plane gap accepted knowingly; no grant beyond developer and summon; review by 2027-02-09 with no silent renewal; renders only through scripts/refresh_agent_surfaces.sh.",
+  "conditions_verified": "sha256:eba9c181f374e7c0a9ab8daa0c042aa4936e319b662c76af81e3eb94e8785ace",
+  "evidence": "operator rulings 2026-11-09 (mathagents-ab) and D-7 2026-11-15 (in session); archive 1398425621@7803a688 docs/release/unfreeze-goose.conditions.txt sha256 ddc3c0cc08e7f3740117d593f6c3e9c18d3b3821e7db68cbc23af53b9fb5b020; researchteam _frozen.verify_unfreeze asks for exactly unfreeze-goose"
+}
