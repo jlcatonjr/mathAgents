@@ -51,6 +51,12 @@ Where this differs from the project's real layout, the **Project Layout** sectio
 
 > ⚙️ **USER-EDITABLE** — this project's real layout where it differs from the generated Directory Structure and Output Conventions (for example, deliverables under `Projects/*/` rather than one output folder). Where the two disagree, this section is authoritative. `--update` never overwrites it.
 
+- **Private records (local only, gitignored `tmp/`; operator decision D-0, 2026-11-13).** Plans:
+  `tmp/by-week/`. Work summaries: `tmp/private-records/workSummaries/` (not `workSummaries/`). Private reports,
+  handoffs, decision-spec and conditions texts, and the full charter decisions: `tmp/private-records/docs/reports/`,
+  `docs/handoffs/`, `docs/release/` and `docs/charter/03-decisions.md` under `tmp/private-records/`. The tracked
+  `docs/reports/` holds public reports only.
+
 ---
 
 <!-- AGENTTEAMS:BEGIN output_conventions v=1 -->
@@ -249,7 +255,21 @@ ordering, including where operator instructions and read content sit:
 Every report, page or other artifact is saved as a file in this repository (or the session scratchpad while
 being drafted), never published to the provider's cloud: no Claude Artifact publish and no Claude Docs document.
 A report for others goes in `docs/reports/` (Markdown, plus an HTML version when a page helps) for the operator
-to send.
+to send. This repository is public: only a report meant to be public goes in `docs/reports/`; a private one goes
+in `tmp/private-records/docs/reports/` (see Private records below).
+
+### Private records stay local (operator decision D-0, 2026-11-13)
+
+This repository is public. Its private records live only in this checkout's gitignored `tmp/`, with no backup:
+plans in `tmp/by-week/`, and daily work summaries, handoffs, private reports, decision-spec and conditions texts
+and the full charter decisions in `tmp/private-records/` (seeded 2026-11-13 from the archived private repository at
+7803a688; see `tmp/private-records/README.md`). Rule 10 daily summaries go to
+`tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`, not the tracked `workSummaries/`.
+
+- Never commit anything under `tmp/`. The pre-commit guard `scripts/hooks/private-paths-guard.sh` refuses it, even
+  after `git add -f`; install it in a new checkout with `bash scripts/install_private_paths_guard.sh`. Re-run that after
+  `agentteams --install-git-hooks` or `scripts/refresh_agent_surfaces.sh`, which can rewrite the hook.
+- Never run `git clean -x` (or `-X`) in this checkout: it would delete the only copy.
 
 ### Security rows when `.github/` is not writable
 

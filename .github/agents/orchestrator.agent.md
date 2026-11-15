@@ -159,6 +159,14 @@ You coordinate all agent operations for **mathAgents**. You route work to domain
 
 > ⚙️ **USER-EDITABLE** — project-specific rules, overrides, and extensions for this agent. This section lies outside every `AGENTTEAMS` fence and is preserved verbatim across `agentteams --update --merge`.
 
+### Work summaries are private (operator decision D-0, 2026-11-13)
+
+This repository is public. Rule 10 summaries, and every `@work-summarizer` dispatch, use
+`tmp/private-records/workSummaries/` (daily, weekly, monthly), never the tracked `workSummaries/`: pass that path in
+the dispatch. Gap checks and backfills (references/work-summary-backfill.reference.md,
+work-summary-tooling.reference.md) list `tmp/private-records/workSummaries/daily/`, not `workSummaries/daily/`.
+Private reports, handoffs and decision texts go under `tmp/private-records/docs/`. Nothing under `tmp/` is committed.
+
 ### The proof pipeline: you hold its write authority (D39)
 
 - The nine pipeline agents (`@statement-formalizer`, `@fidelity-auditor`, `@proof-strategist`, `@logic-articulator`,
