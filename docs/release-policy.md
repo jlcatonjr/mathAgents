@@ -14,7 +14,12 @@ marks *public*, are records of the archived private repository (jlcatonjr/mathAg
 repository's log. Their spec and conditions texts (`docs/release/`, `docs/handoffs/`) are private records, kept locally
 under `tmp/private-records/` and not published. In this repository, authority comes only from rows in its own
 `.github/agents/references/security-decisions.log.csv`, all deriving from the public root `release-policy-public-1.1`
-(pr11 P03), which adopts this file at the sha256 that row records.
+(pr11 P03), which adopts this file at the sha256 that row records. A row counts as *public* only if it is in that log;
+a label in this file grants nothing. No tool yet compares this file with the recorded sha256 at clearance, so the
+check is procedural: any later change to this file needs a new operator-signed root row before it takes effect.
+The root also adopts, as its own, the rules below that the private history introduced (the 1.1 intake rule, which
+there took effect with D45, and the operator signer, provisioned there under `provision-operator-signer-*`); the
+private rows are cited as their provenance only.
 
 ## 1. Versions and branches
 
