@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "action_reviewed": "overwrite",
+  "scope": "",
+  "conditions": "Single-use: the first overwrite render at researchteam v1.1.4 (5fd8ec3b) + agentteams v1.1.3 (cbd41a74) with decision signing on, in ~/githubrepositories/mathAgents on branch chore/pin-v1.1.4 at the reviewed head (the commit that adds this spec), by scripts/refresh_agent_surfaces.sh (sha256 781f13e2ba844edb03b76983449f12942812c053fdeb8cf6a806b579aa3224bf) and nothing else, with the .venv from the v1.1.4 bootstrap. One row in each of .github/agents, .claude/agents and .goose/recipes, deriving from release-policy-public-1.1 (recorded in each of those logs). After the render, and before anything is staged: the orchestrator's private one-shot restore_user_regions.py (sha256 2d6c6a236054806dff01833dde0a70ceb97eab3cca6770e33577c8d6eaf3465b) puts back from HEAD the user-owned regions agentteams v1.1.3 drops (the Goose recipes' Project-Specific Notes, agentteams #533; the instruction files' Project Layout sections), then must report every region equal to HEAD; the changed paths must equal the rehearsal's expected-changes list (sha256 22c807108ff04b33146a8f7b859c8904ce6782e425d0d29ad5cf63550702fc17; content digests equal except files that embed the run date); scripts/check_render_consistency.sh (sha256 4d4fbdc4f630dbc2b7a815d690c613f20a449d7fe97b2f6d5384752110f1a3fe) CONSISTENT; the decisions logs changed only by this row's consumed mark; no change to brief.json, rosters, authorized-verify-keys, the exception registry, the toolchain-group file, CLAUDE.md or the integrity manifest. Stop conditions (no repair under this row; a re-run needs a new signed row): any failure of the refresh script, a region that cannot be restored, an unexpected path, or a protected file changed.",
+  "conditions_verified": "throwaway-key rehearsal 2026-11-16 in the no-remote scratch clone v114r2 (chore/pin-v1.1.4 at e484a85; key_id rehearsal-test, signed by the operator in a terminal; op-2026 not used): root rows in .claude and .goose, overwrite rows in all three logs, each clearing; refresh_agent_surfaces.sh every step exit 0, render check CONSISTENT (G-KERNEL, validate, registries ok); the three overwrite rows consumed; exception registry unchanged and audit clean (2 active of cap 3; the overwrite rows take no registry slot); main checkout's lean/.lake build untouched; 70 changed paths: model lines on 42 Claude agents (agentteams default: claude-fable-5-2 for the orchestrator, opus for the rest), the toolchain_group_rule fence row, security agent and vulnerability-watch refresh, Codex re-projection, build-logs; dropped user regions in 4 files (Goose work-summarizer notes; Project Layout in .claude/CLAUDE.md, .github/copilot-instructions.md, AGENTS.md) restored from HEAD by restore_user_regions.py, after which all 171 notes regions equal HEAD.",
+  "evidence": "plan tmp/by-week/2026-W47/pr11-p08-v114-render step V7 (private); @security V7 and V7r2 rows; agentteams #533",
+  "derives_from": "release-policy-public-1.1",
+  "effect_grants": "",
+  "effect_relaxes": "",
+  "effect_targets": ".agentteams/bin;.claude/agents;.codex/agents;.codex/hooks.json;.codex/confined-run.example.sh;.github/agents;.goose/recipes;.goose/sandbox.sb;.researchteam;.vscode/tasks.json;AGENTS.md;references/agent-surface-matrix.md;scripts/goose-readfs-mcp.py",
+  "effect_destructive": "no",
+  "effect_cross_repo": "no",
+  "effect_bulk": "yes"
+}

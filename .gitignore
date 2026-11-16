@@ -150,3 +150,6 @@ _site/
 .goose/recipes/references/memory-index.json
 .goose/recipes/references/memory-index.vcache
 .goose/recipes/references/delivery-receipt.json
+.codex/agents/references/memory-index.json
+.codex/agents/references/memory-index.vcache
+.codex/agents/references/delivery-receipt.json
