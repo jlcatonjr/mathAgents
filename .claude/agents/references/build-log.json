@@ -1,13 +1,13 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.1.0",
+  "agentteams_version": "1.1.3",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "9b16fb544c03aad636d3839c37873624f6efbd37",
+    "commit": "cbd41a74f3e8bedd516c3a32581be47eb7d6152b",
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-10T01:54:39.995813+00:00",
+  "generated_at": "2026-11-16T11:54:05.974550+00:00",
   "project_name": "mathAgents",
   "framework": "claude",
   "project_type": "research",
@@ -32,16 +32,13 @@
     "evaluation"
   ],
   "files_written": [
-    ".claude/agents/references/security-vulnerability-watch.reference.md",
-    ".claude/agents/references/security-vulnerability-watch.json",
-    ".claude/agents/references/framework-watch.reference.md",
-    ".claude/agents/security.md"
+    ".agentteams-status/.gitignore"
   ],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "7e350d6cb17aac72",
     "universal/navigator.template.md": "3d28148430bddfdf",
-    "universal/security.template.md": "b738b65b9a3edecd",
+    "universal/security.template.md": "de2479d7357a9450",
     "universal/code-hygiene.template.md": "8c53882027a0aa40",
     "universal/adversarial.template.md": "0c7b7cb909b089a0",
     "universal/conflict-auditor.template.md": "a6199323e4d1add3",
@@ -83,7 +80,7 @@
     "universal/work-summary-backfill.reference.template.md": "5730bac043dc2874",
     "universal/parallelization.reference.template.md": "12111b7bb9a9aa10",
     "universal/sandbox-handoff.reference.template.md": "fe27b3ca2d7de60d",
-    "universal/instruction-authority.reference.template.md": "a73a355a8da0c15f",
+    "universal/instruction-authority.reference.template.md": "795f8448cc6435d3",
     "universal/orchestrator-spawn-authority.reference.template.md": "221ebb904e4f4e48",
     "universal/redteam-methodology.reference.template.md": "a0443337a9796294",
     "universal/retrospective-remediation.reference.template.md": "1965ac5f52cf72f0",
@@ -93,8 +90,8 @@
     "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
     "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
     "workstream-expert.template.md": "19e099ff5eaf447b",
-    "copilot-instructions.template.md": "d3fcc564166c5285",
-    "builder/team-builder-claude.template.md": "f18ed3516005d223",
+    "copilot-instructions.template.md": "aec170fecb546317",
+    "builder/team-builder-claude.template.md": "ad3e1bfad3e83b1e",
     "domain/content-enricher.template.md": "25b7c467ae7a8978"
   },
   "output_files_map": [
@@ -538,18 +535,7 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert",
-    "axiom-auditor",
-    "counterexample-hunter",
-    "engine-advisor",
-    "fidelity-auditor",
-    "interpretation-advisor",
-    "lean-informalization",
-    "lean-prover",
-    "logic-articulator",
-    "proof-strategist",
-    "statement-formalizer",
-    "tactic-planner"
+    "evaluation-expert"
   ],
   "governance_agents": [
     "navigator",
@@ -564,18 +550,20 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "e88a48a31fdbc906",
+  "manifest_fingerprint": "c481a541431e07c5",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.reference.md": "f49405f856ed5156",
-    "references/security-vulnerability-watch.json": "14a7476115937a4a",
-    "references/framework-watch.reference.md": "2d8e8df83972c912",
-    "security.md": "ea385448ad3dee8c",
+    "../../.agentteams-status/.gitignore": "240a3e0d37d2e86b",
+    "references/security-vulnerability-watch.reference.md": "08b943bec35b9cde",
+    "references/security-vulnerability-watch.json": "cda6a3b221f159d0",
+    "references/instruction-authority.reference.md": "f528ec87bad719b5",
+    "../CLAUDE.md": "ea0c52670c9a7d9f",
+    "security.md": "4e89cc9fd703cba0",
     "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
-    "../CLAUDE.md": "b0089726d0607cec",
+    "references/framework-watch.reference.md": "2d8e8df83972c912",
     "references/runtime-handoffs.json": "73306a5217a45b1f",
-    "orchestrator.md": "4719123e9c03dc04",
+    "orchestrator.md": "f0f77f298631fbaa",
     "navigator.md": "508287eb74d0b808",
     "code-hygiene.md": "08be39d6d775c969",
     "adversarial.md": "1a4a1c0914731d55",
@@ -586,7 +574,7 @@
     "agent-refactor.md": "623b2276090a9e42",
     "repo-liaison.md": "686c93141d189b44",
     "git-operations.md": "31e94cdcb55be41c",
-    "work-summarizer.md": "b34dd444fd5d22c5",
+    "work-summarizer.md": "d6e36e6a142f3fee",
     "primary-producer.md": "c51f731d78b2efac",
     "quality-auditor.md": "f57580c9e1a6e93c",
     "cohesion-repairer.md": "4228e62669a05cbe",
@@ -604,7 +592,6 @@
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
     "references/parallelization.reference.md": "fbd84bddbf5f6c13",
-    "references/instruction-authority.reference.md": "ca0812420b64ade7",
     "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
     "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
     "references/skill-generation.reference.md": "2721d15d64d12081",
@@ -801,6 +788,7 @@
       "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
+      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
       "write_policy": "0baf736c166d97cd042e76c7fa009b1ce45e4f06435fc2ebfb141332fca3e0cf"
     },
     ".claude/agents/SETUP-REQUIRED.md": {
@@ -971,8 +959,8 @@
     ".claude/agents/security.md": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
-      "security_rules_invariant": "d117bbfdbef263d9152dcad4b10c691f98458d1219e7a9e4134ee65d31e9d081",
-      "threat_intelligence": "f59be50a53a574bdc7ee2e1a2274edfd3b6e2b58010eced45b26a01049fc1f51",
+      "security_rules_invariant": "6b6a4bed94cbf42fb8ec7e44f2dbfabbb2639b5c3e22fe2648c8a3660be87a35",
+      "threat_intelligence": "9b8e9d770dcc7b994aa528e7dae8d75c31d73dd0c208ad0a36a05d3b1a1eb931",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
