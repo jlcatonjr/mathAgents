@@ -7,8 +7,8 @@ surface by running ``agentteams --interop-from`` on those renders, then scopes t
 
 * **claude** (``<repo>/.claude/agents/<name>.md``): agentteams' ``tools:`` mapping is already exact; it is
   verified, and a projection that grants more than the declared tools, or whose front matter carries any key
-  but ``name``, ``description`` and one ``tools`` (``permissionMode``, ``mcpServers``, ``hooks``, ``model``...),
-  is refused.
+  but ``name``, ``description``, one ``tools`` and at most one ``model`` whose value is exactly one of
+  CLAUDE_MODELS (``permissionMode``, ``mcpServers``, ``hooks``, another model...), is refused.
 * **goose** (``<repo>/.goose/recipes/<name>.yaml``): agentteams gives every recipe the whole ``developer``
   extension (shell and file writes), and ``summon`` to the agents with handoffs. The ``extensions:`` key is
   replaced with one that lists only the extensions the tools need, each with ``available_tools``
@@ -62,7 +62,11 @@ SURFACES = {
     "codex": (".codex/agents", ".toml", learned.TOML),
 }
 # the only keys a projection may carry; anything else could widen the agent outside its tools (C-3)
-CLAUDE_KEYS = frozenset({"name", "description", "tools"})
+CLAUDE_KEYS = frozenset({"name", "description", "tools", "model"})
+# `model` picks which model runs the agent, not what it may do (no C-3 widening), so it is allowed only as the exact
+# value agentteams (1.1.1+) renders for a non-orchestrator agent, which the operator kept (2026-11-16; @security
+# pr11-p08-check-claude-model-allowlist). sync projects pipeline agents only, never an orchestrator.
+CLAUDE_MODELS = frozenset({"opus"})
 GOOSE_KEYS = frozenset({"version", "title", "description", "instructions", "extensions"})
 CODEX_KEYS = frozenset({"name", "description", "sandbox_mode", "developer_instructions"})
 
@@ -296,7 +300,8 @@ def scope_goose(recipe: str, tools: list[str]) -> str:
 
 def check_claude(md: str, tools: list[str]) -> None:
     """Refuse a Claude projection that grants a tool the declared tools do not, or carries any other key that
-    could widen it (permissionMode, mcpServers, hooks, model, a second tools line...)."""
+    could widen it (permissionMode, mcpServers, hooks, a second tools line...), or a ``model`` other than exactly
+    one of CLAUDE_MODELS (quoted or bare)."""
     keys = _front_keys(md)
     names = [k for k, _ in keys]
     if len(set(names)) != len(names):
@@ -305,6 +310,13 @@ def check_claude(md: str, tools: list[str]) -> None:
     if extra:
         raise SurfaceError(f"the Claude projection carries front-matter key(s) {', '.join(extra)}; only "
                            + ", ".join(sorted(CLAUDE_KEYS)) + " are allowed")
+    if "model" in names:
+        raw = model = dict(keys)["model"]
+        if len(model) >= 2 and model[0] == model[-1] and model[0] in "'\"":
+            model = model[1:-1]
+        if model not in CLAUDE_MODELS:
+            raise SurfaceError(f"the Claude projection sets model {raw!r}; allowed: "
+                               + ", ".join(sorted(CLAUDE_MODELS)))
     value = dict(keys).get("tools")
     if not value:  # a Claude agent without `tools:` inherits every tool
         raise SurfaceError("the Claude projection has no tools: line (it would inherit every tool)")
