@@ -2,6 +2,7 @@
 name: Navigator — mathAgents
 description: "Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

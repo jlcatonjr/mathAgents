@@ -2,6 +2,7 @@
 name: Orchestrator — mathAgents
 description: "Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check."
 tools: Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task
+model: claude-fable-5-2
 ---
 
 <!--

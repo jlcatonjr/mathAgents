@@ -43,5 +43,6 @@
     }
   ],
   "note": "Rule 11(d) aggregate cap (operator D-6, 2026-11-15), recorded under the signed row exception-registry-cap-3. The S-10 toolchain group takes no slot (agentteams toolchain_group). agentteams may add machine fields (the group's sequence high-water mark, activation counters) after signing; the cap value and the entries listed at signing are what the row covers.",
+  "toolchain_group_sequence": 1,
   "version": 1
 }

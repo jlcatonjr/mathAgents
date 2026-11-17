@@ -7,7 +7,7 @@
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-16T11:54:05.974550+00:00",
+  "generated_at": "2026-11-17T00:02:20.327349+00:00",
   "project_name": "mathAgents",
   "framework": "claude",
   "project_type": "research",
@@ -32,7 +32,41 @@
     "evaluation"
   ],
   "files_written": [
-    ".agentteams-status/.gitignore"
+    ".claude/agents/references/security-vulnerability-watch.reference.md",
+    ".claude/agents/references/security-vulnerability-watch.json",
+    ".claude/agents/references/framework-watch.reference.md",
+    ".claude/CLAUDE.md",
+    ".claude/agents/orchestrator.md",
+    ".claude/agents/navigator.md",
+    ".claude/agents/security.md",
+    ".claude/agents/code-hygiene.md",
+    ".claude/agents/adversarial.md",
+    ".claude/agents/conflict-auditor.md",
+    ".claude/agents/conflict-resolution.md",
+    ".claude/agents/cleanup.md",
+    ".claude/agents/agent-updater.md",
+    ".claude/agents/agent-refactor.md",
+    ".claude/agents/repo-liaison.md",
+    ".claude/agents/git-operations.md",
+    ".claude/agents/work-summarizer.md",
+    ".claude/agents/primary-producer.md",
+    ".claude/agents/quality-auditor.md",
+    ".claude/agents/cohesion-repairer.md",
+    ".claude/agents/technical-validator.md",
+    ".claude/agents/format-converter.md",
+    ".claude/agents/reference-manager.md",
+    ".claude/agents/output-compiler.md",
+    ".claude/agents/visual-designer.md",
+    ".claude/agents/post-production-auditor.md",
+    ".claude/agents/retrieval-integrator.md",
+    ".claude/agents/research-analyst.md",
+    ".claude/agents/methods-review-expert.md",
+    ".claude/agents/harness-spec-expert.md",
+    ".claude/agents/proof-dossiers-expert.md",
+    ".claude/agents/proof-library-expert.md",
+    ".claude/agents/evaluation-expert.md",
+    ".claude/agents/team-builder.md",
+    ".claude/agents/content-enricher.md"
   ],
   "manual_required": 7,
   "template_hashes": {
@@ -535,7 +569,18 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert"
+    "evaluation-expert",
+    "axiom-auditor",
+    "counterexample-hunter",
+    "engine-advisor",
+    "fidelity-auditor",
+    "interpretation-advisor",
+    "lean-informalization",
+    "lean-prover",
+    "logic-articulator",
+    "proof-strategist",
+    "statement-formalizer",
+    "tactic-planner"
   ],
   "governance_agents": [
     "navigator",
@@ -550,72 +595,252 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "c481a541431e07c5",
+  "manifest_fingerprint": "3d04d8fb4584c5e8",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "../../.agentteams-status/.gitignore": "240a3e0d37d2e86b",
-    "references/security-vulnerability-watch.reference.md": "08b943bec35b9cde",
-    "references/security-vulnerability-watch.json": "cda6a3b221f159d0",
-    "references/instruction-authority.reference.md": "f528ec87bad719b5",
-    "../CLAUDE.md": "ea0c52670c9a7d9f",
-    "security.md": "4e89cc9fd703cba0",
+    "references/security-vulnerability-watch.reference.md": "05d034628322f23b",
+    "references/security-vulnerability-watch.json": "a2b45840af50c948",
+    "references/framework-watch.reference.md": "5c5ddecdb8ea3071",
+    "../CLAUDE.md": "f8f0b43ef5a14ee8",
+    "orchestrator.md": "ea58318ccbbe4954",
+    "navigator.md": "6474eba5eafdc6a3",
+    "security.md": "fa1d9e02cce583d3",
+    "code-hygiene.md": "62285350634a5344",
+    "adversarial.md": "0323755af46ac682",
+    "conflict-auditor.md": "d70f4dc1daa79601",
+    "conflict-resolution.md": "acdcd31baa26f146",
+    "cleanup.md": "9e8e23c282c464d6",
+    "agent-updater.md": "ee1d39a2c4297c8e",
+    "agent-refactor.md": "f22a8bc658ace100",
+    "repo-liaison.md": "974c8816d87fd420",
+    "git-operations.md": "237df8c211455a3c",
+    "work-summarizer.md": "d495c80c7e1099dc",
+    "primary-producer.md": "7ae4fb913d2ad24b",
+    "quality-auditor.md": "b85e8fb4da0da6f3",
+    "cohesion-repairer.md": "48d21f3afd5cb210",
+    "technical-validator.md": "c5c0f81dd74526a7",
+    "format-converter.md": "f32ffed2b261fc5a",
+    "reference-manager.md": "4208e873b0aa4016",
+    "output-compiler.md": "f040fc1dbb7398af",
+    "visual-designer.md": "9a0a2228b702ed03",
+    "post-production-auditor.md": "a2484c911aff6f4d",
+    "retrieval-integrator.md": "94c1da4659535ee7",
+    "research-analyst.md": "060a3fd08a6fb17c",
+    "methods-review-expert.md": "f4dcf4eec6ac8569",
+    "harness-spec-expert.md": "9421b2a4010cdb8e",
+    "proof-dossiers-expert.md": "f4456c2eafd7b096",
+    "proof-library-expert.md": "a720a38a15602dad",
+    "evaluation-expert.md": "42934e76dd141b1d",
+    "team-builder.md": "ecf77a494cf3c229",
+    "content-enricher.md": "373bacbc50fb3c76",
     "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
-    "references/framework-watch.reference.md": "2d8e8df83972c912",
     "references/runtime-handoffs.json": "73306a5217a45b1f",
-    "orchestrator.md": "f0f77f298631fbaa",
-    "navigator.md": "508287eb74d0b808",
-    "code-hygiene.md": "08be39d6d775c969",
-    "adversarial.md": "1a4a1c0914731d55",
-    "conflict-auditor.md": "9d395c24100261c0",
-    "conflict-resolution.md": "af0f7709be0da353",
-    "cleanup.md": "2631197713342a5b",
-    "agent-updater.md": "0f0edc30e99ee29a",
-    "agent-refactor.md": "623b2276090a9e42",
-    "repo-liaison.md": "686c93141d189b44",
-    "git-operations.md": "31e94cdcb55be41c",
-    "work-summarizer.md": "d6e36e6a142f3fee",
-    "primary-producer.md": "c51f731d78b2efac",
-    "quality-auditor.md": "f57580c9e1a6e93c",
-    "cohesion-repairer.md": "4228e62669a05cbe",
-    "technical-validator.md": "b691ac5b70a4a461",
-    "format-converter.md": "57cb5017c43097ca",
-    "reference-manager.md": "d249f379fc88e191",
-    "output-compiler.md": "a3ef48ef0f505361",
-    "visual-designer.md": "bc01dbb7d5d7bf31",
-    "post-production-auditor.md": "91cc994b44863799",
-    "retrieval-integrator.md": "7e490925bae0bb4f",
-    "research-analyst.md": "bba5d06996138e0d",
     "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
     "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
     "references/work-summary-spec.reference.md": "96232231a1f7c6be",
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
     "references/parallelization.reference.md": "fbd84bddbf5f6c13",
+    "references/instruction-authority.reference.md": "f528ec87bad719b5",
     "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
     "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
     "references/skill-generation.reference.md": "2721d15d64d12081",
     "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
     "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
     "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
-    "methods-review-expert.md": "ade466072dbe9be4",
-    "harness-spec-expert.md": "25f2d1a4c33ec4c5",
-    "proof-dossiers-expert.md": "5829bb6eba0e454e",
-    "proof-library-expert.md": "5649e0f65e2261f4",
-    "evaluation-expert.md": "347776059403292e",
-    "team-builder.md": "bd7c4461274ae7f9",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
-    "content-enricher.md": "7a991305d1b007f0",
     "references/write-policy.reference.md": "d5d003ec5740b609",
     "references/mcp-need.reference.md": "15c753f1a114601e",
     "references/authorized-verify-keys/README.md": "badf32b421079acf",
     "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {
+    "orchestrator.md": {
+      "name": "Orchestrator \u2014 mathAgents",
+      "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
+      "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task",
+      "model": "claude-fable-5-2"
+    },
+    "navigator.md": {
+      "name": "Navigator \u2014 mathAgents",
+      "description": "\"Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
     "security.md": {
       "name": "Security \u2014 mathAgents",
       "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
-      "tools": "Read, Grep, Glob"
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "code-hygiene.md": {
+      "name": "Code Hygiene \u2014 mathAgents",
+      "description": "\"Read-only auditor that enforces modular architecture, file hygiene, script lifecycle, anti-sprawl rules, and agent documentation quality. Delegates removals to @cleanup; delegates structural extraction to @agent-refactor.\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "adversarial.md": {
+      "name": "Adversarial \u2014 mathAgents",
+      "description": "\"Presupposition critic: challenges the assumptions underlying any plan, proposal, or diagnosis produced by the agent team. Traces how justified changes in presuppositions cascade through dependent logic.\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "conflict-auditor.md": {
+      "name": "Conflict Auditor \u2014 mathAgents",
+      "description": "\"Detects logical conflicts across deliverables, agent documentation, reference files, and source material in mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "conflict-resolution.md": {
+      "name": "Conflict Resolution \u2014 mathAgents",
+      "description": "\"Makes ACCEPT/REJECT/REVISE decisions on conflicts flagged by the conflict auditor in mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "cleanup.md": {
+      "name": "Cleanup \u2014 mathAgents",
+      "description": "\"Removes stale drafts, build artifacts, and orphaned files from mathAgents with mandatory safety checks\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "agent-updater.md": {
+      "name": "Agent Updater \u2014 mathAgents",
+      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "agent-refactor.md": {
+      "name": "Agent Refactor \u2014 mathAgents",
+      "description": "\"Extracts shared data to reference files and enforces spec compliance across all agent documentation in mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "repo-liaison.md": {
+      "name": "Repo Liaison \u2014 mathAgents",
+      "description": "\"Tracks agent documentation in repositories adjacent to mathAgents, communicates cross-repository impacts, maintains the adjacent-repos registry, and coordinates between orchestrators when this project's activity affects neighboring agent infrastructures.\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "git-operations.md": {
+      "name": "Git Operations \u2014 mathAgents",
+      "description": "\"Executes and governs Git and GitHub operations in mathAgents, including commit/push, pull/merge/rebase, conflict handling, and recovery workflows.\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "work-summarizer.md": {
+      "name": "Work Summarizer \u2014 mathAgents",
+      "description": "\"Synthesizes daily, weekly, and monthly work summaries from canonical plan artifacts and git evidence for mathAgents; supports append-first daily capture, legacy tmp/ fallback, and required adversarial/conflict audits\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "primary-producer.md": {
+      "name": "Primary Producer \u2014 mathAgents",
+      "description": "\"Drafts and revises deliverables in mathAgents from Component Briefs provided by workstream expert agents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "quality-auditor.md": {
+      "name": "Quality Auditor \u2014 mathAgents",
+      "description": "\"Read-only audit agent that inspects deliverables in mathAgents for structural defects, logical inconsistencies, and LLM-generated prose patterns; does not rewrite\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "cohesion-repairer.md": {
+      "name": "Cohesion Repairer \u2014 mathAgents",
+      "description": "\"Repairs within-section cohesion failures in mathAgents deliverables \u2014 disjointedness, broken transitions, and missing argumentative spine; does not reorganize across sections\"",
+      "tools": "Read",
+      "model": "opus"
+    },
+    "technical-validator.md": {
+      "name": "Technical Validator \u2014 mathAgents",
+      "description": "\"Read-only audit agent that verifies technical accuracy in mathAgents \u2014 code examples, file excerpts, API references, and tool invocations match what exists on disk\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "format-converter.md": {
+      "name": "Format Converter \u2014 mathAgents",
+      "description": "\"Converts deliverables from their source format to Markdown with Chicago author-date citations; Lean 4 sources; generated blueprint for final output in mathAgents\"",
+      "tools": "Read",
+      "model": "opus"
+    },
+    "reference-manager.md": {
+      "name": "Reference Manager \u2014 mathAgents",
+      "description": "\"Manages the bibliography and reference database for mathAgents \u2014 CRUD operations, citation verification, anti-fabrication enforcement\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "output-compiler.md": {
+      "name": "Output Compiler \u2014 mathAgents",
+      "description": "\"Assembles all converted components into a final deliverable package for mathAgents \u2014 dependency check, ordering, build manifest\"",
+      "tools": "Read",
+      "model": "opus"
+    },
+    "visual-designer.md": {
+      "name": "Visual Designer \u2014 mathAgents",
+      "description": "\"Creates and revises diagrams and figures for mathAgents using the approved diagram toolchain\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "post-production-auditor.md": {
+      "name": "Post-Production Auditor \u2014 mathAgents",
+      "description": "\"Outcome-verification specialist for mathAgents: validates claimed completed work against source-of-truth state using risk-tiered sampling and evidence-backed verdicts\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "retrieval-integrator.md": {
+      "name": "Retrieval Integrator \u2014 mathAgents",
+      "description": "\"Validates retrieval integration contracts in mathAgents \u2014 query entrypoints, maintenance entrypoints, trigger channels, and freshness obligations\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "research-analyst.md": {
+      "name": "Research Analyst \u2014 mathAgents",
+      "description": "\"Orchestrates the optional agentteams[research] runtime library in mathAgents \u2014 web search, reputable-source rating, and dual-lens claim verification\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "methods-review-expert.md": {
+      "name": "Methods Literature Review Expert \u2014 mathAgents",
+      "description": "\"Component expert for Methods Literature Review in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "harness-spec-expert.md": {
+      "name": "Harness Specification Expert \u2014 mathAgents",
+      "description": "\"Component expert for Harness Specification in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "proof-dossiers-expert.md": {
+      "name": "Proof Dossiers Expert \u2014 mathAgents",
+      "description": "\"Component expert for Proof Dossiers in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "proof-library-expert.md": {
+      "name": "Proof Library Expert \u2014 mathAgents",
+      "description": "\"Component expert for Proof Library in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "evaluation-expert.md": {
+      "name": "Harness Evaluation Expert \u2014 mathAgents",
+      "description": "\"Component expert for Harness Evaluation in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "team-builder.md": {
+      "tools": "Read, Grep, Glob",
+      "name": "Team Builder \u2014 Agent Teams Module",
+      "description": "\"Interactively constructs a complete agent team for a new or existing Claude project by conducting an intake interview and invoking the build_team pipeline\"",
+      "model": "opus"
+    },
+    "content-enricher.md": {
+      "name": "Content Enricher \u2014 mathAgents",
+      "description": "\"Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
     },
     "../skills/tool-lean-4/SKILL.md": {
       "name": "tool-lean-4",
@@ -624,156 +849,6 @@
     "../skills/tool-mathlib/SKILL.md": {
       "name": "tool-mathlib",
       "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
-    },
-    "orchestrator.md": {
-      "name": "Orchestrator \u2014 mathAgents",
-      "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
-      "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task"
-    },
-    "navigator.md": {
-      "name": "Navigator \u2014 mathAgents",
-      "description": "\"Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "code-hygiene.md": {
-      "name": "Code Hygiene \u2014 mathAgents",
-      "description": "\"Read-only auditor that enforces modular architecture, file hygiene, script lifecycle, anti-sprawl rules, and agent documentation quality. Delegates removals to @cleanup; delegates structural extraction to @agent-refactor.\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "adversarial.md": {
-      "name": "Adversarial \u2014 mathAgents",
-      "description": "\"Presupposition critic: challenges the assumptions underlying any plan, proposal, or diagnosis produced by the agent team. Traces how justified changes in presuppositions cascade through dependent logic.\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "conflict-auditor.md": {
-      "name": "Conflict Auditor \u2014 mathAgents",
-      "description": "\"Detects logical conflicts across deliverables, agent documentation, reference files, and source material in mathAgents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "conflict-resolution.md": {
-      "name": "Conflict Resolution \u2014 mathAgents",
-      "description": "\"Makes ACCEPT/REJECT/REVISE decisions on conflicts flagged by the conflict auditor in mathAgents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "cleanup.md": {
-      "name": "Cleanup \u2014 mathAgents",
-      "description": "\"Removes stale drafts, build artifacts, and orphaned files from mathAgents with mandatory safety checks\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "agent-updater.md": {
-      "name": "Agent Updater \u2014 mathAgents",
-      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "agent-refactor.md": {
-      "name": "Agent Refactor \u2014 mathAgents",
-      "description": "\"Extracts shared data to reference files and enforces spec compliance across all agent documentation in mathAgents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "repo-liaison.md": {
-      "name": "Repo Liaison \u2014 mathAgents",
-      "description": "\"Tracks agent documentation in repositories adjacent to mathAgents, communicates cross-repository impacts, maintains the adjacent-repos registry, and coordinates between orchestrators when this project's activity affects neighboring agent infrastructures.\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "git-operations.md": {
-      "name": "Git Operations \u2014 mathAgents",
-      "description": "\"Executes and governs Git and GitHub operations in mathAgents, including commit/push, pull/merge/rebase, conflict handling, and recovery workflows.\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "work-summarizer.md": {
-      "name": "Work Summarizer \u2014 mathAgents",
-      "description": "\"Synthesizes daily, weekly, and monthly work summaries from canonical plan artifacts and git evidence for mathAgents; supports append-first daily capture, legacy tmp/ fallback, and required adversarial/conflict audits\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "primary-producer.md": {
-      "name": "Primary Producer \u2014 mathAgents",
-      "description": "\"Drafts and revises deliverables in mathAgents from Component Briefs provided by workstream expert agents\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "quality-auditor.md": {
-      "name": "Quality Auditor \u2014 mathAgents",
-      "description": "\"Read-only audit agent that inspects deliverables in mathAgents for structural defects, logical inconsistencies, and LLM-generated prose patterns; does not rewrite\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "cohesion-repairer.md": {
-      "name": "Cohesion Repairer \u2014 mathAgents",
-      "description": "\"Repairs within-section cohesion failures in mathAgents deliverables \u2014 disjointedness, broken transitions, and missing argumentative spine; does not reorganize across sections\"",
-      "tools": "Read"
-    },
-    "technical-validator.md": {
-      "name": "Technical Validator \u2014 mathAgents",
-      "description": "\"Read-only audit agent that verifies technical accuracy in mathAgents \u2014 code examples, file excerpts, API references, and tool invocations match what exists on disk\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "format-converter.md": {
-      "name": "Format Converter \u2014 mathAgents",
-      "description": "\"Converts deliverables from their source format to Markdown with Chicago author-date citations; Lean 4 sources; generated blueprint for final output in mathAgents\"",
-      "tools": "Read"
-    },
-    "reference-manager.md": {
-      "name": "Reference Manager \u2014 mathAgents",
-      "description": "\"Manages the bibliography and reference database for mathAgents \u2014 CRUD operations, citation verification, anti-fabrication enforcement\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "output-compiler.md": {
-      "name": "Output Compiler \u2014 mathAgents",
-      "description": "\"Assembles all converted components into a final deliverable package for mathAgents \u2014 dependency check, ordering, build manifest\"",
-      "tools": "Read"
-    },
-    "visual-designer.md": {
-      "name": "Visual Designer \u2014 mathAgents",
-      "description": "\"Creates and revises diagrams and figures for mathAgents using the approved diagram toolchain\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "post-production-auditor.md": {
-      "name": "Post-Production Auditor \u2014 mathAgents",
-      "description": "\"Outcome-verification specialist for mathAgents: validates claimed completed work against source-of-truth state using risk-tiered sampling and evidence-backed verdicts\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "retrieval-integrator.md": {
-      "name": "Retrieval Integrator \u2014 mathAgents",
-      "description": "\"Validates retrieval integration contracts in mathAgents \u2014 query entrypoints, maintenance entrypoints, trigger channels, and freshness obligations\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "research-analyst.md": {
-      "name": "Research Analyst \u2014 mathAgents",
-      "description": "\"Orchestrates the optional agentteams[research] runtime library in mathAgents \u2014 web search, reputable-source rating, and dual-lens claim verification\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "methods-review-expert.md": {
-      "name": "Methods Literature Review Expert \u2014 mathAgents",
-      "description": "\"Component expert for Methods Literature Review in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "harness-spec-expert.md": {
-      "name": "Harness Specification Expert \u2014 mathAgents",
-      "description": "\"Component expert for Harness Specification in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "proof-dossiers-expert.md": {
-      "name": "Proof Dossiers Expert \u2014 mathAgents",
-      "description": "\"Component expert for Proof Dossiers in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "proof-library-expert.md": {
-      "name": "Proof Library Expert \u2014 mathAgents",
-      "description": "\"Component expert for Proof Library in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "evaluation-expert.md": {
-      "name": "Harness Evaluation Expert \u2014 mathAgents",
-      "description": "\"Component expert for Harness Evaluation in mathAgents \u2014 prepares Component Briefs, reviews drafts against brief checklist, approves deliverables\"",
-      "tools": "Read, Grep, Glob"
-    },
-    "team-builder.md": {
-      "tools": "Read, Grep, Glob",
-      "name": "Team Builder \u2014 Agent Teams Module",
-      "description": "\"Interactively constructs a complete agent team for a new or existing Claude project by conducting an intake interview and invoking the build_team pipeline\""
-    },
-    "content-enricher.md": {
-      "name": "Content Enricher \u2014 mathAgents",
-      "description": "\"Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials\"",
-      "tools": "Read, Grep, Glob"
     }
   },
   "front_matter_baseline_version": 2,
@@ -804,7 +879,7 @@
       "content": "7e27078b151bcb7c28c67263c5e3d635202ae46212fad52a320f5e1bb1715e8d"
     },
     ".claude/agents/axiom-auditor.md": {
-      "*": "2e345cf45bca06f426c602d5f001f4525dd73067d19b7c7ae94a7808fd5d159f"
+      "*": "94574c0fcfcf3a48ad312631580810018d74a3b12a3f7db8788cac5e4c9a4ceb"
     },
     ".claude/agents/cleanup.md": {
       "content": "84af0717872c4996889bebb9ebccf9404b9a5ee6c037edff1fe91afddfa012c9"
@@ -836,10 +911,10 @@
       "content": "a983455252742ffae7990aeead26731462a98f6ebe1d49d942da86c09ec490e5"
     },
     ".claude/agents/counterexample-hunter.md": {
-      "*": "e32af4a26dc95dfdf9f2279d7047f5c241249ede7648839bf00bebc2c5be93c6"
+      "*": "7e401d1679da3bb679029aba4f24e3cc1a5e749c8a7105e49f0f7b7abbe9ee17"
     },
     ".claude/agents/engine-advisor.md": {
-      "*": "1badec05005e520646bbee9e1a1b9679ad8c788037f96843487939b1fe0dcaf0"
+      "*": "e0197c133eeefe1390fbb14c6b145fbea13adee5b9a2c59d906b2ac3e0be7fc5"
     },
     ".claude/agents/evaluation-expert.md": {
       "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
@@ -848,7 +923,7 @@
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
     ".claude/agents/fidelity-auditor.md": {
-      "*": "44785e0691e2210193dc6715048ebb2e0bebec8a571b47ebbafec2a5f3ba17e2"
+      "*": "ceafc260346d5e0d4862ea691c30445e733edc741a2cff349ee2fabb050ba1c7"
     },
     ".claude/agents/format-converter.md": {
       "content": "c1e6028a5c5eaf689c561cf2c2f343870f53b5af5d048d5f86ea216839ecc254"
@@ -863,16 +938,16 @@
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
     ".claude/agents/interpretation-advisor.md": {
-      "*": "032a4c7fc6769c39ec716aa2b68d91caa389659581908dbd98d0c7d1e780a139"
+      "*": "d6a93fa774a485b0660e89d1525abee119f204ce185e64cada1ecad8a6fa503a"
     },
     ".claude/agents/lean-informalization.md": {
-      "*": "8b6b2805b783a756c75298153fd467f32dbbf59262bfc1650b034406164a2307"
+      "*": "7807d5accf65ebb4d8cfb2371b228be8191bbfd6fe801fb9a36ec630613afd23"
     },
     ".claude/agents/lean-prover.md": {
-      "*": "05cb3ae0e90f33fc425a41df86a54cfa657d6b36be59cefceb42b4e2b71cad9e"
+      "*": "95eb5d5edc11962ccf0210ea1d78e21e40ff2d5f84ab7d4bd042a75f8edcddbd"
     },
     ".claude/agents/logic-articulator.md": {
-      "*": "910b8197eaa98c9a556437a36cede041d0d457e2f4c8c7d7e8a3d60b3fa2c1ab"
+      "*": "dfe61102fbe80b04fee297450d11a6a34fec0b6996d09beff32309027fe32b4d"
     },
     ".claude/agents/methods-review-expert.md": {
       "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
@@ -917,7 +992,7 @@
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
     ".claude/agents/proof-strategist.md": {
-      "*": "ccb7e976645815ad31322e50ef4a0a94341f6aae7cee9cbf7e2cc1484f755681"
+      "*": "96e50e4e850fbc615ca24e66da80c081c4c6774d66a10f7002d9f855ef6ffa4a"
     },
     ".claude/agents/quality-auditor.md": {
       "invariant_core": "22865343d5410a5b9f6bf746260ff712d050e3ef8c1427a60abd7f94bc5ec18e",
@@ -959,16 +1034,16 @@
     ".claude/agents/security.md": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
-      "security_rules_invariant": "6b6a4bed94cbf42fb8ec7e44f2dbfabbb2639b5c3e22fe2648c8a3660be87a35",
-      "threat_intelligence": "9b8e9d770dcc7b994aa528e7dae8d75c31d73dd0c208ad0a36a05d3b1a1eb931",
+      "security_rules_invariant": "bc32341ed61176f7fba69ef0d09decaec4a33f9d6f0fae7f6f07f1236104eba0",
+      "threat_intelligence": "a287e74d8dcf2d165a8ff3be385588881e03687dbe07ac141e3685dc693ee9b1",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
     ".claude/agents/statement-formalizer.md": {
-      "*": "55717284fdb9a4ec47eb5b00bbff7964c232e64af94fb64d56b627f0fac583c3"
+      "*": "cde3615fe0320a5868c3047e20de1916b4278753b562ff139a67ab424eb544e8"
     },
     ".claude/agents/tactic-planner.md": {
-      "*": "a25564bbb633e99c0c6093f79d7c2c75410bda8514356fd004415aa95bf7bbcd"
+      "*": "926f9061413a991224c2c246613e51239d67b1b3bf6e6d00854b0ca7ad2d7cdd"
     },
     ".claude/agents/team-builder.md": {
       "content": "c73556804f3236e52a48366b914e5cdab66f42f992a6da53049c244ae93473bc"

@@ -2,6 +2,7 @@
 name: Methods Literature Review Expert — mathAgents
 description: "Component expert for Methods Literature Review in mathAgents — prepares Component Briefs, reviews drafts against brief checklist, approves deliverables"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

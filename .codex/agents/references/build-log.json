@@ -1,13 +1,13 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.1.0",
+  "agentteams_version": "1.1.3",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "9b16fb544c03aad636d3839c37873624f6efbd37",
+    "commit": "cbd41a74f3e8bedd516c3a32581be47eb7d6152b",
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-10T01:56:00.791758+00:00",
+  "generated_at": "2026-11-17T00:03:55.991442+00:00",
   "project_name": "mathAgents",
   "framework": "codex",
   "project_type": "research",
@@ -31,49 +31,12 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [
-    ".codex/agents/references/code-hygiene-rules.reference.md",
-    ".codex/agents/references/unix-philosophy-mapping.reference.md",
-    ".codex/agents/references/security-vulnerability-watch.reference.md",
-    ".codex/agents/references/security-vulnerability-watch.json",
-    ".codex/agents/references/security-linux-hardening.reference.md",
-    ".codex/agents/references/security-macos-hardening.reference.md",
-    ".codex/agents/references/security-windows-hardening.reference.md",
-    ".codex/agents/references/security-infrastructure-layers.reference.md",
-    ".codex/agents/references/ai-bad-habits-watch.reference.md",
-    ".codex/agents/references/framework-watch.reference.md",
-    ".codex/agents/references/adjacent-repos.md",
-    ".codex/agents/references/github-workflows-merge.reference.md",
-    ".codex/agents/references/branch-lifecycle.reference.md",
-    ".codex/agents/references/work-summary-spec.reference.md",
-    ".codex/agents/references/work-summary-tooling.reference.md",
-    ".codex/agents/references/work-summary-backfill.reference.md",
-    ".codex/agents/references/parallelization.reference.md",
-    ".codex/agents/references/sandbox-handoff.reference.md",
-    ".codex/agents/references/instruction-authority.reference.md",
-    ".codex/agents/references/orchestrator-spawn-authority.reference.md",
-    ".codex/agents/references/redteam-methodology.reference.md",
-    ".codex/agents/references/retrospective-remediation.reference.md",
-    ".codex/agents/references/cli-tool-discovery.reference.md",
-    ".codex/agents/references/skill-generation.reference.md",
-    ".codex/agents/references/external-retrieval-quality-gate.reference.md",
-    ".codex/agents/references/retrieval-integration.reference.md",
-    ".codex/agents/references/retrieval-trigger-contract.reference.md",
-    ".codex/agents/SETUP-REQUIRED.md",
-    ".codex/agents/references/write-policy.reference.md",
-    ".codex/agents/references/mcp-need.reference.md",
-    ".codex/confined-run.example.sh",
-    ".agentteams/bin/codex-role-gate.py",
-    ".codex/hooks.json",
-    ".codex/agents/references/pipeline-graph.md",
-    ".codex/agents/references/pipeline-graph.svg",
-    ".codex/agents/references/pipeline-handoffs.svg"
-  ],
+  "files_written": [],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "7e350d6cb17aac72",
     "universal/navigator.template.md": "3d28148430bddfdf",
-    "universal/security.template.md": "b738b65b9a3edecd",
+    "universal/security.template.md": "de2479d7357a9450",
     "universal/code-hygiene.template.md": "8c53882027a0aa40",
     "universal/adversarial.template.md": "0c7b7cb909b089a0",
     "universal/conflict-auditor.template.md": "a6199323e4d1add3",
@@ -115,7 +78,7 @@
     "universal/work-summary-backfill.reference.template.md": "5730bac043dc2874",
     "universal/parallelization.reference.template.md": "12111b7bb9a9aa10",
     "universal/sandbox-handoff.reference.template.md": "fe27b3ca2d7de60d",
-    "universal/instruction-authority.reference.template.md": "a73a355a8da0c15f",
+    "universal/instruction-authority.reference.template.md": "795f8448cc6435d3",
     "universal/orchestrator-spawn-authority.reference.template.md": "221ebb904e4f4e48",
     "universal/redteam-methodology.reference.template.md": "a0443337a9796294",
     "universal/retrospective-remediation.reference.template.md": "1965ac5f52cf72f0",
@@ -125,7 +88,7 @@
     "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
     "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
     "workstream-expert.template.md": "19e099ff5eaf447b",
-    "copilot-instructions.template.md": "d3fcc564166c5285",
+    "copilot-instructions.template.md": "aec170fecb546317",
     "builder/team-builder-copilot-vscode.template.md": "799171f781e58676",
     "domain/content-enricher.template.md": "25b7c467ae7a8978"
   },
@@ -585,50 +548,19 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "c8ca4ec6ab084233",
+  "manifest_fingerprint": "3b50641582f2a132",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
-    "references/unix-philosophy-mapping.reference.md": "98380a74b954cd46",
-    "references/security-vulnerability-watch.reference.md": "cd3742b855cef1ca",
-    "references/security-vulnerability-watch.json": "a45999d33d1ed11b",
-    "references/security-linux-hardening.reference.md": "9a670efe190347ec",
-    "references/security-macos-hardening.reference.md": "7fa4efd0a07759e5",
-    "references/security-windows-hardening.reference.md": "cf1d896e7d962ebb",
-    "references/security-infrastructure-layers.reference.md": "37def34e964633e8",
-    "references/ai-bad-habits-watch.reference.md": "32543aa395a0b308",
+    "references/security-vulnerability-watch.reference.md": "4aae997b8aa9f7b3",
+    "references/security-vulnerability-watch.json": "1bf3bca746671324",
+    "references/instruction-authority.reference.md": "f528ec87bad719b5",
+    "security.toml": "070a37b0d6a53611",
+    "../../.agents/skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
+    "../../.agents/skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
     "references/framework-watch.reference.md": "2d8e8df83972c912",
-    "references/adjacent-repos.md": "855bd3dee7b9380c",
-    "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
-    "references/branch-lifecycle.reference.md": "40c1047ac13cbe68",
-    "references/work-summary-spec.reference.md": "96232231a1f7c6be",
-    "references/work-summary-tooling.reference.md": "f3656972717153a9",
-    "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
-    "references/parallelization.reference.md": "fbd84bddbf5f6c13",
-    "references/sandbox-handoff.reference.md": "82e8d2e535443368",
-    "references/instruction-authority.reference.md": "ca0812420b64ade7",
-    "references/orchestrator-spawn-authority.reference.md": "76b1889804d1fd29",
-    "references/redteam-methodology.reference.md": "3c36b8d11bfcf964",
-    "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
-    "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
-    "references/skill-generation.reference.md": "2721d15d64d12081",
-    "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
-    "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
-    "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
-    "SETUP-REQUIRED.md": "b6c16adfbb523442",
-    "references/write-policy.reference.md": "d5d003ec5740b609",
-    "references/mcp-need.reference.md": "15c753f1a114601e",
-    "../confined-run.example.sh": "0d0aca72a2cdca97",
-    "../../.agentteams/bin/codex-role-gate.py": "8e2a3bea7a3b0022",
-    "../hooks.json": "440226be258249e4",
-    "references/pipeline-graph.md": "662997c4f9bf7a4e",
-    "references/pipeline-graph.svg": "fca0eb5fae81859d",
-    "references/pipeline-handoffs.svg": "21ced32c3aa143c1",
-    "orchestrator.toml": "ca8653a125a8be07",
+    "orchestrator.toml": "f6c6928c5519875c",
     "navigator.toml": "b05d9a19ce492a5f",
-    "security.toml": "befe722082db0141",
     "code-hygiene.toml": "d9558ff50a10ab04",
-    "adversarial.toml": "3615002c264d9613",
     "conflict-auditor.toml": "67694ceca20c3a60",
     "conflict-resolution.toml": "cbf6b98aaf3310f4",
     "cleanup.toml": "71aabf57e1a2d343",
@@ -636,7 +568,7 @@
     "agent-refactor.toml": "e74a67a4730c05b2",
     "repo-liaison.toml": "26882847b0573871",
     "git-operations.toml": "4812b21218240642",
-    "work-summarizer.toml": "42e8fd8565d6ad64",
+    "work-summarizer.toml": "b7c6db496b42af7f",
     "primary-producer.toml": "c9e1ba561058bb88",
     "quality-auditor.toml": "3e8c24b670a81df2",
     "cohesion-repairer.toml": "c9caec19d48962f9",
@@ -645,21 +577,32 @@
     "reference-manager.toml": "2cb30c00db5dcffd",
     "output-compiler.toml": "a71eae6a12cee14f",
     "visual-designer.toml": "9fa2ffa2bb66b9a9",
-    "post-production-auditor.toml": "6415c856ee4644d2",
     "retrieval-integrator.toml": "00750e3ff916cdff",
     "research-analyst.toml": "7a1c615914718657",
+    "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
+    "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
+    "references/work-summary-spec.reference.md": "96232231a1f7c6be",
+    "references/work-summary-tooling.reference.md": "f3656972717153a9",
+    "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
+    "references/parallelization.reference.md": "fbd84bddbf5f6c13",
+    "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
+    "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
+    "references/skill-generation.reference.md": "2721d15d64d12081",
+    "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
+    "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
+    "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
     "methods-review-expert.toml": "18d972bd913f2457",
     "harness-spec-expert.toml": "552e029c0c03085a",
     "proof-dossiers-expert.toml": "7c102c62ddb05d42",
     "proof-library-expert.toml": "e1b96fc1965bc2a9",
     "evaluation-expert.toml": "749566b7b7debfd7",
-    "../../AGENTS.md": "8a74207c5afb455f",
+    "../../AGENTS.md": "aba374c321ae760d",
     "team-builder.toml": "67112b2ee5aec8d9",
+    "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.toml": "3c9084a432be8c99",
-    "../../.agents/skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
-    "../../.agents/skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
-    "../../.agents/skills/tool-pandoc/SKILL.md": "ee738a290d2c238d",
-    "../../.agents/skills/tool-leanblueprint/SKILL.md": "f98348a9f0eeb42a"
+    "references/write-policy.reference.md": "d5d003ec5740b609",
+    "references/mcp-need.reference.md": "15c753f1a114601e",
+    "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {
     "../../.agents/skills/tool-lean-4/SKILL.md": {
@@ -669,14 +612,6 @@
     "../../.agents/skills/tool-mathlib/SKILL.md": {
       "name": "tool-mathlib",
       "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
-    },
-    "../../.agents/skills/tool-pandoc/SKILL.md": {
-      "name": "tool-pandoc",
-      "description": "\"Pandoc operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Pandoc.\""
-    },
-    "../../.agents/skills/tool-leanblueprint/SKILL.md": {
-      "name": "tool-leanblueprint",
-      "description": "\"leanblueprint operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with leanblueprint.\""
     }
   },
   "front_matter_baseline_version": 2,
@@ -695,7 +630,7 @@
       "codex_translation": "a5087d08429c64794c32801b8214640e0052f4c8ed9ee1c840f0b8f985c1025a"
     },
     ".codex/agents/axiom-auditor.toml": {
-      "codex_translation": "9aa27b39a0e1f6d4f6fe17f945c61ba009b2e0ae458e2851b6e9f28adaeed330"
+      "codex_translation": "4a3a64a84dc18edad62efa01862fc6725e406b8a00fc19fe719df9f22c0c3cdc"
     },
     ".codex/agents/cleanup.toml": {
       "content": "15ad0b097e669ab3b0753c4de59cf4251b0ce9d0713c2b6d0083f5633d21efc7",
@@ -733,10 +668,10 @@
       "codex_translation": "b00724a4e356510e26d3e462e284c45fa322533deda771694b7bfd59ec756e6e"
     },
     ".codex/agents/counterexample-hunter.toml": {
-      "codex_translation": "0b73305a523500055e8e15fa0d0f11f02b1727a34a1487fc20bf51d796f4c687"
+      "codex_translation": "fba7b12220dd07ff9490c419522eabc97be48bed3374d1cc1f97c1d111ed78e7"
     },
     ".codex/agents/engine-advisor.toml": {
-      "codex_translation": "7b0b8471e2a3997a4c82a437c078ed968b4420f8bc098b7203e3c33c4360b95b"
+      "codex_translation": "8460006cf4133406b0134ddfe274237a4b9e60a80418bbb49657a076244dcc36"
     },
     ".codex/agents/evaluation-expert.toml": {
       "component_spec": "fc1d3541b5a9d47be85c181fc7010483f5f6db02b1f8b4b061a9384706db47cd",
@@ -746,7 +681,7 @@
       "codex_translation": "c517da120ea57b028ebdccfba907802511dce959c34e4c2712dbe18bf84fa096"
     },
     ".codex/agents/fidelity-auditor.toml": {
-      "codex_translation": "86d144c5855528966ab5a8819868a129e4eb283440021f6dbf61f4d8d494b3ce"
+      "codex_translation": "f4ef5acf5c4520de2bbfe9d75296b619d231f40c78ecd930664c684787924042"
     },
     ".codex/agents/format-converter.toml": {
       "content": "e41be746a4d88ff90b6204207bdc475a1420015e1faadd247feeb25b074926d2",
@@ -764,16 +699,16 @@
       "codex_translation": "d91d1d32b32bc40f2868cc487cf9a6521c9d13513de08d9f52dbb2eef875f145"
     },
     ".codex/agents/interpretation-advisor.toml": {
-      "codex_translation": "244c399881e0637c114d5ffc498aa63d81fdd6a202b459fe8d45c96180f41e2d"
+      "codex_translation": "fe1261a57db3a3ed5e96970915fb9b83bad0346708dddd15ef88889fe14f4a89"
     },
     ".codex/agents/lean-informalization.toml": {
-      "codex_translation": "14b40e6e8792c4187c6b85763503806402f59c7148031063ca14c3ee94390612"
+      "codex_translation": "4aa3b9b9d02b0db73395121aa8578f61fc5a0d42a2a4fd3b8779dd25a61d4c28"
     },
     ".codex/agents/lean-prover.toml": {
-      "codex_translation": "4e5cd9380f5d9a2817b3df3c31a5bdbda3a66bf9fff6f4749086cbe6fe8b26e0"
+      "codex_translation": "8eaf15a661c4d3048640b22ef90695c9946a1aa1d9aa5e87223fba12f9f2ad5d"
     },
     ".codex/agents/logic-articulator.toml": {
-      "codex_translation": "54c2386eef9258ca1de1c1897007c4bab8c09e7c30d894d67aed134bba469860"
+      "codex_translation": "0e51e2495f665f1a12bf1cfb6ded06122b5e426c620a18cfec3348107e1c532b"
     },
     ".codex/agents/methods-review-expert.toml": {
       "component_spec": "fb49724ab331f8d581e5536c718f80bb8b0d361e369671d43152466a9de24a51",
@@ -826,7 +761,7 @@
       "codex_translation": "cf0d8880fc4baf581546f7bf91a6444971bab9be1c0ccdb0756d22585f4b1812"
     },
     ".codex/agents/proof-strategist.toml": {
-      "codex_translation": "93b8c7b5818536cae9fb919837c0568c0284a7037930458026bbf56980a0ca60"
+      "codex_translation": "d4dc9565d898e829e2795c48b9bb9234e5636cd0ae914a64475e8b4dfa4add28"
     },
     ".codex/agents/quality-auditor.toml": {
       "defect_taxonomy": "e9468640170cbdc1e966b0c589f2d1e4926c1fde9ca792f49923fae80e903b79",
@@ -872,18 +807,18 @@
     },
     ".codex/agents/security.toml": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
-      "security_rules_invariant": "4a07a6d9c929cf75a0724063b86b9217ffd8c08840014a5bca50ce344ae02a2b",
-      "threat_intelligence": "81defa9719fde85d20416cc0f5bf51f33775a5859349f9504c6c53332641f0e5",
+      "security_rules_invariant": "b5841b502fab86934f0b93b956cfb980febfd993a37af5e81ddf8c57c4429619",
+      "threat_intelligence": "cb6186f3dff20333dae9cde7040fd3191c07e950b6f7b0fa109688fcf8db645e",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "codex_translation": "98cd2d9b928f75a45ab2db39f6215138e0900cfb8afccaa839d3eea5f424efcd"
     },
     ".codex/agents/statement-formalizer.toml": {
-      "codex_translation": "e9e0d3caf2bef6c47750c79b2236b1eb86d1c73389a4e706f0025752cfd80e0f"
+      "codex_translation": "1659bf427065b07d0ae68d0df120234ea851711b0b3f04fe0cbf14135716b470"
     },
     ".codex/agents/tactic-planner.toml": {
-      "codex_translation": "a00d18dfd399566c8b767f4335def46c201ff2087f12e838342528a07f27cf4e"
+      "codex_translation": "2adc266b24ad0b6f56665c746669b2a7764925e1bafdc8fcb6b5df3f66368a40"
     },
     ".codex/agents/team-builder.toml": {
       "content": "a88bdaca8cf1eddfbacd85256271b3fc0ef6f14b785a33ee8a1a38cc3fc48977",
@@ -918,6 +853,7 @@
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
       "constitutional_rules_baseline": "37bfbafafaba1bf3c46ff89f6124f482efeb583faaf851326bf1aebdb693cf25",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
+      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
     }
   }

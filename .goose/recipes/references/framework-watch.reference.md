@@ -24,7 +24,7 @@ re-rendered on every `--update --merge`.
 <!-- AGENTTEAMS:BEGIN framework_data v=1 -->
 
 
-Generated on: `2026-11-09`
+Generated on: `2026-11-15`
 Source: https://docs.anthropic.com/en/docs/claude-code/sub-agents
 Fetch status: `skipped`
 Diff summary: `matched=0 new_upstream=0 missing_upstream=4`

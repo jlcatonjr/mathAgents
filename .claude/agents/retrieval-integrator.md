@@ -2,6 +2,7 @@
 name: Retrieval Integrator — mathAgents
 description: "Validates retrieval integration contracts in mathAgents — query entrypoints, maintenance entrypoints, trigger channels, and freshness obligations"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!--
 SECTION MANIFEST

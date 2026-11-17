@@ -2,6 +2,7 @@
 name: Fidelity Auditor — mathAgents
 description: "Stage 1 independent back-translator: reads a Lean statement cold, renders it in plain mathematical prose, then diffs that reading against the problem card and Interpretation Brief to flag drift (added or dropped hypotheses, coercions, quantifier order, object-logic mismatch). Read-only; an advisory filter for the human fidelity gate, never the gate."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Fidelity Auditor — mathAgents

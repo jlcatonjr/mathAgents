@@ -7,7 +7,7 @@
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-16T11:52:48.057672+00:00",
+  "generated_at": "2026-11-17T00:01:12.961617+00:00",
   "project_name": "mathAgents",
   "framework": "copilot-vscode",
   "project_type": "research",
@@ -31,7 +31,13 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [],
+  "files_written": [
+    ".github/agents/security.agent.md",
+    ".github/agents/references/security-vulnerability-watch.reference.md",
+    ".github/agents/references/security-vulnerability-watch.json",
+    ".github/agents/references/framework-watch.reference.md",
+    ".github/copilot-instructions.md"
+  ],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "7e350d6cb17aac72",
@@ -533,7 +539,18 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert"
+    "evaluation-expert",
+    "axiom-auditor",
+    "counterexample-hunter",
+    "engine-advisor",
+    "fidelity-auditor",
+    "interpretation-advisor",
+    "lean-informalization",
+    "lean-prover",
+    "logic-articulator",
+    "proof-strategist",
+    "statement-formalizer",
+    "tactic-planner"
   ],
   "governance_agents": [
     "navigator",
@@ -548,21 +565,17 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "01efff3f35d4c643",
+  "manifest_fingerprint": "92e74005c8b19704",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "security.agent.md": "564d877f34f9ea00",
-    "references/security-vulnerability-watch.reference.md": "17a147e9082f6a2d",
-    "references/security-vulnerability-watch.json": "36f7ee3f7f64d0e8",
-    "references/instruction-authority.reference.md": "f528ec87bad719b5",
-    "../copilot-instructions.md": "f5407b1b18dd5ad3",
-    "references/pipeline-graph.md": "cbc2a04f7e9e0d6b",
-    "references/pipeline-graph.svg": "7b0ae44a026faa62",
-    "../../.vscode/tasks.json": "1fe326f13f1dd5cb",
-    "orchestrator.agent.md": "99cb72284c422663",
+    "security.agent.md": "1e87ef4123668864",
+    "references/security-vulnerability-watch.reference.md": "16100a6052cb4f88",
+    "references/security-vulnerability-watch.json": "97fa023f32bd5ebd",
+    "references/framework-watch.reference.md": "5c5ddecdb8ea3071",
+    "../copilot-instructions.md": "08ebc5eba7df51ec",
     "references/ref-lean-4-reference.md": "816fe8da794dcdc3",
     "references/ref-mathlib-reference.md": "fc8f89ad91a8d9ee",
-    "references/framework-watch.reference.md": "2d8e8df83972c912",
+    "orchestrator.agent.md": "99cb72284c422663",
     "navigator.agent.md": "c62a8b6cce6789b9",
     "code-hygiene.agent.md": "f29bdfc5606b0b6c",
     "adversarial.agent.md": "2681ec35ef421af4",
@@ -591,6 +604,7 @@
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
     "references/parallelization.reference.md": "fbd84bddbf5f6c13",
+    "references/instruction-authority.reference.md": "f528ec87bad719b5",
     "references/retrospective-remediation.reference.md": "e62bcafe1a37c29a",
     "references/cli-tool-discovery.reference.md": "f99ce2cdb1f915e2",
     "references/skill-generation.reference.md": "8042ff44519f1328",
@@ -605,7 +619,8 @@
     "team-builder.agent.md": "0e54a832ee0b6b28",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.agent.md": "efc9966c04c05bd3",
-    "references/authorized-verify-keys/README.md": "badf32b421079acf"
+    "references/authorized-verify-keys/README.md": "badf32b421079acf",
+    "references/pipeline-graph.md": "cbc2a04f7e9e0d6b"
   },
   "front_matter_baseline": {
     "security.agent.md": {
@@ -1032,8 +1047,8 @@
     ".github/agents/security.agent.md": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
-      "security_rules_invariant": "6b6a4bed94cbf42fb8ec7e44f2dbfabbb2639b5c3e22fe2648c8a3660be87a35",
-      "threat_intelligence": "b09034b8e13f263ffe49fa611ab811a6b7e923a44f7860ee04f59dc1525be071",
+      "security_rules_invariant": "bc32341ed61176f7fba69ef0d09decaec4a33f9d6f0fae7f6f07f1236104eba0",
+      "threat_intelligence": "b1bb5fda5b045b0f756521356698b23830245e6e5d028421fc06263bfc0a502f",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501"
     },
     ".github/agents/statement-formalizer.agent.md": {

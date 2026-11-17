@@ -2,6 +2,7 @@
 name: Visual Designer — mathAgents
 description: "Creates and revises diagrams and figures for mathAgents using the approved diagram toolchain"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

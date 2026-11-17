@@ -10,6 +10,7 @@ SECTION MANIFEST — copilot-instructions.template.md
 | agent_team            | FENCED        | Full agent team list                     |
 | authority_hierarchy   | FENCED        | Source hierarchy list                    |
 | source_repositories   | FENCED        | Authority source entries                 |
+| toolchain_group_rule  | FENCED        | First-party toolchain group; template-authoritative |
 | constitutional_core   | FENCED        | Tier 1 principles C-1..C-5; non-overridable |
 | constitutional_rules  | USER-EDITABLE | Project may extend or customise          |
 | project_specific_rules| USER-EDITABLE | Extension home for instruction files     |
@@ -262,28 +263,6 @@ agentteams ships and restores this section on every `--update --merge`; a projec
 they are.
 <!-- AGENTTEAMS:END toolchain_group_rule -->
 
-<!-- AGENTTEAMS:BEGIN codex_write_policy v=1 -->
-## Write Policy: You Are the Orchestrator
-
-**This section applies to Codex sessions only.** Grok and Goose sessions that read this shared `AGENTS.md` ignore it and follow their own instructions.
-
-This team runs `write_policy: "orchestrator-only"`. In this top-level session **you are the orchestrator**, the
-only agent that writes. Every other agent is read-only and returns proposals; agents granted `agentteams_runner`
-stage their writes through it for your approval. Follow the orchestrator agent file's **Write Policy: Applying
-Proposals** section in full. In particular:
-
-- **Before every dispatch,** run `agentteams --issue-dispatch --agent <slug> --description <brief>` and put the
-  printed nonce in the task as the agent's `dispatch` value. An agent without one can't write.
-- **Returned artifacts:** apply them with `agentteams --apply-proposal FILE.json --description <brief>` or
-  `--run-request`.
-- **Staged writes:** review them with `agentteams --list-staged` and `--show-staged SID`, then decide with
-  `--apply-staged SID` or `--reject-staged SID`.
-- **At closeout:** run `agentteams --verify-proposal-ledger`.
-
-These commands queue for the operator's runner. If one says no runner is serving, ask the operator to start it.
-Reference: the team's `references/write-policy.reference.md`.
-<!-- AGENTTEAMS:END codex_write_policy -->
-
 ---
 
 ## Style Rules
@@ -361,3 +340,24 @@ denies it), append the `@security` row to `references/pending-security-rows.csv`
 it before or with the action. A pending row is never a clearance in itself. A later session that can
 write `.github/` transfers it under the rules in `references/pending-security-rows.README.md`
 (P1–P6).
+<!-- AGENTTEAMS:BEGIN codex_write_policy v=1 -->
+## Write Policy: You Are the Orchestrator
+
+**This section applies to Codex sessions only.** Grok and Goose sessions that read this shared `AGENTS.md` ignore it and follow their own instructions.
+
+This team runs `write_policy: "orchestrator-only"`. In this top-level session **you are the orchestrator**, the
+only agent that writes. Every other agent is read-only and returns proposals; agents granted `agentteams_runner`
+stage their writes through it for your approval. Follow the orchestrator agent file's **Write Policy: Applying
+Proposals** section in full. In particular:
+
+- **Before every dispatch,** run `agentteams --issue-dispatch --agent <slug> --description <brief>` and put the
+  printed nonce in the task as the agent's `dispatch` value. An agent without one can't write.
+- **Returned artifacts:** apply them with `agentteams --apply-proposal FILE.json --description <brief>` or
+  `--run-request`.
+- **Staged writes:** review them with `agentteams --list-staged` and `--show-staged SID`, then decide with
+  `--apply-staged SID` or `--reject-staged SID`.
+- **At closeout:** run `agentteams --verify-proposal-ledger`.
+
+These commands queue for the operator's runner. If one says no runner is serving, ask the operator to start it.
+Reference: the team's `references/write-policy.reference.md`.
+<!-- AGENTTEAMS:END codex_write_policy -->

@@ -2,6 +2,7 @@
 name: Format Converter — mathAgents
 description: "Converts deliverables from their source format to Markdown with Chicago author-date citations; Lean 4 sources; generated blueprint for final output in mathAgents"
 tools: Read
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 
