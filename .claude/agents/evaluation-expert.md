@@ -2,6 +2,7 @@
 name: Harness Evaluation Expert — mathAgents
 description: "Component expert for Harness Evaluation in mathAgents — prepares Component Briefs, reviews drafts against brief checklist, approves deliverables"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

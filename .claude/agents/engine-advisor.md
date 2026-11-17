@@ -2,6 +2,7 @@
 name: Engine Advisor — mathAgents
 description: "Read-only engine selection advisor: joins the prover-engine registry with this machine's probed profile and offers non-default engines (SMT, ATP, LLM provers) at the start of a working session and whenever one would help. Lean is the default; every other engine's output is a hint until the kernel re-checks it."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Engine Advisor — mathAgents

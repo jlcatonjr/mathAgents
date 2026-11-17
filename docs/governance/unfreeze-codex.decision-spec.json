@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "unfreeze-codex",
+  "scope": "unfreeze-codex",
+  "derives_from": "release-policy-public-1.1",
+  "effect_relaxes": "brief.json frozen_surfaces: codex",
+  "effect_targets": "brief.json; .codex/; .agentteams/bin/codex-role-gate.py; .agents/skills/; AGENTS.md",
+  "conditions": "Binding text: docs/governance/unfreeze-codex.conditions.txt. Re-establishes in this log the operator's 2026-11-09 Codex unfreeze (archive row of the same id, provenance only): Codex rendered natively under orchestrator-only, bespoke agents imported read-only; renders only through scripts/refresh_agent_surfaces.sh; agentteams and researchteam v1.1.0 or later.",
+  "conditions_verified": "sha256:7083f66a5122664c413f6ddd237f34add84d5f4f67cbc1f0798d79bb318189c8",
+  "evidence": "operator ruling 2026-11-09 (mathagents-ab); archive 1398425621@7803a688 docs/release/cx3-unfreeze-codex-goose.conditions.txt sha256 9b4fcf39cc5cf3ed0767b822a432c108a274e1903156330a2959588884de0a6d; researchteam _frozen.verify_unfreeze asks for exactly unfreeze-codex"
+}

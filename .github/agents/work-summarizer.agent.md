@@ -250,3 +250,10 @@ Implements the orchestrator's *Past-Day Backfill Obligation* — fills **recent 
 ## Project-Specific Notes
 
 > ⚙️ **USER-EDITABLE** — project-specific rules, overrides, and extensions for this agent. This section lies outside every `AGENTTEAMS` fence and is preserved verbatim across `agentteams --update --merge`.
+
+### Daily summaries are private (operator decision D-0, 2026-11-13)
+
+This repository is public. Write daily, weekly and monthly summaries under `tmp/private-records/workSummaries/`
+(for example `tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`), never under the tracked `workSummaries/`.
+Where the generic instructions above name `workSummaries/`, read `tmp/private-records/workSummaries/`. Plans stay in
+`tmp/by-week/`. Nothing under `tmp/` is ever committed (`scripts/hooks/private-paths-guard.sh` refuses it).

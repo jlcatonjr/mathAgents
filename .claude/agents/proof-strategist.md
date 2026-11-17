@@ -2,6 +2,7 @@
 name: Proof Strategist — mathAgents
 description: "Stage 2: builds the proof-strategy skeleton for a fidelity-approved statement — an informal strategy, method selection, and a leanblueprint dependency graph whose nodes bind to Lean names — and closes with an adversarial strategy review, all returned as text for the orchestrator to write. Loops back to Stage 1 when a strategy exposes a mis-stated theorem."
 tools: Read, Grep, Glob, mcp__agentteams_runner__write_file, mcp__agentteams_runner__read_file_hashed
+model: opus
 mcpServers:
   - agentteams_runner:
       type: stdio

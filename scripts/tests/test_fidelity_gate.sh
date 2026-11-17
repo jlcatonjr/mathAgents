@@ -12,7 +12,7 @@ cp "$ROOT/references/schemas/fidelity-record.schema.json" "$ROOT/references/sche
 cp "$ROOT/references/schemas/prover-engines.schema.json" "$TMP/references/schemas/"
 cp "$ROOT/references/object-logics.json" "$ROOT/references/prover-engines.json" "$TMP/references/"
 cp "$ROOT/references/axiom-allowlist.json" "$ROOT/references/preferences.toml" "$TMP/references/"
-mkdir -p "$TMP/docs/charter" && cp "$ROOT/docs/charter/03-decisions.md" "$TMP/docs/charter/"
+mkdir -p "$TMP/docs/charter" && cp "$(python3 -c 'import sys, pathlib; sys.path.insert(0, sys.argv[1]); import instance_root; print(instance_root.charter_path(pathlib.Path(sys.argv[2])))' "$ROOT/scripts" "$ROOT")" "$TMP/docs/charter/"
 printf '[[lean_lib]]\nname = "MathAgents"\n[[lean_lib]]\nname = "MathAgentsWIP"\n' > "$TMP/lean/lakefile.toml"
 echo "theorem thm : True := trivial" > "$TMP/lean/MathAgents/Pilot.lean"
 echo "import MathAgents.Pilot" > "$TMP/lean/MathAgents.lean"

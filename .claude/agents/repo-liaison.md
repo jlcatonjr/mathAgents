@@ -2,6 +2,7 @@
 name: Repo Liaison — mathAgents
 description: "Tracks agent documentation in repositories adjacent to mathAgents, communicates cross-repository impacts, maintains the adjacent-repos registry, and coordinates between orchestrators when this project's activity affects neighboring agent infrastructures."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

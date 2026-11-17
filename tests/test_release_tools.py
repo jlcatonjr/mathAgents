@@ -91,7 +91,9 @@ def test_tag_release_signs_in_a_fresh_clone_not_the_working_checkout():
 def test_tag_release_requires_a_green_long_suites_run_on_the_commit():
     """D46: the long suites run before every release; the tag script refuses a commit they have not passed."""
     script = TAG_RELEASE.read_text()
-    assert 'head_sha=$COMMIT&status=success&event=push' in script
+    assert 'head_sha=$COMMIT&status=success' in script
+    # a push run, or a workflow_dispatch run on exactly this commit (D45 condition 4, third text)
+    assert '.head_sha == "\'"$COMMIT"\'" and (.event == "push" or .event == "workflow_dispatch")' in script
     assert '.name == "long-suites" and .conclusion == "success"' in script
     assert 'die "no successful Gates run on $COMMIT passed long-suites' in script
     assert script.index("LONG_OK") < script.index('tag -s "$TAG"')  # checked before anything is signed
@@ -191,3 +193,18 @@ def test_the_signers_awk_reads_pyproject_as_tomllib_does():
     assert run(tag_awk, "-v", "k=version") == project["version"]
     assert run(lib_awk) == project["version"]
     assert text.count("\n[project]\n") + text.startswith("[project]\n") == 1  # one [project] table
+
+def test_wait_for_green_ci_fallback_uses_owner_repo_api_paths():
+    """@security review of PR #1 (2026-11-10): `gh api` takes OWNER/REPO; GH_REPO is host-qualified for `gh -R`, so
+    `repos/$GH_REPO/...` would be an invalid path. The dispatch fallback reads the run on the PR's exact head."""
+    lib = (ROOT / "scripts" / "operator" / "lib_release.sh").read_text()
+    assert 'GH_REPO="github.com/jlcatonjr/mathAgents"' in lib and "repos/$GH_REPO" not in lib
+    body = lib[lib.index("wait_for_green_ci() {"):lib.index("# version_at <rev>:")]
+    assert 'repos/jlcatonjr/mathAgents/compare/$base...$head' in body
+    assert 'repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$head' in body
+    assert 'select(.head_sha == "\'"$head"\'")' in body
+    assert '^(main|dev|release/[0-9]+\\.[0-9]+)$' in body
+    assert body.count('compare/$base...$head') == 2  # behind_by checked before and after the wait
+    assert '" long-suites=success "' in body
+    rms = (ROOT / "scripts" / "operator" / "release-merge-and-sign.sh").read_text()
+    assert 'wait_for_green_ci "$PR" long' in rms

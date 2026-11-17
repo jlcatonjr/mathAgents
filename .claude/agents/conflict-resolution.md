@@ -2,6 +2,7 @@
 name: Conflict Resolution — mathAgents
 description: "Makes ACCEPT/REJECT/REVISE decisions on conflicts flagged by the conflict auditor in mathAgents"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!--
 SECTION MANIFEST

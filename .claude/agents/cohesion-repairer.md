@@ -2,6 +2,7 @@
 name: Cohesion Repairer — mathAgents
 description: "Repairs within-section cohesion failures in mathAgents deliverables — disjointedness, broken transitions, and missing argumentative spine; does not reorganize across sections"
 tools: Read
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

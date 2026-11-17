@@ -2,6 +2,7 @@
 name: Agent Updater — mathAgents
 description: "Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

@@ -2,6 +2,7 @@
 name: Proof Dossiers Expert — mathAgents
 description: "Component expert for Proof Dossiers in mathAgents — prepares Component Briefs, reviews drafts against brief checklist, approves deliverables"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

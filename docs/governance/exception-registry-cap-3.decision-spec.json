@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "exception-registry-cap-3",
+  "scope": "exception-registry-cap-3",
+  "derives_from": "release-policy-public-1.1",
+  "effect_relaxes": "exception registry cap.max_active_relaxing: agentteams default 1 raised to 3",
+  "effect_targets": ".github/agents/references/exception-registry.json",
+  "conditions": "Operator decision D-6 (2026-11-15): the Rule 11(d) aggregate cap for this workspace is 3 active relaxing exceptions, recorded in .github/agents/references/exception-registry.json, listing unfreeze-codex and unfreeze-goose (2 of 3; the S-10 toolchain group takes no slot). agentteams checks the cap only at activation, not at signing (agentteams #505, fix due in 1.2.1), so the orchestrator counts it before each relaxing row is signed. Raising the cap again needs a new signed row.",
+  "conditions_verified": "registry sha256:b4a73a0f6b9cb5d92172e308c200c9de47e12d0c583adff01d4a46101d42bf16 at signing",
+  "evidence": "agentteams v1.1.0/v1.1.3 cli/exception_registry.py (assert_within_aggregate_cap, active_relaxing_exceptions); agentteams issue #505; pr11 P03 D-6"
+}

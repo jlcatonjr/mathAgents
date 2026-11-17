@@ -2,6 +2,7 @@
 name: Statement Formalizer — mathAgents
 description: "Stage 1 drafter: turns a problem card's informal statement into an explicit quantified statement and a Lean 4 stub (`:= sorry`) for the MathAgentsWIP library, under the declared object logic, returned as text for the orchestrator to write. Drafts for the human fidelity gate; never decides it."
 tools: Read, Grep, Glob, mcp__agentteams_runner__write_file, mcp__agentteams_runner__run_command, mcp__agentteams_runner__read_file_hashed
+model: opus
 mcpServers:
   - agentteams_runner:
       type: stdio

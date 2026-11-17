@@ -2,6 +2,7 @@
 name: Interpretation Advisor — mathAgents
 description: "Statement-interpretation and provenance expert for proof development: surfaces competing readings of an informal claim and the object logic each presupposes, traces the provenance and variant history of a theorem and its proof methods, and commissions auditable interpretation briefs and logic/method guides. Advises the human fidelity gate; never decides it."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Interpretation Advisor — mathAgents

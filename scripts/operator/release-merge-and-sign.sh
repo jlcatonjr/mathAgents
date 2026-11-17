@@ -47,7 +47,7 @@ v=$(version_at "$REL_HEAD"); [[ "$v" == "$EXPECT_VERSION" ]] || die "REL_HEAD is
 echo "ok: #$PR -> $LINE at $REL_HEAD, version $v"
 
 printf '\n== CI on #%s\n' "$PR"
-wait_for_green_ci "$PR"
+wait_for_green_ci "$PR" long
 yes_or_stop "Merge #$PR (mathAgents $v) into $LINE at ${REL_HEAD:0:10} with a regular merge?"
 "$GH" pr merge "$PR" -R "$GH_REPO" --merge --match-head-commit "$REL_HEAD"
 MERGE=$("$GH" pr view "$PR" -R "$GH_REPO" --json mergeCommit --jq .mergeCommit.oid)

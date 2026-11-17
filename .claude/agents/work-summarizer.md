@@ -2,6 +2,7 @@
 name: Work Summarizer — mathAgents
 description: "Synthesizes daily, weekly, and monthly work summaries from canonical plan artifacts and git evidence for mathAgents; supports append-first daily capture, legacy tmp/ fallback, and required adversarial/conflict audits"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 
@@ -251,3 +252,10 @@ codes are in `references/write-policy.reference.md`.
 ## Project-Specific Notes
 
 > ⚙️ **USER-EDITABLE** — project-specific rules, overrides, and extensions for this agent. This section lies outside every `AGENTTEAMS` fence and is preserved verbatim across `agentteams --update --merge`.
+
+### Daily summaries are private (operator decision D-0, 2026-11-13)
+
+This repository is public. Write daily, weekly and monthly summaries under `tmp/private-records/workSummaries/`
+(for example `tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`), never under the tracked `workSummaries/`.
+Where the generic instructions above name `workSummaries/`, read `tmp/private-records/workSummaries/`. Plans stay in
+`tmp/by-week/`. Nothing under `tmp/` is ever committed (`scripts/hooks/private-paths-guard.sh` refuses it).

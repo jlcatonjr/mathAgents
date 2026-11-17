@@ -184,10 +184,20 @@ def test_claude_over_grants_are_refused():
 
 
 @pytest.mark.parametrize("extra", ["permissionMode: bypassPermissions", "mcpServers: [x]", "hooks: {}",
-                                   "model: opus", "tools: Read, Bash"])
+                                   "model: inherit", "model: haiku", "model: sonnet", "model:", "model: opus extra",
+                                   "model: claude-fable-5-2", "model: opus\nmodel: opus", "tools: Read, Bash"])
 def test_a_claude_projection_with_any_other_or_a_repeated_key_is_refused(extra):
     with pytest.raises(surfaces.SurfaceError):
         surfaces.check_claude(f"---\nname: x\ntools: Read, Grep, Glob\n{extra}\n---\n", ["read", "search"])
+
+
+@pytest.mark.parametrize("model", ["opus", "'opus'", '"opus"'])
+def test_a_claude_projection_may_carry_the_agentteams_default_model(model):
+    """agentteams 1.1.1+ writes `model: opus` for a non-orchestrator agent (operator kept it, 2026-11-16): allowed
+    as that exact value only; the tools check still applies."""
+    surfaces.check_claude(f"---\nname: x\ntools: Read, Grep, Glob\nmodel: {model}\n---\n", ["read", "search"])
+    with pytest.raises(surfaces.SurfaceError):
+        surfaces.check_claude(f"---\nname: x\ntools: Read, Grep, Bash\nmodel: {model}\n---\n", ["read", "search"])
 
 
 CODEX = "name = \"x\"\ndescription = \"d\"\nsandbox_mode = \"{mode}\"\ndeveloper_instructions = '''\nbody\n'''\n"

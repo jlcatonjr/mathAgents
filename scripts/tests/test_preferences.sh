@@ -27,7 +27,7 @@ mkdir -p "$TMP/references/schemas" "$TMP/docs/charter" "$TMP/reports/dossiers/de
 cp "$ROOT"/references/schemas/*.json "$TMP/references/schemas/"
 cp "$ROOT/references/object-logics.json" "$ROOT/references/prover-engines.json" "$ROOT/references/axiom-allowlist.json" \
    "$ROOT/references/preferences.toml" "$TMP/references/"
-cp "$ROOT/docs/charter/03-decisions.md" "$TMP/docs/charter/"
+cp "$(python3 -c 'import sys, pathlib; sys.path.insert(0, sys.argv[1]); import instance_root; print(instance_root.charter_path(pathlib.Path(sys.argv[2])))' "$ROOT/scripts" "$ROOT")" "$TMP/docs/charter/"
 D="$TMP/reports/dossiers/demo"
 printf '# Brief\n\n### R1. One\n\n### R2. Two\n\nG-AX-P9-1 and G-AX-P9-2 are candidates.\n' > "$D/interpretation.md"
 prefs() {  # prefs [logic] [kernel_as_judge] [extra]

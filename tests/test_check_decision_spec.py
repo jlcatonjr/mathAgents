@@ -2,6 +2,7 @@
 and scope rules, so a spec that cannot clear is refused before the operator's key is read."""
 from __future__ import annotations
 
+import csv
 import json
 import sys
 from pathlib import Path
@@ -103,13 +104,54 @@ def test_cli_exit_codes(tmp_path):
     assert cds.main([str(tmp_path / "missing.json"), "--team-dir", ".github/agents", "--repo", str(repo)]) == 2
 
 
-SPECS = sorted((ROOT / "docs" / "release").glob("*.decision-spec.json")) if (ROOT / "docs" / "release").is_dir() else []
+SPEC_DIRS = [ROOT / "docs" / "governance", ROOT / "docs" / "release"]  # docs/release/ only in the private history
+SPECS = sorted(p for d in SPEC_DIRS if d.is_dir() for p in d.glob("*.decision-spec.json"))
 
 
-@pytest.mark.skipif(not SPECS, reason="docs/release/ is not in this tree (the public export excludes it)")
+def _dated(spec: dict) -> dict:
+    """Signing scripts set the date at signing time (a DATE or <...> placeholder in the committed spec)."""
+    for key in ("date", "timestamp"):
+        if key in spec and (spec[key] == "DATE" or "<" in str(spec[key])):
+            spec[key] = "2026-11-15"
+    return spec
+
+
+def _repo_with_unsigned_parents(tmp_path: Path) -> Path:
+    """The team's real log and roster, plus a stand-in row for each committed spec not yet signed into the log.
+
+    Lineage then resolves through committed specs (a child drafted before its parent is signed still checks), while
+    an id that is neither recorded nor a committed spec still fails.
+    """
+    refs = tmp_path / ".github/agents/references"
+    refs.mkdir(parents=True)
+    real = ROOT / ".github/agents" / cds.LOG
+    rows = list(csv.DictReader(real.open(encoding="utf-8", newline=""))) if real.exists() else []
+    out = [(r.get("action_reviewed") or "", r.get("derives_from") or "") for r in rows]
+    recorded = {a.strip().lower() for a, _ in out}
+    for p in SPECS:
+        s = json.loads(p.read_text(encoding="utf-8"))
+        aid = str(s.get("action_reviewed") or "").strip().lower()
+        if aid and aid not in recorded:
+            out.append((aid, str(s.get("derives_from") or "")))
+    with (refs / Path(cds.LOG).name).open("w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["action_reviewed", "derives_from"])
+        w.writerows(out)
+    roster = ROOT / ".github/agents" / cds.ROSTER
+    if roster.exists():
+        (refs / Path(cds.ROSTER).name).write_text(roster.read_text(encoding="utf-8"), encoding="utf-8")
+    return tmp_path
+
+
+@pytest.mark.skipif(not SPECS, reason="no committed decision specs in docs/governance/ (or docs/release/)")
 @pytest.mark.parametrize("spec_path", SPECS, ids=lambda p: p.name)
-def test_committed_specs_pass(spec_path):
-    spec = json.loads(spec_path.read_text(encoding="utf-8"))
-    if "<" in str(spec.get("date", "")):
-        spec["date"] = "2026-10-28"  # signing scripts set the date at signing time
-    assert cds.check(spec, ".github/agents", ROOT)[0] == []
+def test_committed_specs_pass(spec_path, tmp_path):
+    spec = _dated(json.loads(spec_path.read_text(encoding="utf-8")))
+    assert cds.check(spec, ".github/agents", _repo_with_unsigned_parents(tmp_path))[0] == []
+
+
+def test_committed_spec_lineage_cannot_name_an_unknown_id(tmp_path):
+    if not SPECS:
+        pytest.skip("no committed decision specs")
+    spec = _dated({**json.loads(SPECS[0].read_text(encoding="utf-8")), "derives_from": "no-such-row-anywhere"})
+    assert any("no-such-row-anywhere" in p for p in cds.check(spec, ".github/agents", _repo_with_unsigned_parents(tmp_path))[0])

@@ -2,6 +2,7 @@
 name: Research Analyst — mathAgents
 description: "Orchestrates the optional agentteams[research] runtime library in mathAgents — web search, reputable-source rating, and dual-lens claim verification"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

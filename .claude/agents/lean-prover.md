@@ -2,6 +2,7 @@
 name: Lean Prover — mathAgents
 description: "Stage 5: drafts Lean 4 proofs for fidelity-approved stubs, iterating on kernel feedback by piping each attempt to lake (nothing written), returns the finished file text for the orchestrator to write, runs the G-KERNEL gate on what was written, and drafts the move of a declaration from MathAgentsWIP to MathAgents only once it is proved. Never changes an approved statement; the kernel, not the prover, decides what is proved."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Lean Prover — mathAgents

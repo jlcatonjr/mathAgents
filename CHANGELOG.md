@@ -13,6 +13,24 @@ versioned here; a result's status is its G-KERNEL report.
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-11-10
+
+### release notes
+
+`v1.1.0` is the first release of the 1.1 line, tagged on `release/1.1`, and the first from this public repository.
+Its history starts fresh at an export of the private repository's `main` (charter D45): the 1.0.x tags and their
+history stay in the archived private repository, so the 1.0.x sections below are kept for reference and their compare
+links name tags this repository does not have. The release:
+- moves the toolchain to agentteams `v1.1.0` and researchteam `v1.1.0`, the peeled commits of verified signed tags;
+- unfreezes the Codex and Goose surfaces: Codex runs under the orchestrator-only write policy, and Goose is rendered
+  off the switch, UNENFORCED, as an accepted risk until agentteams enforces the policy there;
+- is licensed Apache-2.0 (`LICENSE`, `NOTICE`, and the `pyproject.toml` licence metadata). The package keeps the
+  "Private :: Do Not Upload" classifier, so nothing is uploaded to PyPI: install it from this repository;
+- runs the long suites only where they can matter, and before every release (D46).
+
+**To pin this release:** verify the tag against `~/.config/agentteams/allowed_signers`, then pin the commit it points to
+(its peeled commit), never a branch.
+
 ### Added
 - A documentation site and an interactive explorer, built like agentteams' and baseAgent's (MkDocs Material). It
   has Home, Getting Started, Concepts, a CLI reference, the API reference, the Explorer, the Proof Library,
@@ -34,23 +52,47 @@ versioned here; a result's status is its G-KERNEL report.
   - `tests/test_api_site.py` runs in the gates job.
 - `mathagents.cli` builds its parser in a private `_build_parser()`, so the site can read it. Arguments that had
   no help text now have it. Nothing else in the behaviour changes, and no public name changes.
+- A public summary of the decision charter, `docs/charter/decisions-summary.md`, which keeps every decision number
+  (the full charter stays in the archived private repository). `scripts/instance_root.py`'s `charter_path()` resolves
+  the summary where it exists.
+- The operator's release tooling gains a decision-spec preflight (`scripts/operator/check_decision_spec.py`) and a
+  root-owned signer (`scripts/operator/lib_signer.sh`); the tag signer uses no python.
 
 ### Changed
+- `toolchain.lock` pins agentteams `v1.1.0` (`9b16fb54`) and researchteam `v1.1.0` (`938dd663`), the peeled commits of
+  verified signed tags, and the agent surfaces are re-rendered on them through `scripts/refresh_agent_surfaces.sh`.
+  `brief.json` `frozen_surfaces` is empty: Codex is rendered natively with the role gate, and Goose's recipes are
+  grant-scoped, off the write-policy switch (an accepted risk, recorded in the operator's signed unfreeze decision).
+- Native per-provider projection, phase 1: the Copilot-to-Claude bridge is retired, and a fail-closed bridge guard
+  runs before and after every agent-surface update.
+- CI follows an integration-branch model: pull requests go into `dev`, and `dev` reaches `main` through a release PR.
 - **CI cost (charter D46, superseding D36):** the long suites run only where they can matter. They are the
   G-KERNEL gate tests and the Lean half of the G-AX tests, now in the `long-suites` job. They run on releases,
   manual dispatch, a monthly schedule, PRs that change their inputs (`scripts/ci_long_suite_inputs.txt`), and
   pushes to `main` that the merged PR's run did not cover. `scripts/ci_long_suites.py` decides, fail-closed, and
   `tag-release.sh` refuses a commit without a green `long-suites` run. G-KERNEL itself still runs on every push.
-- On `main` only, `toolchain.lock` follows the 1.1 line: agentteams `v1.1.0-rc.15` (`9900fbd3`) and researchteam
-  `v1.1.0-rc.4` (`4af46b7d`), the peeled commits of verified signed tags, in the operator-signed rows
-  `pin-agentteams-v1.1.0-rc.15` and `pin-researchteam-v1.1.0-rc.4`, with the surfaces re-rendered at agentteams
-  rc.15, whose security agents carry the restored S-10 package cooldown. Before that, rc.12 and rc.3 (#93; the rc.3
-  row is retroactive for #90). `release/1.0` stays on agentteams `v1.0.0` and researchteam `v1.0.1`.
-- `.agentteams-status/.gitignore`, committed by that sync, is untracked (#66); the directory is ignored since #63.
+- `.agentteams-status/.gitignore`, committed by an earlier sync, is untracked; the directory has been ignored since 1.0.1.
 - The harness spec's account of the Lean library is corrected (audit finding IA-39): `lean/MathAgents/` holds four
   files, `Smoke` is documented as a toolchain smoke test, and the `finite-probability` object logic is `available`.
 - Charter decision D40: the operator chose route A for G-FID delegation, a pre-screened review queue with no
   delegation, and no delegation setting is added (the design's `fidelity.delegation` key stays unimplemented).
+- `CONTRIBUTING.md`, `STABILITY.md`, `docs/module.md` and the concepts page describe the public repository.
+
+### Removed
+- The self-hosted fallback runner (charter D37) and its scripts are retired; CI runs on GitHub-hosted runners only.
+
+### Fixed
+- Five gate tests (G-FID, G-CX, the G-AX validator, dossier structure, preferences) copied the full charter into
+  their fixtures and failed on the public tree, which carries only the summary; they now copy the file
+  `charter_path()` resolves. `test_stage_agents.sh` still checks every stage agent's grants, and runs its cross-check
+  against the full charter's D27, D39 and D41 rows only where that file exists.
+- The release tools accept a Gates run started by `workflow_dispatch` on exactly the commit in question, as well as a
+  push run: `tag-release.sh` for the long-suites evidence (D46 is unchanged: the long suites must pass on the signed
+  commit), and `release-merge-and-sign.sh` and `merge-forward.sh` when no pull-request check registers. On release day
+  the public repository's push and pull_request events started no workflow (D45 condition 4).
+- The p2 and p3 kernel snapshots are re-taken under the public history.
+
+**Toolchain:** agentteams `v1.1.0` at `9b16fb54` · researchteam `v1.1.0` at `938dd663` · Lean `leanprover/lean4:v4.34.1` · Mathlib `d13f23b`.
 
 ## [1.0.1] — 2026-10-23
 
@@ -325,7 +367,8 @@ mathagents freezes at 1.0.0 on agentteams 1.0 final (decision D43). v0.2.7 is th
 
 **Toolchain:** agentteams 1.0.0rc7 (commit not recorded) · Lean `v4.34.1` · Mathlib `d13f23b`.
 
-[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/jlcatonjr/mathAgents/releases/tag/v1.1.0
 [1.0.1]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.0...v1.0.1
 [1.0.1rc2]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.1-rc.1...v1.0.1-rc.2
 [1.0.1rc1]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.0...v1.0.1-rc.1

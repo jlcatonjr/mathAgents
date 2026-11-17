@@ -47,20 +47,27 @@ def posture(words: str) -> set[str]:
     if "bash" in w:
         granted.add("execute")
     return granted
-d27 = next((l for l in Path("docs/charter/03-decisions.md").read_text().splitlines() if l.startswith("| D27 |")), "")
+# D45: the full charter stays in the archived private repository; the public tree carries the summary, whose rows
+# are not edited after the fact. The grants themselves are checked below either way; only the cross-check that the
+# full charter recorded each amendment needs the full charter.
+FULL_CHARTER = Path("docs/charter/03-decisions.md")
 POSTURE = {}
 for name in STAGE_AGENTS:
     check(name in table, f"{name}: has a posture in charter §5")
     POSTURE[name] = ((posture(table.get(name, "")) | AMENDMENTS.get(name, set())) - REVOKED.get(name, set())
                      - REVOKED_D41.get(name, set()))
-for name, extra in AMENDMENTS.items():
-    check(name in d27 and all(f"`{t}`" in d27 for t in extra), f"{name}: amendment {sorted(extra)} recorded in D27")
-d39 = next((l for l in Path("docs/charter/03-decisions.md").read_text().splitlines() if l.startswith("| D39 |")), "")
-for name, gone in REVOKED.items():
-    check(f"`{name}`" in d39 and all(f"`{t}`" in d39 for t in gone), f"{name}: revocation {sorted(gone)} recorded in D39")
-d41 = next((l for l in Path("docs/charter/03-decisions.md").read_text().splitlines() if l.startswith("| D41 |")), "")
-for name, gone in REVOKED_D41.items():
-    check(f"`{name}`" in d41 and all(f"`{t}`" in d41 for t in gone), f"{name}: revocation {sorted(gone)} recorded in D41")
+if FULL_CHARTER.is_file():
+    d27 = next((l for l in FULL_CHARTER.read_text().splitlines() if l.startswith("| D27 |")), "")
+    for name, extra in AMENDMENTS.items():
+        check(name in d27 and all(f"`{t}`" in d27 for t in extra), f"{name}: amendment {sorted(extra)} recorded in D27")
+    d39 = next((l for l in FULL_CHARTER.read_text().splitlines() if l.startswith("| D39 |")), "")
+    for name, gone in REVOKED.items():
+        check(f"`{name}`" in d39 and all(f"`{t}`" in d39 for t in gone), f"{name}: revocation {sorted(gone)} recorded in D39")
+    d41 = next((l for l in FULL_CHARTER.read_text().splitlines() if l.startswith("| D41 |")), "")
+    for name, gone in REVOKED_D41.items():
+        check(f"`{name}`" in d41 and all(f"`{t}`" in d41 for t in gone), f"{name}: revocation {sorted(gone)} recorded in D41")
+else:
+    print("note: docs/charter/03-decisions.md is not in this tree (D45); the D27/D39/D41 record cross-check is skipped")
 
 bespoke = re.search(r"^BESPOKE_AGENTS=\(([^)]*)\)", Path("scripts/refresh_agent_surfaces.sh").read_text(), re.M)
 bespoke = set(bespoke.group(1).split()) if bespoke else set()
