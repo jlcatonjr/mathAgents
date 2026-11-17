@@ -2,6 +2,7 @@
 name: Lean Informalization — mathAgents
 description: "Turns Lean 4 formal developments into faithful, readable mathematics (informalization) under a name-binding faithfulness contract — narrates statements and foundations, never inventing a claim the kernel did not check"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!-- PROVENANCE (spec DD-31, charter §4 Stage 7). Ported as a copy from the baseAgent repository:

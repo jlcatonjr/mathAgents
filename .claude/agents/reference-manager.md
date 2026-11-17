@@ -2,6 +2,7 @@
 name: Reference Manager — mathAgents
 description: "Manages the bibliography and reference database for mathAgents — CRUD operations, citation verification, anti-fabrication enforcement"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

@@ -64,11 +64,19 @@ elif [[ -d .codex/agents ]]; then
     # Native Codex team (write_policy covering codex, CX-3; agentteams #319): agentteams refuses an interop-only
     # projection, so re-run refresh step 3a (native render, then the bespoke import) on a copy of the tree.
     FRESH_SRC="$FRESH"; FRESH="$FRESH/tree"
+    # The copy needs the repository's identity: agentteams applies the toolchain group only when remote.origin.url
+    # names a listed workspace (toolchain_group), and the security agent's S-10 bullet depends on it. Give the copy a
+    # bare `git init` with the same origin URL, not the history (pr11 P08: without it this step reported a false
+    # "stale" on .codex/agents/security.toml).
+    : >"$FRESH_SRC/render.log"
     rsync -a --exclude .git --exclude .venv --exclude lean/.lake --exclude node_modules ./ "$FRESH/" \
+      && git -C "$FRESH" init -q >>"$FRESH_SRC/render.log" 2>&1 \
+      && { ORIGIN="$(git config --get remote.origin.url || true)"; [[ -z "$ORIGIN" ]] \
+           || git -C "$FRESH" remote add origin "$ORIGIN" >>"$FRESH_SRC/render.log" 2>&1; } \
       && ( cd "$FRESH" \
            && "$(python3 scripts/lib/agentteams_provenance.py --interpreter-of researchteam)" -c \
                 "from pathlib import Path; from researchteam._update_cmd import _refresh_codex; _refresh_codex(Path('.'), dry_run=False)" \
-           && bash scripts/lib/project_bespoke_codex.sh ) >"$FRESH_SRC/render.log" 2>&1 \
+           && bash scripts/lib/project_bespoke_codex.sh ) >>"$FRESH_SRC/render.log" 2>&1 \
       || bad "codex freshness: temp projection failed:"$'\n'"$(tail -20 "$FRESH_SRC/render.log")"
   else
     # mirror the repository layout: AGENTS.md is Goose-owned and interop leaves an existing one alone,

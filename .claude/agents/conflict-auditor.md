@@ -2,6 +2,7 @@
 name: Conflict Auditor — mathAgents
 description: "Detects logical conflicts across deliverables, agent documentation, reference files, and source material in mathAgents"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

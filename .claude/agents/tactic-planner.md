@@ -2,6 +2,7 @@
 name: Tactic Planner — mathAgents
 description: "Stage 4: drafts a tactic-level plan for each blueprint node — candidate Lean 4 tactics, Mathlib lemmas verified to exist under the pinned toolchain, and engine hints from the prover registry. Advisory formal sketches for the Lean prover, returned as text for the orchestrator to write; writes no file."
 tools: Read, Grep, Glob, mcp__agentteams_runner__write_file, mcp__agentteams_runner__read_file_hashed
+model: opus
 mcpServers:
   - agentteams_runner:
       type: stdio

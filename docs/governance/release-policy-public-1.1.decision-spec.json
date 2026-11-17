@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "release-policy-public-1.1",
+  "scope": "release-policy-public-1.1",
+  "derives_from": "",
+  "effect_relaxes": "",
+  "effect_targets": "docs/release-policy.md",
+  "conditions": "Binding text: docs/governance/release-policy-public-1.1.conditions.txt. Adopts docs/release-policy.md at sha256 0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de (main 2ee1946, PR #6) as the public repository's release policy for the 1.1 line, and is the lineage root of this log. It grants nothing and relaxes nothing; the archived private log is cited as provenance only and carries no authority.",
+  "conditions_verified": "conditions sha256:f8d62a4c69ed42b218af83df9bb206c480243b1e8a12fbe1fe69b17feaa9e712; docs/release-policy.md sha256:0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de (git show origin/main 2ee1946, equal to PR #6 head 5b2f5b3)",
+  "evidence": "PR #6 (merged 2ee1946); pr11 P03 plan tmp/by-week/2026-W46/pr11-p03-governance-bootstrap (private); operator decisions D-2, D-5, D-6, D-8 in session 2026-11-11 to 2026-11-15; archive provenance 1398425621@7803a688 log sha256 dfe9a764962ab91ce81b05d891a43f977046ea6f32e52c05c8b7edd677fbb675"
+}

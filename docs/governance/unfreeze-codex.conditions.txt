@@ -1,0 +1,20 @@
+Binding conditions for the operator's Rule 11 row unfreeze-codex in the public repository jlcatonjr/mathAgents (id
+1452811332), deriving from release-policy-public-1.1. It re-establishes, in this repository's own log, the Codex
+unfreeze the operator ruled on 2026-11-09 ("Both now, Goose UNENFORCED"). The id is unchanged because researchteam's
+unfreeze check (and scripts/lib/require_unfreeze_toolchain.sh) asks for exactly unfreeze-codex.
+Provenance only: archive jlcatonjr/mathAgents-private (id 1398425621) commit 7803a688,
+docs/release/cx3-unfreeze-codex-goose.conditions.txt sha256 9b4fcf39cc5cf3ed0767b822a432c108a274e1903156330a2959588884de0a6d
+(its Codex half, items 1, 2, 4 and 5, restated here; its Goose half is superseded by unfreeze-goose).
+
+1. Scope. codex stays out of brief.json frozen_surfaces and in write_policy_frameworks. Nothing else in the brief
+   changes under this row.
+2. Codex under orchestrator-only. The Codex team is rendered natively under the switch (role gate
+   .agentteams/bin/codex-role-gate.py, .codex/hooks.json, the launcher), and the bespoke pipeline agents are imported
+   into it read-only (agentteams #319; scripts/lib/project_bespoke_codex.sh), each with sandbox_mode "read-only".
+   mcp_grants are not honoured on Codex.
+3. Toolchain. Effective only with agentteams v1.1.0 or later and researchteam v1.1.0 or later, release tags pinned in
+   toolchain.lock (scripts/lib/require_unfreeze_toolchain.sh refuses earlier).
+4. Render. Renders go through scripts/refresh_agent_surfaces.sh only; check_render_consistency.sh must pass; every
+   bespoke .codex/agents/*.toml is read-only; AGENTS.md keeps its project-owned regions.
+5. Use. researchteam's unfreeze check does not consume this row, so it stays in force until the operator records a
+   HALT or a superseding row. The exception registry lists it (.github/agents/references/exception-registry.json).

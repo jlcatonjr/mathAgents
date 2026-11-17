@@ -2,6 +2,7 @@
 name: Work Summarizer — mathAgents
 description: "Synthesizes daily, weekly, and monthly work summaries from canonical plan artifacts and git evidence for mathAgents; supports append-first daily capture, legacy tmp/ fallback, and required adversarial/conflict audits"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

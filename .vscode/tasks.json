@@ -137,6 +137,21 @@
       "detail": "AGENTTEAMS"
     },
     {
+      "label": "script: install_private_paths_guard",
+      "type": "shell",
+      "command": "bash scripts/install_private_paths_guard.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "detail": "AGENTTEAMS"
+    },
+    {
       "label": "script: validate_agentteams_update",
       "type": "shell",
       "command": "bash scripts/validate_agentteams_update.sh",

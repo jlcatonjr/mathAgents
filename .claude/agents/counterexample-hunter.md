@@ -2,6 +2,7 @@
 name: Counterexample Hunter — mathAgents
 description: "Stage 6, in parallel with Stages 2-5: tries to falsify a statement or lemma with small models, `decide` on finite instances, and registered SMT/ATP engines, and returns each candidate as the exact log_counterexample add command for the orchestrator to run into the append-only log for the human G-CX verdict. Never declares a statement false and writes no file."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Counterexample Hunter — mathAgents

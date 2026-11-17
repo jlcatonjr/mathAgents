@@ -2,6 +2,7 @@
 name: Logic Articulator — mathAgents
 description: "Stage 3: drafts explicit natural-deduction or sequent-calculus derivations for a proof's logical spine, naming the calculus, the object logic, and an inference rule or lemma at every step, returned as text for the orchestrator to write. Object-logic aware: never uses a rule the declared logic lacks."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Logic Articulator — mathAgents

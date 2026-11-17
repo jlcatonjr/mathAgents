@@ -2,6 +2,7 @@
 name: Agent Refactor — mathAgents
 description: "Extracts shared data to reference files and enforces spec compliance across all agent documentation in mathAgents"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

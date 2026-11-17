@@ -2,6 +2,7 @@
 name: Axiom Auditor — mathAgents
 description: "Runs and explains the automated gates: G-KERNEL (build, kernel replay, axiom envelope), the registry validator, the dossier validator (structure, G-FID, G-AX, G-CX), G-NAME and G-BLUEPRINT with the pinned-Mathlib name index, and checks the Stage 8 kernel snapshot's preconditions (the orchestrator takes it). Reports findings and G-AX candidates; never approves an axiom or a statement change."
 tools: Read, Grep, Glob
+model: opus
 ---
 
 # Axiom Auditor — mathAgents

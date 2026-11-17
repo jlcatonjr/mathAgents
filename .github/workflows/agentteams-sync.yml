@@ -20,8 +20,9 @@ on:
         required: false
         type: boolean
         default: false
-  # schedule: paused (Jim, 2026-10-14). The agentteams pin moves only deliberately, to a release tag. Restore it once
-  # toolchain.lock moves to a researchteam release with the frozen-surfaces fix (planned for 1.0.1; release-policy §4):
+  # schedule: paused (Jim, 2026-10-14). The agentteams pin moves only deliberately, to a release tag. Autosync stays off
+  # until mathAgents is on researchteam v1.1.6 (operator ruling R22, 2026-11-16); the schedule resumes only by its own PR
+  # and the operator's signed Rule 11 row (release-policy §4):
   #   - cron: "0 6 * * 1"   # weekly Monday 06:00 UTC — SHA-gated
 
 permissions:
@@ -54,14 +55,34 @@ jobs:
           # A release-locked toolchain.lock verifies signed tags against allowed_signers. The runner has
           # none, so the operator stores the line from agentteams SECURITY.md "Release signers" as this
           # secret. Without it, release-locked runs fail closed; unlocked runs never read it.
+          # Only the agentteams release key is trusted here, by its pinned fingerprint (SECURITY.md "Release
+          # signers"): a secret holding another key, or more than that one line, would let that key's tags
+          # verify as releases. A key rotation is a reviewed change to RELEASE_FP, never a secret edit.
           if [ -n "$ALLOWED_SIGNERS" ]; then
-            printf '%s\n' "$ALLOWED_SIGNERS" > "$RUNNER_TEMP/allowed_signers"
-            echo "AGENTTEAMS_ALLOWED_SIGNERS=$RUNNER_TEMP/allowed_signers" >> "$GITHUB_ENV"
+            RELEASE_FP="SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM"
+            signers="$RUNNER_TEMP/allowed_signers"
+            printf '%s\n' "$ALLOWED_SIGNERS" | sed '/^[[:space:]]*$/d' > "$signers"
+            if [ "$(wc -l < "$signers" | tr -d ' ')" != 1 ]; then
+              echo "AGENTTEAMS_ALLOWED_SIGNERS must hold exactly one line, the release key's; refusing" >&2; exit 1
+            fi
+            read -r principal opts ktype kdata rest < "$signers"
+            if [ -z "$principal" ] || [ "$opts" != 'namespaces="git"' ] || [ -z "$kdata" ] || [ -n "$rest" ]; then
+              echo 'AGENTTEAMS_ALLOWED_SIGNERS is not "<principal> namespaces="git" <type> <key>"; refusing' >&2; exit 1
+            fi
+            printf '%s %s\n' "$ktype" "$kdata" > "$signers.pub"
+            fp="$(ssh-keygen -l -E sha256 -f "$signers.pub" 2>/dev/null | awk '{print $2}')"
+            if [ "$fp" != "$RELEASE_FP" ]; then
+              echo "AGENTTEAMS_ALLOWED_SIGNERS holds key ${fp:-<unreadable>}, not the release key $RELEASE_FP; refusing" >&2
+              exit 1
+            fi
+            echo "AGENTTEAMS_ALLOWED_SIGNERS=$signers" >> "$GITHUB_ENV"
           fi
 
       - name: Install ResearchTeam CLI
         run: |
-          python -m pip install --upgrade pip
+          # pip itself is held to S-10: an unpinned self-upgrade takes whatever release is newest, even one inside the
+          # 14-day cooldown. 26.2.2 is the pin scripts/bootstrap_toolchain.sh uses (OSV none; re-checked 2026-11-12).
+          python -m pip install "pip==26.2.2"
           # A release-locked repo (toolchain.lock has `researchteam.tag=`) installs researchteam at the
           # lock's PR-reviewed commit, so the code that verifies release tags in the gate below is the
           # pinned release, not whatever is on researchteam main (release policy §3). The gate re-verifies
@@ -141,10 +162,11 @@ jobs:
 
       - name: Open / update the evergreen auto-PR (never auto-merge)
         if: steps.gate.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c  # v6
+        id: cpr
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c  # v6.1.0
         with:
-          branch: chore/agentteams-autosync
           base: dev
+          branch: chore/agentteams-autosync
           delete-branch: false
           title: "chore: researchteam + agentteams autosync → ${{ steps.gate.outputs.new_sha }}"
           commit-message: "chore: researchteam + agentteams autosync → ${{ steps.gate.outputs.new_sha }}"
@@ -152,3 +174,19 @@ jobs:
           # security-review-required: the gate found a security-boundary path (sandbox/, hooks, CI,
           # scripts, agent capability files, ...) in this update. Do not merge without @security.
           labels: agentteams-autosync${{ steps.gate.outputs.sensitive == 'true' && ',security-review-required' || '' }}
+
+      # F-5: a detected change that opens or updates no PR is a silent failure (for example, Actions not allowed to
+      # create pull requests). Fail the run so it shows red instead of passing as a quiet week.
+      - name: Fail when a detected change produced no PR
+        if: steps.gate.outputs.changed == 'true' && steps.cpr.outputs.pull-request-number == ''
+        env:
+          OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+          NEW_SHA: ${{ steps.gate.outputs.new_sha }}
+        run: |
+          if [ "$OPERATION" = none ]; then
+            # Nothing to commit (for example a force=true run with no new content): not a failure.
+            echo "::warning::autosync ran for $NEW_SHA but the working tree had no diff, so no PR was needed."
+            exit 0
+          fi
+          echo "::error::autosync detected a change ($NEW_SHA) but no pull request was opened or updated (operation: '$OPERATION'). Check Settings > Actions > General > 'Allow GitHub Actions to create and approve pull requests'."
+          exit 1

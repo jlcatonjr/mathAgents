@@ -2,6 +2,7 @@
 name: Git Operations — mathAgents
 description: "Executes and governs Git and GitHub operations in mathAgents, including commit/push, pull/merge/rebase, conflict handling, and recovery workflows."
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 
