@@ -610,21 +610,16 @@ codes are in `references/write-policy.reference.md`.
 
 > ⚙️ **USER-EDITABLE** — project-specific rules, overrides, and extensions for this agent. This section lies outside every `AGENTTEAMS` fence and is preserved verbatim across `agentteams --update --merge`.
 
-### S-10 package cooldown: first-party pins (2026-11-04)
+### S-10 package cooldown: first-party pins (updated 2026-11-16)
 
-The generated S-10 rule in this file is in force: a 14-day cooldown for every package release, latest stable only, with
-carve-outs for remediating a vulnerability the scan detected and for named local repositories. Its local-repository
-carve-out names **no repository** here, because the brief sets no `s10_cooldown_exempt_repos` (operator decision,
-2026-11-03). Read that as "no repository is exempt *through the brief*", not as "mathAgents' own pins are held":
+The generated S-10 rule in this file is in force. Its first-party toolchain-group bullet is what exempts mathAgents' own
+first-party pins (agentteams, researchteam, baseAgent releases) from the 14-day cooldown: the operator-signed
+`.agentteams/toolchain-group.json` (sequence 1), whose parent row `s10-first-party-releases-2026-11` derives from
+`release-policy-public-1.1` in this log (pr11 P08, 2026-11-16). A pin move to a signed release of a group member still needs
+tag verification (S-9, `agentteams --verify-toolchain-pin`), an OSV/GHSA check of third-party packages, the latest-stable
+rule and this agent's review, but no cooldown row and no operator pin row (T2).
 
-- **mathAgents' own first-party pins are not held by the cooldown.** agentteams and researchteam on the 1.1 line are
-  exempt under the signed rows `s10-release-key-exemption-1.1` and `s10-release-key-exemption-researchteam-1.1`
-  (subject to its dependency conditions; row `s10-first-party-cooldown-exemption-2026-11-03`). The generated rule
-  allows this: it forbids adopting a release inside the cooldown, or a release candidate, only "without a recorded
-  `@security` clearance". Each pin move's own signed pin row is that clearance, and it still needs tag verification,
-  provenance and an OSV/GHSA check of third-party packages.
-- **Everything else keeps the cooldown**, third-party packages included. A standing exemption for any other
-  first-party repository needs its own signed Rule 11 row.
-
-Remove this note in the render that adds `s10_cooldown_exempt_repos` and its signed `s10-cooldown-exempt` rows
-(planned with agentteams rc.16, which makes every surface honour them).
+- The private history's rows `s10-release-key-exemption-1.1` and `s10-release-key-exemption-researchteam-1.1` do not carry
+  over to this public repository (docs/release-policy.md section 2) and exempt nothing here.
+- **Everything else keeps the cooldown**, third-party packages included. A standing exemption for any other first-party
+  repository needs its own signed Rule 11 row.
