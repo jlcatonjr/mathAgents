@@ -119,11 +119,24 @@ accepted `DEFENDED`), and was excluded from the baseline then.
    so the git **SHA**, not the version and not raw file-drift, is the only sound trigger. The gate lives
    in the managed `scripts/agentteams_autosync_gate.sh` (shared by the upstream + derived workflows).
 2. **On a real update, the scheduled run auto-opens/updates ONE evergreen PR** (`chore/agentteams-autosync`)
-   after every blocking gate passes in-job (validate + forbidden-path + detector unit tests upstream).
+   after every blocking gate passes in the gate job (validate + forbidden-path + detector unit tests upstream).
    It compares against the ref on the open evergreen branch, so an already-integrated SHA never re-fires
    while the PR waits — no weekly spam. A manual `workflow_dispatch` (optionally `force=true`) does the
    same on demand. Machine-path files (`delivery-receipt.json`, `memory-index.json`) are scrubbed so no
    CI-runner path is ever proposed.
+   - **Two jobs (#182).** The gate runs in the `autosync` job, which has `contents: read` and so cannot
+     push or open a PR. It hands its result to the `open_pr` job as an artifact: one patch and the PR body.
+   - `open_pr` holds the write token and runs no integrated code. It checks out the run's branch, confirms it is the gate's commit, refuses
+     gate outputs that are not a commit id and `true`/`false`, applies the patch with `git apply`, and
+     refuses a `.git` path, a symbolic link, a submodule entry or a `.gitattributes` filter.
+   - `open_pr` decides the `security-review-required` label itself, from the changed paths, with the
+     repository's committed gate script (`--classify-sensitive`). The gate job's own answer can only add
+     the label, never remove it. The PR body starts with what `open_pr` found; the gate job's text follows.
+   - **Limits.** The patch and the PR body are still written by the job that runs integrated code, so the
+     review of the PR's diff remains the control on its content. That job can also write Actions caches and
+     artifacts, so a workflow that holds a write token should not restore a cache (`open_pr` restores none).
+     The artifact is kept for 3 days; after that, "Re-run failed jobs" on `open_pr` fails and the workflow
+     must be run again.
 3. **Auto-merge is disabled — the evergreen PR is reviewed and merged by a human.** The autosync is
    automatic *proposal*, not automatic merge; blocking gates run before the PR opens, and the reviewer
    gate below is the final word. (To opt into auto-merge-on-green later, enable `gh pr merge --auto` on
@@ -220,7 +233,7 @@ whether the schedule is paused.
 
 **A paused schedule means dispatch only.** A derived repository may pause its weekly autosync: the schedule is
 disabled with `gh workflow disable`, or commented out of its own `agentteams-sync.yml`. That workflow is seeded
-at `init` and is not synced. While the schedule is paused, the scheduled runs described in *Execution Policy*
+at `init` and is not synced; `researchteam workflow-sync` updates it but keeps its `on:` block, so a pause stays. While the schedule is paused, the scheduled runs described in *Execution Policy*
 1–2 and *Automatic Integration* 3 do not happen. Integration happens only through an operator-dispatched
 `workflow_dispatch` run, or through the repository's local procedure above. Everything else in this policy
 still applies to those runs: the gates, the evergreen PR, review by a human, rollback.
@@ -241,21 +254,30 @@ generate, so the "latest agentteams update" is integrated without a manual step.
    with **no** layer-2 file sync — safe on the upstream repo (a full `researchteam update` there would
    overwrite local managed-file edits with the older upstream versions).
 3. **CI autosync (remote, SHA-gated) — the durable, always-propagating layer.** The `agentteams-sync`
-   workflow (upstream) and the scaffold-emitted `agentteams-sync` (derived) run weekly + on
-   `workflow_dispatch`. Both are thin shells over the managed `scripts/agentteams_autosync_gate.sh`,
+   workflow (upstream) runs weekly + on `workflow_dispatch`. The scaffold-emitted `agentteams-sync` (derived)
+   ships with its weekly schedule commented out (#186), so it runs on `workflow_dispatch` until the repository
+   turns the schedule on, which is a deliberate edit there. Both are thin shells over the managed `scripts/agentteams_autosync_gate.sh`,
    which SHA-gates on agentteams `main`, and on a real change installs that pinned SHA, runs the regen
    (upstream `--layer1-only`; derived full), scrubs machine-path churn, runs the blocking gates, records
    the SHA in `.github/agentteams-autosync-ref`, and lets the workflow open/update the evergreen PR (see
    Execution Policy). Because the gate is a **managed** file, fixes to the logic propagate to every
    derived repo via `researchteam update` — the four workflow copies (upstream, scaffold, each derived)
    stay thin and rarely change.
+   **Taking a scaffold change into an existing derived repo (#186).** The workflow is written at `init` and
+   otherwise only by `researchteam workflow-sync`. That command rewrites `.github/workflows/agentteams-sync.yml`
+   from the installed scaffold but keeps the repository's own top-level `on:` block as it is. With
+   `--workflow validate` it writes the opt-in validate workflow in the same way. It shows a diff and asks
+   first (`--yes`, `--dry-run`). Without that command, port the changed `permissions:` / `jobs:` parts by hand
+   and keep the `on:` block. Do not copy the whole scaffold over the file: before 1.1.7 the scaffold carried a
+   live weekly `schedule:`, and a whole-file copy changes the trigger section either way. A workflow disabled in GitHub (`gh workflow disable`) stays disabled either
+   way. A workflow edit gets the repo's own `@security` review.
 
 **Division of labor (hook vs CI — they do not fight).** The local pre-commit hook fires on *staged agent
 files* and re-integrates at whatever agentteams version is *installed locally*; the CI autosync fires on
 an *agentteams `main` SHA change* and integrates the *pinned upstream* SHA. Disjoint triggers; any overlap
 is self-healing (the `preserve` shrink policy protects enriched fences; `researchteam doctor` flags a stale
-local install). The blocking gates run **in-job before** the PR is created — a `GITHUB_TOKEN`-authored PR
-does not fire `pull_request` checks, so in-job gating (not PR-status checks) is what guarantees a bad regen
+local install). The blocking gates run **in the gate job, before** the PR is created — a `GITHUB_TOKEN`-authored PR
+does not fire `pull_request` checks, so gating in the gate job (not PR-status checks) is what guarantees a bad regen
 never becomes a mergeable PR.
 
 **Follow-up ([RT]).** The SHA-gate keys on the agentteams commit only; a researchteam-managed-only change

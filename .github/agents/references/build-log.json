@@ -1,13 +1,13 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.1.3",
+  "agentteams_version": "1.1.4",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "cbd41a74f3e8bedd516c3a32581be47eb7d6152b",
+    "commit": "b82d78e74382ceeec560b2198c96430ffcedcf21",
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-17T00:01:12.961617+00:00",
+  "generated_at": "2026-11-17T20:36:23.424623+00:00",
   "project_name": "mathAgents",
   "framework": "copilot-vscode",
   "project_type": "research",
@@ -31,13 +31,7 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [
-    ".github/agents/security.agent.md",
-    ".github/agents/references/security-vulnerability-watch.reference.md",
-    ".github/agents/references/security-vulnerability-watch.json",
-    ".github/agents/references/framework-watch.reference.md",
-    ".github/copilot-instructions.md"
-  ],
+  "files_written": [],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "7e350d6cb17aac72",
@@ -539,18 +533,7 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert",
-    "axiom-auditor",
-    "counterexample-hunter",
-    "engine-advisor",
-    "fidelity-auditor",
-    "interpretation-advisor",
-    "lean-informalization",
-    "lean-prover",
-    "logic-articulator",
-    "proof-strategist",
-    "statement-formalizer",
-    "tactic-planner"
+    "evaluation-expert"
   ],
   "governance_agents": [
     "navigator",
@@ -565,17 +548,18 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "92e74005c8b19704",
+  "manifest_fingerprint": "525ed7edf9b3c120",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "security.agent.md": "1e87ef4123668864",
-    "references/security-vulnerability-watch.reference.md": "16100a6052cb4f88",
-    "references/security-vulnerability-watch.json": "97fa023f32bd5ebd",
-    "references/framework-watch.reference.md": "5c5ddecdb8ea3071",
-    "../copilot-instructions.md": "08ebc5eba7df51ec",
+    "security.agent.md": "66fd4c2e1ff58c64",
+    "references/security-vulnerability-watch.json": "ef5c15b41dcb2e5a",
+    "references/pipeline-graph.md": "cbc2a04f7e9e0d6b",
+    "references/pipeline-graph.svg": "7b0ae44a026faa62",
+    "orchestrator.agent.md": "99cb72284c422663",
     "references/ref-lean-4-reference.md": "816fe8da794dcdc3",
     "references/ref-mathlib-reference.md": "fc8f89ad91a8d9ee",
-    "orchestrator.agent.md": "99cb72284c422663",
+    "references/security-vulnerability-watch.reference.md": "c4e7e08714211703",
+    "../copilot-instructions.md": "f5407b1b18dd5ad3",
     "navigator.agent.md": "c62a8b6cce6789b9",
     "code-hygiene.agent.md": "f29bdfc5606b0b6c",
     "adversarial.agent.md": "2681ec35ef421af4",
@@ -619,8 +603,7 @@
     "team-builder.agent.md": "0e54a832ee0b6b28",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.agent.md": "efc9966c04c05bd3",
-    "references/authorized-verify-keys/README.md": "badf32b421079acf",
-    "references/pipeline-graph.md": "cbc2a04f7e9e0d6b"
+    "references/authorized-verify-keys/README.md": "badf32b421079acf"
   },
   "front_matter_baseline": {
     "security.agent.md": {
@@ -1048,7 +1031,7 @@
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "security_rules_invariant": "bc32341ed61176f7fba69ef0d09decaec4a33f9d6f0fae7f6f07f1236104eba0",
-      "threat_intelligence": "b1bb5fda5b045b0f756521356698b23830245e6e5d028421fc06263bfc0a502f",
+      "threat_intelligence": "512286f7030c39acd763de50c410d3683cfd27fa5a20f0680ef72941f14e8852",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501"
     },
     ".github/agents/statement-formalizer.agent.md": {
