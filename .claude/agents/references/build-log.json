@@ -1,13 +1,13 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.1.3",
+  "agentteams_version": "1.1.4",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "cbd41a74f3e8bedd516c3a32581be47eb7d6152b",
+    "commit": "b82d78e74382ceeec560b2198c96430ffcedcf21",
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-17T00:02:20.327349+00:00",
+  "generated_at": "2026-11-18T17:50:49.123537+00:00",
   "project_name": "mathAgents",
   "framework": "claude",
   "project_type": "research",
@@ -34,39 +34,8 @@
   "files_written": [
     ".claude/agents/references/security-vulnerability-watch.reference.md",
     ".claude/agents/references/security-vulnerability-watch.json",
-    ".claude/agents/references/framework-watch.reference.md",
     ".claude/CLAUDE.md",
-    ".claude/agents/orchestrator.md",
-    ".claude/agents/navigator.md",
-    ".claude/agents/security.md",
-    ".claude/agents/code-hygiene.md",
-    ".claude/agents/adversarial.md",
-    ".claude/agents/conflict-auditor.md",
-    ".claude/agents/conflict-resolution.md",
-    ".claude/agents/cleanup.md",
-    ".claude/agents/agent-updater.md",
-    ".claude/agents/agent-refactor.md",
-    ".claude/agents/repo-liaison.md",
-    ".claude/agents/git-operations.md",
-    ".claude/agents/work-summarizer.md",
-    ".claude/agents/primary-producer.md",
-    ".claude/agents/quality-auditor.md",
-    ".claude/agents/cohesion-repairer.md",
-    ".claude/agents/technical-validator.md",
-    ".claude/agents/format-converter.md",
-    ".claude/agents/reference-manager.md",
-    ".claude/agents/output-compiler.md",
-    ".claude/agents/visual-designer.md",
-    ".claude/agents/post-production-auditor.md",
-    ".claude/agents/retrieval-integrator.md",
-    ".claude/agents/research-analyst.md",
-    ".claude/agents/methods-review-expert.md",
-    ".claude/agents/harness-spec-expert.md",
-    ".claude/agents/proof-dossiers-expert.md",
-    ".claude/agents/proof-library-expert.md",
-    ".claude/agents/evaluation-expert.md",
-    ".claude/agents/team-builder.md",
-    ".claude/agents/content-enricher.md"
+    ".claude/agents/security.md"
   ],
   "manual_required": 7,
   "template_hashes": {
@@ -595,16 +564,18 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "3d04d8fb4584c5e8",
+  "manifest_fingerprint": "c5b97a38b24a2c71",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.reference.md": "05d034628322f23b",
-    "references/security-vulnerability-watch.json": "a2b45840af50c948",
-    "references/framework-watch.reference.md": "5c5ddecdb8ea3071",
+    "references/security-vulnerability-watch.reference.md": "49da39d9d05155f2",
+    "references/security-vulnerability-watch.json": "69cd9199827cf831",
     "../CLAUDE.md": "f8f0b43ef5a14ee8",
+    "security.md": "1f943e37628b3a52",
+    "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
+    "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
+    "references/runtime-handoffs.json": "73306a5217a45b1f",
     "orchestrator.md": "ea58318ccbbe4954",
     "navigator.md": "6474eba5eafdc6a3",
-    "security.md": "fa1d9e02cce583d3",
     "code-hygiene.md": "62285350634a5344",
     "adversarial.md": "0323755af46ac682",
     "conflict-auditor.md": "d70f4dc1daa79601",
@@ -626,16 +597,6 @@
     "post-production-auditor.md": "a2484c911aff6f4d",
     "retrieval-integrator.md": "94c1da4659535ee7",
     "research-analyst.md": "060a3fd08a6fb17c",
-    "methods-review-expert.md": "f4dcf4eec6ac8569",
-    "harness-spec-expert.md": "9421b2a4010cdb8e",
-    "proof-dossiers-expert.md": "f4456c2eafd7b096",
-    "proof-library-expert.md": "a720a38a15602dad",
-    "evaluation-expert.md": "42934e76dd141b1d",
-    "team-builder.md": "ecf77a494cf3c229",
-    "content-enricher.md": "373bacbc50fb3c76",
-    "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
-    "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
-    "references/runtime-handoffs.json": "73306a5217a45b1f",
     "references/code-hygiene-rules.reference.md": "c1121ac76053d7e6",
     "references/github-workflows-merge.reference.md": "4c6ca56df707a068",
     "references/work-summary-spec.reference.md": "96232231a1f7c6be",
@@ -649,13 +610,34 @@
     "references/external-retrieval-quality-gate.reference.md": "fbe8d3f594613687",
     "references/retrieval-integration.reference.md": "c1294ec7e1465d9b",
     "references/retrieval-trigger-contract.reference.md": "0ee12734f686939b",
+    "methods-review-expert.md": "f4dcf4eec6ac8569",
+    "harness-spec-expert.md": "9421b2a4010cdb8e",
+    "proof-dossiers-expert.md": "f4456c2eafd7b096",
+    "proof-library-expert.md": "a720a38a15602dad",
+    "evaluation-expert.md": "42934e76dd141b1d",
+    "team-builder.md": "ecf77a494cf3c229",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
+    "content-enricher.md": "373bacbc50fb3c76",
     "references/write-policy.reference.md": "d5d003ec5740b609",
     "references/mcp-need.reference.md": "15c753f1a114601e",
     "references/authorized-verify-keys/README.md": "badf32b421079acf",
     "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {
+    "security.md": {
+      "name": "Security \u2014 mathAgents",
+      "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "../skills/tool-lean-4/SKILL.md": {
+      "name": "tool-lean-4",
+      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
+    },
+    "../skills/tool-mathlib/SKILL.md": {
+      "name": "tool-mathlib",
+      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
+    },
     "orchestrator.md": {
       "name": "Orchestrator \u2014 mathAgents",
       "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
@@ -665,12 +647,6 @@
     "navigator.md": {
       "name": "Navigator \u2014 mathAgents",
       "description": "\"Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "security.md": {
-      "name": "Security \u2014 mathAgents",
-      "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
@@ -841,14 +817,6 @@
       "description": "\"Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
-    },
-    "../skills/tool-lean-4/SKILL.md": {
-      "name": "tool-lean-4",
-      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
-    },
-    "../skills/tool-mathlib/SKILL.md": {
-      "name": "tool-mathlib",
-      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
     }
   },
   "front_matter_baseline_version": 2,
@@ -1035,7 +1003,7 @@
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "security_rules_invariant": "bc32341ed61176f7fba69ef0d09decaec4a33f9d6f0fae7f6f07f1236104eba0",
-      "threat_intelligence": "a287e74d8dcf2d165a8ff3be385588881e03687dbe07ac141e3685dc693ee9b1",
+      "threat_intelligence": "40e76c26d5b7db1f785607257b391a83e64f99c87b2471bcc2c1d99efade67d9",
       "security_verdict_contract": "e17bc133696fef7e7aaa86af1023b9ad979f3f6cd87d853af62c8e019efff501",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
