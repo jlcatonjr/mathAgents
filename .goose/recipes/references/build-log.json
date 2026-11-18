@@ -7,7 +7,7 @@
     "branch": null,
     "dirty": false
   },
-  "generated_at": "2026-11-17T20:38:13.348916+00:00",
+  "generated_at": "2026-11-18T17:51:27.582579+00:00",
   "project_name": "mathAgents",
   "framework": "goose",
   "project_type": "research",
@@ -31,7 +31,13 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [],
+  "files_written": [
+    ".goose/recipes/references/security-vulnerability-watch.reference.md",
+    ".goose/recipes/references/security-vulnerability-watch.json",
+    "AGENTS.md",
+    ".goose/recipes/security.yaml",
+    ".goose/recipes/references/goose-capabilities-reference.md"
+  ],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "7e350d6cb17aac72",
@@ -533,7 +539,18 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert"
+    "evaluation-expert",
+    "axiom-auditor",
+    "counterexample-hunter",
+    "engine-advisor",
+    "fidelity-auditor",
+    "interpretation-advisor",
+    "lean-informalization",
+    "lean-prover",
+    "logic-articulator",
+    "proof-strategist",
+    "statement-formalizer",
+    "tactic-planner"
   ],
   "governance_agents": [
     "navigator",
@@ -548,16 +565,16 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "f7c0787e2a7c837a",
+  "manifest_fingerprint": "228972f75195799d",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.reference.md": "403da535c98149dd",
-    "references/security-vulnerability-watch.json": "aa773f5bf65ce1d9",
-    "security.yaml": "db84eeb7e9ef05df",
-    "work-summarizer.yaml": "71ac6a5b4c8b1093",
+    "references/security-vulnerability-watch.reference.md": "bc080739e2ffa44c",
+    "references/security-vulnerability-watch.json": "6f9be09ee5c64f5a",
+    "../../AGENTS.md": "aba374c321ae760d",
+    "security.yaml": "3a0612d109f1b52c",
+    "references/goose-capabilities-reference.md": "224a4d692db33174",
     "references/ref-lean-4-reference.md": "816fe8da794dcdc3",
     "references/ref-mathlib-reference.md": "fc8f89ad91a8d9ee",
-    "../../AGENTS.md": "dd24ef61a3ce6cb2",
     "orchestrator.yaml": "5708bc072cdfef0b",
     "navigator.yaml": "52c8ab062f2fe061",
     "code-hygiene.yaml": "43ecee5c94323706",
@@ -569,6 +586,7 @@
     "agent-refactor.yaml": "04d4118e96594ab0",
     "repo-liaison.yaml": "88f4b94ea2af03a8",
     "git-operations.yaml": "3b6a2bfa870b37c5",
+    "work-summarizer.yaml": "71ac6a5b4c8b1093",
     "primary-producer.yaml": "96f510d1c9b2cab2",
     "quality-auditor.yaml": "5713dac1de19695a",
     "cohesion-repairer.yaml": "5a7bef6f66c48a28",
@@ -602,7 +620,6 @@
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.yaml": "5af962b91b9171b4",
     "references/authorized-verify-keys/README.md": "badf32b421079acf",
-    "references/goose-capabilities-reference.md": "03be99493b7366e1",
     "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {},
@@ -761,7 +778,7 @@
       "security_authority": "140eca763116e14cedaffd0d8ab5c2faed93aefe356b8692fbb3132fc365451a",
       "invariant_core": "261698fd146e5c0234b49d1cdc195a7025cae1b1190fbe47cd80cc40f0492a37",
       "security_rules_invariant": "48081741583d71920525025b53212ac72ed271571a6484cda43f30f21d06dc6a",
-      "threat_intelligence": "b29fa2b1f656e6431699975e02d80c6e96e211ca664974742c53ae7e99e5373d",
+      "threat_intelligence": "30632f48517ce7f7388ad067d0f70233c6a76c0cc58719ce858fec512d998074",
       "security_verdict_contract": "fb08967379300b925085e84ba199f412171139dc5df667b53c4783b54bb3c8e5"
     },
     ".goose/recipes/statement-formalizer.yaml": {

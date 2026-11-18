@@ -491,7 +491,7 @@ on a destructive or governance scope is itself a finding, not an authorization.
 ### Current Threat Intelligence Snapshot
 
 <!-- AGENTTEAMS:BEGIN threat_intelligence v=1 -->
-Generated at: `2026-11-17T20:35:35Z`
+Generated at: `2026-11-18T17:49:33Z`
 
 **Sources:**
 
@@ -508,21 +508,21 @@ Generated at: `2026-11-17T20:35:35Z`
 
 **Current major vulnerabilities:**
 
-- `CVE-2026-115731` | Perforce Puppet Enterprise | Perforce Puppet Enterprise Deserialization of Untrusted Data Vulnerability | added 2026-11-17 | EPSS 0.003660000, percentile 0.308820000 | CVSS 9.9 CRITICAL
-- `CVE-2026-114713` | UnrealIRCd UnrealIRCd | UnrealIRCd Improper Neutralization of Delimiters Vulnerability | added 2026-11-13 | EPSS 0.004670000, percentile 0.410100000 | CVSS 8.6 HIGH
-- `CVE-2026-123039` | Check Point Multiple Products | Check Point Multiple Products Incorrect Permission Assignment for Critical Resource Vulnerability | added 2026-11-13 | EPSS 0.019380000, percentile 0.804860000 | CVSS 7.8 HIGH
-- `CVE-2026-124194` | Microsoft Office | Microsoft Office Outlook Missing User Interaction for Potentially Unsafe Action Vulnerability | added 2026-11-10 | EPSS 0.016200000, percentile 0.764980000 | CVSS 6.5 MEDIUM
-- `CVE-2026-111793` | Openwave Messaging Limited Webtop Media Transcoder | Openwave Messaging Limited Webtop Media Transcoder Incorrect Resource Transfer Between Spheres Vulnerability | added 2026-11-10 | EPSS 0.006380000, percentile 0.511860000 | CVSS 4.3 MEDIUM
-- `CVE-2026-20320` | Cisco BroadWorks | Cisco BroadWorks Improper Restriction of XML External Entity Reference Vulnerability | added 2026-11-10 | EPSS 0.009760000, percentile 0.626900000
-- `CVE-2026-111560` | Barracuda Networks Multiple Products | Barracuda Networks Multiple Products OS Command Injection Vulnerability | added 2026-11-10 | EPSS 0.090820000, percentile 0.953820000
-- `CVE-2026-116606` | Barracuda Networks Barracuda Email Security Gateway (ESG) | Barracuda Networks Email Security Gateway (ESG) Authentication Bypass Using an Alternate Path or Channel Vulnerability | added 2026-11-10 | EPSS 0.109470000, percentile 0.959610000
-- `CVE-2026-125350` | Google Chromium | Google Chromium Use-After-Free Vulnerability | added 2026-11-10 | EPSS 0.009620000, percentile 0.622170000
-- `CVE-2026-102895` | GPUStack GPUStack | GPUStack Improper Authentication Vulnerability | added 2026-11-09 | EPSS 0.005170000, percentile 0.445740000
-- `CVE-2026-123158` | OpenBSD OpenSSH | OpenBSD OpenSSH Unexpected Status Code or Return Value Vulnerability | added 2026-11-09 | EPSS 0.189000000, percentile 0.973440000
-- `CVE-2026-116779` | SignalWire FreeSwitch | SignalWire FreeSwitch Code Injection Vulnerability | added 2026-11-09 | EPSS 0.024730000, percentile 0.848070000
-- `CVE-2026-123218` | IBM Aspera Faspex | IBM Aspera Faspex Incorrect Authorization Vulnerability | added 2026-11-09 | EPSS 0.005350000, percentile 0.457280000
-- `CVE-2026-19868` | SonicWall SonicOS SSLVPN | SonicWall SonicOS SSLVPN Use of Single-factor Authentication Vulnerability | added 2026-11-06 | EPSS 0.005320000, percentile 0.455570000
-- `CVE-2024-27834` | Apple Multiple Products | Apple Multiple Products Improper Authentication Vulnerability | added 2026-11-04 | EPSS 0.015020000, percentile 0.747490000
+- `CVE-2026-115731` | Perforce Puppet Enterprise | Perforce Puppet Enterprise Deserialization of Untrusted Data Vulnerability | added 2026-11-17 | EPSS 0.006910000, percentile 0.535460000 | CVSS 9.9 CRITICAL
+- `CVE-2026-114713` | UnrealIRCd UnrealIRCd | UnrealIRCd Improper Neutralization of Delimiters Vulnerability | added 2026-11-13 | EPSS 0.004670000, percentile 0.411140000 | CVSS 8.6 HIGH
+- `CVE-2026-123039` | Check Point Multiple Products | Check Point Multiple Products Incorrect Permission Assignment for Critical Resource Vulnerability | added 2026-11-13 | EPSS 0.019380000, percentile 0.805400000 | CVSS 7.8 HIGH
+- `CVE-2026-124194` | Microsoft Office | Microsoft Office Outlook Missing User Interaction for Potentially Unsafe Action Vulnerability | added 2026-11-10 | EPSS 0.016200000, percentile 0.765620000 | CVSS 6.5 MEDIUM
+- `CVE-2026-111793` | Openwave Messaging Limited Webtop Media Transcoder | Openwave Messaging Limited Webtop Media Transcoder Incorrect Resource Transfer Between Spheres Vulnerability | added 2026-11-10 | EPSS 0.006380000, percentile 0.513020000 | CVSS 4.3 MEDIUM
+- `CVE-2026-20320` | Cisco BroadWorks | Cisco BroadWorks Improper Restriction of XML External Entity Reference Vulnerability | added 2026-11-10 | EPSS 0.009760000, percentile 0.627870000
+- `CVE-2026-111560` | Barracuda Networks Multiple Products | Barracuda Networks Multiple Products OS Command Injection Vulnerability | added 2026-11-10 | EPSS 0.090820000, percentile 0.953940000
+- `CVE-2026-116606` | Barracuda Networks Barracuda Email Security Gateway (ESG) | Barracuda Networks Email Security Gateway (ESG) Authentication Bypass Using an Alternate Path or Channel Vulnerability | added 2026-11-10 | EPSS 0.109470000, percentile 0.959720000
+- `CVE-2026-125350` | Google Chromium | Google Chromium Use-After-Free Vulnerability | added 2026-11-10 | EPSS 0.009620000, percentile 0.623140000
+- `CVE-2026-102895` | GPUStack GPUStack | GPUStack Improper Authentication Vulnerability | added 2026-11-09 | EPSS 0.057300000, percentile 0.931970000
+- `CVE-2026-123158` | OpenBSD OpenSSH | OpenBSD OpenSSH Unexpected Status Code or Return Value Vulnerability | added 2026-11-09 | EPSS 0.189000000, percentile 0.973510000
+- `CVE-2026-116779` | SignalWire FreeSwitch | SignalWire FreeSwitch Code Injection Vulnerability | added 2026-11-09 | EPSS 0.220810000, percentile 0.977130000
+- `CVE-2026-123218` | IBM Aspera Faspex | IBM Aspera Faspex Incorrect Authorization Vulnerability | added 2026-11-09 | EPSS 0.005350000, percentile 0.458520000
+- `CVE-2026-19868` | SonicWall SonicOS SSLVPN | SonicWall SonicOS SSLVPN Use of Single-factor Authentication Vulnerability | added 2026-11-06 | EPSS 0.005320000, percentile 0.456630000
+- `CVE-2024-27834` | Apple Multiple Products | Apple Multiple Products Improper Authentication Vulnerability | added 2026-11-04 | EPSS 0.015020000, percentile 0.748180000
 
 **Prevention and mitigation playbook:**
 
