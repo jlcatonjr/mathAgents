@@ -157,6 +157,13 @@ def test_release_merge_signs_only_with_the_signer_already_on_the_line():
     assert '/bin/ln -s "$GH" "$GHDIR/gh"' in script  # tag-release.sh's D46 check needs gh on the signer's PATH
 
 
+def test_release_merge_requires_the_line_and_version():
+    """Policy amendment 2 (2026-11-19): LINE and EXPECT_VERSION have no default, so a run can't fall onto a line."""
+    script = WRAPPERS[0].read_text()
+    assert 'LINE="${LINE:?' in script and 'EXPECT_VERSION="${EXPECT_VERSION:?' in script
+    assert "${LINE:-" not in script and "${EXPECT_VERSION:-" not in script
+
+
 def test_no_interpreter_is_used_for_signing():
     """CA-154 (operator, 2026-11-06): the tag signer reads pyproject.toml with awk, so neither it nor the wrapper uses
     python or /opt/anaconda3 (release-policy §7: /opt/anaconda3 is not used for signing)."""

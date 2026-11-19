@@ -7,6 +7,7 @@
 # redirect to the private one can't be followed.
 # Revision 4 (2026-11-06, CA-154, operator decision "Drop python from the signer"): pyproject.toml's name and version are
 # read with /usr/bin/awk instead of python3 + tomllib, so no interpreter (and no /opt/anaconda3) is used for signing.
+# Revision 5 (2026-11-19, policy amendment 2): wording only; the release key also signs the 1.2 line. No check changed.
 # Usage: tag-release.sh <40-hex commit> <ssh-signing-key-path>
 #
 # Everything runs in a fresh clone of the fixed URL in a temporary directory, never in a working checkout, whose
@@ -24,7 +25,7 @@
 #   - the key's fingerprint is the pinned release key AND ~/.config/agentteams/allowed_signers lists it.
 # The tag is verified (neutralised, stderr only, pinned fingerprint) before it is pushed.
 # Operator notes (@security rev-2 PASS, Rule 12):
-#   - The first rc1: create release/1.0 BEFORE the commit that bumps the version to 1.0.0rc1 (or at that bump commit
+#   - The first rc1 of a line: create release/X.Y BEFORE the commit that bumps the version to X.Y.0rc1 (or at that bump commit
 #     itself), so the signed commit's version differs from its first parent's; otherwise this script refuses.
 #   - GIT_SSH_COMMAND and every other GIT_* variable are dropped. Put SSH options (IdentityAgent, a hardware key's
 #     SecurityKeyProvider) in ~/.ssh/config. An -sk key may need SSH_SK_PROVIDER set for /usr/bin/ssh-keygen.
@@ -35,7 +36,7 @@ URL="git@github.com:jlcatonjr/mathAgents.git"
 COMMIT="${1:?usage: $0 <40-hex commit> <ssh-signing-key-path>}"
 KEY="${2:?usage: $0 <40-hex commit> <ssh-signing-key-path>}"
 SIGNERS="$HOME/.config/agentteams/allowed_signers"
-RELEASE_FP="SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM"  # the release key (policy §2; it signs the 1.0 and 1.1 lines)
+RELEASE_FP="SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM"  # the release key (policy §2; it signs the 1.0, 1.1 and 1.2 lines)
 SSH_KEYGEN=/usr/bin/ssh-keygen
 TAGGER_NAME="${TAGGER_NAME:-jlcatonjr}"; TAGGER_EMAIL="${TAGGER_EMAIL:-}"
 # No global/system git config, no GIT_* overrides from the environment (condition 1).

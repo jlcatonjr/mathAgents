@@ -8,7 +8,7 @@ mathAgents is licensed under Apache-2.0 (see [`LICENSE`](../LICENSE) and [`NOTIC
 
 - **`main`** is where development happens. Every change, fixes included, lands there first, through a pull request.
 - **Releases are signed tags,** and they are what users install and pin.
-- **`release/1.<n>`** collects the reviewed fixes for the next patch release of a maintained line. It changes only when the maintainer copies in a fix that is already on `main` (a *backport*). Between tags its commits are unsigned, so it is not for installing or pinning. A line is cut from a tag on demand (`STABILITY.md`).
+- **`release/1.<n>`** collects the reviewed fixes for the next patch release of a maintained line. It changes only when the maintainer copies in a fix that is already on `main` (a *backport*). Between tags its commits are unsigned, so it is not for installing or pinning. A new minor line is cut from `main` for its first release and takes only the release PR before its backports (`STABILITY.md`, `docs/release-policy.md` §1).
 - **Each patch tag is cut on its release line** and signed by the maintainer. After each tag, the release line is merged back into `main`.
 
 ## Branches and tags

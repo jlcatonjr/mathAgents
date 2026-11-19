@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "release-policy-public-1.1-amend-2",
+  "scope": "release-policy-public-1.1-amend-2",
+  "derives_from": "release-policy-public-1.1",
+  "effect_relaxes": "",
+  "effect_targets": "docs/release-policy.md",
+  "conditions": "Binding text: docs/governance/release-policy-public-1.1-amend-2.conditions.txt. Under root conditions item 5 and amendment 1 item 5, adopts docs/release-policy.md at sha256 8b9107143a20330f8e503669abe6f38693b006cae255656a610d8eeca8ec4f80 in place of amendment 1's 583b3ed0f7e60b2e5985e26b8277e840db1ddd562921bb6bf890dfcd684f9d26, replacing amendment 1 as the adopted text (amendment 1 is not retracted): the header, \u00a71 (the release/1.2 line and its cut point), \u00a72 (the release key signs the 1.0, 1.1 and 1.2 lines) and \u00a73 (release-line rows for a new minor line; the id-naming rule; the lock move). It widens the root's scope from the 1.1 line to the 1.1 and 1.2 lines (conditions item 2). The same PR changes the tag scripts' wording and one stricter check (LINE and EXPECT_VERSION required). It grants and relaxes nothing and derives from release-policy-public-1.1.",
+  "conditions_verified": "conditions sha256:613006022c3bb9e6e111c3efb7e4a41896d01a76090ef3e6a303385764fdccee; docs/release-policy.md sha256:8b9107143a20330f8e503669abe6f38693b006cae255656a610d8eeca8ec4f80 (branch chore/release-policy-public-1.2-amend-2); diff against amendment 1's file 583b3ed0 (main 56b65a2) is the hunks of conditions item 1",
+  "evidence": "1.2 release coordination with infrastructuremanagement-8d (operator go for researchteam v1.2.0, 2026-11-19); @security ruling on the 1.2 rows; @adversarial and @conflict-auditor reviews (PR body); tmp/by-week/2026-W47/r12-prep (private)"
+}

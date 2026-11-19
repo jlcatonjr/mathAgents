@@ -12,7 +12,8 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    merge or a `git cherry-pick -x` PR to `release/1.0` (never a squash): label it
    `backport-1.0` (a collaborator's request for one is the label `needs-backport-1.0` on the merged `main` PR), link the `main` PR, and include fixes only (security, correctness, documentation).
 2. **Toolchain.** `toolchain.lock` names the agentteams and researchteam commits the release renders with: for 1.x,
-   the peeled commits of verified signed agentteams and researchteam tags (`release-policy.md` §3). Moving it is an `@security` row; then run
+   the peeled commits of verified signed agentteams and researchteam tags (`release-policy.md` §3). Moving it is an `@security` row; a move to a new minor line also needs the operator-signed
+   `release-line-*` rows and the lock procedure in §3. Then run
    `bash scripts/refresh_agent_surfaces.sh` under its overwrite clearance. `scripts/lib/agentteams_provenance.py`
    refuses a render on any other agentteams. The Lean pin moves only through `mathagents bump`
    (`docs/lean-toolchain-upgrade.md`).
@@ -28,7 +29,7 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    - `agentteams --check-wiring --framework claude` where the write policy is on.
 6. **Merge.** PR into the release line, green CI, `@code-hygiene`, `@conflict-auditor`, then the `@security` merge row.
    The operator merges and signs in one run with `scripts/operator/release-merge-and-sign.sh` (plain terminal,
-   `/bin/bash -p`): a regular merge at the reviewed head, checked in a fresh clone, then step 7's signer on that merge
+   `/bin/bash -p`, with `LINE=release/X.Y` and `EXPECT_VERSION` both set; neither has a default): a regular merge at the reviewed head, checked in a fresh clone, then step 7's signer on that merge
    commit, taken from the merge commit and matching the sha256 the operator computed from `origin/release/X.Y`. The
    release PR may not change `tag-release.sh`. Without the wrapper: merge with a regular merge (never a squash) and
    push normally (no force), then step 7.
@@ -43,7 +44,7 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    is the head of the release branch right after the release merge, and its version differs from its first parent's.
    The script works only in a fresh clone of the fixed URL (never the working checkout, whose `.git/config` agents
    can write), with global and system git config and every `GIT_*` variable dropped. It refuses unless the key is
-   the pinned release key (it signs the 1.0 and 1.1 lines) and `~/.config/agentteams/allowed_signers` holds it, verifies with the neutralised
+   the pinned release key (it signs the 1.0, 1.1 and 1.2 lines) and `~/.config/agentteams/allowed_signers` holds it, verifies with the neutralised
    command from agentteams SECURITY.md before pushing, and asks y/N before tagging and again before pushing. Tags
    are immutable: never move or delete one; fix forward.
 8. **Merge forward.** After the tag, merge `release/X.Y` forward into `main` (a regular merge, under its `@security` row;
