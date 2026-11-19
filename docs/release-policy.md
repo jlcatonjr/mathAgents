@@ -78,14 +78,14 @@ private rows are cited as their provenance only.
   toolchain-group member, while the group file verifies, is recorded by this repository's `@security` review in the
   pin-move PR: tag object, peeled SHA, signature, the vulnerability search, and that the group file still verifies and
   every signed relaxation is still present. That review needs no operator-signed row (`docs/agentteams-update-policy.md`,
-  "Pins"), but this repository still records it as an unsigned `@security` row in its decisions log, in the pin-move PR
-  or, when adding it there would move the reviewed head, in the next records PR. Any other move is an `@security` row
+  "Pins"), but this repository still records it as an unsigned `@security` row in its decisions log: in the pin-move
+  PR, or, when adding it there would move the reviewed head, in a PR merged before the next pin move. Any other move is an `@security` row
   in the decisions log, which the operator signs while decision signing is on.
   `scripts/lib/agentteams_provenance.py` refuses a render on any other agentteams commit.
 - **Pins today (2026-11-18).** Both are peeled commits of verified signed tags, with `.tag=` lines.
   - `main` (and `dev`, synced from it): researchteam `v1.1.9` (`166ee217`, tag object `9b982986`) and agentteams
     `v1.1.4` (`b82d78e7`, tag object `541b9e55`), PR #13 (2026-11-18), a toolchain-group move recorded by the
-    `@security` review in that PR (its log row follows in a records PR). Before that, in this repository: researchteam `v1.1.8` (`4060531a`) with agentteams
+    `@security` review in that PR. Before that, in this repository: researchteam `v1.1.8` (`4060531a`) with agentteams
     `v1.1.4`, PR #11 (2026-11-18), and researchteam `v1.1.4` (`5fd8ec3b`) with agentteams `v1.1.3` (`cbd41a74`), PR #7
     (2026-11-16), each a group move with its review row in this repository's log. `toolchain.lock` is authoritative.
 - **Pins before the public repository (private history).** Every row named in this bullet is in the private history
@@ -234,9 +234,15 @@ waits.
   bootstrap (pr11 P03, the root `release-policy-public-1.1`) on, were signed with the root-owned
   `/opt/agentteams-signer/venv-v1.1.3` (agentteams v1.1.3, under the pip constraints
   `/opt/agentteams-signer/constraints-v1.1.3.txt`, vetted 2026-11-13; its header cites infrastructureManagement's operator script 65),
-  by one-shot operator scripts that refuse unless the signer and its interpreter are root-owned and report agentteams
-  1.1.3. `scripts/operator/lib_signer.sh` below still names the 1.0 signer: moving its `signer_check` to the v1.1.3
-  signer is a separate change to the signing tooling, under its own `@security` review.
+  by one-shot operator scripts. Those scripts do not source `scripts/operator/lib_signer.sh`, which still names the 1.0
+  signer, so they are the exception to the `lib_signer.sh` rule below until it moves to the v1.1.3 signer (a separate
+  change under its own `@security` review, then a further amendment of this section). From this amendment on, each such
+  script must itself: refuse unless the signer, its interpreter, the venv and every parent directory are root-owned and
+  nothing under the venv is group- or world-writable; refuse unless the signer reports agentteams 1.1.3; refuse when a
+  `PYTHON*` variable is set, and run the signer as `python -I`; and run `scripts/operator/check_decision_spec.py` on each
+  spec before the key is read. The v1.1.3 venv has no `PROVENANCE.json`; its vetting record is the constraints file.
+  The scripts that signed this log's rows before this amendment checked only the signer's and interpreter's ownership
+  and the version, and ran the preflight.
 - The 1.0 signer is the root-owned `/opt/agentteams-signer-v1.0.0` (agentteams v1.0.0, cc5b8c9e; cryptography 50.0.0),
   provisioned once by `scripts/operator/provision_signer_venv.sh` under the operator's row
   `provision-operator-signer-agentteams-v1.0.0-r3` (operator decision 2026-10-28). Every new signing script sources
