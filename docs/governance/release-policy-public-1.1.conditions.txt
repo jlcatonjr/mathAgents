@@ -1,0 +1,20 @@
+Binding conditions for the operator's Rule 11 root row release-policy-public-1.1 (public repository jlcatonjr/mathAgents,
+id 1452811332). Operator decisions, 2026-11-11 to 2026-11-15, in session: D-2 (one fresh root, docs/governance/),
+D-5 (the S-10 group parent derives from this root), D-6 (aggregate cap 3), D-8 (decision signing turned on).
+
+1. Adoption. This row adopts docs/release-policy.md as merged to main in 2ee1946 (PR #6), file sha256
+   0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de, as this repository's release policy for the 1.1
+   line. That includes the rules the private history introduced and the policy names as the root's own (the 1.1 intake
+   rule and the root-owned operator signer). mathAgents may add rules to the policy but may not weaken it.
+2. Root. This is the lineage root for the public log: every later constraint-relaxing row in
+   .github/agents/references/security-decisions.log.csv derives from it, directly or through rows that do (Rule 11(a)).
+   A HALT on this row halts everything deriving from it, the S-10 toolchain-group exemption included.
+3. Grants nothing. No grant, no relaxation, no trust-root target, no cross-repository or destructive effect. It restates
+   no HALT, consumed row or expired row of the private history. The HALT repo-visibility-public stays bound to
+   repository 1398425621 and is cited, not imported.
+4. Provenance only. The archived private repository jlcatonjr/mathAgents-private (id 1398425621, archived 2026-11-11),
+   commit 7803a688b4fb734f6700feea9144831abd15f83d, .github/agents/references/security-decisions.log.csv, file sha256
+   dfe9a764962ab91ce81b05d891a43f977046ea6f32e52c05c8b7edd677fbb675 (454 rows). Its rows carry no authority here.
+5. Policy changes. No tool compares docs/release-policy.md with item 1's sha256 at clearance, so the check is
+   procedural: a later change to that file takes effect only under a new operator-signed root row (or a row deriving
+   from this one that names the new sha256).

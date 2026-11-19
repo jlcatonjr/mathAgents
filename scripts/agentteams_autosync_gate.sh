@@ -9,7 +9,7 @@
 #
 # What it does (in order):
 #   1. SHA-GATE FIRST (before any install/regen): compare agentteams main HEAD to the ref recorded on
-#      the evergreen PR branch (if open) or on the current branch. If unchanged -> emit changed=false
+#      the evergreen branch (only while an open PR has it as head) or on the current branch. If unchanged -> emit changed=false
 #      and exit 0 with ZERO writes. This is the whole "evergreen, not weekly spam" guarantee.
 #      RELEASE-LOCKED repos (toolchain.lock has `agentteams.tag=`): the target is instead the newest
 #      VERIFIED signed tag on that tag's vX.Y line (scripts/check_toolchain.py --release-candidate /
@@ -29,6 +29,10 @@
 #                            (a mirror or fork is not github.com/jlcatonjr/agentteams, so the layer-1
 #                            provenance guard refuses it unless RESEARCHTEAM_ALLOW_UNVERIFIED_AGENTTEAMS=1)
 #   AUTOSYNC_PR_BODY_FILE    where to write the PR body (default: ./.autosync-pr-body.md, gitignored)
+#   AUTOSYNC_EVERGREEN_PR_OPEN  true|false: whether an open PR has the evergreen branch as head. The workflow
+#                            looks it up in its own read-only job (`evergreen_pr`), so no token reaches this
+#                            script; when unset, the gate tries `gh pr list` itself (a local run; in CI it has
+#                            no token there, so the state is unknown and the current branch's ref is used).
 # GitHub outputs (when $GITHUB_OUTPUT is set): changed=<bool>, new_sha=<sha>, old_sha=<sha>
 # Exit: 0 = success (check `changed`); non-zero = a blocking gate failed (workflow must NOT open a PR).
 
@@ -142,12 +146,43 @@ else
     exit 1
   fi
 fi
-# Baseline = the ref recorded on the OPEN evergreen PR branch if it exists (so an already-integrated
-# SHA does not re-fire weekly while the PR waits to be merged), else the ref on the current branch.
+# Baseline = the ref recorded on the evergreen branch, but ONLY while an open PR has that branch as its
+# head (so an already-integrated SHA does not re-fire weekly while the PR waits to be merged). Otherwise
+# the ref on the current branch. A branch with no open PR -- left by a failed PR step, or by a PR closed
+# without merging -- is not "already integrated": trusting it would report up-to-date forever and never
+# open the PR (#172). When the lookup cannot run, use the current branch: that errs toward detecting the
+# change (at worst an open PR is refreshed), never toward stranding it.
+# evergreen_pr_state -> "open" | "none" | "unknown". AUTOSYNC_EVERGREEN_PR_OPEN=true|false overrides the
+# lookup (the workflow's `evergreen_pr` job, or tests); otherwise `gh pr list` with whatever auth gh has (a local run).
+evergreen_pr_state() {
+  case "${AUTOSYNC_EVERGREEN_PR_OPEN:-}" in
+    true) echo open; return ;;
+    false) echo none; return ;;
+  esac
+  command -v gh >/dev/null 2>&1 || { echo unknown; return; }
+  local n
+  n="$(gh pr list --head "$EVERGREEN_BRANCH" --state open --json number --jq 'length' 2>/dev/null)" \
+    || { echo unknown; return; }
+  case "$n" in
+    0) echo none ;;
+    ''|*[!0-9]*) echo unknown ;;
+    *) echo open ;;
+  esac
+}
 old_sha=""
 if git show "origin/${EVERGREEN_BRANCH}:${REF_FILE}" >/dev/null 2>&1; then
-  old_sha="$(git show "origin/${EVERGREEN_BRANCH}:${REF_FILE}" 2>/dev/null | tr -d '[:space:]')"
-elif [ -f "$REF_FILE" ]; then
+  pr_state="$(evergreen_pr_state)"
+  case "$pr_state" in
+    open)
+      old_sha="$(git show "origin/${EVERGREEN_BRANCH}:${REF_FILE}" 2>/dev/null | tr -d '[:space:]')" ;;
+    none)
+      log "${EVERGREEN_BRANCH} exists but no open PR has it as head; baseline from the current branch" ;;
+    *)
+      echo "::warning::autosync-gate: cannot tell whether ${EVERGREEN_BRANCH} has an open PR (no AUTOSYNC_EVERGREEN_PR_OPEN, and gh could not answer); baseline from the current branch"
+      log "cannot tell whether ${EVERGREEN_BRANCH} has an open PR; baseline from the current branch" ;;
+  esac
+fi
+if [ -z "$old_sha" ] && [ -f "$REF_FILE" ]; then
   old_sha="$(tr -d '[:space:]' < "$REF_FILE")"
 fi
 emit "new_sha=$new_sha"
@@ -176,11 +211,44 @@ if [ "$MODE" = "derived" ] && [ -n "$RT_TAG" ]; then
   python -m pip install --quiet --no-deps --force-reinstall "git+https://github.com/jlcatonjr/researchteam.git@${rt_sha}" \
     || { log "pip install of researchteam@${rt_sha} FAILED"; exit 1; }
 fi
+# agentteams' runtime dependencies are held to S-10 too. The base install declares only `jsonschema>=4.20`,
+# which resolves to the first six packages below on Python 3.11-3.12 (typing-extensions is unused from 3.13). The
+# last three are agentteams' [signing] backend: without cryptography the render cannot verify an operator-signed
+# (Ed25519) decision row, fails closed, and silently drops the relaxation it authorizes (the S-10 carve-out for
+# jlcatonjr/agentteams), so a CI render would differ from a bootstrap_toolchain.sh one. These
+# are the vetted versions in upstream docs/release/constraints-2026-11-13.txt, which derived repositories do
+# not receive; tests/test_toolchain.py keeps the two equal. Everything installs --no-deps, so pip resolves no
+# runtime dependency on its own. (Building agentteams from git still installs its exact-pinned [build-system]
+# backend, setuptools, which has no dependencies.) `pip check` then fails the gate if this agentteams commit
+# needs a package or version outside the set, so a new dependency is vetted here first, never installed unvetted.
+AGENTTEAMS_DEPS='jsonschema==4.26.0
+attrs==26.1.0
+jsonschema-specifications==2025.9.1
+referencing==0.37.0
+rpds-py==2026.9.1
+typing-extensions==4.16.0
+cryptography==50.0.2
+cffi==2.1.1
+pycparser==3.12'
+log "installing agentteams' vetted dependency set (no-deps)"
+# --only-binary: a missing wheel must fail, not build from source (rpds-py would fetch an unpinned maturin).
+# shellcheck disable=SC2086  # fixed literal list above; word splitting is intended
+python -m pip install --quiet --only-binary=:all: --no-deps $AGENTTEAMS_DEPS || {
+  log "pip install of agentteams' vetted dependency set FAILED"; exit 1; }
+python -c "import cryptography" 2>/dev/null || {
+  log "GATE FAIL: cryptography is not importable, so every signed-row check would fail closed and drop its relaxation"
+  exit 1; }
 log "installing agentteams @ ${new_sha} (pinned; closes ls-remote/pip TOCTOU)"
-python -m pip install --quiet "git+${AGENTTEAMS_GIT}@${new_sha}" || {
+python -m pip install --quiet --no-deps "git+${AGENTTEAMS_GIT}@${new_sha}" || {
   log "pip install of agentteams@${new_sha} FAILED"; exit 1; }
+python -m pip check || {
+  echo "::error::autosync-gate: agentteams@${new_sha} needs a dependency outside the S-10 vetted set (AGENTTEAMS_DEPS)"
+  log "GATE FAIL: agentteams@${new_sha} needs a dependency outside the S-10 vetted set (AGENTTEAMS_DEPS); vet it first"
+  exit 1; }
 command -v agentteams >/dev/null 2>&1 || { log "agentteams not on PATH after install"; exit 1; }
 
+# Recorded before the regen: the toolchain-group trust-root guard (section 4) refuses a regen that moves HEAD.
+pre_regen_head="$(git rev-parse HEAD 2>/dev/null || true)"
 log "running researchteam regen (mode=${MODE})"
 if [ "$MODE" = "derived" ]; then
   researchteam update --yes || { log "researchteam update FAILED"; exit 1; }
@@ -229,6 +297,74 @@ elif [ -n "$TARGET_TAG" ]; then
   log "GATE FAIL: release-locked, but scripts/check_toolchain.py is missing"; exit 1
 fi
 
+# First-party toolchain group (operator rulings T2/R9). Runs on every integrating run, after the lock is written.
+# 1. Trust-root guard: the candidate agentteams has just run (the regen), so it could have altered what the check
+#    trusts. HEAD must not have moved, and the group file, the operator verify keys and the signed decision log
+#    must be exactly as committed (untracked, gitignored, skip-worktree and assume-unchanged entries count too).
+#    An autosync run never changes them legitimately. This stops accidents and a careless regen, not a hostile
+#    candidate: the check runs that candidate's code. On release-locked runs the signed-tag check (section 1)
+#    is what makes the candidate trustworthy, and an exit 0 for an untagged agentteams pin is refused below.
+# 2. `agentteams --verify-toolchain-pin` (read-only, agentteams >= v1.1.2; an agentteams without it fails on its
+#    own message) maps its exit code as follows:
+#      0  every group pin verified: the S-10 toolchain-group exemption applies.
+#      2  no group file, so no exemption is claimed and the ordinary S-10 rules apply (the 14-day cooldown, plus a
+#         pin row where policy needs one). Never "verified". In upstream mode it fails: researchteam is a group
+#         member and must carry the file. In derived mode it passes with a ::warning:: and a PR-body notice.
+#      1  a present group file or a group pin failed (refused, bad pin, a group pin without NAME.tag): hard fail.
+#      *  anything else: hard fail.
+GROUP_TRUST_PATHS=(.agentteams/toolchain-group.json .github/agents/references/authorized-verify-keys
+                   .github/agents/references/security-decisions.log.csv)
+group_note=""
+group_fail() { echo "::error::autosync-gate: $1"; log "GATE FAIL: $1"; exit 1; }
+# Fail closed: a git error must never read as "nothing changed".
+head_now="$(git rev-parse HEAD 2>/dev/null)" || group_fail "trust-root guard: cannot read HEAD"
+[ -n "$pre_regen_head" ] && [ "$head_now" = "$pre_regen_head" ] \
+  || group_fail "the regen moved HEAD (${pre_regen_head:-<none>} -> ${head_now}); a regen never commits"
+tampered="$(git status --porcelain --ignored -- "${GROUP_TRUST_PATHS[@]}")" \
+  || group_fail "trust-root guard: git status failed"
+[ -z "$tampered" ] || { printf '%s\n' "$tampered"; group_fail "the regen changed the toolchain-group trust root"; }
+# Skip-worktree (S) and assume-unchanged (lowercase) entries are invisible to `git status`.
+flags="$(git ls-files -v -- "${GROUP_TRUST_PATHS[@]}")" || group_fail "trust-root guard: git ls-files failed"
+hidden="$(printf '%s\n' "$flags" | grep -E '^([a-z]|S) ' || true)"
+[ -z "$hidden" ] || { printf '%s\n' "$hidden"; group_fail "trust-root files are marked skip-worktree/assume-unchanged"; }
+
+if [ ! -f toolchain.lock ] || { [ ! -f brief.json ] && [ ! -e .agentteams/toolchain-group.json ]; }; then
+  # A lock-less derived repo pins nothing. A repo with no brief and no group file cannot be a listed workspace
+  # (the team id comes from the brief). Either way there is nothing to verify and no exemption to claim.
+  [ "$MODE" = "upstream" ] && group_fail "no toolchain.lock or brief.json in upstream mode"
+  log "no toolchain.lock, or no brief.json and no group file: no S-10 exemption claimed"
+  group_note="no toolchain.lock, or no brief.json and no group file: no S-10 exemption claimed"
+elif [ ! -f brief.json ]; then
+  group_fail ".agentteams/toolchain-group.json is present, but there is no brief.json to name this workspace's team"
+else
+  group_signers="${AGENTTEAMS_ALLOWED_SIGNERS:-$HOME/.config/agentteams/allowed_signers}"
+  # argparse also exits 2 on an unknown flag, so an agentteams too old for the check is reported on its own.
+  # The help text is captured first: under pipefail, `--help | grep -q` can fail on SIGPIPE after a match.
+  at_help="$(agentteams --help 2>/dev/null || true)"
+  case "$at_help" in *--verify-toolchain-pin*) ;; *) false ;; esac \
+    || group_fail "this agentteams has no --verify-toolchain-pin (added in agentteams v1.1.2)"
+  log "verifying toolchain-group pins in toolchain.lock (agentteams --verify-toolchain-pin)"
+  pin_rc=0
+  # --description: agentteams derives the team id from the brief (team_id, else the project_name slug) and
+  # refuses with exit 1 without it.
+  agentteams --verify-toolchain-pin toolchain.lock --allowed-signers "$group_signers" --output .github/agents \
+    --description brief.json || pin_rc=$?
+  # An agentteams pin with no agentteams.tag line can never verify (it exits 1), so a 0 there is not genuine.
+  if [ "$pin_rc" -eq 0 ] && grep -q '^agentteams=' toolchain.lock && [ -z "$(lock_tag agentteams)" ]; then
+    group_fail "--verify-toolchain-pin exited 0 for an untagged agentteams pin, which cannot verify"
+  fi
+  case "$pin_rc" in
+    0) log "toolchain-group pins verified: the S-10 toolchain-group exemption applies"
+       group_note="verified (the S-10 toolchain-group exemption applies)" ;;
+    2) [ "$MODE" = "upstream" ] && group_fail "no .agentteams/toolchain-group.json, but researchteam is a group member (exit 2)"
+       echo "::warning::autosync-gate: no toolchain-group file: no exemption claimed; ordinary S-10 rules apply"
+       log "no toolchain-group file (exit 2): no exemption claimed; the ordinary S-10 rules apply"
+       group_note="**no group file: no toolchain-group exemption claimed.** The ordinary S-10 rules apply at review: each pinned release clears the 14-day cooldown unless another recorded carve-out covers it, and carries a pin row where policy needs one" ;;
+    1) group_fail "a toolchain-group pin or the group file did not verify (exit 1)" ;;
+    *) group_fail "agentteams --verify-toolchain-pin exited ${pin_rc}" ;;
+  esac
+fi
+
 git add -A >/dev/null 2>&1 || true
 staged="$(git -c core.quotePath=false diff --cached --name-only 2>/dev/null)"
 substantive="$(printf '%s\n' "$staged" | grep -Ev "$NOISE_REGEX" | grep -v '\.agentteams-backups/' | sed '/^$/d' || true)"
@@ -269,6 +405,7 @@ if [ -n "$sensitive" ]; then emit "sensitive=true"; else emit "sensitive=false";
     echo "- **toolchain.lock:** $(grep -E '^(researchteam|agentteams)=' toolchain.lock | sed 's/=.*@\(.\{7\}\).*/ \1/' | paste -sd, - | sed 's/,/, /g')"
   fi
   [ -n "$lock_note" ] && echo "- **toolchain.lock not updated:** ${lock_note}"
+  [ -n "$group_note" ] && echo "- **toolchain group:** ${group_note}"
   echo
   if [ -n "$substantive" ]; then
     echo "**Substantive changed paths** (regen state-churn — graphs / threat-intel / build-log /"
@@ -279,7 +416,7 @@ if [ -n "$sensitive" ]; then emit "sensitive=true"; else emit "sensitive=false";
     echo "_No substantive (non-churn) paths changed — this is a churn-only refresh._"
   fi
   echo
-  echo "Gates passed in-job (validate + forbidden-path$( [ "$MODE" = upstream ] && echo ' + detector tests')). "
+  echo "Gates passed in the gate job (validate + forbidden-path$( [ "$MODE" = upstream ] && echo ' + detector tests')). "
   echo "Auto-PR only — review and merge to integrate. Machine-path files (delivery-receipt, memory-index)"
   echo "were scrubbed so no runner path is proposed."
 } > "$PR_BODY_FILE"

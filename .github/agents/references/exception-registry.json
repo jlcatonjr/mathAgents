@@ -1,0 +1,48 @@
+{
+  "cap": {
+    "max_active_relaxing": 3
+  },
+  "exceptions": [
+    {
+      "action": "unfreeze-codex",
+      "effect": {
+        "relaxes": [
+          "brief.json frozen_surfaces: codex"
+        ]
+      },
+      "id": "unfreeze-codex",
+      "issued": "2026-11-15T00:00:00+00:00",
+      "kind": "unfreeze",
+      "lineage": [
+        "release-policy-public-1.1"
+      ],
+      "relaxing": true,
+      "scope": "unfreeze-codex",
+      "status": "active"
+    },
+    {
+      "action": "unfreeze-goose",
+      "effect": {
+        "relaxes": [
+          "brief.json frozen_surfaces: goose",
+          "Goose without enforced orchestrator-only",
+          "Goose recipes carry developer (D34)",
+          "Goose seatbelt control-plane gap (item 3a)"
+        ]
+      },
+      "expires": "2027-02-09T23:59:59+00:00",
+      "id": "unfreeze-goose",
+      "issued": "2026-11-15T00:00:00+00:00",
+      "kind": "unfreeze",
+      "lineage": [
+        "release-policy-public-1.1"
+      ],
+      "relaxing": true,
+      "scope": "unfreeze-goose",
+      "status": "active"
+    }
+  ],
+  "note": "Rule 11(d) aggregate cap (operator D-6, 2026-11-15), recorded under the signed row exception-registry-cap-3. The S-10 toolchain group takes no slot (agentteams toolchain_group). agentteams may add machine fields (the group's sequence high-water mark, activation counters) after signing; the cap value and the entries listed at signing are what the row covers.",
+  "toolchain_group_sequence": 1,
+  "version": 1
+}

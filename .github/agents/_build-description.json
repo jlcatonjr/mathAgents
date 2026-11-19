@@ -283,7 +283,7 @@
     "research_verification"
   ],
   "layer2_profile": "scholarly",
-  "enforce_decision_signing": false,
+  "enforce_decision_signing": true,
   "team_id": "mathagents",
   "methodology_coverage": {
     "units_dir": "reports/dossiers",

@@ -704,3 +704,9 @@ def test_the_native_codex_freshness_compare_ignores_run_provenance_only(tmp_path
     assert native < check.index("_refresh_codex(Path('.'), dry_run=False)") < check.index("project_bespoke_codex.sh")
     assert check.index("project_bespoke_codex.sh") < check.index("compare_codex_tree.py")
     assert "--exclude .git " in check  # the copy never carries the worktree's git pointer
+    # ...but it carries the repository's identity (pr11 P08): a bare git init with the same origin URL, before the
+    # projection, so agentteams applies the toolchain group in the copy as it does in the tree
+    rs = check.index("rsync -a --exclude .git")
+    assert rs < check.index('git -C "$FRESH" init -q') < check.index("_refresh_codex(Path('.'), dry_run=False)")
+    assert 'git -C "$FRESH" remote add origin "$ORIGIN"' in check
+    assert "git config --get remote.origin.url || true" in check

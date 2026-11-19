@@ -2,6 +2,7 @@
 name: Cleanup — mathAgents
 description: "Removes stale drafts, build artifacts, and orphaned files from mathAgents with mandatory safety checks"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

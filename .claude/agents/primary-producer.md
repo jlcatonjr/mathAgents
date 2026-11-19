@@ -2,6 +2,7 @@
 name: Primary Producer — mathAgents
 description: "Drafts and revises deliverables in mathAgents from Component Briefs provided by workstream expert agents"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

@@ -10,6 +10,7 @@ SECTION MANIFEST — copilot-instructions.template.md
 | agent_team            | FENCED        | Full agent team list                     |
 | authority_hierarchy   | FENCED        | Source hierarchy list                    |
 | source_repositories   | FENCED        | Authority source entries                 |
+| toolchain_group_rule  | FENCED        | First-party toolchain group; template-authoritative |
 | constitutional_core   | FENCED        | Tier 1 principles C-1..C-5; non-overridable |
 | constitutional_rules  | USER-EDITABLE | Project may extend or customise          |
 | project_specific_rules| USER-EDITABLE | Extension home for instruction files     |
@@ -52,6 +53,12 @@ Where this differs from the project's real layout, the **Project Layout** sectio
 ## Project Layout
 
 > ⚙️ **USER-EDITABLE** — this project's real layout where it differs from the generated Directory Structure and Output Conventions (for example, deliverables under `Projects/*/` rather than one output folder). Where the two disagree, this section is authoritative. `--update` never overwrites it.
+
+- **Private records (local only, gitignored `tmp/`; operator decision D-0, 2026-11-13).** Plans:
+  `tmp/by-week/`. Work summaries: `tmp/private-records/workSummaries/` (not `workSummaries/`). Private reports,
+  handoffs, decision-spec and conditions texts, and the full charter decisions: `tmp/private-records/docs/reports/`,
+  `docs/handoffs/`, `docs/release/` and `docs/charter/03-decisions.md` under `tmp/private-records/`. The tracked
+  `docs/reports/` holds public reports only.
 
 ---
 
@@ -226,27 +233,35 @@ ordering, including where operator instructions and read content sit:
 - `https://www.crossref.org` — DOI resolution and bibliographic metadata verification
 <!-- AGENTTEAMS:END source_repositories -->
 
-<!-- AGENTTEAMS:BEGIN codex_write_policy v=1 -->
-## Write Policy: You Are the Orchestrator
+<!-- AGENTTEAMS:BEGIN toolchain_group_rule v=2 -->
+## First-party toolchain group (a bounded constraint-relaxing authorization)
 
-**This section applies to Codex sessions only.** Grok and Goose sessions that read this shared `AGENTS.md` ignore it and follow their own instructions.
+In a governed workspace, the repositories listed in the toolchain-group file
+(`.agentteams/toolchain-group.json`) are its *first-party toolchain group*; their releases are cut and
+signed by the operator with the release key. The file is a constraint-relaxing authorization, and this
+rule stands on its own, whatever number the project's constraint-relaxing rule carries:
 
-This team runs `write_policy: "orchestrator-only"`. In this top-level session **you are the orchestrator**, the
-only agent that writes. Every other agent is read-only and returns proposals; agents granted `agentteams_runner`
-stage their writes through it for your approval. Follow the orchestrator agent file's **Write Policy: Applying
-Proposals** section in full. In particular:
+- **Operator-signed.** It verifies only with the operator's Ed25519 decision key (a key in this team's
+  verify-key store) and only for the workspaces it lists, by repository and team id. No agent and no
+  brief edit can widen it; changing the group or its workspaces needs a new operator signature.
+- **Traceable.** Its signed `derives_from` names the recorded decision(s) it derives from. Each must be an
+  authentic authorizing decision in this team's log, with a recorded, acyclic lineage; an unretracted HALT on
+  it or on any ancestor ends the group (C-2).
+- **A trust root.** No decision row may target the file, and editing it by hand only stops it verifying.
+- **HALT ends it.** An unretracted HALT on the `s10-toolchain-group` family in any surface's decisions
+  log ends it at once (C-2), as does removing its key from the verify-key store. A HALT on any
+  `s10-cooldown-exempt` action (a member's exemption or that family) binds it too.
+- **No sunset and no cap slot.** Unlike every other relaxing exception, it does not expire and does not
+  count against the aggregate exception cap (operator ruling). Every other relaxing exception keeps its
+  cap and sunset, a project's own clauses included.
+- **What it lifts.** Only Rule S-10's 14-day cooldown and a pin move's per-release operator decision row,
+  for releases of group members. It never lifts the vulnerability search, Rule S-9's signed-tag check
+  (`agentteams --verify-toolchain-pin` checks it and fails closed; the project's dependency gate should run
+  it), the latest-stable rule, a `@security` review, or any other rule.
 
-- **Before every dispatch,** run `agentteams --issue-dispatch --agent <slug> --description <brief>` and put the
-  printed nonce in the task as the agent's `dispatch` value. An agent without one can't write.
-- **Returned artifacts:** apply them with `agentteams --apply-proposal FILE.json --description <brief>` or
-  `--run-request`.
-- **Staged writes:** review them with `agentteams --list-staged` and `--show-staged SID`, then decide with
-  `--apply-staged SID` or `--reject-staged SID`.
-- **At closeout:** run `agentteams --verify-proposal-ledger`.
-
-These commands queue for the operator's runner. If one says no runner is serving, ask the operator to start it.
-Reference: the team's `references/write-policy.reference.md`.
-<!-- AGENTTEAMS:END codex_write_policy -->
+agentteams ships and restores this section on every `--update --merge`; a project's own rules stay where
+they are.
+<!-- AGENTTEAMS:END toolchain_group_rule -->
 
 ---
 
@@ -273,6 +288,16 @@ Reference: the team's `references/write-policy.reference.md`.
 > Agent persona files receive an equivalent `## Project-Specific Notes` region automatically from
 > `emit`; instruction files do not, so it is declared here. Additions here may extend the
 > Constitutional Rules; they may not weaken the Constitutional Core.
+
+### Private records stay local (operator decision D-0, 2026-11-13)
+
+This repository is public. Its private records live only in the checkout's gitignored `tmp/`, with no backup:
+plans in `tmp/by-week/`, and daily work summaries, handoffs, private reports, decision-spec and conditions texts and
+the full charter decisions in `tmp/private-records/`. Rule 10 daily summaries go to
+`tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`, not the tracked `workSummaries/`. Never commit anything
+under `tmp/` (the pre-commit guard `scripts/hooks/private-paths-guard.sh` refuses it, even after `git add -f`;
+install it with `bash scripts/install_private_paths_guard.sh`), and never run `git clean -x` (or `-X`) in a working
+checkout.
 
 ### Codex session preflight (IA-02)
 
@@ -315,3 +340,24 @@ denies it), append the `@security` row to `references/pending-security-rows.csv`
 it before or with the action. A pending row is never a clearance in itself. A later session that can
 write `.github/` transfers it under the rules in `references/pending-security-rows.README.md`
 (P1–P6).
+<!-- AGENTTEAMS:BEGIN codex_write_policy v=1 -->
+## Write Policy: You Are the Orchestrator
+
+**This section applies to Codex sessions only.** Grok and Goose sessions that read this shared `AGENTS.md` ignore it and follow their own instructions.
+
+This team runs `write_policy: "orchestrator-only"`. In this top-level session **you are the orchestrator**, the
+only agent that writes. Every other agent is read-only and returns proposals; agents granted `agentteams_runner`
+stage their writes through it for your approval. Follow the orchestrator agent file's **Write Policy: Applying
+Proposals** section in full. In particular:
+
+- **Before every dispatch,** run `agentteams --issue-dispatch --agent <slug> --description <brief>` and put the
+  printed nonce in the task as the agent's `dispatch` value. An agent without one can't write.
+- **Returned artifacts:** apply them with `agentteams --apply-proposal FILE.json --description <brief>` or
+  `--run-request`.
+- **Staged writes:** review them with `agentteams --list-staged` and `--show-staged SID`, then decide with
+  `--apply-staged SID` or `--reject-staged SID`.
+- **At closeout:** run `agentteams --verify-proposal-ledger`.
+
+These commands queue for the operator's runner. If one says no runner is serving, ask the operator to start it.
+Reference: the team's `references/write-policy.reference.md`.
+<!-- AGENTTEAMS:END codex_write_policy -->

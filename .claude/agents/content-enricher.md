@@ -2,6 +2,7 @@
 name: Content Enricher — mathAgents
 description: "Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

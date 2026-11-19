@@ -3,7 +3,7 @@
   "project_name": "mathAgents",
   "project_goal": "Develop, verify, and explain mathematical and logical proofs across applied/modeling mathematics, research-level mathematics, competition problems, logic and foundations, and proofs used in the philosophy of science. Every proof is articulated through an explicit symbolic-logic pipeline (formal statement with fidelity check, proof-strategy blueprint, named-rule derivations, tactic plans) and is accepted only as Blueprint + Lean: a blueprint whose nodes are name-linked to Lean 4 declarations that build with no sorry, admit, or unapproved axiom. The Lean kernel judges validity; a human judges statement fidelity. Harness design decisions are derived from, and cited to, research on automated and LLM-assisted theorem proving, with Chicago author-date citations to verified sources.",
   "layer2_profile": "scholarly",
-  "enforce_decision_signing": false,
+  "enforce_decision_signing": true,
   "deliverables": [
     "Proof dossiers (Markdown, Chicago author-date)",
     "Lean 4 proof library (Lake package)",

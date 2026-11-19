@@ -2,6 +2,7 @@
 name: Technical Validator — mathAgents
 description: "Read-only audit agent that verifies technical accuracy in mathAgents — code examples, file excerpts, API references, and tool invocations match what exists on disk"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--

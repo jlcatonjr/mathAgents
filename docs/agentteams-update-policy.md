@@ -119,11 +119,34 @@ accepted `DEFENDED`), and was excluded from the baseline then.
    so the git **SHA**, not the version and not raw file-drift, is the only sound trigger. The gate lives
    in the managed `scripts/agentteams_autosync_gate.sh` (shared by the upstream + derived workflows).
 2. **On a real update, the scheduled run auto-opens/updates ONE evergreen PR** (`chore/agentteams-autosync`)
-   after every blocking gate passes in-job (validate + forbidden-path + detector unit tests upstream).
+   after every blocking gate passes in the gate job (validate + forbidden-path + detector unit tests upstream).
    It compares against the ref on the open evergreen branch, so an already-integrated SHA never re-fires
    while the PR waits — no weekly spam. A manual `workflow_dispatch` (optionally `force=true`) does the
    same on demand. Machine-path files (`delivery-receipt.json`, `memory-index.json`) are scrubbed so no
    CI-runner path is ever proposed.
+   - **Two jobs (#182).** The gate runs in the `autosync` job, which has `contents: read` and so cannot
+     push or open a PR. It hands its result to the `open_pr` job as an artifact: one patch and the PR body.
+   - `open_pr` holds the write token and runs no integrated code. It checks out the run's branch, confirms it is the gate's commit, refuses
+     gate outputs that are not a full commit id (40 hex characters) and `true`/`false`, applies the patch with `git apply`, and
+     refuses a `.git` path, a symbolic link, a submodule entry or a `.gitattributes` filter.
+   - `open_pr` decides the `security-review-required` label itself, from the changed paths, with the
+     repository's committed gate script (`--classify-sensitive`). The gate job's own answer can only add
+     the label, never remove it. The PR body starts with what `open_pr` found; the gate job's text follows.
+   - **Limits.** The patch and the PR body are still written by the job that runs integrated code, so the
+     review of the PR's diff remains the control on its content.
+   - **Rule for every repository that runs autosync: a workflow that holds a write token or a secret restores
+     no cache.** The gate job is read-only, but GitHub gives every job a runtime token that can write Actions
+     caches and artifacts, and a job cannot give that token up. Integrated code could therefore save a cache
+     entry under a key another workflow restores. So in any workflow with `contents: write`, another write
+     permission, or a secret: no `actions/cache`, and no `cache:` input on a `setup-*` action. `open_pr`
+     restores none. A read-only workflow may keep its cache only if nothing relies on its result for a merge,
+     a release or a publication: a required check or a docs build that restores a poisoned cache is misled
+     just the same.
+   - If the branch moves between the two jobs, create-pull-request puts the commit on the branch's newer
+     tip. `open_pr` checked the patch against the gate's commit, so the PR's own diff, which GitHub shows
+     against the real base, is what the reviewer goes by.
+     The artifact is kept for 3 days; after that, "Re-run failed jobs" on `open_pr` fails and the workflow
+     must be run again.
 3. **Auto-merge is disabled — the evergreen PR is reviewed and merged by a human.** The autosync is
    automatic *proposal*, not automatic merge; blocking gates run before the PR opens, and the reviewer
    gate below is the final word. (To opt into auto-merge-on-green later, enable `gh pr merge --auto` on
@@ -155,7 +178,9 @@ Under a release lock, the Execution Policy above changes as follows:
 
 1. **The gate follows the release line, never `main`.** The SHA-gate target is the newest verified tag on
    the locked tag's `vX.Y` line that is newer than it (`check_toolchain.py --release-candidate`, then
-   `--verify-tag`). With no newer tag, the run is a no-op. A tag that fails verification fails the gate,
+   `--verify-tag`). From a final-release lock, only final releases count: a `v1.1.0` lock is never moved to
+   `v1.1.1-rc.1` (latest-stable rule; researchteam 1.1.1). From a release-candidate lock, newer candidates and
+   the final do. With no newer tag, the run is a no-op. A tag that fails verification fails the gate,
    and no PR opens. `force=true` re-integrates the locked tag, which is how an operator-dispatched soak
    run works.
 2. **The lock moves only to a verified tag.** `check_toolchain.py --write-lock` refuses to move a locked
@@ -196,8 +221,17 @@ Under a release lock, the Execution Policy above changes as follows:
    limitation. researchteam v1.0.1 fixes it, so a consumer becomes eligible once it pins v1.0.1 or later; the operator re-enables
    each schedule (OI-2026-10-19-05).
 
-Moving a pin is a security event: record each move in an `@security` row naming the tag object and the
-peeled SHA.
+Moving a pin is a security event: record each move, naming the tag object and the peeled SHA. Where the
+record goes depends on the release (`docs/release-policy.md`, "Pins"):
+
+- **A release of a first-party toolchain-group member** (agentteams, researchteam, baseAgent, mathAgents, in a
+  workspace the operator-signed group file lists): no decision-log row. The record is the repository's own
+  `@security` review in the pin-move PR, which names the tag object and the peeled SHA and records the
+  known-vulnerability search. It is a record of a review, not an authorization: no decision row is signed for
+  it, but the tag must still verify as the operator's signed release (`agentteams --verify-toolchain-pin`) and
+  the latest-stable rule still applies.
+- **Any other pin move**, or a member move once the group file no longer verifies or an unretracted HALT on
+  `s10-toolchain-group` stands: a row in the decisions log. In a repository with decision signing on, that row is an authorization and the operator signs it.
 
 ## Derived Repositories: what an update means, and a paused schedule
 
@@ -218,7 +252,7 @@ whether the schedule is paused.
 
 **A paused schedule means dispatch only.** A derived repository may pause its weekly autosync: the schedule is
 disabled with `gh workflow disable`, or commented out of its own `agentteams-sync.yml`. That workflow is seeded
-at `init` and is not synced. While the schedule is paused, the scheduled runs described in *Execution Policy*
+at `init` and is not synced; `researchteam workflow-sync` updates it but keeps its `on:` block, so a pause stays. While the schedule is paused, the scheduled runs described in *Execution Policy*
 1–2 and *Automatic Integration* 3 do not happen. Integration happens only through an operator-dispatched
 `workflow_dispatch` run, or through the repository's local procedure above. Everything else in this policy
 still applies to those runs: the gates, the evergreen PR, review by a human, rollback.
@@ -239,21 +273,30 @@ generate, so the "latest agentteams update" is integrated without a manual step.
    with **no** layer-2 file sync — safe on the upstream repo (a full `researchteam update` there would
    overwrite local managed-file edits with the older upstream versions).
 3. **CI autosync (remote, SHA-gated) — the durable, always-propagating layer.** The `agentteams-sync`
-   workflow (upstream) and the scaffold-emitted `agentteams-sync` (derived) run weekly + on
-   `workflow_dispatch`. Both are thin shells over the managed `scripts/agentteams_autosync_gate.sh`,
+   workflow (upstream) runs weekly + on `workflow_dispatch`. The scaffold-emitted `agentteams-sync` (derived)
+   ships with its weekly schedule commented out (#186), so it runs on `workflow_dispatch` until the repository
+   turns the schedule on, which is a deliberate edit there. Both are thin shells over the managed `scripts/agentteams_autosync_gate.sh`,
    which SHA-gates on agentteams `main`, and on a real change installs that pinned SHA, runs the regen
    (upstream `--layer1-only`; derived full), scrubs machine-path churn, runs the blocking gates, records
    the SHA in `.github/agentteams-autosync-ref`, and lets the workflow open/update the evergreen PR (see
    Execution Policy). Because the gate is a **managed** file, fixes to the logic propagate to every
    derived repo via `researchteam update` — the four workflow copies (upstream, scaffold, each derived)
    stay thin and rarely change.
+   **Taking a scaffold change into an existing derived repo (#186).** The workflow is written at `init` and
+   otherwise only by `researchteam workflow-sync`. That command rewrites `.github/workflows/agentteams-sync.yml`
+   from the installed scaffold but keeps the repository's own top-level `on:` block as it is. With
+   `--workflow validate` it writes the opt-in validate workflow in the same way. It shows a diff and asks
+   first (`--yes`, `--dry-run`). Without that command, port the changed `permissions:` / `jobs:` parts by hand
+   and keep the `on:` block. Do not copy the whole scaffold over the file: before 1.1.7 the scaffold carried a
+   live weekly `schedule:`, and a whole-file copy changes the trigger section either way. A workflow disabled in GitHub (`gh workflow disable`) stays disabled either
+   way. A workflow edit gets the repo's own `@security` review.
 
 **Division of labor (hook vs CI — they do not fight).** The local pre-commit hook fires on *staged agent
 files* and re-integrates at whatever agentteams version is *installed locally*; the CI autosync fires on
 an *agentteams `main` SHA change* and integrates the *pinned upstream* SHA. Disjoint triggers; any overlap
 is self-healing (the `preserve` shrink policy protects enriched fences; `researchteam doctor` flags a stale
-local install). The blocking gates run **in-job before** the PR is created — a `GITHUB_TOKEN`-authored PR
-does not fire `pull_request` checks, so in-job gating (not PR-status checks) is what guarantees a bad regen
+local install). The blocking gates run **in the gate job, before** the PR is created — a `GITHUB_TOKEN`-authored PR
+does not fire `pull_request` checks, so gating in the gate job (not PR-status checks) is what guarantees a bad regen
 never becomes a mergeable PR.
 
 **Follow-up ([RT]).** The SHA-gate keys on the agentteams commit only; a researchteam-managed-only change

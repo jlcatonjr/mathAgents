@@ -51,6 +51,12 @@ Where this differs from the project's real layout, the **Project Layout** sectio
 
 > ⚙️ **USER-EDITABLE** — this project's real layout where it differs from the generated Directory Structure and Output Conventions (for example, deliverables under `Projects/*/` rather than one output folder). Where the two disagree, this section is authoritative. `--update` never overwrites it.
 
+- **Private records (local only, gitignored `tmp/`; operator decision D-0, 2026-11-13).** Plans:
+  `tmp/by-week/`. Work summaries: `tmp/private-records/workSummaries/` (not `workSummaries/`). Private reports,
+  handoffs, decision-spec and conditions texts, and the full charter decisions: `tmp/private-records/docs/reports/`,
+  `docs/handoffs/`, `docs/release/` and `docs/charter/03-decisions.md` under `tmp/private-records/`. The tracked
+  `docs/reports/` holds public reports only.
+
 ---
 
 <!-- AGENTTEAMS:BEGIN output_conventions v=1 -->
@@ -218,6 +224,36 @@ ordering, including where operator instructions and read content sit:
 - `https://www.crossref.org` — DOI resolution and bibliographic metadata verification
 <!-- AGENTTEAMS:END source_repositories -->
 
+<!-- AGENTTEAMS:BEGIN toolchain_group_rule v=2 -->
+## First-party toolchain group (a bounded constraint-relaxing authorization)
+
+In a governed workspace, the repositories listed in the toolchain-group file
+(`.agentteams/toolchain-group.json`) are its *first-party toolchain group*; their releases are cut and
+signed by the operator with the release key. The file is a constraint-relaxing authorization, and this
+rule stands on its own, whatever number the project's constraint-relaxing rule carries:
+
+- **Operator-signed.** It verifies only with the operator's Ed25519 decision key (a key in this team's
+  verify-key store) and only for the workspaces it lists, by repository and team id. No agent and no
+  brief edit can widen it; changing the group or its workspaces needs a new operator signature.
+- **Traceable.** Its signed `derives_from` names the recorded decision(s) it derives from. Each must be an
+  authentic authorizing decision in this team's log, with a recorded, acyclic lineage; an unretracted HALT on
+  it or on any ancestor ends the group (C-2).
+- **A trust root.** No decision row may target the file, and editing it by hand only stops it verifying.
+- **HALT ends it.** An unretracted HALT on the `s10-toolchain-group` family in any surface's decisions
+  log ends it at once (C-2), as does removing its key from the verify-key store. A HALT on any
+  `s10-cooldown-exempt` action (a member's exemption or that family) binds it too.
+- **No sunset and no cap slot.** Unlike every other relaxing exception, it does not expire and does not
+  count against the aggregate exception cap (operator ruling). Every other relaxing exception keeps its
+  cap and sunset, a project's own clauses included.
+- **What it lifts.** Only Rule S-10's 14-day cooldown and a pin move's per-release operator decision row,
+  for releases of group members. It never lifts the vulnerability search, Rule S-9's signed-tag check
+  (`agentteams --verify-toolchain-pin` checks it and fails closed; the project's dependency gate should run
+  it), the latest-stable rule, a `@security` review, or any other rule.
+
+agentteams ships and restores this section on every `--update --merge`; a project's own rules stay where
+they are.
+<!-- AGENTTEAMS:END toolchain_group_rule -->
+
 ---
 
 ## Style Rules
@@ -243,6 +279,16 @@ ordering, including where operator instructions and read content sit:
 > Agent persona files receive an equivalent `## Project-Specific Notes` region automatically from
 > `emit`; instruction files do not, so it is declared here. Additions here may extend the
 > Constitutional Rules; they may not weaken the Constitutional Core.
+
+### Private records stay local (operator decision D-0, 2026-11-13)
+
+This repository is public. Its private records live only in the checkout's gitignored `tmp/`, with no backup:
+plans in `tmp/by-week/`, and daily work summaries, handoffs, private reports, decision-spec and conditions texts and
+the full charter decisions in `tmp/private-records/`. Rule 10 daily summaries go to
+`tmp/private-records/workSummaries/daily/YYYY-MM-DD.md`, not the tracked `workSummaries/`. Never commit anything
+under `tmp/` (the pre-commit guard `scripts/hooks/private-paths-guard.sh` refuses it, even after `git add -f`;
+install it with `bash scripts/install_private_paths_guard.sh`), and never run `git clean -x` (or `-X`) in a working
+checkout.
 
 ### Security rows when `.github/` is not writable
 

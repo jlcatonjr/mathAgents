@@ -61,7 +61,7 @@ researchteam never edits `settings.json`). `researchteam doctor` reports both.
 | `researchteam materialize [--yes] [--dry-run] [--copilot-only] [--adopt-orphans] [--discard-user-regions] [--no-codex]` | Re-render the agent team on every surface (copilot-vscode plus native claude/goose teams) from `brief.json` after a domain/identity change (cleared `--overwrite` pass per surface), then re-personalize the identity files. |
 | `researchteam update [--yes] [--dry-run] [--layer2-only] [--layer1-only] [--ref REF] [--accept-upstream PATH] [--no-codex]` | Sync framework files from upstream, then merge agent infrastructure: copilot-vscode, then each native claude/goose surface the instance already carries (merge mode, never overwrite), then Codex (native, orchestrator-only; refused otherwise; `--no-codex` leaves Codex unchanged). |
 | `researchteam status` | Show marker info and CLI version. |
-| `researchteam doctor [--drift]` | Diagnose the researchteam ↔ agentteams toolchain, the toolchain pin and frozen fences; `--drift` also checks seeded files and bridges (see *Drift report*). |
+| `researchteam doctor [--drift]` | Diagnose the researchteam ↔ agentteams toolchain, the toolchain pin, the term index (its gate, hooks and CI) and frozen fences; `--drift` also checks seeded files and bridges (see *Drift report*). |
 
 ## The two-layer update model
 
@@ -77,6 +77,11 @@ agentteams descriptor (`brief.json` / `.github/agents/_build-description.json`).
 `layer1 = off` in `.researchteam`. `update` (including the derived autosync) then syncs layer 2
 only, `materialize` refuses, and `doctor` says so. Without that line, a missing descriptor is an
 error that names both ways out: describe the project in `brief.json`, or add `layer1 = off`.
+
+**Term registers.** `term_index_require = true` in `.researchteam` makes a term register compulsory for
+every research project (`docs/term-index-protocol.md`). Accepted values are `true`/`yes`/`on`/`1` and
+`false`/`no`/`off`/`0`. `scripts/check_term_index.py` reads it. Upstream sets it; a derived repository
+decides for itself.
 
 **Project identity — generated, not synced:** `README.md` and the title + *Project Purpose* header
 of `CLAUDE.md` are generated from `brief.json` and are **not** part of layer-2 sync. `update` will
@@ -166,7 +171,8 @@ For example, a bridge-generated `.claude` advisor stub has none, so it is skippe
 - **`layer2_profile`** (`"scholarly"` | `"generic"`; default when absent: `"scholarly"`). A
   `generic` project receives only the framework-neutral layer-2 files; the scholarly tooling
   (citation-claim audit protocol, literature-library scripts, news-perspective protocol,
-  historical-context protocol, methodology/historical-context/citation-integrity checks) is not
+  historical-context protocol, term-index protocol and scripts,
+  methodology/historical-context/citation-integrity checks) is not
   synced. Switching an already-scaffolded instance to
   `generic` stops those files being re-synced; any copies placed at `init` remain on disk and can be
   removed by hand.
@@ -409,8 +415,15 @@ Drift findings are warnings and never fail `doctor`, with one exception: under
 ## Derived-repo CI
 
 Projects created with `researchteam init` receive `.github/workflows/agentteams-sync.yml`, which
-runs weekly (Monday 06:00 UTC) and on `workflow_dispatch`: it installs the CLI and runs the managed
+runs on `workflow_dispatch`, and weekly (Monday 06:00 UTC) once the project uncomments its schedule, which ships
+off (#186); `researchteam workflow-sync` updates the workflow and keeps the project's `on:` block: it installs the CLI and runs the managed
 `scripts/agentteams_autosync_gate.sh --mode derived`. The gate SHA-gates on agentteams, installs the
 pinned commit, runs a full `researchteam update --yes` and the blocking validation gates, and the
 workflow then opens or updates one evergreen PR (`chore/agentteams-autosync`). See
 `docs/agentteams-update-policy.md`.
+
+A second workflow is opt-in: `researchteam workflow-sync --workflow validate` writes
+`.github/workflows/researchteam-validate.yml`, which runs the bridge validator on pull requests and on
+pushes to `main` with a read-only token. `init` does not install it and `update` never touches it. With it,
+the checks inside `validate`, the term-index gate among them, run on every pull request
+(`docs/term-index-protocol.md`). Whether a failure blocks a merge is the repository's own branch rule.

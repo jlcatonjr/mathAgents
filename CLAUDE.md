@@ -31,6 +31,13 @@ Primary outputs:
 7. Place every load-bearing source in its own time: date, place, audience and text version, with
    anachronism guarded in both directions. Follow `docs/historical-context-protocol.md`, and run
    `bash scripts/claude_researchteam_bridge.sh history-check <project>` before compiling.
+8. Define each project's key terms in its term register (`Projects/<project>/terminology/terms.json`)
+   and use the preferred labels. Rebuild the term index after editing
+   (`bash scripts/claude_researchteam_bridge.sh term-build <project>`, or the optional hooks the operator
+   merges), and run `bash scripts/claude_researchteam_bridge.sh term-check <project>` before compiling.
+   Follow `docs/term-index-protocol.md`. A clean check means WELL-FORMED AND CURRENT, not that terms
+   are used in their defined sense. This rule applies where the repository carries the term-index
+   scripts (the scholarly profile).
 
 ## Quick Start
 
@@ -152,15 +159,15 @@ keep it. Operator decision, 2026-10-28.
   surface on each update. A bare `researchteam update` or `agentteams --update` is not a complete update here.
 - **Codex and Goose (CX-3, operator ruling 2026-11-09).** Both are unfrozen for 1.1.0 (`brief.json`
   `frozen_surfaces` is empty), effective with the agentteams v1.1.0 pin (MA-6) and the operator's Ed25519-signed
-  Rule 11 rows `unfreeze-codex` and `unfreeze-goose` (`docs/release/unfreeze-*.decision-spec.json`), which researchteam itself verifies. Codex is under orchestrator-only: a native
+  Rule 11 rows `unfreeze-codex` and `unfreeze-goose` (`docs/release/unfreeze-*.decision-spec.json`, a private record: local copy under `tmp/private-records/`), which researchteam itself verifies. Codex is under orchestrator-only: a native
   render with the role gate, hooks and launcher, then the bespoke agents imported into it read-only
   (`scripts/lib/project_bespoke_codex.sh`; agentteams #319). Goose runs **UNENFORCED**: agentteams still refuses
   orchestrator-only on Goose (`GOOSE_SWITCH_REFUSED`), so its recipes render off the switch: the bespoke ones are
   grant-scoped (`mathagents._surfaces scope-goose`), and the read-only and command-running ones carry `developer`
-  (D34's accepted risk, accepted again 2026-11-09; `docs/release/unfreeze-goose.conditions.txt`). Also accepted
+  (D34's accepted risk, accepted again 2026-11-09; `docs/release/unfreeze-goose.conditions.txt`, private). Also accepted
   ("Unfreeze both, accept the gap"): off the switch, Goose's sandbox profile no longer write-denies `.agentteams`
   or `.goose/recipes`, so a Goose session could edit the Codex role gate (item 3a there; agentteams handoff
-  `docs/handoffs/2026-11-09-to-agentteams-goose-sandbox-control-plane.md`). Re-freeze Goose, or put it under the switch, once agentteams enforces it
-  there (gap 1 in `docs/handoffs/2026-10-27-to-agentteams-native-projection-gaps.md`).
+  `docs/handoffs/2026-11-09-to-agentteams-goose-sandbox-control-plane.md`, private). Re-freeze Goose, or put it under the switch, once agentteams enforces it
+  there (gap 1 in `docs/handoffs/2026-10-27-to-agentteams-native-projection-gaps.md`, private).
 - **Autosync is paused.** The `agentteams-sync` workflow's schedule is disabled, and it runs only when the
   operator dispatches it. Pins move only to verified signed tags (`toolchain.lock`), with an @security row.

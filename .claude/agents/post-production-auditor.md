@@ -2,6 +2,7 @@
 name: Post-Production Auditor — mathAgents
 description: "Outcome-verification specialist for mathAgents: validates claimed completed work against source-of-truth state using risk-tiered sampling and evidence-backed verdicts"
 tools: Read, Grep, Glob
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

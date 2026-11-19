@@ -2,6 +2,7 @@
 name: Output Compiler — mathAgents
 description: "Assembles all converted components into a final deliverable package for mathAgents — dependency check, ordering, build manifest"
 tools: Read
+model: opus
 ---
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 

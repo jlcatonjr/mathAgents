@@ -2,6 +2,7 @@
 name: Harness Specification Expert — mathAgents
 description: "Component expert for Harness Specification in mathAgents — prepares Component Briefs, reviews drafts against brief checklist, approves deliverables"
 tools: Read, Grep, Glob
+model: opus
 ---
 
 <!--
