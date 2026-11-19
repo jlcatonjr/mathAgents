@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "release-policy-public-1.1-amend-1",
+  "scope": "release-policy-public-1.1-amend-1",
+  "derives_from": "release-policy-public-1.1",
+  "effect_relaxes": "",
+  "effect_targets": "docs/release-policy.md",
+  "conditions": "Binding text: docs/governance/release-policy-public-1.1-amend-1.conditions.txt. Under root conditions item 5, adopts docs/release-policy.md at sha256 facb419e45997202f17ded65d8a673605f2cdc41e98a0c5418ac9725d4baf603 in place of 0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de: the header, \u00a72 (the toolchain group in force), \u00a73 (pin records; pins today v1.1.9/v1.1.4), \u00a74 (record wording; who dispatches unchanged) and \u00a77 (the signer in use). It grants and relaxes nothing and derives from release-policy-public-1.1.",
+  "conditions_verified": "conditions sha256:1af50e5b1245b5e8baa970ccb49b7150c53aee61ace0def23eeae6df13f29b34; docs/release-policy.md sha256:facb419e45997202f17ded65d8a673605f2cdc41e98a0c5418ac9725d4baf603 (branch chore/release-policy-public-1.2); diff against the root's file 0c00d7d9 is the five hunks of conditions item 1",
+  "evidence": "operator instruction 2026-11-18 in session; @security and @adversarial reviews (PR body); tmp/by-week/2026-W47/pr15-followups Z4-Z6 (private)"
+}

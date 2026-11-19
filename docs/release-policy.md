@@ -16,7 +16,9 @@ under `tmp/private-records/` and not published. In this repository, authority co
 `.github/agents/references/security-decisions.log.csv`, all deriving from the public root `release-policy-public-1.1`
 (pr11 P03), which adopts this file at the sha256 that row records. A row counts as *public* only if it is in that log;
 a label in this file grants nothing. No tool yet compares this file with the recorded sha256 at clearance, so the
-check is procedural: any later change to this file needs a new operator-signed root row before it takes effect.
+check is procedural: any later change to this file needs a new operator-signed root row before it takes effect, or a
+row deriving from the root that names the new sha256 (root conditions item 5). Amendment 1 (`release-policy-public-1.1-amend-1`,
+2026-11-18) is such a row: it brings §2, §3, §4 and §7 up to date with the public repository's own rows.
 The root also adopts, as its own, the rules below that the private history introduced (the 1.1 intake rule, which
 there took effect with D45, and the operator signer, provisioned there under `provision-operator-signer-*`); the
 private rows are cited as their provenance only.
@@ -51,9 +53,14 @@ private rows are cited as their provenance only.
   The same key signs the 1.1 line. In the private history, 1.1-line agentteams and researchteam tags were exempt
   from the S-10 cooldown under the operator-signed rows `s10-release-key-exemption-1.1` and
   `s10-release-key-exemption-researchteam-1.1` (PR #78; history: private). Those rows do not carry over. In this
-  public repository the S-10 cooldown applies to every release unless a row in this repository's own log exempts it
-  (planned: the operator-signed toolchain-group exemption for agentteams, researchteam, baseAgent and mathAgents,
-  deriving from `release-policy-public-1.1`; pr11 P08).
+  public repository the S-10 cooldown applies to every release unless a row in this repository's own log exempts it.
+  **The toolchain group (public, in force since 2026-11-16).** The operator-signed group file
+  `.agentteams/toolchain-group.json` (sequence 1; parent row `s10-first-party-releases-2026-11`, deriving from
+  `release-policy-public-1.1`; pr11 P08) makes agentteams, researchteam, baseAgent and mathAgents a first-party
+  toolchain group. While it verifies (`agentteams --verify-toolchain-group`) and no HALT on `s10-toolchain-group`
+  stands, a release of a member is exempt from the S-10 cooldown and needs no per-release operator pin row. It lifts
+  nothing else: tag verification (S-9, `agentteams --verify-toolchain-pin`), the known-vulnerability search, the
+  latest-stable rule and the `@security` review all still apply.
 - **Verification.** Against `~/.config/agentteams/allowed_signers`, which is outside every write root. Installing
   or changing it is operator-only. Use the neutralised verify command from agentteams SECURITY.md.
 - **The RC.** mathAgents' RC is the signed tag `v1.0.0-rc.1` on `release/1.0`, so baseAgent can pin it.
@@ -67,11 +74,22 @@ private rows are cited as their provenance only.
 - **One source of truth.** When both the extras and `toolchain.lock` carry a pin, `check_toolchain.py` fails if they
   disagree (implemented by researchteam). mathAgents also tests that the `.github` and `.claude` build-logs name the
   locked agentteams commit.
-- **Moving a pin.** Each move is an `@security` row naming the tag and its peeled SHA.
+- **Moving a pin.** Each move is recorded with the tag object and its peeled SHA. A move to a release of a
+  toolchain-group member, while the group file verifies, is recorded by this repository's `@security` review in the
+  pin-move PR: tag object, peeled SHA, signature, the vulnerability search, and that the group file still verifies and
+  every signed relaxation is still present. That review needs no operator-signed row (`docs/agentteams-update-policy.md`,
+  "Pins"), but this repository still records it as an unsigned `@security` row in its decisions log, in the pin-move PR
+  or, when adding it there would move the reviewed head, in the next records PR. Any other move is an `@security` row
+  in the decisions log, which the operator signs while decision signing is on.
   `scripts/lib/agentteams_provenance.py` refuses a render on any other agentteams commit.
-- **Pins today (2026-11-09).** Both are peeled commits of verified signed tags, with `.tag=` lines. Every row named
-  in this bullet is in the private history (see "Rows named here" above); the next pin move is recorded in this
-  repository's own log.
+- **Pins today (2026-11-18).** Both are peeled commits of verified signed tags, with `.tag=` lines.
+  - `main` (and `dev`, synced from it): researchteam `v1.1.9` (`166ee217`, tag object `9b982986`) and agentteams
+    `v1.1.4` (`b82d78e7`, tag object `541b9e55`), PR #13 (2026-11-18), a toolchain-group move recorded by the
+    `@security` review in that PR (its log row follows in a records PR). Before that, in this repository: researchteam `v1.1.8` (`4060531a`) with agentteams
+    `v1.1.4`, PR #11 (2026-11-18), and researchteam `v1.1.4` (`5fd8ec3b`) with agentteams `v1.1.3` (`cbd41a74`), PR #7
+    (2026-11-16), each a group move with its review row in this repository's log. `toolchain.lock` is authoritative.
+- **Pins before the public repository (private history).** Every row named in this bullet is in the private history
+  (see "Rows named here" above) and carries no authority here.
   - `release/1.0`: agentteams `v1.0.0` (`cc5b8c9e`, moved in Phase T on 2026-10-19 from the joint soak pair
     agentteams `v1.0.0-rc.14` + researchteam `v1.0.0-rc.3`) and researchteam `v1.0.1` (`b55e2307`, for its
     frozen-surfaces fix).
@@ -119,7 +137,7 @@ private rows are cited as their provenance only.
     merges only after: `bash scripts/refresh_agent_surfaces.sh` has run on its branch and the operator has pushed that
     commit (a pull request opened with the workflow token starts no checks, so this push is what starts them); `gates`
     and `long-suites` pass; the agentteams and
-    researchteam pin move has its own @security row (S-10: tag verification, provenance, an OSV check); and, when it carries the `security-review-required` label, an
+    researchteam pin move has its own @security record under §3 (S-10: tag verification, provenance, an OSV check); and, when it carries the `security-review-required` label, an
     @security review.
 
 ## 5. Codex and AGENTS.md
@@ -212,7 +230,14 @@ waits.
   security gate could never clear before the key is read: no approved author, a scope that excludes the action, an
   unset date, a team dir the signer doesn't write to, or a `derives_from` chain that doesn't resolve to recorded rows
   (the gate pools lineage per action id, so a bad first row makes an id unclearable: use a new id).
-- The signer is the root-owned `/opt/agentteams-signer-v1.0.0` (agentteams v1.0.0, cc5b8c9e; cryptography 50.0.0),
+- **The signer in use (2026-11-15 on).** The operator-signed rows of this public repository's log, from the governance
+  bootstrap (pr11 P03, the root `release-policy-public-1.1`) on, were signed with the root-owned
+  `/opt/agentteams-signer/venv-v1.1.3` (agentteams v1.1.3, under the pip constraints
+  `/opt/agentteams-signer/constraints-v1.1.3.txt`, vetted 2026-11-13; its header cites infrastructureManagement's operator script 65),
+  by one-shot operator scripts that refuse unless the signer and its interpreter are root-owned and report agentteams
+  1.1.3. `scripts/operator/lib_signer.sh` below still names the 1.0 signer: moving its `signer_check` to the v1.1.3
+  signer is a separate change to the signing tooling, under its own `@security` review.
+- The 1.0 signer is the root-owned `/opt/agentteams-signer-v1.0.0` (agentteams v1.0.0, cc5b8c9e; cryptography 50.0.0),
   provisioned once by `scripts/operator/provision_signer_venv.sh` under the operator's row
   `provision-operator-signer-agentteams-v1.0.0-r3` (operator decision 2026-10-28). Every new signing script sources
   `scripts/operator/lib_signer.sh` and calls `signer_check`. It refuses unless the signer and its parents are
