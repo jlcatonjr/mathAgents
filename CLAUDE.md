@@ -157,17 +157,27 @@ keep it. Operator decision, 2026-10-28.
   runs `researchteam update`, re-projects the bespoke agents through interop, renders every unfrozen surface
   natively, and checks render consistency, with a bridge guard before and after. It projects to every unfrozen
   surface on each update. A bare `researchteam update` or `agentteams --update` is not a complete update here.
+  With decision signing on (`brief.json` `enforce_decision_signing`), its render needs operator-signed single-use
+  overwrite rows. A researchteam-only pin move whose layer-1 dry run would change no agent file beyond live advisory
+  data, fenced regeneration or a known region drop is done with `researchteam update --layer2-only` (PR #13).
 - **Codex and Goose (CX-3, operator ruling 2026-11-09).** Both are unfrozen for 1.1.0 (`brief.json`
   `frozen_surfaces` is empty), effective with the agentteams v1.1.0 pin (MA-6) and the operator's Ed25519-signed
-  Rule 11 rows `unfreeze-codex` and `unfreeze-goose` (`docs/release/unfreeze-*.decision-spec.json`, a private record: local copy under `tmp/private-records/`), which researchteam itself verifies. Codex is under orchestrator-only: a native
+  Rule 11 rows `unfreeze-codex` and `unfreeze-goose`, which researchteam itself verifies. In this public repository
+  both are signed afresh in its own log (2026-11-15), deriving from `release-policy-public-1.1`; their binding texts are
+  `docs/governance/unfreeze-codex.conditions.txt` and `docs/governance/unfreeze-goose.conditions.txt`, and Goose is
+  reviewed by 2027-02-09. Codex is under orchestrator-only: a native
   render with the role gate, hooks and launcher, then the bespoke agents imported into it read-only
   (`scripts/lib/project_bespoke_codex.sh`; agentteams #319). Goose runs **UNENFORCED**: agentteams still refuses
   orchestrator-only on Goose (`GOOSE_SWITCH_REFUSED`), so its recipes render off the switch: the bespoke ones are
   grant-scoped (`mathagents._surfaces scope-goose`), and the read-only and command-running ones carry `developer`
-  (D34's accepted risk, accepted again 2026-11-09; `docs/release/unfreeze-goose.conditions.txt`, private). Also accepted
+  (D34's accepted risk, accepted again 2026-11-09 and 2026-11-15; `docs/governance/unfreeze-goose.conditions.txt` item 2). Also accepted
   ("Unfreeze both, accept the gap"): off the switch, Goose's sandbox profile no longer write-denies `.agentteams`
   or `.goose/recipes`, so a Goose session could edit the Codex role gate (item 3a there; agentteams handoff
   `docs/handoffs/2026-11-09-to-agentteams-goose-sandbox-control-plane.md`, private). Re-freeze Goose, or put it under the switch, once agentteams enforces it
   there (gap 1 in `docs/handoffs/2026-10-27-to-agentteams-native-projection-gaps.md`, private).
-- **Autosync is paused.** The `agentteams-sync` workflow's schedule is disabled, and it runs only when the
-  operator dispatches it. Pins move only to verified signed tags (`toolchain.lock`), with an @security row.
+- **Autosync is paused.** The `agentteams-sync` workflow's schedule is disabled. It runs only when dispatched on
+  `dev`, by the operator or by the orchestrator with the operator's go-ahead in session. Pins move only to verified
+  signed tags (`toolchain.lock`). A release of a first-party toolchain-group member (`.agentteams/toolchain-group.json`,
+  operator-signed) is recorded by this repository's @security review in the pin-move PR, with no decision row, while
+  the group file verifies (`agentteams --verify-toolchain-group`, `--verify-toolchain-pin`); any other pin move needs
+  an operator-signed row (`docs/agentteams-update-policy.md`, "Pins").
