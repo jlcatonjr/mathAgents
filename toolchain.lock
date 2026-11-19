@@ -4,8 +4,9 @@
 # build-logs must name it (tests/test_refresh_guard.py). Move it only in a release, with an @security row (on main, which
 # is no release line, also by an operator decision that brings it in line with what main already carries):
 #   both lines pin the peeled commit of a verified signed tag (docs/release-policy.md §3). On main both follow the 1.1
-#   line: researchteam v1.1.9, which pins agentteams v1.1.4 (pr14, 2026-11-18; operator ruling R28; group-member
-#   move under T2, recorded by this repository's @security review in the PR, no decision row, researchteam #209).
+#   line: researchteam v1.1.9, which pins agentteams v1.1.4 (PR #13, plan pr14, 2026-11-18; operator ruling R28;
+#   group-member move under T2: no operator-signed row; recorded by this repository's @security review in the PR and
+#   its unsigned @security row in the decisions log, row pr14-pin-v1.1.9-fixed-head-b1f5ce7-review).
 #   S-10 is met through the operator-signed toolchain-group file (parent row s10-first-party-releases-2026-11, IM
 #   script 120), not a cooldown. Previous pins: researchteam v1.1.8 + agentteams v1.1.4 (PR #11), researchteam
 #   v1.1.4 + agentteams v1.1.3 (PR #7). Earlier pins are in the private history.

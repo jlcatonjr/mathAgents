@@ -180,6 +180,7 @@ keep it. Operator decision, 2026-10-28.
   `dev`, by whoever `docs/release-policy.md` §4 allows, after checking that the `AGENTTEAMS_ALLOWED_SIGNERS` secret
   exists and that the workflow's trust-root step still pins the release key. Pins move only to verified
   signed tags (`toolchain.lock`). A release of a first-party toolchain-group member (`.agentteams/toolchain-group.json`,
-  operator-signed) is recorded by this repository's @security review in the pin-move PR, with no decision row, while
-  the group file verifies (`agentteams --verify-toolchain-group`, `--verify-toolchain-pin`); any other pin move needs
-  an operator-signed row (`docs/agentteams-update-policy.md`, "Pins").
+  operator-signed) needs no operator-signed row while the group file verifies (`agentteams --verify-toolchain-group`,
+  `--verify-toolchain-pin`): it is recorded by this repository's @security review in the pin-move PR and, as
+  `docs/release-policy.md` §3 requires, by an unsigned @security row in the decisions log. Any other pin move needs an
+  operator-signed row (`docs/agentteams-update-policy.md`, "Pins").
