@@ -79,7 +79,8 @@ private rows are cited as their provenance only.
   pin-move PR: tag object, peeled SHA, signature, the vulnerability search, and that the group file still verifies and
   every signed relaxation is still present. That review needs no operator-signed row (`docs/agentteams-update-policy.md`,
   "Pins"), but this repository still records it as an unsigned `@security` row in its decisions log: in the pin-move
-  PR, or, when adding it there would move the reviewed head, in a PR merged before the next pin move. Any other move is an `@security` row
+  PR, or, when adding it there would move the reviewed head, in a PR merged before the next pin move. That row is this
+  repository's addition to `docs/agentteams-update-policy.md`, which asks for none. Any other move is an `@security` row
   in the decisions log, which the operator signs while decision signing is on.
   `scripts/lib/agentteams_provenance.py` refuses a render on any other agentteams commit.
 - **Pins today (2026-11-18).** Both are peeled commits of verified signed tags, with `.tag=` lines.

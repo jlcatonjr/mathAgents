@@ -3,7 +3,7 @@ jlcatonjr/mathAgents, id 1452811332), deriving from the root release-policy-publ
 ("a later change to that file takes effect only under a new operator-signed root row (or a row deriving from this one
 that names the new sha256)"). Operator instruction 2026-11-18, in session: bring docs/release-policy.md up to date.
 
-1. Adoption. This row adopts docs/release-policy.md at sha256 42d35a58639686d07d1b76feeb42fc4cc21c3b783603f791460b85bf6cb42b0e
+1. Adoption. This row adopts docs/release-policy.md at sha256 583b3ed0f7e60b2e5985e26b8277e840db1ddd562921bb6bf890dfcd684f9d26
    in place of 0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de, as merged to main with this row. The
    change from the root's file is five hunks, and nothing else:
    a. the header: names this amendment and root conditions item 5;
@@ -13,7 +13,8 @@ that names the new sha256)"). Operator instruction 2026-11-18, in session: bring
       verification, the vulnerability search, the latest-stable rule, the @security review);
    c. §3 Moving a pin and Pins today: a toolchain-group member move is recorded by the @security review in the
       pin-move PR and still as an unsigned @security row in the decisions log, in that PR or, when adding it there
-      would move the reviewed head, in a PR merged before the next pin move; any other move is an @security row the
+      would move the reviewed head, in a PR merged before the next pin move (this repository's addition to
+      docs/agentteams-update-policy.md, which asks for no row); any other move is an @security row the
       operator signs while decision signing is on. Pins today: researchteam v1.1.9 + agentteams v1.1.4 (PR #13), after
       v1.1.8 + v1.1.4 (PR #11) and v1.1.4 + v1.1.3 (PR #7); the earlier pins are relabelled as private history;
    d. §4: the autosync merge condition's "@security row" becomes "@security record under §3". Who dispatches is
