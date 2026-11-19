@@ -158,8 +158,9 @@ keep it. Operator decision, 2026-10-28.
   natively, and checks render consistency, with a bridge guard before and after. It projects to every unfrozen
   surface on each update. A bare `researchteam update` or `agentteams --update` is not a complete update here.
   With decision signing on (`brief.json` `enforce_decision_signing`), its render needs operator-signed single-use
-  overwrite rows. A researchteam-only pin move whose layer-1 dry run would change no agent file beyond live advisory
-  data, fenced regeneration or a known region drop is done with `researchteam update --layer2-only` (PR #13).
+  overwrite rows. For the record: PR #13, a researchteam-only pin move, ran `researchteam update --layer2-only`
+  instead, because its layer-1 dry run showed no agent change beyond live advisory data; @security reviewed that
+  choice for that move only. It is not a standing exception to this procedure.
 - **Codex and Goose (CX-3, operator ruling 2026-11-09).** Both are unfrozen for 1.1.0 (`brief.json`
   `frozen_surfaces` is empty), effective with the agentteams v1.1.0 pin (MA-6) and the operator's Ed25519-signed
   Rule 11 rows `unfreeze-codex` and `unfreeze-goose`, which researchteam itself verifies. In this public repository
@@ -176,7 +177,8 @@ keep it. Operator decision, 2026-10-28.
   `docs/handoffs/2026-11-09-to-agentteams-goose-sandbox-control-plane.md`, private). Re-freeze Goose, or put it under the switch, once agentteams enforces it
   there (gap 1 in `docs/handoffs/2026-10-27-to-agentteams-native-projection-gaps.md`, private).
 - **Autosync is paused.** The `agentteams-sync` workflow's schedule is disabled. It runs only when dispatched on
-  `dev`, by the operator or by the orchestrator with the operator's go-ahead in session. Pins move only to verified
+  `dev`, by whoever `docs/release-policy.md` §4 allows, after checking that the `AGENTTEAMS_ALLOWED_SIGNERS` secret
+  exists and that the workflow's trust-root step still pins the release key. Pins move only to verified
   signed tags (`toolchain.lock`). A release of a first-party toolchain-group member (`.agentteams/toolchain-group.json`,
   operator-signed) is recorded by this repository's @security review in the pin-move PR, with no decision row, while
   the group file verifies (`agentteams --verify-toolchain-group`, `--verify-toolchain-pin`); any other pin move needs
