@@ -11,6 +11,8 @@ SECTION MANIFEST — copilot-instructions.template.md
 | authority_hierarchy   | FENCED        | Source hierarchy list                    |
 | source_repositories   | FENCED        | Authority source entries                 |
 | toolchain_group_rule  | FENCED        | First-party toolchain group; template-authoritative |
+| github_management_rule| FENCED        | GitHub management by role; template-authoritative |
+| dev_merge_rule        | FENCED        | Integration-branch merge authorization; template-authoritative |
 | constitutional_core   | FENCED        | Tier 1 principles C-1..C-5; non-overridable |
 | constitutional_rules  | USER-EDITABLE | Project may extend or customise          |
 | project_specific_rules| USER-EDITABLE | Extension home for instruction files     |

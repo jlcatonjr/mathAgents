@@ -1,3 +1,11 @@
+<!--
+SECTION MANIFEST
+| section_id | designation  |
+|------------|--------------|
+| content    | FENCED       |
+The "Project Extension Rules (CH-P01+)" section after the fence is unfenced and user-owned.
+-->
+
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 # Code Hygiene Rules — Enforcement Catalog (mathAgents)
 
@@ -423,3 +431,19 @@ preference. A chain is a CH-31 finding only if it passes all three flag conditio
 none of the exclusions; otherwise it is CH-24-compliant as an `if`/`elif`.
 
 <!-- AGENTTEAMS:END content -->
+
+## Project Extension Rules (CH-P01+)
+
+> ⚙️ **USER-EDITABLE** — add this project's own hygiene rules here, numbered `CH-P01`, `CH-P02`, … (a namespace reserved
+> for projects), with the same ID/Name/Category/Severity structure. This section lies outside the managed
+> region, so `--update --merge` keeps it while framework rules above are updated. `--doctor` warns if a `CH-…` id
+> appears twice in this file, or if a rule here uses a framework id (`CH-01`, `CH-02`, …).
+
+<!-- Example:
+### CH-P01 — Project-Specific Rule Name
+
+**Category:** <category>
+**Severity:** <severity>
+
+Description and enforcement check.
+-->

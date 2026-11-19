@@ -17,6 +17,7 @@ SECTION MANIFEST — conflict-auditor.template.md
 | handoff_payload_codes      | FENCED        | PAYLOAD_UNTYPED / PAYLOAD_MISMATCH |
 | rules                      | FENCED        | Template-owned section             |
 | handoff_payload_conflict_codes| FENCED        | Template-owned section             |
+| conflict_log_format        | FENCED        | Returned rows; orchestrator appends |
 -->
 
 # Conflict Auditor — mathAgents
@@ -111,12 +112,6 @@ row with `code` = `CLEAN`, the audited scope in `description`, `status` = `close
 it records the audit without asking `@conflict-resolution` for a decision.
 
 <!-- AGENTTEAMS:END conflict_log_format -->
-
-### Conflict Log Format
-
-Append to `.github/agents/references/conflict-log.csv` with columns:
-`date,category,code,severity,file,description,status,resolution`
-
 ---
 
 ## Audit Scope

@@ -10,13 +10,15 @@ SECTION MANIFEST
 |---------------------------|--------------|
 | memory_index_consultation | FENCED       |
 | invariant_core            | FENCED       |
+| decision_rules            | FENCED       |
+| dispositions              | FENCED       |
 | rules                     | FENCED       |
 -->
 
 
 # Conflict Resolution — mathAgents
 
-You make **ACCEPT / REJECT / REVISE** decisions on conflicts flagged by `@conflict-auditor`. You do not detect conflicts — you decide how to resolve them.
+You decide each conflict flagged by `@conflict-auditor`: **REJECT / ACCEPT / REVISE**, or **NO-CONFLICT** when the claims do not actually contradict each other. You do not detect conflicts — you decide how to resolve them.
 
 ---
 
@@ -25,6 +27,14 @@ You make **ACCEPT / REJECT / REVISE** decisions on conflicts flagged by `@confli
 
 > ⛔ **Do not modify or omit.**
 <!-- AGENTTEAMS:END invariant_core -->
+
+## Decision Framework
+
+For each conflict in `.claude/agents/references/conflict-log.csv` with status `open`:
+
+### Step 1: Read Both Sides
+- Read the conflicting claims from their source files
+- Check the authority hierarchy to determine which source has higher authority
 
 <!-- AGENTTEAMS:BEGIN decision_rules v=1 -->
 ### Step 2: Apply Decision Rules
@@ -44,14 +54,6 @@ Step 3 disposition table. Higher-tier evidence can override a default only under
 | `PE` (Phantom Entry) | REJECT: remove the entry; *(If `@reference-manager` in team)* flag it for `@reference-manager` investigation |
 
 <!-- AGENTTEAMS:END decision_rules -->
-
-## Decision Framework
-
-For each conflict in `.github/agents/references/conflict-log.csv` with status `open`:
-
-### Step 1: Read Both Sides
-- Read the conflicting claims from their source files
-- Check the authority hierarchy to determine which source has higher authority
 
 <!-- AGENTTEAMS:BEGIN memory_index_consultation v=4 -->
 ### Memory-index consultation *(applies when `references/memory-index.json` is present)*
@@ -108,7 +110,7 @@ resolution, and may already be closed.
 
 ### Step 4: Update Log
 
-Update `.github/agents/references/conflict-log.csv`: change `status` to `resolved`, add `resolution` description.
+Update `.claude/agents/references/conflict-log.csv` as the **Recording** rule in the Step 3 disposition table says.
 
 ---
 
