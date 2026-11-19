@@ -18,7 +18,10 @@ under `tmp/private-records/` and not published. In this repository, authority co
 a label in this file grants nothing. No tool yet compares this file with the recorded sha256 at clearance, so the
 check is procedural: any later change to this file needs a new operator-signed root row before it takes effect, or a
 row deriving from the root that names the new sha256 (root conditions item 5). Amendment 1 (`release-policy-public-1.1-amend-1`,
-2026-11-18) is such a row: it brings §2, §3, §4 and §7 up to date with the public repository's own rows.
+2026-11-18) is such a row: it brings §2, §3, §4 and §7 up to date with the public repository's own rows. Amendment 2
+(`release-policy-public-1.1-amend-2`, 2026-11-19) replaces it as the adopted text (amendment 1 stays recorded and is
+not retracted): it extends the policy to the 1.2 line (§1 the `release/1.2` branch, §2 the key's scope, §3 the
+release-line rows and the lock move).
 The root also adopts, as its own, the rules below that the private history introduced (the 1.1 intake rule, which
 there took effect with D45, and the operator signer, provisioned there under `provision-operator-signer-*`); the
 private rows are cited as their provenance only.
@@ -43,14 +46,23 @@ private rows are cited as their provenance only.
   change `scripts/operator/tag-release.sh`. Every signed row about the release names the history it refers to:
   `private` (this repository) or `public`. `release/1.0` and the `v0.x`–`v1.0.1` tags stay in the archived private
   repository.
+- **The 1.2 line (public repository, amendment 2).** `release/1.2` is cut from `main` at the merge commit of the pull
+  request that moves the pins to the 1.2 line (§3), while `main` is still at `1.2.0.dev0`, so the signed commit's
+  version differs from its first parent's. It takes in only: the release PR, branched from `release/1.2` (version `1.2.0rcN`, then `1.2.0`;
+  CHANGELOG `[1.2.0]` with its Toolchain block; the pins that block names), merged with a regular merge; afterwards,
+  `1.2.N` backports under the rules above. A release PR may not change `scripts/operator/tag-release.sh`, so any change
+  to the tag scripts merges to `main` before the cut. After each RC or final tag, `release/1.2` is merged forward into
+  `main` with a regular merge, and at `v1.2.0` `main` moves to `1.3.0.dev0`. `release/1.1` stays open for `1.1.N`
+  backports only; the policy in force on every line is `main`'s `docs/release-policy.md`, not a release branch's copy.
+  Every signed row about a 1.2 release names its history as `public`.
 
 ## 2. Tags
 
 - **Form.** `vX.Y.Z` or `vX.Y.Z-rc.N`, annotated and SSH-signed by the operator from a plain terminal with
   `scripts/operator/tag-release.sh`. No agent signs a tag.
-- **Key.** The agentteams release key (`SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM`; it signs the 1.0 and 1.1 lines). Its
+- **Key.** The agentteams release key (`SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM`; it signs the 1.0, 1.1 and 1.2 lines). Its
   `allowed_signers` line is in agentteams SECURITY.md, under "Release signers".
-  The same key signs the 1.1 line. In the private history, 1.1-line agentteams and researchteam tags were exempt
+  The same key signs the 1.1 and 1.2 lines. In the private history, 1.1-line agentteams and researchteam tags were exempt
   from the S-10 cooldown under the operator-signed rows `s10-release-key-exemption-1.1` and
   `s10-release-key-exemption-researchteam-1.1` (PR #78; history: private). Those rows do not carry over. In this
   public repository the S-10 cooldown applies to every release unless a row in this repository's own log exempts it.
@@ -83,6 +95,23 @@ private rows are cited as their provenance only.
   repository's addition to `docs/agentteams-update-policy.md`, which asks for none. Any other move is an `@security` row
   in the decisions log, which the operator signs while decision signing is on.
   `scripts/lib/agentteams_provenance.py` refuses a render on any other agentteams commit.
+- **Moving to a new release line (amendment 2).** A pin move that takes agentteams or researchteam to a new minor
+  line (for example 1.1 to 1.2) also needs, for each repository whose line changes, an operator-signed row
+  `release-line-<repository>-<X.Y>` in the `.github/agents`, `.claude/agents` and `.goose/recipes` logs, recorded
+  before the pin-move PR merges. It derives from `release-policy-public-1.1` and from the amendment that adopts that
+  line, grants and relaxes nothing, takes no exception-registry slot, and targets `toolchain.lock` (and
+  `.github/agentteams-autosync-ref` only when the PR changes it). The toolchain group does not lift it: the group lifts
+  a member's per-release pin row, not the adoption of a new line. The 1.2 line's rows are `release-line-agentteams-1.2`
+  and `release-line-researchteam-1.2`. Never give any row an id that begins with a line row's id (such as
+  `release-line-agentteams-1.2.1` or `release-line-agentteams-1.20`): the security gate matches an action against
+  every row whose id it prefixes, so the newest such row would decide for the line row. Use a sibling id instead. No
+  tool checks that the line rows exist before the merge; the pin-move PR's `@security` review does.
+  `check_toolchain.py --write-lock --tag` refuses a tag on another line than the lock's `.tag=` line, so a line move
+  first removes both `researchteam.tag=` and `agentteams.tag=` lines from `toolchain.lock`, then writes the lock with
+  both `--tag` values (no `--sync-extras`: that is for upstream researchteam, and this repository's `pyproject.toml`
+  pins no agentteams extra). Every other §3 rule (verified signed tags, peeled commits, the `@security`
+  review and its row) applies unchanged. The line rows and this lock procedure are this repository's addition to
+  `docs/agentteams-update-policy.md`, which moves a lock only on its own line and asks for no row.
 - **Pins today (2026-11-18).** Both are peeled commits of verified signed tags, with `.tag=` lines.
   - `main` (and `dev`, synced from it): researchteam `v1.1.9` (`166ee217`, tag object `9b982986`) and agentteams
     `v1.1.4` (`b82d78e7`, tag object `541b9e55`), PR #13 (2026-11-18), a toolchain-group move recorded by the

@@ -1,0 +1,47 @@
+Binding conditions for the operator's Rule 11 row release-policy-public-1.1-amend-2 (public repository
+jlcatonjr/mathAgents, id 1452811332), deriving from the root release-policy-public-1.1 under its conditions item 5
+and amendment 1's item 5 ("each later amendment names the one it replaces; the file in force is the one the latest
+amendment names"). Purpose: extend the release policy, which the root adopted for the 1.1 line, to the 1.2 line
+(mathAgents 1.2.0 with researchteam 1.2 and agentteams 1.2).
+
+1. Adoption. This row adopts docs/release-policy.md at sha256 8b9107143a20330f8e503669abe6f38693b006cae255656a610d8eeca8ec4f80 in place of
+   583b3ed0f7e60b2e5985e26b8277e840db1ddd562921bb6bf890dfcd684f9d26 (amendment 1's), as merged to main with this row.
+   It replaces amendment 1 as the adopted text. Amendment 1 is not retracted and stays cleared; its rows stay in the
+   three logs. The change from amendment 1's file is these hunks, and nothing else:
+   a. the header: names this amendment, that it replaces amendment 1, and what it extends;
+   b. §1: a new bullet, the 1.2 line: release/1.2 is cut from main at the merge commit of the pin PR that moves the
+      pins to the 1.2 line, while main is at 1.2.0.dev0; it takes only the release PR, branched from release/1.2 (1.2.0rcN, then 1.2.0;
+      CHANGELOG [1.2.0] with its Toolchain block; its pins), by regular merge, and then 1.2.N backports; a release PR
+      may not change tag-release.sh, so tag-script changes merge to main before the cut; merge-forward after each tag,
+      and main moves to 1.3.0.dev0 at v1.2.0; release/1.1 takes 1.1.N backports only, and the policy in force on every
+      line is main's; rows about a 1.2 release name their history as public;
+   c. §2 Key: the release key signs the 1.0, 1.1 and 1.2 lines (two phrases in one passage);
+   d. §3: a new bullet, moving to a new release line: a pin move to a new minor line of agentteams or researchteam
+      also needs, per repository whose line changes, an operator-signed release-line-<repository>-<X.Y> row in the
+      three logs, recorded before the pin-move PR merges, deriving from release-policy-public-1.1 and the amendment
+      adopting that line, granting and relaxing nothing, with no exception-registry slot, targeting toolchain.lock
+      (and .github/agentteams-autosync-ref only when the PR changes it); the toolchain group does not lift it; the
+      1.2 rows are release-line-agentteams-1.2 and release-line-researchteam-1.2; the id-naming rule (no id that begins
+      with a line row's id, e.g. -1.2.1 or -1.20), and that no tool checks the rows exist, so the pin-move PR's
+      @security review does; the lock-move procedure (drop both .tag= lines, then --write-lock with both --tag values,
+      no --sync-extras); every other §3 rule unchanged.
+2. Scope. The root's item 1 adopts the policy "for the 1.1 line". Under root item 5 (a change to the file under a row
+   naming its sha256), this row widens that scope: the adopted file governs the 1.1 and 1.2 lines, and nothing about
+   the 1.1 line changes. The line rows and the lock procedure in hunk d are this repository's addition to
+   docs/agentteams-update-policy.md, which moves a lock only on its line and asks for no row; the root CLAUDE.md,
+   docs/release-checklist.md and docs/CONTRIBUTING.md are brought in line in the same PR.
+3. Grants and relaxes nothing. Each change states a branch rule, the scope of a key already pinned, or adds a
+   requirement (the release-line rows, which tighten a pin move). Nothing is removed from §1 to §7. No trust-root
+   target, no cross-repository or destructive effect, no exception-registry slot.
+4. Lineage. It derives from release-policy-public-1.1 only; a HALT on the root halts it. It is recorded in the
+   .github/agents, .claude/agents and .goose/recipes logs, as the root and amendment 1 are, before either release-line
+   row (each of which derives from it).
+5. Same pull request (tag scripts). The PR adopting this text also changes, with one stricter check and otherwise wording only:
+   scripts/operator/tag-release.sh (revision 5 note; "1.0, 1.1 and 1.2 lines"; the first-rc1 note names release/X.Y),
+   scripts/operator/lib_release.sh (one comment), and scripts/operator/release-merge-and-sign.sh (LINE and
+   EXPECT_VERSION become required, with no default: a behaviour change that only refuses more; its header says so), and
+   docs/release-checklist.md to match.
+   The operator recomputes SIGNER_SHA256 from origin/release/1.2:scripts/operator/tag-release.sh after the cut.
+6. Later changes. As root item 5 and amendment 1 item 5.
+7. Hashes. Before this amendment, main's docs/release-policy.md hashed to amendment 1's 583b3ed0... (checked at
+   56b65a2). The merged file must hash to the sha256 in item 1; any other change merged into it voids this adoption.

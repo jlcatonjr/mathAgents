@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "op-2026",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "release-line-researchteam-1.2",
+  "scope": "release-line-researchteam-1.2",
+  "derives_from": "release-policy-public-1.1; release-policy-public-1.1-amend-2",
+  "effect_relaxes": "",
+  "effect_targets": "toolchain.lock",
+  "conditions": "Under docs/release-policy.md \u00a73 as adopted by release-policy-public-1.1-amend-2 (sha256 8b9107143a20330f8e503669abe6f38693b006cae255656a610d8eeca8ec4f80), mathAgents' toolchain.lock leaves the researchteam 1.1 line for the 1.2 line: the researchteam pin may move to a verified, signed, final (not pre-release) researchteam v1.2.N tag, its peeled 40-hex commit, by the pin-move PR on main that release/1.2 is then cut from. Each such move still needs everything else \u00a73 requires (S-9 tag verification, the vulnerability search, the latest-stable rule, the @security review and its row) and the operator's merge approval at a fixed head. It does not cover a pin to any other line, it does not lift the S-10 cooldown for a non-member, and it does not authorize the render, which needs its own signed overwrite rows. It does not cover a pin-move PR that changes .github/agentteams-autosync-ref (only the autosync gate writes that file); such a PR needs its own release-line row targeting toolchain.lock and .github/agentteams-autosync-ref. It grants and relaxes nothing and takes no exception-registry slot.",
+  "conditions_verified": "rc.1 dry run 2026-11-19 (researchteam v1.2.0-rc.1: tag object 8987baad, peeled commit 4bc357d4; agentteams v1.2.1: tag object a72a844e, peeled commit a7ab95e2): both tags verify against the release key; the lock writes after both .tag= lines are dropped; a draft of this row's preflight passed deriving from the root alone and refused with amend-2 until amend-2 is recorded",
+  "evidence": "1.2 release coordination with infrastructuremanagement-8d; @security ruling (both line rows operator-signed, non-relaxing, derives_from root; amend-2, target toolchain.lock); tmp/by-week/2026-W47/r12-prep R1, R7 (private)"
+}

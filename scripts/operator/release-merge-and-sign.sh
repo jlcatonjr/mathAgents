@@ -3,11 +3,12 @@
 # merge commit in a fresh clone, then sign THAT commit with the repository's own reviewed signer, taken from the
 # verified merge commit (never from a working checkout) and matching the sha256 the operator approved.
 #   PR=<n> REL_HEAD=<40-hex> PREV_HEAD=<40-hex: the release line's head before the merge> \
-#   LINE=release/1.1 EXPECT_VERSION=1.1.0 SIGNER_SHA256=<64-hex> TAGGER_EMAIL=<e-mail> KEY="$HOME/.ssh/<key>" \
+#   LINE=release/1.2 EXPECT_VERSION=1.2.0rc1 SIGNER_SHA256=<64-hex> TAGGER_EMAIL=<e-mail> KEY="$HOME/.ssh/<key>" \
 #   /bin/bash -p "$HOME/githubrepositories/mathAgents/scripts/operator/release-merge-and-sign.sh"
 # Derived 2026-11-06 from agentteams-f3's cleared derived-phase-t/release-merge-and-sign.sh (sha256 916edcf1…), which
 # signed mathAgents v1.0.0 on 2026-10-19. Changes from it: mathAgents only (no REPO variable); the release line is the
-# LINE variable (default release/1.1) instead of a fixed release/1.0, and EXPECT_VERSION defaults to 1.1.0. Every
+# LINE variable instead of a fixed release/1.0. Since 2026-11-19 (policy amendment 2) LINE and EXPECT_VERSION are
+# required, with no default, so a run can't fall onto the wrong line (a stricter check, not only wording). Otherwise every
 # check is unchanged, except that the signer is given gh and no python (CA-154). SIGNER_SHA256 comes from the operator's own `shasum -a 256` of
 # origin/<LINE>:scripts/operator/tag-release.sh, never from a session's output.
 # Privileged mode only: -p ignores caller-exported functions (even `builtin`) and $BASH_ENV.
@@ -20,7 +21,7 @@ clean_reexec PR REL_HEAD PREV_HEAD LINE SIGNER_SHA256 TAGGER_NAME TAGGER_EMAIL K
 neutralise
 PR="${PR:?PR=<number>}"
 REL_HEAD="${REL_HEAD:?}"; PREV_HEAD="${PREV_HEAD:?}"; SIGNER_SHA256="${SIGNER_SHA256:?}"; KEY="${KEY:?}"
-LINE="${LINE:-release/1.1}"; EXPECT_VERSION="${EXPECT_VERSION:-1.1.0}"
+LINE="${LINE:?LINE=release/X.Y}"; EXPECT_VERSION="${EXPECT_VERSION:?EXPECT_VERSION=X.Y.Z or X.Y.ZrcN}"
 [[ "$LINE" =~ ^release/[0-9]+\.[0-9]+$ ]] || die "LINE must be release/X.Y"
 [[ "$REL_HEAD" =~ ^[0-9a-f]{40}$ && "$PREV_HEAD" =~ ^[0-9a-f]{40}$ ]] || die "REL_HEAD and PREV_HEAD must be 40-hex"
 [[ "$SIGNER_SHA256" =~ ^[0-9a-f]{64}$ ]] || die "SIGNER_SHA256 must be 64-hex"
