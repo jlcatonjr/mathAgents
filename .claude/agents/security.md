@@ -471,7 +471,7 @@ on a destructive or governance scope is itself a finding, not an authorization.
 ### Current Threat Intelligence Snapshot
 
 <!-- AGENTTEAMS:BEGIN threat_intelligence v=1 -->
-Generated at: `2026-11-19T16:22:51Z`
+Generated at: `2026-11-20T04:58:17Z`
 
 **Sources:**
 
