@@ -13,6 +13,21 @@ versioned here; a result's status is its G-KERNEL report.
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-11-19
+
+### release notes
+
+`v1.2.0` is the first release of the 1.2 line, tagged on `release/1.2`. It carries `v1.2.0-rc.1` unchanged apart from
+the version: no backport landed on `release/1.2` after the candidate. The candidate's notes below describe the
+release: the move to researchteam `v1.2.0` and agentteams `v1.2.1`, release-policy amendments 1 and 2, the full re-render
+under agentteams 1.2.1 with its adopted constitution text, and the known issues. baseAgent's dry-run pin check against
+`v1.2.0-rc.1` passed before this tag was signed.
+
+**To pin this release:** verify the tag against `~/.config/agentteams/allowed_signers`, then pin the commit it points
+to (its peeled commit), never a branch.
+
+**Toolchain:** agentteams `v1.2.1` at `a7ab95e2` · researchteam `v1.2.0` at `7da258f6` · Lean `leanprover/lean4:v4.34.1` · Mathlib `d13f23b`.
+
 ## [1.2.0rc1] — 2026-11-19
 
 ### release notes
@@ -418,7 +433,8 @@ mathagents freezes at 1.0.0 on agentteams 1.0 final (decision D43). v0.2.7 is th
 
 **Toolchain:** agentteams 1.0.0rc7 (commit not recorded) · Lean `v4.34.1` · Mathlib `d13f23b`.
 
-[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0-rc.1...HEAD
+[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0-rc.1...v1.2.0
 [1.2.0rc1]: https://github.com/jlcatonjr/mathAgents/compare/v1.1.0...v1.2.0-rc.1
 [1.1.0]: https://github.com/jlcatonjr/mathAgents/releases/tag/v1.1.0
 [1.0.1]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.0...v1.0.1
