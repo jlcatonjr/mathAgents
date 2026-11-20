@@ -13,6 +13,57 @@ versioned here; a result's status is its G-KERNEL report.
 
 ## [Unreleased]
 
+## [1.2.0rc1] — 2026-11-19
+
+### release notes
+
+`v1.2.0-rc.1` is the first candidate of the 1.2 line, tagged on `release/1.2`, which was cut at `95afb6d` (the merge of
+#18). The release:
+- moves the toolchain to the 1.2 line: researchteam `v1.2.0` and agentteams `v1.2.1`, the peeled commits of verified
+  signed tags, under the operator-signed release-line rows `release-line-agentteams-1.2` and
+  `release-line-researchteam-1.2`;
+- adopts release-policy amendments 1 and 2: the toolchain group in force, the pin-record rules, the signer in use, and
+  the 1.2 line (branch rule, key scope, release-line rows and the lock move);
+- re-renders every agent surface under agentteams 1.2.1 with the operator's signed single-use overwrite rows, and adopts
+  agentteams 1.2's constitution text in the instruction files (the first-party toolchain group, GitHub management,
+  integration-branch merge authorization, and Rule 9's net-benefit ordering);
+- turns decision signing on with a public governance root, and keeps private records out of the public tree.
+
+**To pin this candidate:** verify the tag against `~/.config/agentteams/allowed_signers`, then pin the commit it points
+to (its peeled commit), never a branch.
+
+### Added
+- Public governance root `release-policy-public-1.1` (#6, #7), with decision signing on, the operator's Ed25519 key in
+  the three verify-key stores, the aggregate exception cap (3), and the first-party toolchain group
+  (`.agentteams/toolchain-group.json`; agentteams, researchteam, baseAgent and mathAgents).
+- Release-policy amendments 1 (#16) and 2 (#17): the 1.2 line, the release-line rows for a new minor line, the id-naming
+  rule, and the lock-move procedure.
+- The term-index scripts (`scripts/build_term_index.py`, `check_term_index.py`, `query_term_index.py`,
+  `term_index_engine.py`; researchteam Working Rule 8). Nothing binds until a project adds a term register.
+- `scripts/hooks/private-paths-guard.sh` and `scripts/install_private_paths_guard.sh`: a pre-commit guard that refuses
+  anything under the gitignored `tmp/` (#5).
+- agentteams 1.2 references (api-impact, net-benefit-prioritization, operator-decision, work-summary-trigger-catalog),
+  and `.claude/hooks/work-summary-stop.py`, committed but not wired.
+
+### Changed
+- The toolchain moved along the 1.1 line before the 1.2 move (#18): researchteam `v1.1.4` + agentteams `v1.1.3` (#7),
+  researchteam `v1.1.8` + agentteams `v1.1.4` (#11), then researchteam `v1.1.9` (#13), each a toolchain-group move
+  recorded by an `@security` review.
+- `release-merge-and-sign.sh` requires `LINE` and `EXPECT_VERSION`, with no default (#17).
+- `mathagents sync` accepts a Claude projection's `model:` key only when it is exactly `opus`.
+- Every GitHub Actions `uses:` is pinned to a commit SHA (#8).
+- The constitutional gate hook, the Goose sandbox profile and `sandbox/confine-run.sh` follow agentteams 1.2; each change
+  only narrows what an agent may do.
+
+### Known issues
+- The three `framework-watch.reference.md` files (`.github`, `.claude`, `.goose`) keep their pre-1.2 text (a recorded
+  deviation in #18); the next agentteams update refreshes them once `tmp/frozen-fences.state.json` is cleared.
+- agentteams 1.2.1's Codex role gate has a WASM mode that is dormant here (the launcher never passes its variable). An
+  upstream fix is reported on agentteams `dev`; mathAgents takes it with a later agentteams release, without patching
+  the generated gate.
+
+**Toolchain:** agentteams `v1.2.1` at `a7ab95e2` · researchteam `v1.2.0` at `7da258f6` · Lean `leanprover/lean4:v4.34.1` · Mathlib `d13f23b`.
+
 ## [1.1.0] — 2026-11-10
 
 ### release notes
@@ -367,7 +418,8 @@ mathagents freezes at 1.0.0 on agentteams 1.0 final (decision D43). v0.2.7 is th
 
 **Toolchain:** agentteams 1.0.0rc7 (commit not recorded) · Lean `v4.34.1` · Mathlib `d13f23b`.
 
-[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0-rc.1...HEAD
+[1.2.0rc1]: https://github.com/jlcatonjr/mathAgents/compare/v1.1.0...v1.2.0-rc.1
 [1.1.0]: https://github.com/jlcatonjr/mathAgents/releases/tag/v1.1.0
 [1.0.1]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.0...v1.0.1
 [1.0.1rc2]: https://github.com/jlcatonjr/mathAgents/compare/v1.0.1-rc.1...v1.0.1-rc.2
