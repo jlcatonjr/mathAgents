@@ -1,0 +1,44 @@
+Binding conditions for the operator's Rule 11 row release-policy-public-1.1-amend-1 (public repository
+jlcatonjr/mathAgents, id 1452811332), deriving from the root release-policy-public-1.1 under its conditions item 5
+("a later change to that file takes effect only under a new operator-signed root row (or a row deriving from this one
+that names the new sha256)"). Operator instruction 2026-11-18, in session: bring docs/release-policy.md up to date.
+
+1. Adoption. This row adopts docs/release-policy.md at sha256 583b3ed0f7e60b2e5985e26b8277e840db1ddd562921bb6bf890dfcd684f9d26
+   in place of 0c00d7d95a887de62889d74045704963562dd2a4c4058f3d4ce24c7d311219de, as merged to main with this row. The
+   change from the root's file is five hunks, and nothing else:
+   a. the header: names this amendment and root conditions item 5;
+   b. §2 Key: the toolchain-group exemption, described as planned, is described as in force since 2026-11-16 (group
+      file .agentteams/toolchain-group.json, sequence 1; parent row s10-first-party-releases-2026-11), with what it
+      lifts (the S-10 cooldown and a member release's per-release operator pin row) and what it does not (S-9 tag
+      verification, the vulnerability search, the latest-stable rule, the @security review);
+   c. §3 Moving a pin and Pins today: a toolchain-group member move is recorded by the @security review in the
+      pin-move PR and still as an unsigned @security row in the decisions log, in that PR or, when adding it there
+      would move the reviewed head, in a PR merged before the next pin move (this repository's addition to
+      docs/agentteams-update-policy.md, which asks for no row); any other move is an @security row the
+      operator signs while decision signing is on. Pins today: researchteam v1.1.9 + agentteams v1.1.4 (PR #13), after
+      v1.1.8 + v1.1.4 (PR #11) and v1.1.4 + v1.1.3 (PR #7); the earlier pins are relabelled as private history;
+   d. §4: the autosync merge condition's "@security row" becomes "@security record under §3". Who dispatches is
+      unchanged (only the operator);
+   e. §7: names the signer in use since 2026-11-15, the root-owned /opt/agentteams-signer/venv-v1.1.3 (agentteams
+      v1.1.3), and makes the one-shot scripts that use it a stated exception to the lib_signer.sh rule until
+      scripts/operator/lib_signer.sh moves to that signer (a separate change under its own @security review, then a
+      further amendment); from this amendment on each such script must itself check the ownership chain and
+      writability of the venv, the version, refuse PYTHON* variables, run the signer as python -I, and run
+      check_decision_spec.py before the key is read.
+2. Grants and relaxes nothing. Each change describes a rule already in force under a signed row of this log
+   (s10-first-party-releases-2026-11 and the group file) or a fact about this repository, or keeps a rule (the
+   decisions-log record of every pin move). No trust-root target, no cross-repository or destructive effect, no
+   exception-registry slot.
+3. Lineage. It derives from release-policy-public-1.1; a HALT on the root halts it. It is recorded in the
+   .github/agents, .claude/agents and .goose/recipes logs, as the root is.
+4. Provenance, not authority. The orchestrator dispatched the paused agentteams-sync workflow on dev twice on
+   2026-11-18 (runs 44387325749 and 44415904542), each on the operator's explicit in-session approval, where §4 says the
+   operator dispatches. This row records that and does not widen §4; a standing change to who dispatches would be a
+   separate relaxing row.
+5. Later changes. As root item 5: a later change to docs/release-policy.md takes effect only under a new operator-signed
+   row deriving from the root that names its sha256. Each later amendment names the one it replaces; the file in force
+   is the one the latest amendment names.
+6. Hashes. Before this amendment, main's docs/release-policy.md hashed to the root's 0c00d7d9... (checked at c0c3536).
+   The merged file must hash to the sha256 in item 1; any other change merged into it voids this adoption.
+7. Before merge. The @security review row of the v1.1.9 pin move (PR #13, fixed head b1f5ce7) is in the .github log,
+   in this PR or in one merged before it, as §3 now requires.
