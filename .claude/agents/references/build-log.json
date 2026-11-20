@@ -1,13 +1,14 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.2.1",
+  "agentteams_version": "1.2.2",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "a7ab95e241244903339b6d54743f7c3366530071",
+    "commit": "a5bc8c0e930a59c5144d87814b8e256ad64b04a5",
     "branch": null,
-    "dirty": false
+    "dirty": false,
+    "on_remote": null
   },
-  "generated_at": "2026-11-19T16:23:31.444196+00:00",
+  "generated_at": "2026-11-20T22:27:15.387822+00:00",
   "project_name": "mathAgents",
   "framework": "claude",
   "project_type": "research",
@@ -31,22 +32,10 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [
-    ".claude/agents/references/code-hygiene-rules.reference.md",
-    ".claude/agents/references/security-vulnerability-watch.reference.md",
-    ".claude/agents/references/security-vulnerability-watch.json",
-    ".claude/CLAUDE.md",
-    ".claude/agents/orchestrator.md",
-    ".claude/agents/navigator.md",
-    ".claude/agents/security.md",
-    ".claude/agents/conflict-auditor.md",
-    ".claude/agents/conflict-resolution.md",
-    ".claude/agents/agent-updater.md",
-    ".claude/agents/team-builder.md"
-  ],
+  "files_written": [],
   "manual_required": 7,
   "template_hashes": {
-    "universal/orchestrator.template.md": "c571d5b8a208012b",
+    "universal/orchestrator.template.md": "d71641cab1e0d395",
     "universal/navigator.template.md": "5a8b04969c0727df",
     "universal/security.template.md": "9e9f79c92ba2cc24",
     "universal/code-hygiene.template.md": "6774a03ed3018fe6",
@@ -54,7 +43,7 @@
     "universal/conflict-auditor.template.md": "03a61cb6e57afeda",
     "universal/conflict-resolution.template.md": "88624f165b7992e7",
     "universal/cleanup.template.md": "6a404be5ad0bfbe9",
-    "universal/agent-updater.template.md": "120cfda154d35a45",
+    "universal/agent-updater.template.md": "e1801dc15c6cd557",
     "universal/agent-refactor.template.md": "1c0cede6ba31198d",
     "universal/repo-liaison.template.md": "70331bea47521df8",
     "universal/git-operations.template.md": "58d7680e3974bde4",
@@ -83,7 +72,7 @@
     "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
     "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
     "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
-    "universal/github-workflows-merge.reference.template.md": "288fb2f043fa1f4f",
+    "universal/github-workflows-merge.reference.template.md": "4e7c51deabc83d4f",
     "universal/branch-lifecycle.reference.template.md": "49d996d0d76b3fe7",
     "universal/work-summary-spec.reference.template.md": "d29ca7e680ad715d",
     "universal/work-summary-tooling.reference.template.md": "62e643b1a9711af6",
@@ -573,18 +562,7 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert",
-    "axiom-auditor",
-    "counterexample-hunter",
-    "engine-advisor",
-    "fidelity-auditor",
-    "interpretation-advisor",
-    "lean-informalization",
-    "lean-prover",
-    "logic-articulator",
-    "proof-strategist",
-    "statement-formalizer",
-    "tactic-planner"
+    "evaluation-expert"
   ],
   "governance_agents": [
     "navigator",
@@ -599,25 +577,27 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "732baa278e647a12",
+  "manifest_fingerprint": "62aed8370c9478a7",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/code-hygiene-rules.reference.md": "6c4732588c64ebef",
-    "references/security-vulnerability-watch.reference.md": "4c7580cc9f86b0b2",
-    "references/security-vulnerability-watch.json": "994691864a24b221",
-    "../CLAUDE.md": "31b705a14d6f2864",
-    "orchestrator.md": "99875fb6e7c338b7",
-    "navigator.md": "b1c107f985d4aae2",
-    "security.md": "39cc9d7a4da8ca84",
-    "conflict-auditor.md": "e769ccee614b76c7",
-    "conflict-resolution.md": "7bac6bd57f1940d5",
-    "agent-updater.md": "31b777885fbdc60b",
-    "team-builder.md": "3888fdc65c2dee90",
+    "references/security-vulnerability-watch.reference.md": "2dfce7deb2521403",
+    "references/security-vulnerability-watch.json": "86729788f0783be7",
+    "references/framework-watch.reference.md": "38c46f08b20c84b4",
+    "references/github-workflows-merge.reference.md": "f4cedddb414d2cc1",
+    "../CLAUDE.md": "05f91041e5b757dc",
+    "orchestrator.md": "0841e1d5b81aa94d",
+    "security.md": "72e1f76dbb9fa8e9",
+    "agent-updater.md": "a7836eb0e75d3b82",
+    "../hooks/work-summary-stop.py": "c82d72eb635013b3",
+    "../settings.worksummary.example.json": "2686d9dc1d3fe45f",
     "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
     "references/runtime-handoffs.json": "90631e28221ad60b",
+    "navigator.md": "b1c107f985d4aae2",
     "code-hygiene.md": "6da2227802688e3c",
     "adversarial.md": "0323755af46ac682",
+    "conflict-auditor.md": "e769ccee614b76c7",
+    "conflict-resolution.md": "7bac6bd57f1940d5",
     "cleanup.md": "9e8e23c282c464d6",
     "agent-refactor.md": "f22a8bc658ace100",
     "repo-liaison.md": "974c8816d87fd420",
@@ -634,7 +614,6 @@
     "post-production-auditor.md": "a2484c911aff6f4d",
     "retrieval-integrator.md": "94c1da4659535ee7",
     "research-analyst.md": "060a3fd08a6fb17c",
-    "references/github-workflows-merge.reference.md": "0fd0bcd7a89d5941",
     "references/work-summary-spec.reference.md": "96232231a1f7c6be",
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
@@ -651,6 +630,7 @@
     "proof-dossiers-expert.md": "f4456c2eafd7b096",
     "proof-library-expert.md": "a720a38a15602dad",
     "evaluation-expert.md": "42934e76dd141b1d",
+    "team-builder.md": "3888fdc65c2dee90",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.md": "373bacbc50fb3c76",
     "references/write-policy.reference.md": "d5d003ec5740b609",
@@ -665,15 +645,41 @@
       "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task",
       "model": "claude-fable-5-2"
     },
+    "security.md": {
+      "name": "Security \u2014 mathAgents",
+      "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "agent-updater.md": {
+      "name": "Agent Updater \u2014 mathAgents",
+      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "../skills/tool-lean-4/SKILL.md": {
+      "name": "tool-lean-4",
+      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
+    },
+    "../skills/tool-mathlib/SKILL.md": {
+      "name": "tool-mathlib",
+      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
+    },
     "navigator.md": {
       "name": "Navigator \u2014 mathAgents",
       "description": "\"Repository structure navigation, project map maintenance, file location lookups, and dependency queries for mathAgents\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
-    "security.md": {
-      "name": "Security \u2014 mathAgents",
-      "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
+    "code-hygiene.md": {
+      "name": "Code Hygiene \u2014 mathAgents",
+      "description": "\"Read-only auditor that enforces modular architecture, file hygiene, script lifecycle, anti-sprawl rules, and agent documentation quality. Delegates removals to @cleanup; delegates structural extraction to @agent-refactor.\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "adversarial.md": {
+      "name": "Adversarial \u2014 mathAgents",
+      "description": "\"Presupposition critic: challenges the assumptions underlying any plan, proposal, or diagnosis produced by the agent team. Traces how justified changes in presuppositions cascade through dependent logic.\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
@@ -686,38 +692,6 @@
     "conflict-resolution.md": {
       "name": "Conflict Resolution \u2014 mathAgents",
       "description": "\"Makes ACCEPT/REJECT/REVISE decisions on conflicts flagged by the conflict auditor in mathAgents\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "agent-updater.md": {
-      "name": "Agent Updater \u2014 mathAgents",
-      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "team-builder.md": {
-      "name": "Team Builder \u2014 Agent Teams Module",
-      "description": "\"Interactively constructs a complete agent team for a new or existing Claude project by conducting an intake interview and invoking the build_team pipeline\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "../skills/tool-lean-4/SKILL.md": {
-      "name": "tool-lean-4",
-      "description": "\"Lean 4 operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Lean 4.\""
-    },
-    "../skills/tool-mathlib/SKILL.md": {
-      "name": "tool-mathlib",
-      "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
-    },
-    "code-hygiene.md": {
-      "name": "Code Hygiene \u2014 mathAgents",
-      "description": "\"Read-only auditor that enforces modular architecture, file hygiene, script lifecycle, anti-sprawl rules, and agent documentation quality. Delegates removals to @cleanup; delegates structural extraction to @agent-refactor.\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "adversarial.md": {
-      "name": "Adversarial \u2014 mathAgents",
-      "description": "\"Presupposition critic: challenges the assumptions underlying any plan, proposal, or diagnosis produced by the agent team. Traces how justified changes in presuppositions cascade through dependent logic.\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
@@ -847,6 +821,12 @@
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
+    "team-builder.md": {
+      "name": "Team Builder \u2014 Agent Teams Module",
+      "description": "\"Interactively constructs a complete agent team for a new or existing Claude project by conducting an intake interview and invoking the build_team pipeline\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
     "content-enricher.md": {
       "name": "Content Enricher \u2014 mathAgents",
       "description": "\"Fills in default template placeholders and underdeveloped sections in generated agent files for mathAgents using the project's source materials\"",
@@ -856,12 +836,17 @@
   },
   "front_matter_baseline_version": 2,
   "fence_baseline": {
-    "references/code-hygiene-rules.reference.md": {
-      "content": "181cd5dc18b87d7fd21f0e3815ae057958523122b8005197f05d1bf1591b9a52"
-    },
     "references/security-vulnerability-watch.reference.md": {
-      "threat_data": "3b786c1628482f0fd44eda7b9423fbe66c11ae31e2a72e46ec9f3697311a8109",
+      "threat_data": "6c7efe7d3868b8128375520fe71a77687a2f6371282cbd4947aa0054f54e2d17",
       "operational_integration_process": "d0f4bee8580d904734bf5622085cd2e48005c302778e24410f92b310603e1f8a"
+    },
+    "references/framework-watch.reference.md": {
+      "framework_data": "ad6392577a0f937924d3bc31039594ee662f4bf8028fd9391a183862d08e63db",
+      "operational_integration_process": "157d0f536d83f2a774e8b4520699ed625464572a33f1eb05f8e57498b91e1361",
+      "conformance_standard_check": "537d190f9ffb045d217e5a602dba6a0a5fafb21283aeaa0d28435edb5952c618"
+    },
+    "references/github-workflows-merge.reference.md": {
+      "content": "f4cedddb414d2cc1ea0b41f0c6dfebe02985283be45d8b89868f0e7791e9c4ab"
     },
     "../CLAUDE.md": {
       "project_overview": "2e5d490c645705421ee3c2b6bb6c24ce6e852a879d1b7b0b298c9f69771d8442",
@@ -873,7 +858,7 @@
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
       "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
-      "github_management_rule": "f4892e0fd535a97902fb597c6293f4884cf06b652d43ad03facdc6c04c9283e0",
+      "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "write_policy": "0baf736c166d97cd042e76c7fa009b1ce45e4f06435fc2ebfb141332fca3e0cf"
     },
@@ -882,8 +867,29 @@
       "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
       "routing_table_rows": "b8ce7ac0fbdb6866e16e41d1027b178b48e717a44a480b083df0fc78f5b3e2c4",
       "update_compatibility_source_pack": "9e7d840aca21251fe36b00cbe4599093060e67a08c712c648eb6e70356aa897d",
-      "available_workflows": "69c4add668d1d3c167cebb8c5dc0e697b536f1be18f514cc82a7628d3159fb16",
+      "available_workflows": "45d5199091c10327bb6080f0d196a9af8e57550f75b3ca2539ab8914e4e65b51",
       "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d"
+    },
+    "security.md": {
+      "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
+      "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
+      "security_rules_invariant": "729200986e5130124a82b72d5e5b9d9a173803683e5eaf307f2485b69dcf8c75",
+      "threat_intelligence": "db0f126b0aef1acdaad56982bc351aa33897c1dc6dfe7b7d0dcb888431c980ee",
+      "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
+      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    "agent-updater.md": {
+      "content": "56ab05a8be9382a7594cce1ee712bab9669e451cf7ee8ec6175dbc8b912e4631"
+    },
+    "../skills/tool-lean-4/SKILL.md": {
+      "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
+      "tool_api_surface": "2caea1b389b6c6ec5592390f7d6a50df62d8dac4b5631f29eb4e74dbee7ecf0b",
+      "verification": "84d53b2d74713e8afd957e8ddd482e4ee1eb0fb396c510af3b48715d8eff6125"
+    },
+    "../skills/tool-mathlib/SKILL.md": {
+      "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
+      "tool_api_surface": "99fd76ffc056641631f675ad38333f6b005f3fa7b250e099e9aa156fc32ba8cd",
+      "verification": "84d53b2d74713e8afd957e8ddd482e4ee1eb0fb396c510af3b48715d8eff6125"
     },
     "navigator.md": {
       "invariant_core": "05aac7cabeea587ef7f6a7071f606bed85d271c26453655455db5122fe2fb52a",
@@ -892,13 +898,11 @@
       "code_index_consultation": "560588e20a4a7fccd2004323c8aa94422d41e8aa7ebf8ff48ab7dcbc5142ff41",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
-    "security.md": {
-      "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
-      "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
-      "security_rules_invariant": "729200986e5130124a82b72d5e5b9d9a173803683e5eaf307f2485b69dcf8c75",
-      "threat_intelligence": "d67a551ae58a2864a30db17b521b0fb7a9116c69c49bda85da0132568a2f0161",
-      "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
-      "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    "code-hygiene.md": {
+      "content": "233893c892fde7dfdfd6fe9af9dceb4abaa13df97cce33f734fbffb119667753"
+    },
+    "adversarial.md": {
+      "content": "1089da788007619bdd69030586d267f2fee9337f7f662ccceecf8e54b693a4ad"
     },
     "conflict-auditor.md": {
       "invariant_core": "308398cb80c8f177c530b342f2112d4803f6a5f6116d14cabd1fee8331c69123",
@@ -919,28 +923,6 @@
       "dispositions": "3fbddcdbbe2e4a8ff4a62045559bb823e3203805bbde65c45cf374f95a634c80",
       "rules": "b360ff31afdffda8d0af1928b7b76b60a38a5835fa537f08768f44dce39b61a8",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
-    },
-    "agent-updater.md": {
-      "content": "fdf071935dd1ce906b14216585c21db0f75137353d6ee744649035d2a4e92d2e"
-    },
-    "team-builder.md": {
-      "content": "274dd915023553b34671297e40ea752382a23fc0d2824e2e7ac0c30ad7236643"
-    },
-    "../skills/tool-lean-4/SKILL.md": {
-      "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
-      "tool_api_surface": "2caea1b389b6c6ec5592390f7d6a50df62d8dac4b5631f29eb4e74dbee7ecf0b",
-      "verification": "84d53b2d74713e8afd957e8ddd482e4ee1eb0fb396c510af3b48715d8eff6125"
-    },
-    "../skills/tool-mathlib/SKILL.md": {
-      "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
-      "tool_api_surface": "99fd76ffc056641631f675ad38333f6b005f3fa7b250e099e9aa156fc32ba8cd",
-      "verification": "84d53b2d74713e8afd957e8ddd482e4ee1eb0fb396c510af3b48715d8eff6125"
-    },
-    "code-hygiene.md": {
-      "content": "233893c892fde7dfdfd6fe9af9dceb4abaa13df97cce33f734fbffb119667753"
-    },
-    "adversarial.md": {
-      "content": "1089da788007619bdd69030586d267f2fee9337f7f662ccceecf8e54b693a4ad"
     },
     "cleanup.md": {
       "content": "84af0717872c4996889bebb9ebccf9404b9a5ee6c037edff1fe91afddfa012c9"
@@ -1019,9 +1001,6 @@
       "external_retrieval_quality_gate_output": "5b130293ed8b3531d99ad4e53bf2ec6d9cddcba11cc28df28e962a185e16c04a",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
-    "references/github-workflows-merge.reference.md": {
-      "content": "0fd0bcd7a89d59417167b9482b3c8cda05b76ed69d113ae38add089295346a14"
-    },
     "references/work-summary-spec.reference.md": {
       "content": "96232231a1f7c6bedf5f88786a47ade3b083b9863a26df30049c8de946d6f1bc"
     },
@@ -1085,6 +1064,9 @@
       "review_protocol": "02cf50fba478fcc6202c2ffde432fbb02b7506c9784246ad66dbd71459959caf",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
+    "team-builder.md": {
+      "content": "274dd915023553b34671297e40ea752382a23fc0d2824e2e7ac0c30ad7236643"
+    },
     "SETUP-REQUIRED.md": {
       "content": "b6c16adfbb523442d18139d65e04a23f85ff35591d247df014c88781920b87d8"
     },
@@ -1116,7 +1098,7 @@
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
       "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
-      "github_management_rule": "f4892e0fd535a97902fb597c6293f4884cf06b652d43ad03facdc6c04c9283e0",
+      "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "write_policy": "0baf736c166d97cd042e76c7fa009b1ce45e4f06435fc2ebfb141332fca3e0cf"
     },
@@ -1130,7 +1112,7 @@
       "content": "9b5729853bcf28c5326137f7c2ac8f011cdcbeaa9b23b3d4cb7e7d76d2197309"
     },
     ".claude/agents/agent-updater.md": {
-      "content": "fdf071935dd1ce906b14216585c21db0f75137353d6ee744649035d2a4e92d2e"
+      "content": "56ab05a8be9382a7594cce1ee712bab9669e451cf7ee8ec6175dbc8b912e4631"
     },
     ".claude/agents/axiom-auditor.md": {
       "*": "94574c0fcfcf3a48ad312631580810018d74a3b12a3f7db8788cac5e4c9a4ceb"
@@ -1224,7 +1206,7 @@
       "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
       "routing_table_rows": "b8ce7ac0fbdb6866e16e41d1027b178b48e717a44a480b083df0fc78f5b3e2c4",
       "update_compatibility_source_pack": "9e7d840aca21251fe36b00cbe4599093060e67a08c712c648eb6e70356aa897d",
-      "available_workflows": "69c4add668d1d3c167cebb8c5dc0e697b536f1be18f514cc82a7628d3159fb16",
+      "available_workflows": "45d5199091c10327bb6080f0d196a9af8e57550f75b3ca2539ab8914e4e65b51",
       "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d"
     },
     ".claude/agents/output-compiler.md": {
@@ -1292,7 +1274,7 @@
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "security_rules_invariant": "729200986e5130124a82b72d5e5b9d9a173803683e5eaf307f2485b69dcf8c75",
-      "threat_intelligence": "d67a551ae58a2864a30db17b521b0fb7a9116c69c49bda85da0132568a2f0161",
+      "threat_intelligence": "db0f126b0aef1acdaad56982bc351aa33897c1dc6dfe7b7d0dcb888431c980ee",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
