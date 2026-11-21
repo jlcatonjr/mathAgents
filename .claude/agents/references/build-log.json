@@ -8,7 +8,7 @@
     "dirty": false,
     "on_remote": null
   },
-  "generated_at": "2026-11-20T22:27:15.387822+00:00",
+  "generated_at": "2026-11-21T00:52:33.548906+00:00",
   "project_name": "mathAgents",
   "framework": "claude",
   "project_type": "research",
@@ -32,7 +32,12 @@
     "proof-library",
     "evaluation"
   ],
-  "files_written": [],
+  "files_written": [
+    ".claude/agents/references/security-vulnerability-watch.reference.md",
+    ".claude/agents/references/security-vulnerability-watch.json",
+    ".claude/CLAUDE.md",
+    ".claude/agents/security.md"
+  ],
   "manual_required": 7,
   "template_hashes": {
     "universal/orchestrator.template.md": "d71641cab1e0d395",
@@ -562,7 +567,18 @@
     "harness-spec-expert",
     "proof-dossiers-expert",
     "proof-library-expert",
-    "evaluation-expert"
+    "evaluation-expert",
+    "axiom-auditor",
+    "counterexample-hunter",
+    "engine-advisor",
+    "fidelity-auditor",
+    "interpretation-advisor",
+    "lean-informalization",
+    "lean-prover",
+    "logic-articulator",
+    "proof-strategist",
+    "statement-formalizer",
+    "tactic-planner"
   ],
   "governance_agents": [
     "navigator",
@@ -577,28 +593,24 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "62aed8370c9478a7",
+  "manifest_fingerprint": "898c2a6205678cf9",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.reference.md": "2dfce7deb2521403",
-    "references/security-vulnerability-watch.json": "86729788f0783be7",
-    "references/framework-watch.reference.md": "38c46f08b20c84b4",
-    "references/github-workflows-merge.reference.md": "f4cedddb414d2cc1",
-    "../CLAUDE.md": "05f91041e5b757dc",
-    "orchestrator.md": "0841e1d5b81aa94d",
-    "security.md": "72e1f76dbb9fa8e9",
-    "agent-updater.md": "a7836eb0e75d3b82",
-    "../hooks/work-summary-stop.py": "c82d72eb635013b3",
-    "../settings.worksummary.example.json": "2686d9dc1d3fe45f",
+    "references/security-vulnerability-watch.reference.md": "11bb52f134298fe6",
+    "references/security-vulnerability-watch.json": "1460be900fda8bde",
+    "../CLAUDE.md": "e0b6596093115899",
+    "security.md": "000cc1a4bf432f24",
     "../skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
     "references/runtime-handoffs.json": "90631e28221ad60b",
+    "orchestrator.md": "0841e1d5b81aa94d",
     "navigator.md": "b1c107f985d4aae2",
     "code-hygiene.md": "6da2227802688e3c",
     "adversarial.md": "0323755af46ac682",
     "conflict-auditor.md": "e769ccee614b76c7",
     "conflict-resolution.md": "7bac6bd57f1940d5",
     "cleanup.md": "9e8e23c282c464d6",
+    "agent-updater.md": "a7836eb0e75d3b82",
     "agent-refactor.md": "f22a8bc658ace100",
     "repo-liaison.md": "974c8816d87fd420",
     "git-operations.md": "85948c7d7270253c",
@@ -614,6 +626,7 @@
     "post-production-auditor.md": "a2484c911aff6f4d",
     "retrieval-integrator.md": "94c1da4659535ee7",
     "research-analyst.md": "060a3fd08a6fb17c",
+    "references/github-workflows-merge.reference.md": "f4cedddb414d2cc1",
     "references/work-summary-spec.reference.md": "96232231a1f7c6be",
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
@@ -639,21 +652,9 @@
     "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {
-    "orchestrator.md": {
-      "name": "Orchestrator \u2014 mathAgents",
-      "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
-      "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task",
-      "model": "claude-fable-5-2"
-    },
     "security.md": {
       "name": "Security \u2014 mathAgents",
       "description": "\"Top-priority security sentinel: reviews actions for credential exposure, destructive operations, sensitive content leakage, and reference integrity before any sensitive action proceeds\"",
-      "tools": "Read, Grep, Glob",
-      "model": "opus"
-    },
-    "agent-updater.md": {
-      "name": "Agent Updater \u2014 mathAgents",
-      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
@@ -664,6 +665,12 @@
     "../skills/tool-mathlib/SKILL.md": {
       "name": "tool-mathlib",
       "description": "\"Mathlib operational reference in mathAgents \u2014 configuration, API surface, invocation, and verification. Consult when working with Mathlib.\""
+    },
+    "orchestrator.md": {
+      "name": "Orchestrator \u2014 mathAgents",
+      "description": "\"Coordinates all agent operations for mathAgents: routes work to domain agents, enforces constitutional rules, and closes every multi-file session with a consistency check.\"",
+      "tools": "Read, Edit, Write, Grep, Glob, Bash, TodoWrite, Task",
+      "model": "claude-fable-5-2"
     },
     "navigator.md": {
       "name": "Navigator \u2014 mathAgents",
@@ -698,6 +705,12 @@
     "cleanup.md": {
       "name": "Cleanup \u2014 mathAgents",
       "description": "\"Removes stale drafts, build artifacts, and orphaned files from mathAgents with mandatory safety checks\"",
+      "tools": "Read, Grep, Glob",
+      "model": "opus"
+    },
+    "agent-updater.md": {
+      "name": "Agent Updater \u2014 mathAgents",
+      "description": "\"Synchronizes agent documentation after project structure, deliverable, or reference changes in mathAgents\"",
       "tools": "Read, Grep, Glob",
       "model": "opus"
     },
@@ -840,14 +853,6 @@
       "threat_data": "6c7efe7d3868b8128375520fe71a77687a2f6371282cbd4947aa0054f54e2d17",
       "operational_integration_process": "d0f4bee8580d904734bf5622085cd2e48005c302778e24410f92b310603e1f8a"
     },
-    "references/framework-watch.reference.md": {
-      "framework_data": "ad6392577a0f937924d3bc31039594ee662f4bf8028fd9391a183862d08e63db",
-      "operational_integration_process": "157d0f536d83f2a774e8b4520699ed625464572a33f1eb05f8e57498b91e1361",
-      "conformance_standard_check": "537d190f9ffb045d217e5a602dba6a0a5fafb21283aeaa0d28435edb5952c618"
-    },
-    "references/github-workflows-merge.reference.md": {
-      "content": "f4cedddb414d2cc1ea0b41f0c6dfebe02985283be45d8b89868f0e7791e9c4ab"
-    },
     "../CLAUDE.md": {
       "project_overview": "2e5d490c645705421ee3c2b6bb6c24ce6e852a879d1b7b0b298c9f69771d8442",
       "directory_structure": "7ba6c4977b7f0601ac878ff3fc14deeadc11c7442d1085d652a1901db1f50d17",
@@ -862,24 +867,13 @@
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "write_policy": "0baf736c166d97cd042e76c7fa009b1ce45e4f06435fc2ebfb141332fca3e0cf"
     },
-    "orchestrator.md": {
-      "constitutional_core": "f05ead693f33d316cc83453eb195d232f5ac76cd36d8cce45b3605e14747def4",
-      "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
-      "routing_table_rows": "b8ce7ac0fbdb6866e16e41d1027b178b48e717a44a480b083df0fc78f5b3e2c4",
-      "update_compatibility_source_pack": "9e7d840aca21251fe36b00cbe4599093060e67a08c712c648eb6e70356aa897d",
-      "available_workflows": "45d5199091c10327bb6080f0d196a9af8e57550f75b3ca2539ab8914e4e65b51",
-      "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d"
-    },
     "security.md": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "security_rules_invariant": "729200986e5130124a82b72d5e5b9d9a173803683e5eaf307f2485b69dcf8c75",
-      "threat_intelligence": "db0f126b0aef1acdaad56982bc351aa33897c1dc6dfe7b7d0dcb888431c980ee",
+      "threat_intelligence": "124b68b6f72a3dfc05c425c316da716f1b6d2b73897dfba7b2f0244f345f151f",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
-    },
-    "agent-updater.md": {
-      "content": "56ab05a8be9382a7594cce1ee712bab9669e451cf7ee8ec6175dbc8b912e4631"
     },
     "../skills/tool-lean-4/SKILL.md": {
       "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
@@ -890,6 +884,14 @@
       "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
       "tool_api_surface": "99fd76ffc056641631f675ad38333f6b005f3fa7b250e099e9aa156fc32ba8cd",
       "verification": "84d53b2d74713e8afd957e8ddd482e4ee1eb0fb396c510af3b48715d8eff6125"
+    },
+    "orchestrator.md": {
+      "constitutional_core": "f05ead693f33d316cc83453eb195d232f5ac76cd36d8cce45b3605e14747def4",
+      "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
+      "routing_table_rows": "b8ce7ac0fbdb6866e16e41d1027b178b48e717a44a480b083df0fc78f5b3e2c4",
+      "update_compatibility_source_pack": "9e7d840aca21251fe36b00cbe4599093060e67a08c712c648eb6e70356aa897d",
+      "available_workflows": "45d5199091c10327bb6080f0d196a9af8e57550f75b3ca2539ab8914e4e65b51",
+      "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d"
     },
     "navigator.md": {
       "invariant_core": "05aac7cabeea587ef7f6a7071f606bed85d271c26453655455db5122fe2fb52a",
@@ -926,6 +928,9 @@
     },
     "cleanup.md": {
       "content": "84af0717872c4996889bebb9ebccf9404b9a5ee6c037edff1fe91afddfa012c9"
+    },
+    "agent-updater.md": {
+      "content": "56ab05a8be9382a7594cce1ee712bab9669e451cf7ee8ec6175dbc8b912e4631"
     },
     "agent-refactor.md": {
       "content": "9b5729853bcf28c5326137f7c2ac8f011cdcbeaa9b23b3d4cb7e7d76d2197309"
@@ -1000,6 +1005,9 @@
       "output_format": "f751fcb4fa4f36501bc3ec3bba179f2483438521a4bb529a6e3ef7a1e73fe218",
       "external_retrieval_quality_gate_output": "5b130293ed8b3531d99ad4e53bf2ec6d9cddcba11cc28df28e962a185e16c04a",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
+    },
+    "references/github-workflows-merge.reference.md": {
+      "content": "f4cedddb414d2cc1ea0b41f0c6dfebe02985283be45d8b89868f0e7791e9c4ab"
     },
     "references/work-summary-spec.reference.md": {
       "content": "96232231a1f7c6bedf5f88786a47ade3b083b9863a26df30049c8de946d6f1bc"
@@ -1274,7 +1282,7 @@
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "security_rules_invariant": "729200986e5130124a82b72d5e5b9d9a173803683e5eaf307f2485b69dcf8c75",
-      "threat_intelligence": "db0f126b0aef1acdaad56982bc351aa33897c1dc6dfe7b7d0dcb888431c980ee",
+      "threat_intelligence": "124b68b6f72a3dfc05c425c316da716f1b6d2b73897dfba7b2f0244f345f151f",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83"
     },
