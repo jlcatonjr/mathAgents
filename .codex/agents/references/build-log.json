@@ -1,13 +1,14 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.2.1",
+  "agentteams_version": "1.2.2",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "a7ab95e241244903339b6d54743f7c3366530071",
+    "commit": "a5bc8c0e930a59c5144d87814b8e256ad64b04a5",
     "branch": null,
-    "dirty": false
+    "dirty": false,
+    "on_remote": null
   },
-  "generated_at": "2026-11-19T16:31:54.361508+00:00",
+  "generated_at": "2026-11-21T00:58:03.298718+00:00",
   "project_name": "mathAgents",
   "framework": "codex",
   "project_type": "research",
@@ -34,7 +35,7 @@
   "files_written": [],
   "manual_required": 7,
   "template_hashes": {
-    "universal/orchestrator.template.md": "c571d5b8a208012b",
+    "universal/orchestrator.template.md": "d71641cab1e0d395",
     "universal/navigator.template.md": "5a8b04969c0727df",
     "universal/security.template.md": "9e9f79c92ba2cc24",
     "universal/code-hygiene.template.md": "6774a03ed3018fe6",
@@ -42,7 +43,7 @@
     "universal/conflict-auditor.template.md": "03a61cb6e57afeda",
     "universal/conflict-resolution.template.md": "88624f165b7992e7",
     "universal/cleanup.template.md": "6a404be5ad0bfbe9",
-    "universal/agent-updater.template.md": "120cfda154d35a45",
+    "universal/agent-updater.template.md": "e1801dc15c6cd557",
     "universal/agent-refactor.template.md": "1c0cede6ba31198d",
     "universal/repo-liaison.template.md": "70331bea47521df8",
     "universal/git-operations.template.md": "58d7680e3974bde4",
@@ -71,7 +72,7 @@
     "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
     "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
     "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
-    "universal/github-workflows-merge.reference.template.md": "288fb2f043fa1f4f",
+    "universal/github-workflows-merge.reference.template.md": "4e7c51deabc83d4f",
     "universal/branch-lifecycle.reference.template.md": "49d996d0d76b3fe7",
     "universal/work-summary-spec.reference.template.md": "d29ca7e680ad715d",
     "universal/work-summary-tooling.reference.template.md": "62e643b1a9711af6",
@@ -576,15 +577,15 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "13dae7acc0bf5c48",
+  "manifest_fingerprint": "0868f1ccb54adb47",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.json": "b96a1567ff6b92ea",
-    "security.toml": "b449b68eb560f679",
+    "references/security-vulnerability-watch.json": "afe0ef6a9c1c0826",
+    "security.toml": "2cd1d018edc6729c",
     "../../.agents/skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../../.agents/skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
     "references/code-hygiene-rules.reference.md": "181cd5dc18b87d7f",
-    "references/security-vulnerability-watch.reference.md": "8c56a1e5ac519115",
+    "references/security-vulnerability-watch.reference.md": "2eb9a90af2876e6a",
     "references/framework-watch.reference.md": "2d8e8df83972c912",
     "orchestrator.toml": "f6c6928c5519875c",
     "navigator.toml": "b05d9a19ce492a5f",
@@ -607,7 +608,7 @@
     "visual-designer.toml": "9fa2ffa2bb66b9a9",
     "retrieval-integrator.toml": "00750e3ff916cdff",
     "research-analyst.toml": "7a1c615914718657",
-    "references/github-workflows-merge.reference.md": "0fd0bcd7a89d5941",
+    "references/github-workflows-merge.reference.md": "f4cedddb414d2cc1",
     "references/work-summary-spec.reference.md": "96232231a1f7c6be",
     "references/work-summary-tooling.reference.md": "f3656972717153a9",
     "references/work-summary-backfill.reference.md": "159d923c1f9f29d1",
@@ -624,7 +625,7 @@
     "proof-dossiers-expert.toml": "7c102c62ddb05d42",
     "proof-library-expert.toml": "e1b96fc1965bc2a9",
     "evaluation-expert.toml": "749566b7b7debfd7",
-    "../../AGENTS.md": "c13c180f9905225f",
+    "../../AGENTS.md": "234ad1d8b03b9bf3",
     "team-builder.toml": "67112b2ee5aec8d9",
     "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.toml": "3c9084a432be8c99",
@@ -647,7 +648,7 @@
     "security.toml": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "security_rules_invariant": "45159585a582415482288ea9821ecdd62df9c53f2527e1874b1801ec9a30ea7e",
-      "threat_intelligence": "ae1bcc3a5dc53d416e4cd231b60a29e36dc2d876d0a04fa8c099f9fefdc78f72",
+      "threat_intelligence": "0ff1dc19c6fa019c4da355675cb2e42114379dbd266343fcffacd7abf9ce580a",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
@@ -667,7 +668,7 @@
       "content": "181cd5dc18b87d7fd21f0e3815ae057958523122b8005197f05d1bf1591b9a52"
     },
     "references/security-vulnerability-watch.reference.md": {
-      "threat_data": "3b786c1628482f0fd44eda7b9423fbe66c11ae31e2a72e46ec9f3697311a8109",
+      "threat_data": "6c7efe7d3868b8128375520fe71a77687a2f6371282cbd4947aa0054f54e2d17",
       "operational_integration_process": "d0f4bee8580d904734bf5622085cd2e48005c302778e24410f92b310603e1f8a"
     },
     "references/framework-watch.reference.md": {
@@ -800,7 +801,7 @@
       "codex_translation": "40f8c8ecb16205a880156d9ab3472990146bff93a80f73f66a3eba06c9524520"
     },
     "references/github-workflows-merge.reference.md": {
-      "content": "0fd0bcd7a89d59417167b9482b3c8cda05b76ed69d113ae38add089295346a14"
+      "content": "f4cedddb414d2cc1ea0b41f0c6dfebe02985283be45d8b89868f0e7791e9c4ab"
     },
     "references/work-summary-spec.reference.md": {
       "content": "96232231a1f7c6bedf5f88786a47ade3b083b9863a26df30049c8de946d6f1bc"
@@ -881,7 +882,7 @@
       "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
       "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
-      "github_management_rule": "f4892e0fd535a97902fb597c6293f4884cf06b652d43ad03facdc6c04c9283e0",
+      "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
     },
@@ -1100,7 +1101,7 @@
     ".codex/agents/security.toml": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
       "security_rules_invariant": "45159585a582415482288ea9821ecdd62df9c53f2527e1874b1801ec9a30ea7e",
-      "threat_intelligence": "ae1bcc3a5dc53d416e4cd231b60a29e36dc2d876d0a04fa8c099f9fefdc78f72",
+      "threat_intelligence": "0ff1dc19c6fa019c4da355675cb2e42114379dbd266343fcffacd7abf9ce580a",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
@@ -1146,7 +1147,7 @@
       "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
       "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
-      "github_management_rule": "f4892e0fd535a97902fb597c6293f4884cf06b652d43ad03facdc6c04c9283e0",
+      "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
     }

@@ -24,7 +24,7 @@ re-rendered on every `--update --merge`.
 <!-- AGENTTEAMS:BEGIN framework_data v=1 -->
 
 
-Generated on: `2026-11-15`
+Generated on: `2026-11-20`
 Source: https://docs.anthropic.com/en/docs/claude-code/sub-agents
 Fetch status: `skipped`
 Diff summary: `matched=0 new_upstream=0 missing_upstream=4`
@@ -41,7 +41,7 @@ Diff summary: `matched=0 new_upstream=0 missing_upstream=4`
 
 Local Claude adapter constants (parsed from claude.py source):
 - strictly-required keys (_CLAUDE_REQUIRED_KEYS): description, name
-- default_allowed_tools: Bash, Read, Write, Edit
+- default_allowed_tools: Read, Grep, Glob
 - claude diff (vs expected_doc_tokens) — matched: —; new_upstream: —; missing_upstream: description, model, name, tools
 <!-- AGENTTEAMS:END framework_data -->
 
