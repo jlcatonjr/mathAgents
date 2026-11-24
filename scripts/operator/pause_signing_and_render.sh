@@ -116,7 +116,10 @@ for s in sys.argv[1:]:
 print("overwrite PASS recorded on all three surfaces")
 PY
 researchteam materialize --yes >/dev/null || die "copilot materialize failed"
-if ! researchteam materialize --help 2>/dev/null | grep -q -- "--copilot-only"; then
+# The help text is captured first: under pipefail, `--help | grep -q` can fail on SIGPIPE after a match, which
+# would wrongly take the fallback render below.
+rt_help="$(researchteam materialize --help 2>/dev/null || true)"
+if ! case "$rt_help" in *--copilot-only*) true ;; *) false ;; esac; then
   # Installed CLI predates multi-surface materialize: render the native surfaces explicitly.
   for fw in claude goose; do
     agentteams --description "$DESC" --framework "$fw" --project . --update --overwrite --materialize-native --yes >/dev/null \
