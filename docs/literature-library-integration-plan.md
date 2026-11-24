@@ -7,14 +7,14 @@ literature deemed relevant via the agents' investigation … occur automatically
 investigate … exhaustive for the project … each project builds its own library … separable between
 projects."
 **Status:** IMPLEMENTED & VERIFIED 2026-07-08 (all acceptance criteria met — §4; demonstrated on
-OrthodoxLLM `development-of-offices`). Revised after adversarial + conflict audit (§0).
+a derived research repository's project). Revised after adversarial + conflict audit (§0).
 
 ---
 
 ## 0. What the audit changed (binding resolutions — do not revert to the draft)
 
 The draft was audited by independent adversarial (measured against real `.bib` files) and conflict
-(against the anti-fabrication memory + on-disk OrthodoxLLM) passes. These are binding; §§1–5 reflect
+(against the anti-fabrication memory + an on-disk derived repository) passes. These are binding; §§1–5 reflect
 them.
 
 - **R1 (CRITICAL — the artifact was a toy).** The draft vectorized `.bib` records. Measured: real
@@ -51,12 +51,12 @@ them.
   **acquisition stays out-of-band — never an audit-time fetch.**
 - **R6 (prove before propagating).** The draft shipped ~12 managed surfaces before the core was shown
   useful. → Implement the core (build/query/gate scripts + protocol + one agent-doc surface + bridge +
-  tests), **demonstrate on one real project with real relevance text** (OrthodoxLLM
-  `development-of-offices`, whose notes carry genuine agent relevance judgments), *then* register
+  tests), **demonstrate on one real project with real relevance text** (a project in a derived research
+  repository, whose notes carry genuine agent relevance judgments), *then* register
   `MANAGED_FILES`. Defer: the PD-full-text acquisition layer (document only) and any first-class roster
   agent.
 - **R7 (HIGH CONFLICT — filename clobber).** The draft's managed `scripts/check_library_integrity.sh`
-  is the **exact name** of OrthodoxLLM's instance-local 13 KB domain gate → `researchteam update` would
+  is the **exact name** of the derived repository's instance-local 13 KB domain gate → `researchteam update` would
   **overwrite it** on the reference instance the memory protects. → Rename the managed gate
   **`scripts/check_literature_library_integrity.sh`**. The build/query script names don't collide.
 - **R8 (MANAGED sequencing — R11-shaped).** `_update_cmd.py` 404s on any `MANAGED_FILES` entry absent
@@ -68,19 +68,19 @@ them.
   `vector_model_id:"researchteam-tfidf-v1"` with `vector_method:"lexical-baseline"` and the STUB banner
   adjacent so it can't read as a neural model.
 - **R10 (hash semantics).** `record_text_sha256` hashes the record's **indexed text** (freshness/
-  determinism), explicitly **not** a source-text confirmation — named distinctly from OrthodoxLLM's
+  determinism), explicitly **not** a source-text confirmation — named distinctly from the derived repository's
   `source_text_sha256` so it can't be mistaken for text-fidelity evidence that doesn't exist here.
 - **R11 (exec-bit reality).** The exec-bit sync fix is `.sh`-only. → Invoke the `.py` scripts via
   `python3` in the bridge; only the `.sh` gate relies on `+x`.
 - **R12 (gitignore coupling).** Because the scripts are managed (R7), the *optional* full-text corpus
   ignore pattern (`Projects/*/references/library/corpus/*.txt`) goes in the **managed root `.gitignore`**
   (propagates). The base layer commits raw term counts — **no gitignored vector store**.
-- **R13 (no false parity).** Don't claim ranking-score parity with OrthodoxLLM's sklearn vectors —
+- **R13 (no false parity).** Don't claim ranking-score parity with the derived repository's sklearn vectors —
   honest lexical baseline.
 - **R14 (push back on "exhaustive").** "Exhaustive" is not deliverable or provable. → The gate asserts
   a `coverage_statement` that **disclaims completeness**; reframed to "captures the sources the agents
   surfaced and deemed relevant." Stated plainly to the user.
-- **R15 (protocol-first, no new roster agent).** Matches OrthodoxLLM's audited protocol-only choice and
+- **R15 (protocol-first, no new roster agent).** Matches the derived repository's audited protocol-only choice and
   avoids agentteams-roster fragility; indexing is script-mechanical. "Agent documentation" = the
   protocol doc + `reference-manager` / `literature-review-expert` USER-EDITABLE sections that name the
   **literature-librarian responsibility**. A first-class archetype is a documented future option.
@@ -105,7 +105,7 @@ relevant," with a coverage statement that disclaims completeness.
 
 ## 2. Findings (unchanged from the draft; see §0 for what they forced)
 
-OrthodoxLLM already built this — a scripted `build_catalogue → acquire_text (out-of-band) →
+A derived research repository already built this — a scripted `build_catalogue → acquire_text (out-of-band) →
 build_vectors (real sklearn TF-IDF) → query_vectors` pipeline + a fail-closed gate, **instance-local,
 protocol-only**, with the anti-fabrication ceiling (UNVERIFIED; vector=navigation-not-evidence;
 real-vectoriser-never-authored; no self-attestation; out-of-band acquisition; "vectorized"=lexical,
@@ -187,11 +187,11 @@ dense embeddings anywhere; base install dependency-free). Per-project references
       (advisory `NEEDS-ENRICHMENT`), and a coverage statement that fails to disclaim completeness; prints
       the ceiling banner; `LITERATURE_LIBRARY_ADVISORY=1` downgrades. Unit tests pass under bash 3.2 and 5.
 - [x] `bash …/claude_researchteam_bridge.sh library-build|library-check|library-query <project>` work.
-- [x] **Demonstrated on a real project** (OrthodoxLLM `development-of-offices`): a library builds from
+- [x] **Demonstrated on a real project** (a derived research repository's project): a library builds from
       real relevance text, a query returns sensible related-source candidates, the gate is green, and
       it honestly flags any thin records.
 - [x] The managed gate is named `check_literature_library_integrity.sh` (does **not** collide with
-      OrthodoxLLM's instance-local `check_library_integrity.sh`).
+      the derived repository's instance-local `check_library_integrity.sh`).
 - [x] `docs/literature-library-protocol.md` + the agent PSN pointers reference one protocol; no
       `AGENTTEAMS` fence modified; `validate_agentteams_update.sh` passes; `researchteam update
       --dry-run` recognizes the new `MANAGED_FILES`; `Projects/*/references/library/` never treated as managed.
