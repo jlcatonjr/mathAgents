@@ -30,7 +30,7 @@ agentteams 1.3).
    h. §7: one phrase, the constraints file's header cites "the fleet coordinator's operator script 65" (a generic name
       in place of a repository name); no signer rule is added, removed or changed.
 2. Scope. Under root item 5, this row widens the scope amendment 2 set: the adopted file governs the 1.1, 1.2 and
-   1.3 lines, and nothing about the 1.1 or 1.2 line changes beyond hunk b's wording. Its rows for a 1.3 pin move are
+   1.3 lines, and nothing about the 1.1 or 1.2 line changes beyond the wording of hunks b, e and g. Its rows for a 1.3 pin move are
    the line rows of hunk f, each its own operator-signed row; this row signs neither.
 3. Grants and relaxes nothing. Each change states a branch rule, the scope of a key already pinned, names rows that
    are themselves required (they tighten a pin move), or is wording. Nothing is removed from §1 to §7 except the dated
