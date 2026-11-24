@@ -38,7 +38,7 @@ agents and (b) reconciling it with researchteam's own **literature library**, a 
   `--update` merely refreshes an existing cache. **Adversarial-audit-validated as safe.**
 - `.gitignore` and specific `docs/*.md` are `MANAGED_FILES` (explicit enumeration, not a glob) ⇒ a
   gitignore rule and a new managed doc propagate to derived repos.
-- **Derived-repo pre-check (R7) clean:** neither OrthodoxLLM nor SocialScienceHumanities owns a
+- **Derived-repo pre-check (R7) clean:** neither of the two derived repositories checked owns a
   `docs/retrieval-surfaces.md` or any instance-local retrieval doc ⇒ the generic managed name is safe.
 
 ---

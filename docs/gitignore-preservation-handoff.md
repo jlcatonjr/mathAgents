@@ -1,6 +1,6 @@
 # Handoff — Make `researchteam update` **preserve derived `.gitignore` additions**
 
-**From:** SocialScienceHumanities (a derived research repo) — orchestrator session, 2026-08-26.
+**From:** a derived research repo — orchestrator session, 2026-08-26.
 **To:** researchteam maintainer(s).
 **Scope:** Change the **layer-2 update mechanism** so a sync no longer silently deletes ignore
 patterns that exist only in a derived repo's `.gitignore`.
@@ -68,7 +68,7 @@ that still deletes silently**:
 
 ## 4. Triggering case (concrete, this repo's sibling)
 
-On **2026-08-26**, SocialScienceHumanities imported a manuscript as a hidden, local-only project and
+On **2026-08-26**, that repo imported a manuscript as a hidden, local-only project and
 added two derived-only lines to its `.gitignore`:
 
 ```gitignore
@@ -78,7 +78,7 @@ workSummaries/
 
 Both are legitimate, both are derived-specific, and both are **exactly the content
 `docs/agentteams-update-policy.md:149-174` warns the next `--yes` sync will delete**. That header also
-records the precedent: the 2026-08-07 SocialScienceHumanities sync dropped the source-corpus + LaTeX
+records the precedent: the repo's 2026-08-07 sync dropped the source-corpus + LaTeX
 ignore patterns and exposed **1041 corpus files (198 MB)**. This handoff exists so the tool stops
 depending on someone remembering the policy every time.
 

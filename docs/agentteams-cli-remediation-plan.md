@@ -4,7 +4,7 @@
 **Author:** infrastructure remediation (Claude)
 **Trigger:** `researchteam update` crashed with `ModuleNotFoundError: No module named 'build_team'`
 while regenerating agent-team roster fences for a consumer repository
-(`researchRepositories/SocialScienceHumanities`).
+(a private derived research repository).
 **Status of the immediate outage:** RESOLVED (editable install repaired).
 **Status of structural hardening:** IMPLEMENTED — see §8. This document was **audited
 (adversarial + conflict) and revised** before implementation; §5 recommendations replace an
