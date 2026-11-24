@@ -89,7 +89,7 @@ private rows are cited as their provenance only.
   latest-stable rule and the `@security` review all still apply.
 - **Verification.** Against `~/.config/agentteams/allowed_signers`, which is outside every write root. Installing
   or changing it is operator-only. Use the neutralised verify command from agentteams SECURITY.md.
-- **The RC.** mathAgents' RC is a signed tag `vX.Y.0-rc.N` on `release/X.Y` (the first was `v1.0.0-rc.1` on
+- **The RC.** mathAgents' RC is a signed tag `vX.Y.Z-rc.N` on `release/X.Y` (the first was `v1.0.0-rc.1` on
   `release/1.0`), so baseAgent can pin it.
 - **Tags are immutable.** A pushed tag is never moved or deleted. Fix forward with `v1.0.1`.
 
