@@ -21,10 +21,11 @@ row deriving from the root that names the new sha256 (root conditions item 5). A
 2026-11-18) is such a row: it brings §2, §3, §4 and §7 up to date with the public repository's own rows. Amendment 2
 (`release-policy-public-1.1-amend-2`, 2026-11-19) replaces it as the adopted text (amendment 1 stays recorded and is
 not retracted): it extends the policy to the 1.2 line (§1 the `release/1.2` branch, §2 the key's scope, §3 the
-release-line rows and the lock move). Amendment 3 (`release-policy-public-1.1-amend-3`) replaces amendment 2 as the
+release-line rows and the lock move). Amendment 3 (`release-policy-public-1.1-amend-3`, text of 2026-11-24) replaces amendment 2 as the
 adopted text (amendments 1 and 2 stay recorded and are not retracted): it extends the policy to the 1.3 line (§1 the
 `release/1.3` branch and the RC CHANGELOG form, §2 the key's scope, §3 the 1.3 release-line rows and a pointer to
-`toolchain.lock` in place of the dated pin list).
+`toolchain.lock` in place of the dated pin list; §7 wording only: the fleet coordinator's operator script is named
+generically, and no signer rule changes).
 The root also adopts, as its own, the rules below that the private history introduced (the 1.1 intake rule, which
 there took effect with D45, and the operator signer, provisioned there under `provision-operator-signer-*`); the
 private rows are cited as their provenance only.
@@ -88,7 +89,8 @@ private rows are cited as their provenance only.
   latest-stable rule and the `@security` review all still apply.
 - **Verification.** Against `~/.config/agentteams/allowed_signers`, which is outside every write root. Installing
   or changing it is operator-only. Use the neutralised verify command from agentteams SECURITY.md.
-- **The RC.** mathAgents' RC is the signed tag `v1.0.0-rc.1` on `release/1.0`, so baseAgent can pin it.
+- **The RC.** mathAgents' RC is a signed tag `vX.Y.0-rc.N` on `release/X.Y` (the first was `v1.0.0-rc.1` on
+  `release/1.0`), so baseAgent can pin it.
 - **Tags are immutable.** A pushed tag is never moved or deleted. Fix forward with `v1.0.1`.
 
 ## 3. Pins
@@ -126,8 +128,9 @@ private rows are cited as their provenance only.
   pins no agentteams extra). Every other §3 rule (verified signed tags, peeled commits, the `@security`
   review and its row) applies unchanged. The line rows and this lock procedure are this repository's addition to
   `docs/agentteams-update-policy.md`, which moves a lock only on its own line and asks for no row.
-- **Pins today.** `toolchain.lock` is authoritative for the current pins (peeled commits of verified signed tags, with
-  their `.tag=` lines), and its header lists the previous ones with the pull requests that moved them.
+- **Pins today.** On each branch, its own `toolchain.lock` is authoritative for the pins that branch renders with
+  (peeled commits of verified signed tags, with their `.tag=` lines); its header records the previous pins and the
+  change that moved each.
 - **Pins before the public repository (private history).** Every row named in this bullet is in the private history
   (see "Rows named here" above) and carries no authority here.
   - `release/1.0`: agentteams `v1.0.0` (`cc5b8c9e`, moved in Phase T on 2026-10-19 from the joint soak pair

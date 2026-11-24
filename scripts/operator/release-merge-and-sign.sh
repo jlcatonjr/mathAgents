@@ -3,7 +3,7 @@
 # merge commit in a fresh clone, then sign THAT commit with the repository's own reviewed signer, taken from the
 # verified merge commit (never from a working checkout) and matching the sha256 the operator approved.
 #   PR=<n> REL_HEAD=<40-hex> PREV_HEAD=<40-hex: the release line's head before the merge> \
-#   LINE=release/1.2 EXPECT_VERSION=1.2.0rc1 SIGNER_SHA256=<64-hex> TAGGER_EMAIL=<e-mail> KEY="$HOME/.ssh/<key>" \
+#   LINE=release/1.3 EXPECT_VERSION=1.3.0rc1 SIGNER_SHA256=<64-hex> TAGGER_EMAIL=<e-mail> KEY="$HOME/.ssh/<key>" \
 #   /bin/bash -p "$HOME/githubrepositories/mathAgents/scripts/operator/release-merge-and-sign.sh"
 # Derived 2026-11-06 from agentteams-f3's cleared derived-phase-t/release-merge-and-sign.sh (sha256 916edcf1…), which
 # signed mathAgents v1.0.0 on 2026-10-19. Changes from it: mathAgents only (no REPO variable); the release line is the
