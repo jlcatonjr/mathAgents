@@ -143,8 +143,8 @@ proof library into its own public, Apache-2.0 repository once it is stable.**
 
 Evidence and reasoning:
 - **Your existing pattern.** Framework and tooling repos are public (`researchteam`,
-  `agentteams`); research and content repos are private (`baseAgent`, `SocialScienceHumanities`,
-  `legalResearch`, `agentteams-research`, …). mathAgents is a research instance.
+  `agentteams`); research and content repos are private (`baseAgent`
+  and others). mathAgents is a research instance.
 - **P5 draws on AgenticCapital, which lives in the private `baseAgent`.** A public mathAgents
   would expose that work.
 - **Unverified claims.** Early dossiers will contain unverified or open claims. Private status

@@ -64,7 +64,7 @@ deterministic, offline, no LLM-authored numbers, navigation-only, but they diver
 `library-query` (literature). Update the disambiguation guidance in
 `reference-manager`, `navigator`, `literature-review-expert`, and `orchestrator` (PSN pointers) so an
 agent picks the right surface. researchteam already practices this discipline (e.g. renaming
-`check_literature_library_integrity.sh` to avoid clobbering OrthodoxLLM's check) — extend it.
+`check_literature_library_integrity.sh` to avoid clobbering a derived repository's check) — extend it.
 
 ---
 
