@@ -1,0 +1,56 @@
+{
+  "pins": [
+    {
+      "section": "orchestrator.toml:routing_table_rows",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old rows name the canonical bespoke agents in .github/agents (D24, D27, D28); the new text would send edits to .codex. Review by 2027-01-31."
+    },
+    {
+      "section": "orchestrator.toml:update_compatibility_source_pack",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the existing .github/agents/agent-updater.agent.md; its build_team.py fallback is stale and goes with the 1.3.x release. Review by 2027-01-31."
+    },
+    {
+      "section": "orchestrator.toml:available_workflows",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the new text (governance_logs append, .codex conflict log) is better; release it in 1.3.x by a reviewed AGENTTEAMS_SHRINK_ALLOW render. Review by 2027-01-31."
+    },
+    {
+      "section": "code-hygiene.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    },
+    {
+      "section": "cleanup.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    },
+    {
+      "section": "agent-updater.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents paths; its build_team.py commands are stale and are updated in 1.3.x. Review by 2027-01-31."
+    },
+    {
+      "section": "agent-refactor.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    },
+    {
+      "section": "repo-liaison.toml:protocols",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    },
+    {
+      "section": "git-operations.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the new text fixes a placeholder filled with reports/; release it in 1.3.x by a reviewed AGENTTEAMS_SHRINK_ALLOW render. Review by 2027-01-31."
+    },
+    {
+      "section": "work-summarizer.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; both backup paths exist; the new text is acceptable; release it in 1.3.x by a reviewed AGENTTEAMS_SHRINK_ALLOW render. Review by 2027-01-31."
+    },
+    {
+      "section": "technical-validator.toml:cross_reference_rules",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    },
+    {
+      "section": "team-builder.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text cites the stale build_team.py; release the new text in 1.3.x by a reviewed AGENTTEAMS_SHRINK_ALLOW render. Review by 2027-01-31."
+    },
+    {
+      "section": "content-enricher.toml:content",
+      "reason": "Kept for 1.3.0 (operator ruling 2026-11-25, T3 C5): the agentteams 1.3.0 Codex render rewrites .github/agents/ to .codex/agents/ but keeps the .agent.md suffix, so the new text points at paths that do not exist; the old text names the canonical .github/agents files (the new glob would match nothing). Review by 2027-01-31."
+    }
+  ]
+}
