@@ -82,7 +82,7 @@ working directory, else this checkout when the working directory is inside it. A
 points repository-level agents at the instance.
 
 From Python, every API function takes `root=`, else `MATHAGENTS_ROOT`, else (editable install only) this
-checkout; the search for the nearest `mathagents.toml` is the CLI's alone. See `docs/api-reference/`.
+checkout (`config.switch` alone defaults to the working directory); the search for the nearest `mathagents.toml` is the CLI's alone. See `docs/api-reference/`.
 
 ## `mathagents.toml`
 
@@ -210,7 +210,7 @@ pipeline agent's Invariant Core (`@lean-informalization`: its notes) points to t
 - `mathagents status` prints the pin and whether the harness is verified on it
   (`references/verified-toolchains.json`, shipped with the harness). An unverified pin is a warning.
 - Fidelity, G-AX and counterexample records take optional `toolchain_pin` and `mathlib_rev` stamps.
-  `validate_dossier` warns about a fidelity or G-AX stamp from an earlier pin, which needs re-approval.
+  `validate_dossier` warns about a fidelity or G-AX stamp from a pin other than the current one, which needs re-approval.
 - The bump tools ship in the wheel (`mathagents bump trial | statement-types | statement-drift`).
 
 ## Not shipped

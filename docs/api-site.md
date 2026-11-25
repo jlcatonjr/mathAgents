@@ -41,4 +41,5 @@ Documentation paragraph under the opening description. `tests/test_api_site.py` 
 ## Publishing
 
 `docs.yml` deploys only on main, and only while the repository is public; it has been public since the release
-(D45, `docs/charter/decisions-summary.md`). Before the first deploy, enable Pages with source "GitHub Actions".
+(D45, `docs/charter/decisions-summary.md`). Pages is enabled with source "GitHub Actions", and the site is at
+https://jlcatonjr.github.io/mathAgents/.

@@ -20,8 +20,8 @@ Install from the checkout with `pip install -e .` (Python ≥ 3.11), or into ano
 
 ## Conventions
 
-- **Keyword-only arguments.** Every function except `cli.main` and `config.switch` takes
-  `root: Path | None = None`: the root of the mathAgents checkout or of an [instance](#glossary) that the
+- **Keyword-only arguments.** Every function except `cli.main` takes
+  `root: Path | None = None` (`config.switch` too, but its default is the working directory): the root of the mathAgents checkout or of an [instance](#glossary) that the
   call works on (default: `MATHAGENTS_ROOT`, else the checkout an editable install lives in; an installed
   wheel has no default). Every page's `root` parameter means this. Dossiers are named by slug
   (`[a-z0-9][a-z0-9-]*`).
@@ -56,7 +56,8 @@ Install from the checkout with `pip install -e .` (Python ≥ 3.11), or into ano
   `read_*` reads one optional record (None when it is absent).
 - **One source of gate logic.** The scripts under `scripts/` remain the CLI. The API calls their
   functions in-process, or runs them as subprocesses where a script has only a `main`, so the API and
-  the CLI cannot disagree. The scripts always come from the package's harness (the checkout, or the
+  the CLI reach the same verdicts. The one difference: an error while reading the Lean pin is a skipped-check
+  notice from the API and an error exit from the CLI. The scripts always come from the package's harness (the checkout, or the
   copy inside the wheel), never from `root`: an instance holds data, not gate code (`docs/module.md`).
 
 ## The human-decision boundary (DD-29)
@@ -103,7 +104,7 @@ entry). `Dn` is a decision of the project charter, summarized row by row in
 
 | Term | Meaning | Source |
 |---|---|---|
-| G-KERNEL | The automated proof-integrity gate: builds the Lean library, replays it in the kernel, checks each declaration's axiom envelope, and writes `reports/kernel/latest.json`. A result counts as proved only when that report says `proved`. | spec "G-KERNEL", DD-14; D1 |
+| G-KERNEL | The automated proof-integrity gate: builds the Lean library, replays it in the kernel, checks each declaration's axiom envelope, and writes `reports/kernel/latest.json`. A result counts as proved only when that report says `proved`. | spec "G-KERNEL", DD-14, DD-40; D1 |
 | G-FID | The human statement-fidelity gate: a person approves that a Lean statement says what the informal problem says. | spec "G-FID"; D5 |
 | G-AX | The human gate for axioms, added hypotheses and weakened statements, recorded in `gax.json` and the axiom allowlist. | spec "G-AX"; D5 |
 | G-CX | The human gate for counterexample verdicts, over the append-only `counterexamples.json` log. | spec "G-CX"; D5 |
@@ -112,7 +113,7 @@ entry). `Dn` is a decision of the project charter, summarized row by row in
 | Instance | A repository that consumes the installed harness: it holds the data (`mathagents.toml`, dossiers, `lean/`), while the gate code comes from the package. | D35; [`docs/module.md`](../module.md) |
 | Fresh (current) report | A kernel report that passes the freshness checks every gate applies; see [`kernel`](kernel.md). | spec "G-KERNEL" |
 | Kernel-as-judge | An operator directive, for one conversation only, that lets the kernel's verdict stand in for a human gate; it covers G-FID and G-CX by default and G-AX only when the operator extends it. Records made under it carry a waiver label. | D5, D26; DD-30 |
-| Interpretation Brief | A brief, commissioned from `@interpretation-advisor` when an informal statement admits rival readings, that lists the readings (R-ids) before Stage 1. | spec Stage 0, DD-2 |
+| Interpretation Brief | A brief, commissioned by `@interpretation-advisor` when an informal statement admits rival readings, that lists the readings (R-ids) before Stage 1. | spec Stage 0, DD-2 |
 | Stage 0-8 | The nine pipeline stages, from intake (0) to dossier assembly (8); see [`dossiers.STAGES`](dossiers.md). | spec "Pipeline Stages" |
 | P1-P4 | The parts of the Lean pin: P1 `lean/lean-toolchain`, P2 the lakefile's Mathlib `rev`, P3 the manifest's Mathlib entry, P4 the toolchain of the Mathlib checkout on disk. | [`docs/lean-version-governance.md`](../lean-version-governance.md) |
 | Preferences | Operator settings, each with its choice, alternatives and decision, in `references/preferences.toml` and per dossier. | D32 |

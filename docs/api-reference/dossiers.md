@@ -107,8 +107,10 @@ Precondition for dispatching `stage` on `slug` (spec DD-43). It is `validate_dos
 
 `notices` carries the validator's non-blocking pin-stamp warnings, which the CLI prints as `WARN`
 lines: a fidelity entry or G-AX record stamped with a `toolchain_pin` or `mathlib_rev` other than the
-instance's current pin predates a bump and needs re-approval. They never change `success`. When the Lean
-pin cannot be read, `notices` says the check was skipped.
+instance's current pin predates a bump and needs re-approval. They never change `success`. A missing or
+unreadable Lean pin file gives no warning (the pin's fields are empty and no comparison is made); only an
+error while reading it (for example a lakefile that is not UTF-8) makes `notices` say the check was
+skipped, where the CLI exits with an error.
 
 **Raises:**
 
@@ -134,8 +136,10 @@ Run the dossier validator (structure, G-FID, G-AX, G-CX); fail-closed.
 
 `notices` carries the validator's non-blocking pin-stamp warnings, which the CLI prints as `WARN`
 lines: a fidelity entry or G-AX record stamped with a `toolchain_pin` or `mathlib_rev` other than the
-instance's current pin predates a bump and needs re-approval. They never change `success`. When the Lean
-pin cannot be read, `notices` says the check was skipped.
+instance's current pin predates a bump and needs re-approval. They never change `success`. A missing or
+unreadable Lean pin file gives no warning (the pin's fields are empty and no comparison is made); only an
+error while reading it (for example a lakefile that is not UTF-8) makes `notices` say the check was
+skipped, where the CLI exits with an error.
 
 **Args:**
 
