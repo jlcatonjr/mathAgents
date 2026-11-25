@@ -64,7 +64,7 @@ fresh_clone() {
   [[ "$("$GIT" -C "$1" config --get remote.origin.url)" == "$URL" ]] || die "clone remote is not $URL"
   "${GITX[@]}" fetch -q origin --tags
 }
-# The release key, pinned (docs/release-policy.md §2; the same key signs the 1.0, 1.1 and 1.2 lines).
+# The release key, pinned (docs/release-policy.md §2; the same key signs the 1.0, 1.1, 1.2 and 1.3 lines).
 RELEASE_FPS=("SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM")
 verify_release_tag() {  # stderr only, whole line, pinned fingerprint, annotated, and the object's own name is <tag>
   local tag="$1" status line fp ok=""
