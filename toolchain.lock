@@ -3,24 +3,25 @@
 # scripts/lib/agentteams_provenance.py refuses a render on any other agentteams commit; the rendered .github and .claude
 # build-logs must name it (tests/test_refresh_guard.py). Move it only in a release, with an @security row (on main, which
 # is no release line, also by an operator decision that brings it in line with what main already carries):
-#   both lines pin the peeled commit of a verified signed tag (docs/release-policy.md §3). On main both follow the 1.2
-#   line: researchteam v1.2.1 + agentteams v1.2.2 (plan pin-v122, fleet wave R29, 2026-11-20). Group-member moves on the
-#   locked 1.2 line: no line row and no per-release pin row; recorded by this repository's @security review in the PR
-#   and its unsigned @security row in the decisions log. The tags were already on 1.2, so no .tag= lines were dropped;
-#   --write-lock with both tags (no --sync-extras; §3). The 1.1 -> 1.2 line move was PR #18 under the operator-signed
-#   rows release-line-agentteams-1.2 and release-line-researchteam-1.2 (policy amendment 2, PR #17).
-#   S-10 is met through the operator-signed toolchain-group file (parent row s10-first-party-releases-2026-11, IM
-#   script 120), not a cooldown. Previous pins: researchteam v1.2.0 + agentteams v1.2.1 (PR #18), researchteam v1.1.9 + agentteams v1.1.4 (PR #13), researchteam v1.1.8
-#   + agentteams v1.1.4 (PR #11), researchteam v1.1.4 + agentteams v1.1.3 (PR #7). Earlier pins are in the private
-#   history. release/1.1 keeps researchteam v1.1.9 + agentteams v1.1.4.
+#   both lines pin the peeled commit of a verified signed tag (docs/release-policy.md §3). On main both follow the 1.3
+#   line: researchteam v1.3.0 + agentteams v1.3.0 (plan T3 pin-v130, 1.3.0 metaplan, 2026-11-25). The 1.2 -> 1.3 line
+#   move drops both .tag= lines, then --write-lock with both tags (no --sync-extras; §3, amendment 3), under the
+#   operator-signed rows release-line-agentteams-1.3 and release-line-researchteam-1.3 (policy amendment 3, PR #39).
+#   S-10 is met through the operator-signed toolchain-group file (sequence 5, parent row
+#   s10-first-party-releases-2026-11), not a cooldown. Previous pins: researchteam v1.2.1 + agentteams v1.2.2 (plan
+#   pin-v122, fleet wave R29), researchteam v1.2.0 + agentteams v1.2.1 (PR #18; the 1.1 -> 1.2 line move under
+#   release-line-agentteams-1.2 and release-line-researchteam-1.2, amendment 2, PR #17), researchteam v1.1.9 +
+#   agentteams v1.1.4 (PR #13), researchteam v1.1.8 + agentteams v1.1.4 (PR #11), researchteam v1.1.4 + agentteams
+#   v1.1.3 (PR #7). Earlier pins are in the private history. release/1.2 keeps researchteam v1.2.0 + agentteams
+#   v1.2.1; release/1.1 keeps researchteam v1.1.0 + agentteams v1.1.0.
 #   release/1.0 stays on agentteams v1.0.0 + researchteam v1.0.1.
 #   Lean and Mathlib are pinned separately: lean/lean-toolchain and lean/lake-manifest.json (scripts/lean_pin.py).
 # Release-locked (the .tag= lines): researchteam's managed scripts/agentteams_autosync_gate.sh follows the locked tags'
 # release line, verified, and never rewrites this file to main. The schedule resumes only by its own PR and the
 # operator's signed Rule 11 row (docs/release-policy.md §4).
-# researchteam tag v1.2.1 (tag object 84dd7586, signed SHA256:IPdnLwlF…, verified 2026-11-20)
+# researchteam tag v1.3.0 (tag object 68d0dcd8, signed SHA256:IPdnLwlF…, verified 2026-11-25)
 researchteam=jlcatonjr/researchteam@570724f5792412c2427763b4c6b102e33a9493e9
 researchteam.tag=v1.3.0
-# agentteams tag v1.2.2 (tag object 5de65db0, signed SHA256:IPdnLwlF…, verified 2026-11-20)
+# agentteams tag v1.3.0 (tag object 1621402d, signed SHA256:IPdnLwlF…, verified 2026-11-24 and 2026-11-25)
 agentteams=jlcatonjr/agentteams@536306d2502e3db338846677f2d37489531ac8e7
 agentteams.tag=v1.3.0
