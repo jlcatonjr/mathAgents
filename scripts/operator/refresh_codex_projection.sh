@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # OPERATOR SCRIPT — run outside the agent session.
 # Re-projects the Codex surface (.codex/agents and .agents/skills) from the canonical Copilot team and
-# the Claude skills, using researchteam's own Codex step (interop with --overwrite, stale-agent prune,
-# team-marker check). It is needed once agentteams recognises .codex as a team: the Claude sandbox
+# the Claude skills, using researchteam's own Codex step (a native render with overwrite off; its two
+# scoped imports, the skills and the bespoke agents, pass --overwrite for their own files only; stale-agent
+# prune; team-marker check). It is needed once agentteams recognises .codex as a team: the Claude sandbox
 # block then write-denies .codex for in-session Bash, so scripts/refresh_agent_surfaces.sh renders
 # every other surface and asks you to run this.
 #
