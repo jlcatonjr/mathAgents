@@ -19,8 +19,8 @@
 # release line, verified, and never rewrites this file to main. The schedule resumes only by its own PR and the
 # operator's signed Rule 11 row (docs/release-policy.md §4).
 # researchteam tag v1.2.1 (tag object 84dd7586, signed SHA256:IPdnLwlF…, verified 2026-11-20)
-researchteam=jlcatonjr/researchteam@ecaf7aa2ce86d76d5a2ed0da2a0f72baf40e5ea4
-researchteam.tag=v1.2.1
+researchteam=jlcatonjr/researchteam@570724f5792412c2427763b4c6b102e33a9493e9
+researchteam.tag=v1.3.0
 # agentteams tag v1.2.2 (tag object 5de65db0, signed SHA256:IPdnLwlF…, verified 2026-11-20)
-agentteams=jlcatonjr/agentteams@a5bc8c0e930a59c5144d87814b8e256ad64b04a5
-agentteams.tag=v1.2.2
+agentteams=jlcatonjr/agentteams@536306d2502e3db338846677f2d37489531ac8e7
+agentteams.tag=v1.3.0

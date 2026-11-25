@@ -1,7 +1,7 @@
 <!-- AGENTTEAMS:BEGIN content v=1 -->
 # SETUP-REQUIRED.md
 
-The following **7 placeholder(s)** could not be automatically resolved
+The following **10 placeholder(s)** could not be automatically resolved
 for project **mathAgents** and require manual attention.
 
 ---
@@ -72,6 +72,36 @@ agent files and replace with the correct value.
 **Context:** The placeholder {AUDIT_SLUG} could not be auto-resolved.
 
 **Action required:** Search for `{MANUAL:AUDIT_SLUG}` across all generated
+agent files and replace with the correct value.
+
+---
+
+## 8. `{ADJACENT_REPO_AGENTS_PATH}`
+
+**Found in:** `references/adjacent-repos.md`
+**Context:** Written in the template (line 33): | **Agent infra path** | `{MANUAL:PIP_PACKAGE_NAME}` |
+
+**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
+agent files and replace with the correct value.
+
+---
+
+## 9. `{ADJACENT_REPO_PATH}`
+
+**Found in:** `references/adjacent-repos.md`
+**Context:** Written in the template (line 32): | **Local path**       | `{MANUAL:PIP_PACKAGE_NAME}` (use `~/` notation, not an absolute home path) |
+
+**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
+agent files and replace with the correct value.
+
+---
+
+## 10. `{PROJECT_REDTEAM_NOTES}`
+
+**Found in:** `references/redteam-methodology.reference.md`
+**Context:** Written in the template (line 237): {MANUAL:PIP_PACKAGE_NAME}
+
+**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
 agent files and replace with the correct value.
 
 ---
