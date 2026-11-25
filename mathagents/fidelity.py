@@ -40,7 +40,7 @@ class FidelityRecord:
 
 @dataclass(frozen=True)
 class FidelityCoverage:
-    """A description of how the record covers the namespace's claims in the fresh kernel report.
+    """How the record covers the namespace's claims in the fresh kernel report.
 
     ``current``: approved and fingerprint unchanged; ``lapsed``: the statement changed since approval
     (or left the namespace); ``waived``: kernel-as-judge waivers; ``uncovered``: claims with no entry;
@@ -81,7 +81,7 @@ def fidelity_coverage(*, root: Path | None = None, slug: str) -> FidelityCoverag
     """Compare the fidelity record with the fresh kernel report (claims only; ``Aux``/``CX`` exempt).
 
     Raises:
-        FileNotFoundError: no such dossier, or it has no fidelity record.
+        FileNotFoundError: no such dossier, no fidelity record, or no kernel report.
         KernelReportError: the kernel report is not usable.
         RecordError: the record is invalid.
     """
@@ -105,8 +105,14 @@ def fidelity_coverage(*, root: Path | None = None, slug: str) -> FidelityCoverag
 def require_fidelity(*, root: Path | None = None, slug: str, conversation: str | None = None) -> GateResult:
     """The G-FID gate for ``slug`` (the precondition for dispatching Stage 2), via the dossier validator.
 
+    Args:
+        root: mathAgents checkout.
+        slug: the dossier.
+        conversation: current conversation id, the scope of kernel-as-judge waivers.
+
     Raises:
         ValueError: invalid slug.
+        RuntimeError: git itself failed (fail-closed).
     """
     from mathagents.dossiers import validate_dossiers
 

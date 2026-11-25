@@ -1,9 +1,9 @@
 """G-BLUEPRINT: leanblueprint ``\\lean{}`` names and ``\\leanok`` markers against the kernel (DD-42).
 
-With no blueprint in the checkout the gate does not apply and passes with a notice, as in CI and at
-Stage 8 assembly (both run it only when a blueprint exists). The bare CLI
-(``check_blueprint_consistency.py`` with no blueprint) fails instead; ``check_blueprint(blueprint=...)``
-on a missing directory fails the same way.
+With no blueprint in the checkout the gate does not apply, and ``check_blueprint`` passes with a notice.
+CI and Stage 8 assembly behave the same way: each runs the gate only when a blueprint exists. Two cases
+fail instead: the bare CLI (``check_blueprint_consistency.py`` with no blueprint), and
+``check_blueprint(blueprint=...)`` naming a directory that does not exist.
 """
 from __future__ import annotations
 
@@ -22,7 +22,12 @@ def find_blueprints(*, root: Path | None = None) -> list[Path]:
 
 
 def check_blueprint(*, root: Path | None = None, blueprint: Path | None = None) -> GateResult:
-    """Run G-BLUEPRINT on ``blueprint`` (default: every blueprint ``find_blueprints`` returns)."""
+    """Run G-BLUEPRINT on ``blueprint`` (default: every blueprint ``find_blueprints`` returns).
+
+    Args:
+        root: mathAgents checkout.
+        blueprint: one blueprint directory; a relative path resolves against the working directory, not ``root``.
+    """
     r = _scripts.resolve_root(root)
     bps = [blueprint.resolve()] if blueprint is not None else find_blueprints(root=r)
     gbp = _scripts.gate("check_blueprint_consistency")

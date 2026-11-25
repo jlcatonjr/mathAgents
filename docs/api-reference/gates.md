@@ -2,9 +2,11 @@
 
 Run the automated gates together, in CI order (`.github/workflows/gates.yml`, minus the test suites).
 
-Order: G-KERNEL (rebuilt only with `run_kernel`; otherwise the report's freshness is checked), G-NAME
-(Stage 7+ dossiers), G-BLUEPRINT, registries, preferences, then the dossier validator. Every gate runs
-even after one fails, so the report is complete.
+Order: [G-KERNEL](index.md#glossary) (rebuilt only with `run_kernel`; otherwise the report's freshness
+is checked), G-NAME (Stage 7+ dossiers), G-BLUEPRINT, registries, preferences, then the dossier
+validator. Every gate runs even after one fails, so the report is complete. A gate that raises instead
+of returning a result (for example `RuntimeError` when git fails, or `FileNotFoundError` for a missing
+charter file in the preferences check) stops the run, and the exception propagates.
 
 **CLI surface:** `.github/workflows/gates.yml`
 
@@ -19,7 +21,12 @@ Constant: `('G-KERNEL', 'G-NAME', 'G-BLUEPRINT', 'registries', 'preferences', 'd
 *dataclass*
 
 Results by gate name (`GATES` order); `success` only when every gate that ran passed.
-`errors` and `notices` collect every gate's, prefixed with the gate name.
+`errors` and `notices` collect every gate's, prefixed with the gate name. The dossier validator's
+pin-stamp warnings arrive in `notices` (see [`dossiers`](dossiers.md)).
+
+**Properties:**
+
+- `failed -> list[str]`: the names of the gates whose result is not `success`.
 
 | Field | Type |
 |---|---|
@@ -36,7 +43,17 @@ Run every automated gate.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `run_kernel`: rebuild and audit the Lean library first (slow); otherwise the existing report must be current and PASS (G-KERNEL fails when it is not).
 - `base`: git ref for the dossier validator's append-only checks.
 - `conversation`: current conversation id (waiver scope).
+
+With `run_kernel=True`, the G-KERNEL run writes `reports/kernel/latest.json`.
+
+**Raises:**
+
+- `subprocess.TimeoutExpired`, `KernelReportError` or `FileNotFoundError`: from the kernel run (see
+  [`run_kernel_gate`](kernel.md)).
+- `RuntimeError`: git itself failed in the dossier validator.
+- `FileNotFoundError`: a charter file the preferences check needs is missing (see
+  [`check_preferences`](preferences.md)).

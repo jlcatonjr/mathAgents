@@ -2,9 +2,13 @@
 
 Exception hierarchy for errors the mathagents API raises.
 
-Caller mistakes raise built-in exceptions (`ValueError` for an invalid slug, `FileNotFoundError`
-for a missing dossier or checkout). Domain errors derive from `MathAgentsError`; each also inherits
-the built-in a caller would otherwise catch, so `except RuntimeError` keeps working.
+Caller mistakes and missing inputs raise built-in exceptions; the full list is under
+[Fail-closed](index.md#conventions) in the conventions. Domain errors derive from `MathAgentsError`;
+each also inherits the built-in a caller would otherwise catch, so `except RuntimeError` keeps working.
+
+Decision IDs, gate codes and terms are defined in the [glossary](index.md#glossary).
+
+**CLI surface:** none.
 
 ## Public Surface
 
@@ -19,6 +23,10 @@ The G-KERNEL report is missing, failing, stale, or otherwise unusable (fail-clos
 *exception* (bases: `Exception`)
 
 Base class for all mathagents-raised errors.
+
+It is also raised directly in one case: when a module of the same name as a harness gate script (such as
+`validate_dossier` or `preferences`) was imported from somewhere else first, so the API would otherwise
+run the wrong code. Import `mathagents` before that module, or rename it.
 
 ### class `NameIndexError`
 

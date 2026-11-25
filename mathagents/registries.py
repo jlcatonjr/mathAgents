@@ -22,10 +22,12 @@ class Registry:
     entries: tuple[Mapping, ...]
 
     def get(self, entry_id: str) -> Mapping | None:
+        """The entry whose ``id`` is ``entry_id``, or None."""
         return next((e for e in self.entries if e.get("id") == entry_id), None)
 
     @property
     def ids(self) -> tuple[str, ...]:
+        """Every entry's ``id``, in file order."""
         return tuple(e["id"] for e in self.entries)
 
 

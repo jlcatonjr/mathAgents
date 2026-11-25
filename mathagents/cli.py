@@ -6,7 +6,7 @@
   mathagents sync [--root DIR] [--write] [--overwrite PATH ...]
                                                  refresh vendored files and exported agents (and, with
                                                  [agents] surfaces, their claude/goose/codex forms)
-  mathagents agents export [--root DIR] [--to DIR] [--write]
+  mathagents agents export [--root DIR] [--to DIR] [--write] [--overwrite PATH ...]
                                                  render the pipeline agents for the consumer's roster (and,
                                                  without --to, their [agents] surfaces)
   mathagents doctor [--root DIR]                 version, harness, instance, switch, lock status (learned
@@ -768,7 +768,11 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Run the ``mathagents`` command with ``argv`` (default ``sys.argv[1:]``); returns the exit code."""
+    """Run the ``mathagents`` command with ``argv`` (default ``sys.argv[1:]``); returns the exit code.
+
+    Raises ``SystemExit`` instead on an argparse error, ``--help`` or ``--version``, when no instance is found
+    (code 1), and on an invalid ``[agents]`` setting or a surfaces projection error.
+    """
     args = _build_parser().parse_args(argv)
     return args.func(args)
 

@@ -19,7 +19,8 @@ def validate_claim_ledger(*, root: Path | None = None, deliverable: Path) -> Com
 
     Args:
         root: mathAgents checkout.
-        deliverable: the report, relative to ``root`` (e.g. ``reports/01-methods-review.md``).
+        deliverable: a ``Path`` (not a ``str``) to the report, relative to ``root`` (e.g.
+            ``reports/01-methods-review.md``); an absolute path inside ``root`` is accepted too.
 
     Raises:
         FileNotFoundError: the deliverable does not exist.

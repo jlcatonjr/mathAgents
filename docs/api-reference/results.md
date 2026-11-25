@@ -6,13 +6,19 @@ Every gate or command returns one of these instead of printing or exiting: `succ
 `errors` the findings (complete sentences, as the gate scripts print them after `FAIL`), and
 `notices` the non-blocking remarks.
 
+Decision IDs, gate codes and terms are defined in the [glossary](index.md#glossary).
+
+**CLI surface:** none.
+
 ## Public Surface
 
 ### class `CommandResult`
 
 *dataclass*
 
-Outcome of a gate script the API runs as a subprocess (G-KERNEL, the name index, registries...).
+Outcome of a gate script the API runs as a subprocess: `run_kernel_gate` (G-KERNEL),
+`build_name_index`, `validate_registries`, `validate_evidence` and `validate_claim_ledger`.
+`probe_machine` runs one too but returns its own `MachineProbe`.
 
 | Field | Type |
 |---|---|

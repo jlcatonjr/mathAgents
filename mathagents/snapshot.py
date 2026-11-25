@@ -53,11 +53,15 @@ def snapshot_kernel(*, root: Path | None = None, slug: str, dry_run: bool = Fals
         slug: the dossier.
         dry_run: run every check, write nothing.
 
+    A real run overwrites an existing ``kernel-snapshot.json``.
+
     Raises:
         ValueError: invalid slug.
         FileNotFoundError: no such dossier.
         PermissionError: a real write into a tree that is neither the package's own checkout nor a
-            declared instance (``mathagents.toml``, D35); that is for the test suite only (``MATHAGENTS_TEST=1``).
+            declared instance (``mathagents.toml``, D35); like ``snapshot_kernel.py --root``, that is for the
+            test suite only (``MATHAGENTS_TEST=1``).
+        KeyError: the fidelity record has no ``lean_namespace``.
     """
     r = _scripts.resolve_root(root)
     if not dry_run and r != _scripts.CHECKOUT and not (r / _scripts.INSTANCE_MARKER).is_file() \
@@ -79,6 +83,8 @@ def read_kernel_snapshot(*, root: Path | None = None, slug: str) -> KernelSnapsh
     and the kernel report is the dossier validator's check, not this reader's.
 
     Raises:
+        ValueError: invalid slug.
+        FileNotFoundError: no such dossier.
         RecordError: the snapshot is not a JSON object with ``lean_namespace``, ``commit`` and ``declarations``.
     """
     p = _scripts.dossier_dir(_scripts.resolve_root(root), slug) / "kernel-snapshot.json"

@@ -1,4 +1,4 @@
-"""Dossiers and the eight-stage pipeline: status, stage preconditions, validation, result labels.
+"""Dossiers and the pipeline's stages 0-8: status, stage preconditions, validation, result labels.
 
 A dossier is ``reports/dossiers/<slug>/``. ``validate_dossiers`` runs the dossier validator
 (structure, G-FID, G-AX, G-CX) exactly as ``scripts/validate_dossier.py`` does; ``require_stage`` is
@@ -119,6 +119,9 @@ def validate_dossiers(*, root: Path | None = None, slugs: Iterable[str] = (), re
                       conversation: str | None = None, base: str | None = None) -> GateResult:
     """Run the dossier validator (structure, G-FID, G-AX, G-CX); fail-closed.
 
+    ``notices`` carries the validator's non-blocking pin-stamp warnings (the CLI's ``WARN`` lines); they never
+    change ``success``.
+
     Args:
         root: mathAgents checkout.
         slugs: dossiers to check; none named (and no requirements) checks every dossier.
@@ -126,11 +129,13 @@ def validate_dossiers(*, root: Path | None = None, slugs: Iterable[str] = (), re
         require_stages: ``{slug: N}`` preconditions for dispatching stage N (N >= 2 implies require_fid).
         kernel_report: report path (default ``reports/kernel/latest.json``).
         conversation: current conversation id, the scope of kernel-as-judge waivers.
-        base: git ref for the append-only checks (default: merge base of HEAD with origin/HEAD).
+        base: git ref for the append-only checks (default: merge base of HEAD with origin/HEAD; with neither,
+            the check fails closed). Every commit in ``base..HEAD`` is checked too.
 
     Raises:
         ValueError: an invalid slug or stage number.
         TypeError: a single string passed where a list of slugs is expected.
+        RuntimeError: git itself failed (fail-closed).
     """
     r = _scripts.resolve_root(root)
     stages = dict(require_stages or {})
@@ -140,16 +145,30 @@ def validate_dossiers(*, root: Path | None = None, slugs: Iterable[str] = (), re
         _scripts.check_slug(s)
         if not isinstance(n, int) or not 0 <= n <= 8:
             raise ValueError(f"stage for {s!r} must be an int in 0..8, got {n!r}")
-    errs, targets = _scripts.gate("validate_dossier").run(r, named, fid, stages, kernel_report, conversation, base)
+    vd = _scripts.gate("validate_dossier")
+    errs, targets = vd.run(r, named, fid, stages, kernel_report, conversation, base)
+    checked = list(dict.fromkeys(s for s, _ in targets))
+    try:   # the CLI prints these as WARN lines; they never change the verdict
+        notices = vd.stamp_warnings(r, checked)
+    except (OSError, ValueError, KeyError) as exc:   # no readable Lean pin: the gates report what matters
+        notices = [f"pin-stamp check skipped: the Lean pin could not be read ({exc})"]
     return GateResult(gate="dossier validator (structure, G-FID, G-AX, G-CX)", success=not errs,
-                      checked=[s for s, _ in targets], errors=errs)
+                      checked=[s for s, _ in targets], errors=errs, notices=notices)
 
 
 def require_stage(*, root: Path | None = None, slug: str, stage: int, conversation: str | None = None,
                   base: str | None = None) -> GateResult:
-    """Precondition for dispatching ``stage`` on ``slug`` (spec DD-43).
+    """Precondition for dispatching ``stage`` on ``slug`` (spec DD-43); ``validate_dossiers`` for one stage.
+
+    Args:
+        root: mathAgents checkout.
+        slug: the dossier.
+        stage: the stage to be dispatched, 0-8 (N >= 2 also requires current G-FID approvals).
+        conversation: current conversation id, the scope of kernel-as-judge waivers.
+        base: git ref for the append-only checks (see ``validate_dossiers``).
 
     Raises:
         ValueError: invalid slug or stage.
+        RuntimeError: git itself failed (fail-closed).
     """
     return validate_dossiers(root=root, require_stages={slug: stage}, conversation=conversation, base=base)

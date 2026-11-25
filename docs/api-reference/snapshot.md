@@ -1,6 +1,6 @@
 # `mathagents.snapshot`
 
-Stage 8 kernel snapshot (spec DD-19, DD-43): freeze a dossier's declarations at one checked state.
+[Stage 8](index.md#glossary) kernel snapshot (spec DD-19, DD-43): freeze a dossier's declarations at one checked state.
 
 `snapshot_kernel` copies the provenance and the namespace's declarations from the fresh G-KERNEL
 report into `reports/dossiers/<slug>/kernel-snapshot.json`. It refuses a report from a dirty
@@ -52,17 +52,23 @@ and the kernel report is the dossier validator's check, not this reader's.
 
 **Raises:**
 
+- `ValueError`: invalid slug.
+- `FileNotFoundError`: no such dossier.
 - `RecordError`: the snapshot is not a JSON object with `lean_namespace`, `commit` and `declarations`.
 
 ### `snapshot_kernel(*, root=None, slug, dry_run=False)`
 
 Returns `SnapshotResult`.
 
-Write the dossier's kernel snapshot (Stage 8 assembly).
+Write the dossier's kernel snapshot (Stage 8 assembly). A real run overwrites an existing
+`kernel-snapshot.json`.
+
+Refusals (`success` False): the dossier has no fidelity record; the kernel report is not fresh; the
+report was taken from a dirty `lean/` tree.
 
 **Args:**
 
-- `root`: mathAgents checkout or instance.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `slug`: the dossier.
 - `dry_run`: run every check, write nothing.
 
@@ -71,3 +77,4 @@ Write the dossier's kernel snapshot (Stage 8 assembly).
 - `ValueError`: invalid slug.
 - `FileNotFoundError`: no such dossier.
 - `PermissionError`: a real write into a tree that is neither the package's own checkout nor a declared instance (`mathagents.toml`, D35); like `snapshot_kernel.py --root`, that is for the test suite only (`MATHAGENTS_TEST=1`).
+- `KeyError`: the fidelity record has no `lean_namespace`.
