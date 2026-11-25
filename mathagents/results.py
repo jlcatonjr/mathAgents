@@ -24,7 +24,8 @@ class GateResult:
 
 @dataclass
 class CommandResult:
-    """Outcome of a gate script the API runs as a subprocess (G-KERNEL, the name index, registries...)."""
+    """Outcome of a gate script the API runs as a subprocess (``run_kernel_gate``, ``build_name_index``,
+    ``validate_registries``, ``validate_evidence``, ``validate_claim_ledger``)."""
 
     command: list[str]
     returncode: int

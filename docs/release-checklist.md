@@ -18,7 +18,7 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    refuses a render on any other agentteams. The Lean pin moves only through `mathagents bump`
    (`docs/lean-toolchain-upgrade.md`).
 3. **Version.** Set `pyproject.toml` to the release version (`1.0.0rc1`, `1.0.0`, `1.0.1`, …).
-4. **CHANGELOG.** Move `[Unreleased]` into a dated `[x.y.z]` section, ending with its **Toolchain** block: agentteams
+4. **CHANGELOG.** Move `[Unreleased]` into a dated `[X.Y.ZrcN]` (an RC) or `[X.Y.Z]` section, ending with its **Toolchain** block: agentteams
    (tag and peeled commit), researchteam (tag and peeled commit), Lean, Mathlib. Add the compare link.
 5. **Gates and suites.** On the release commit, all of these must pass:
    - CI `gates.yml`: G-KERNEL, G-FID, G-CX, registries, G-NAME, G-BLUEPRINT, and `long-suites` (the push to the
@@ -44,13 +44,13 @@ row in the three security-decision logs before it runs (constitutional rule C-5)
    is the head of the release branch right after the release merge, and its version differs from its first parent's.
    The script works only in a fresh clone of the fixed URL (never the working checkout, whose `.git/config` agents
    can write), with global and system git config and every `GIT_*` variable dropped. It refuses unless the key is
-   the pinned release key (it signs the 1.0, 1.1 and 1.2 lines) and `~/.config/agentteams/allowed_signers` holds it, verifies with the neutralised
+   the pinned release key (it signs the 1.0, 1.1, 1.2 and 1.3 lines) and `~/.config/agentteams/allowed_signers` holds it, verifies with the neutralised
    command from agentteams SECURITY.md before pushing, and asks y/N before tagging and again before pushing. Tags
    are immutable: never move or delete one; fix forward.
 8. **Merge forward.** After the tag, merge `release/X.Y` forward into `main` (a regular merge, under its `@security` row;
    the operator merges the session-prepared PR with `scripts/operator/merge-forward.sh`, `NEXT_DEV` set after `vX.Y.0`),
    so `main` contains every tagged commit. After `vX.Y.0`, `main` moves to the next minor's dev version
-   (`1.1.0.dev0`). Any backport to a release line means a new signed RC and another soak before the final tag.
+   (after `v1.3.0`, `1.4.0.dev0`). Any backport to a release line means a new signed RC and another soak before the final tag.
 9. **Handoff.** Send baseAgent (and any other instance) the pin-move handoff:
    - the tag, its tag object and its peeled commit;
    - the agentteams render commit;

@@ -1,6 +1,6 @@
 # `mathagents.bindings`
 
-G-NAME: `[Lean: name | status]` bindings in dossier prose (spec DD-17, DD-18).
+[G-NAME](index.md#glossary): `[Lean: name | status]` bindings in dossier prose (spec DD-17, DD-18).
 
 Every binding must resolve against the fresh kernel report or the pinned-Mathlib name index, and its
 status tag must match the kernel. `check_lean_bindings` runs `scripts/check_lean_bindings.py`'s
@@ -45,7 +45,7 @@ Run G-NAME.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `slugs`: dossiers to check (default: all).
 - `assembled_only`: with no slugs, check only Stage 7+ dossiers (as CI does).
 

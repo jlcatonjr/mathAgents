@@ -2,7 +2,7 @@
 # OPERATOR ONLY, plain terminal. After a mathAgents tag: merge the session-prepared merge-forward PR (the release line
 # -> main; after a final X.Y.0 tag it may also move main to the next .dev0) at its reviewed head, regular merge, after
 # checking in a fresh clone that the PR's head merges the verified tag and nothing else.
-#   PR=<n> MF_HEAD=<40-hex> TAG=v1.1.0 NEXT_DEV=1.2.0.dev0 \
+#   PR=<n> MF_HEAD=<40-hex> TAG=v1.3.0 NEXT_DEV=1.4.0.dev0 \
 #   /bin/bash -p "$HOME/githubrepositories/mathAgents/scripts/operator/merge-forward.sh"
 # NEXT_DEV is optional: when set, the script warns unless main's version at the PR head equals it.
 # Derived 2026-11-06 from agentteams-f3's cleared derived-phase-t/merge-forward.sh (sha256 94750b70…), which

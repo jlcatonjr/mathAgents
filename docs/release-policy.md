@@ -21,7 +21,11 @@ row deriving from the root that names the new sha256 (root conditions item 5). A
 2026-11-18) is such a row: it brings §2, §3, §4 and §7 up to date with the public repository's own rows. Amendment 2
 (`release-policy-public-1.1-amend-2`, 2026-11-19) replaces it as the adopted text (amendment 1 stays recorded and is
 not retracted): it extends the policy to the 1.2 line (§1 the `release/1.2` branch, §2 the key's scope, §3 the
-release-line rows and the lock move).
+release-line rows and the lock move). Amendment 3 (`release-policy-public-1.1-amend-3`, text of 2026-11-24) replaces amendment 2 as the
+adopted text (amendments 1 and 2 stay recorded and are not retracted): it extends the policy to the 1.3 line (§1 the
+`release/1.3` branch and the RC CHANGELOG form, §2 the key's scope, §3 the 1.3 release-line rows and a pointer to
+`toolchain.lock` in place of the dated pin list; §7 wording only: the fleet coordinator's operator script is named
+generically, and no signer rule changes).
 The root also adopts, as its own, the rules below that the private history introduced (the 1.1 intake rule, which
 there took effect with D45, and the operator signer, provisioned there under `provision-operator-signer-*`); the
 private rows are cited as their provenance only.
@@ -49,20 +53,30 @@ private rows are cited as their provenance only.
 - **The 1.2 line (public repository, amendment 2).** `release/1.2` is cut from `main` at the merge commit of the pull
   request that moves the pins to the 1.2 line (§3), while `main` is still at `1.2.0.dev0`, so the signed commit's
   version differs from its first parent's. It takes in only: the release PR, branched from `release/1.2` (version `1.2.0rcN`, then `1.2.0`;
-  CHANGELOG `[1.2.0]` with its Toolchain block; the pins that block names), merged with a regular merge; afterwards,
+  CHANGELOG `[1.2.0rcN]`, then `[1.2.0]`, with its Toolchain block; the pins that block names), merged with a regular merge; afterwards,
   `1.2.N` backports under the rules above. A release PR may not change `scripts/operator/tag-release.sh`, so any change
   to the tag scripts merges to `main` before the cut. After each RC or final tag, `release/1.2` is merged forward into
   `main` with a regular merge, and at `v1.2.0` `main` moves to `1.3.0.dev0`. `release/1.1` stays open for `1.1.N`
   backports only; the policy in force on every line is `main`'s `docs/release-policy.md`, not a release branch's copy.
   Every signed row about a 1.2 release names its history as `public`.
+- **The 1.3 line (public repository, amendment 3).** `release/1.3` is cut from `main` at the merge commit of the pull
+  request that moves the pins to the 1.3 line (§3), while `main` is still at `1.3.0.dev0`, so the signed commit's
+  version differs from its first parent's. It takes in only: the release PRs, branched from `release/1.3` (version
+  `1.3.0rcN`, then `1.3.0`), each merged with a regular merge; afterwards, `1.3.N` backports under the rules above. An
+  RC's CHANGELOG section is `[X.Y.ZrcN]` (for this line `[1.3.0rcN]`), and the final's is `[1.3.0]`; each carries its
+  Toolchain block and the pins that block names. A release PR may not change `scripts/operator/tag-release.sh`, so any
+  change to the tag scripts merges to `main` before the cut. After each RC or final tag, `release/1.3` is merged forward
+  into `main` with a regular merge by the operator-only `scripts/operator/merge-forward.sh`, and at `v1.3.0` `main`
+  moves to `1.4.0.dev0`. `release/1.2` stays open for `1.2.N` backports only; the policy in force on every line is
+  `main`'s `docs/release-policy.md`. Every signed row about a 1.3 release names its history as `public`.
 
 ## 2. Tags
 
 - **Form.** `vX.Y.Z` or `vX.Y.Z-rc.N`, annotated and SSH-signed by the operator from a plain terminal with
   `scripts/operator/tag-release.sh`. No agent signs a tag.
-- **Key.** The agentteams release key (`SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM`; it signs the 1.0, 1.1 and 1.2 lines). Its
+- **Key.** The agentteams release key (`SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM`; it signs the 1.0, 1.1, 1.2 and 1.3 lines). Its
   `allowed_signers` line is in agentteams SECURITY.md, under "Release signers".
-  The same key signs the 1.1 and 1.2 lines. In the private history, 1.1-line agentteams and researchteam tags were exempt
+  The same key signs the 1.1, 1.2 and 1.3 lines. In the private history, 1.1-line agentteams and researchteam tags were exempt
   from the S-10 cooldown under the operator-signed rows `s10-release-key-exemption-1.1` and
   `s10-release-key-exemption-researchteam-1.1` (PR #78; history: private). Those rows do not carry over. In this
   public repository the S-10 cooldown applies to every release unless a row in this repository's own log exempts it.
@@ -75,7 +89,8 @@ private rows are cited as their provenance only.
   latest-stable rule and the `@security` review all still apply.
 - **Verification.** Against `~/.config/agentteams/allowed_signers`, which is outside every write root. Installing
   or changing it is operator-only. Use the neutralised verify command from agentteams SECURITY.md.
-- **The RC.** mathAgents' RC is the signed tag `v1.0.0-rc.1` on `release/1.0`, so baseAgent can pin it.
+- **The RC.** mathAgents' RC is a signed tag `vX.Y.Z-rc.N` on `release/X.Y` (the first was `v1.0.0-rc.1` on
+  `release/1.0`), so baseAgent can pin it.
 - **Tags are immutable.** A pushed tag is never moved or deleted. Fix forward with `v1.0.1`.
 
 ## 3. Pins
@@ -102,7 +117,8 @@ private rows are cited as their provenance only.
   line, grants and relaxes nothing, takes no exception-registry slot, and targets `toolchain.lock` (and
   `.github/agentteams-autosync-ref` only when the PR changes it). The toolchain group does not lift it: the group lifts
   a member's per-release pin row, not the adoption of a new line. The 1.2 line's rows are `release-line-agentteams-1.2`
-  and `release-line-researchteam-1.2`. Never give any row an id that begins with a line row's id (such as
+  and `release-line-researchteam-1.2`; the 1.3 line's (amendment 3) are `release-line-agentteams-1.3` and
+  `release-line-researchteam-1.3`, deriving from `release-policy-public-1.1` and `release-policy-public-1.1-amend-3`. Never give any row an id that begins with a line row's id (such as
   `release-line-agentteams-1.2.1` or `release-line-agentteams-1.20`): the security gate matches an action against
   every row whose id it prefixes, so the newest such row would decide for the line row. Use a sibling id instead. No
   tool checks that the line rows exist before the merge; the pin-move PR's `@security` review does.
@@ -112,12 +128,9 @@ private rows are cited as their provenance only.
   pins no agentteams extra). Every other §3 rule (verified signed tags, peeled commits, the `@security`
   review and its row) applies unchanged. The line rows and this lock procedure are this repository's addition to
   `docs/agentteams-update-policy.md`, which moves a lock only on its own line and asks for no row.
-- **Pins today (2026-11-18).** Both are peeled commits of verified signed tags, with `.tag=` lines.
-  - `main` (and `dev`, synced from it): researchteam `v1.1.9` (`166ee217`, tag object `9b982986`) and agentteams
-    `v1.1.4` (`b82d78e7`, tag object `541b9e55`), PR #13 (2026-11-18), a toolchain-group move recorded by the
-    `@security` review in that PR. Before that, in this repository: researchteam `v1.1.8` (`4060531a`) with agentteams
-    `v1.1.4`, PR #11 (2026-11-18), and researchteam `v1.1.4` (`5fd8ec3b`) with agentteams `v1.1.3` (`cbd41a74`), PR #7
-    (2026-11-16), each a group move with its review row in this repository's log. `toolchain.lock` is authoritative.
+- **Pins today.** On each branch, its own `toolchain.lock` is authoritative for the pins that branch renders with
+  (peeled commits of verified signed tags, with their `.tag=` lines); its header records the previous pins and the
+  change that moved each.
 - **Pins before the public repository (private history).** Every row named in this bullet is in the private history
   (see "Rows named here" above) and carries no authority here.
   - `release/1.0`: agentteams `v1.0.0` (`cc5b8c9e`, moved in Phase T on 2026-10-19 from the joint soak pair
@@ -263,7 +276,7 @@ waits.
 - **The signer in use (2026-11-15 on).** The operator-signed rows of this public repository's log, from the governance
   bootstrap (pr11 P03, the root `release-policy-public-1.1`) on, were signed with the root-owned
   `/opt/agentteams-signer/venv-v1.1.3` (agentteams v1.1.3, under the pip constraints
-  `/opt/agentteams-signer/constraints-v1.1.3.txt`, vetted 2026-11-13; its header cites infrastructureManagement's operator script 65),
+  `/opt/agentteams-signer/constraints-v1.1.3.txt`, vetted 2026-11-13; its header cites the fleet coordinator's operator script 65),
   by one-shot operator scripts. Those scripts do not source `scripts/operator/lib_signer.sh`, which still names the 1.0
   signer, so they are the exception to the `lib_signer.sh` rule below until it moves to the v1.1.3 signer (a separate
   change under its own `@security` review, then a further amendment of this section). From this amendment on, each such

@@ -8,6 +8,9 @@
 # Revision 4 (2026-11-06, CA-154, operator decision "Drop python from the signer"): pyproject.toml's name and version are
 # read with /usr/bin/awk instead of python3 + tomllib, so no interpreter (and no /opt/anaconda3) is used for signing.
 # Revision 5 (2026-11-19, policy amendment 2): wording only; the release key also signs the 1.2 line. No check changed.
+# Revision 6 (2026-11-24, policy amendment 3): the release key also signs the 1.3 line (comment). F-1: the two
+# `grep -q` pipeline ends write to /dev/null instead, so under pipefail an early grep exit can't SIGPIPE the producer
+# and fail a check that should pass. Both still fail closed; no check was added or removed.
 # Usage: tag-release.sh <40-hex commit> <ssh-signing-key-path>
 #
 # Everything runs in a fresh clone of the fixed URL in a temporary directory, never in a working checkout, whose
@@ -36,7 +39,7 @@ URL="git@github.com:jlcatonjr/mathAgents.git"
 COMMIT="${1:?usage: $0 <40-hex commit> <ssh-signing-key-path>}"
 KEY="${2:?usage: $0 <40-hex commit> <ssh-signing-key-path>}"
 SIGNERS="$HOME/.config/agentteams/allowed_signers"
-RELEASE_FP="SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM"  # the release key (policy §2; it signs the 1.0, 1.1 and 1.2 lines)
+RELEASE_FP="SHA256:IPdnLwlFdHNhr7QGKVWU40BOKyYzv2u8qxP/qxnzTNM"  # the release key (policy §2; it signs the 1.0, 1.1, 1.2 and 1.3 lines)
 SSH_KEYGEN=/usr/bin/ssh-keygen
 TAGGER_NAME="${TAGGER_NAME:-jlcatonjr}"; TAGGER_EMAIL="${TAGGER_EMAIL:-}"
 # No global/system git config, no GIT_* overrides from the environment (condition 1).
@@ -54,7 +57,7 @@ PUB="$KEY.pub"; [[ -f "$PUB" ]] || die "public key not found next to the signing
 [[ -x "$SSH_KEYGEN" ]] || die "$SSH_KEYGEN not found"
 KEY_FP=$("$SSH_KEYGEN" -lf "$PUB" | awk '{print $2}')
 [[ "$KEY_FP" == "$RELEASE_FP" ]] || die "this key ($KEY_FP) is not the release key ($RELEASE_FP)"
-grep -v '^[[:space:]]*#' "$SIGNERS" | grep -qF "$(awk '{print $2}' "$PUB")" || die "$SIGNERS doesn't list this key"
+grep -v '^[[:space:]]*#' "$SIGNERS" | grep -F "$(awk '{print $2}' "$PUB")" >/dev/null || die "$SIGNERS doesn't list this key"
 
 # Before anything is cloned: the fixed name must reach the public repository, not the renamed private one.
 command -v gh >/dev/null || die "gh is needed to check the repository and the long-suites run (D46)"
@@ -97,7 +100,7 @@ LONG_OK=""
 for run in $(gh api "repos/jlcatonjr/mathAgents/actions/workflows/gates.yml/runs?head_sha=$COMMIT&status=success" \
                --jq '.workflow_runs[] | select(.head_sha == "'"$COMMIT"'" and (.event == "push" or .event == "workflow_dispatch")) | .id') ; do
   if gh api "repos/jlcatonjr/mathAgents/actions/runs/$run/jobs" \
-       --jq '.jobs[] | select(.name == "long-suites" and .conclusion == "success") | .id' | grep -q .; then
+       --jq '.jobs[] | select(.name == "long-suites" and .conclusion == "success") | .id' | grep . >/dev/null; then
     LONG_OK="$run"; break
   fi
 done

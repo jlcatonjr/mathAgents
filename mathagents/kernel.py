@@ -140,6 +140,14 @@ def run_kernel_gate(*, root: Path | None = None, write_report: bool = True,
         root: mathAgents checkout.
         write_report: write ``reports/kernel/latest.json`` (False passes ``--no-report``).
         timeout: seconds before the subprocess is killed (default: none).
+
+    With ``write_report=False`` the gate still runs, but ``report_path`` and ``report`` are None and the
+    counts stay 0.
+
+    Raises:
+        subprocess.TimeoutExpired: ``timeout`` elapsed.
+        KernelReportError: the gate passed, but the report it wrote is not fresh.
+        FileNotFoundError: the gate passed, but wrote no report.
     """
     r = _scripts.resolve_root(root)
     cmd = _scripts.run_script(r, "proof_integrity.py", *([] if write_report else ["--no-report"]), timeout=timeout)
@@ -165,6 +173,7 @@ def declarations_in_namespace(*, root: Path | None = None, namespace: str,
         include_helpers: include ``<ns>.Aux.`` helper lemmas and ``<ns>.CX.`` witnesses.
 
     Raises:
+        FileNotFoundError: no kernel report.
         KernelReportError: the report is not usable.
     """
     ns = namespace.rstrip(".") + "."
