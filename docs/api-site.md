@@ -40,6 +40,5 @@ Documentation paragraph under the opening description. `tests/test_api_site.py` 
 
 ## Publishing
 
-`docs.yml` deploys only on main, and only while the repository is public. Before the first deploy, enable Pages
-with source "GitHub Actions". Making the repository public is the operator's decision. It is currently HALTed by
-@security: see the charter, and the security log row `repo-visibility-public`.
+`docs.yml` deploys only on main, and only while the repository is public; it has been public since the release
+(D45, `docs/charter/decisions-summary.md`). Before the first deploy, enable Pages with source "GitHub Actions".

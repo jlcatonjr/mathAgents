@@ -4,6 +4,8 @@ This machine's hardware and installed engines (`.machine/profile.json`, never co
 
 `@engine-advisor` joins the profile with the prover-engine registry to decide what it may offer.
 
+Decision IDs, gate codes and terms are defined in the [glossary](index.md#glossary).
+
 **CLI surface:** `scripts/probe_machine.py`
 
 ## Public Surface

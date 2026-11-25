@@ -1,11 +1,11 @@
 # `mathagents.kernel`
 
-G-KERNEL: run the kernel gate and read its report (spec DD-14, DD-19, DD-34).
+[G-KERNEL](index.md#glossary): run the kernel gate and read its report (spec DD-14, DD-19, DD-34).
 
 The report (`reports/kernel/latest.json`) is the only authority on whether a declaration is proved.
-`load_kernel_report` applies the same freshness checks as every gate (verdict PASS, source hash
-matching the Lean tree, allowlist hash, no duplicate declarations) and refuses a report that fails
-them, so a caller can never read a stale status as current.
+`load_kernel_report` applies the same freshness checks as every gate (verdict PASS; a recorded Lean
+version that matches the toolchain pin; source hash matching the Lean tree; allowlist hash; no duplicate
+declarations) and refuses a report that fails them, so a caller can never read a stale status as current.
 
 **CLI surface:** `scripts/check_proof_integrity.sh`
 
@@ -54,6 +54,11 @@ Outcome of `run_kernel_gate`; `report` is the fresh report when the gate passed.
 
 A G-KERNEL report that passed the freshness checks (unless loaded with `require_fresh=False`).
 
+**Methods:**
+
+- `status(name) -> str | None`: the kernel status of `name` (`proved`, `open` or `failed`), or None when
+  the report does not list it.
+
 | Field | Type |
 |---|---|
 | `path` | `Path` |
@@ -77,12 +82,13 @@ Declarations under `namespace` in the fresh kernel report, sorted by name.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `namespace`: e.g. `MathAgents.P3DutchBook`.
 - `include_helpers`: include `<ns>.Aux.` helper lemmas and `<ns>.CX.` witnesses.
 
 **Raises:**
 
+- `FileNotFoundError`: no kernel report.
 - `KernelReportError`: the report is not usable.
 
 ### `kernel_report_problem(*, root=None, path=None)`
@@ -93,7 +99,7 @@ Why the kernel report is unusable, or None when it is current and PASS.
 
 **Args:**
 
-- `root`: mathAgents checkout (default: the one this package lives in).
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `path`: report path (default `reports/kernel/latest.json` under `root`).
 
 ### `load_kernel_report(*, root=None, path=None, require_fresh=True)`
@@ -104,7 +110,7 @@ Load the G-KERNEL report.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `path`: report path (default `reports/kernel/latest.json`).
 - `require_fresh`: refuse a report the gates would refuse (default True). False reads it as-is, for diagnostics only; statuses in a stale report are not current.
 
@@ -123,6 +129,16 @@ Slow: runs `lake build` and a `leanchecker` replay.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `write_report`: write `reports/kernel/latest.json` (False passes `--no-report`).
 - `timeout`: seconds before the subprocess is killed (default: none).
+
+With `write_report=False` the gate still runs, but `report_path` and `report` are None and the
+`proved`, `open` and `failed` counts stay 0. With `write_report=True` and a passing gate, the new report is
+loaded through `load_kernel_report` and the counts come from it.
+
+**Raises:**
+
+- `subprocess.TimeoutExpired`: `timeout` elapsed.
+- `KernelReportError` or `FileNotFoundError`: the gate passed, but the report it wrote cannot be loaded
+  as fresh.

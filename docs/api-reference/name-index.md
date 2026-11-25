@@ -1,6 +1,6 @@
 # `mathagents.name_index`
 
-The pinned-Mathlib name index behind G-NAME and G-BLUEPRINT (spec DD-17).
+The pinned-Mathlib name index behind [G-NAME and G-BLUEPRINT](index.md#glossary) (spec DD-17).
 
 `reports/kernel/name-index.txt` (gitignored, machine-local) lists every declaration name in the
 pinned Mathlib. A Lean name in prose resolves if it is in the fresh kernel report (project library)
@@ -14,7 +14,12 @@ or in this index; nothing is resolved by naming convention.
 
 *frozen dataclass*
 
-Where a Lean name resolved: `source` is `kernel`, `mathlib` or None (unresolved).
+Where a Lean name resolved: `source` is `kernel`, `mathlib` or None (unresolved). `status` is the
+kernel status (`proved`, `open` or `failed`), set only when `source == "kernel"`; otherwise None.
+
+**Properties:**
+
+- `resolved -> bool`: `source is not None`.
 
 | Field | Type |
 |---|---|
@@ -30,8 +35,12 @@ Returns `CommandResult`.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `timeout`: seconds before the subprocess is killed (default: none).
+
+**Raises:**
+
+- `subprocess.TimeoutExpired`: `timeout` elapsed.
 
 ### `load_name_index(*, root=None)`
 

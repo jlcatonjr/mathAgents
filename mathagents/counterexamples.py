@@ -29,6 +29,7 @@ class CounterexampleLog:
     entries: tuple[Mapping, ...]
 
     def entry(self, cx_id: str) -> Mapping | None:
+        """The entry with id ``cx_id``, or None when the log has none."""
         return next((e for e in self.entries if e.get("id") == cx_id), None)
 
 
@@ -80,8 +81,12 @@ def log_counterexample(*, root: Path | None = None, slug: str, decl: str, method
         namespace: lean_namespace for a new log when the dossier has no fidelity record yet.
         dry_run: run every check, write nothing.
 
+    Refusals (``success`` False): no such dossier, a stale kernel report, ``decl`` not in it, or no namespace for
+    a new log.
+
     Raises:
         ValueError: invalid slug or method.
+        jsonschema.ValidationError: the log fails its schema.
     """
     _scripts.check_slug(slug)
     if method not in METHODS:
@@ -95,8 +100,19 @@ def record_lean_witness(*, root: Path | None = None, slug: str, cx_id: str, witn
                         dry_run: bool = False) -> LogResult:
     """Record ``lean_witness`` on an entry once the witness ``¬ (type_of% @target)`` is kernel-proved.
 
+    Args:
+        root: mathAgents checkout.
+        slug: the dossier.
+        cx_id: the log entry, such as ``CX-1``.
+        witness_decl: the fully-qualified witness declaration.
+        dry_run: run every check, write nothing.
+
+    Refusals (``success`` False): no such dossier, a stale kernel report, no log, an unknown ``cx_id``, a witness
+    already recorded, a witness not proved, or a fingerprint mismatch.
+
     Raises:
         ValueError: invalid slug.
+        jsonschema.ValidationError: the log fails its schema.
     """
     _scripts.check_slug(slug)
     msg, refusal = _scripts.gate("log_counterexample").add_witness(

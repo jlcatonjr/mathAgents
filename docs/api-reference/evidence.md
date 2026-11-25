@@ -1,8 +1,11 @@
 # `mathagents.evidence`
 
-The Phase 1 evidence layer and claim ledgers (fail-closed source grounding of the project reports).
+The evidence layer (`references/phase1-evidence/`) and claim ledgers: fail-closed source grounding of
+the project reports.
 
-**CLI surface:** `scripts/validate_evidence.py, scripts/validate_claim_ledger.py`
+Decision IDs, gate codes and terms are defined in the [glossary](index.md#glossary).
+
+**CLI surface:** `scripts/validate_evidence.py`, `scripts/validate_claim_ledger.py`
 
 ## Public Surface
 
@@ -14,8 +17,9 @@ Check a report against its claim ledger `reports/<name>.claims.csv` (`validate_c
 
 **Args:**
 
-- `root`: mathAgents checkout.
-- `deliverable`: the report, relative to `root` (e.g. `reports/01-methods-review.md`).
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
+- `deliverable`: a `Path` (not a `str`) to the report, relative to `root` (e.g.
+  `Path("reports/01-methods-review.md")`); an absolute path inside `root` is accepted too.
 
 **Raises:**
 

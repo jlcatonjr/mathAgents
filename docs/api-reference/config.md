@@ -1,6 +1,6 @@
 # `mathagents.config`
 
-Whether the mathAgents architecture is switched on for this machine (D35).
+Whether the mathAgents architecture is switched on for this machine ([D35](index.md#glossary)).
 
 It is on by default. A machine switches it off with `MATHAGENTS_ENABLED=0` in a `.env` file. That file
 is machine-local and gitignored, so it is never committed. The process environment overrides `.env`.
@@ -23,7 +23,7 @@ Constant: `'MATHAGENTS_ENABLED'`
 
 ### class `Switch`
 
-*dataclass, frozen*
+*frozen dataclass*
 
 The effective setting: `enabled`, where it came from (`default`, `environment` or a `.env` path), and
 `problem` when the value is not a recognised boolean (the switch then reads as off).
@@ -38,6 +38,9 @@ The effective setting: `enabled`, where it came from (`default`, `environment` o
 
 Returns `Switch`.
 
-The switch for an instance (default: the working directory). Recognised values: `1/0`, `true/false`,
-`yes/no`, `on/off` (case-insensitive, optionally quoted, optionally `export`ed). An unrecognised value
-fails closed (off).
+The switch for an instance. `root` defaults to the current working directory (not `MATHAGENTS_ROOT`):
+the `.env` search starts there. Recognised values: `1/0`, `true/false`, `yes/no`, `on/off`
+(case-insensitive, optionally quoted, optionally `export`ed). An unrecognised value fails closed (off).
+
+The Python API does not consult this switch; only the `mathagents run`, `bump` and `status` commands do
+(see [`cli`](cli.md)).

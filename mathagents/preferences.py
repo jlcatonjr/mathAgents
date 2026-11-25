@@ -75,7 +75,11 @@ def _scratch(root: Path) -> tempfile.TemporaryDirectory:
 
 
 def check_preferences(*, root: Path | None = None) -> GateResult:
-    """Check the project file and every dossier's preferences.toml (``preferences.py check``)."""
+    """Check the project file and every dossier's preferences.toml (``preferences.py check``).
+
+    Raises:
+        FileNotFoundError: no decision charter (``docs/charter/decisions-summary.md`` or ``03-decisions.md``).
+    """
     errs = _prefs().check_all(_scripts.resolve_root(root))
     return GateResult(gate="preferences", success=not errs, errors=errs)
 
@@ -101,14 +105,24 @@ def effective_preferences(*, root: Path | None = None, slug: str) -> dict[str, P
 
 
 def list_readings(*, root: Path | None = None, slug: str) -> list[Reading]:
-    """The readings of the dossier's Interpretation Brief (empty when it has none)."""
+    """The readings of the dossier's Interpretation Brief (empty when it has none).
+
+    Raises:
+        ValueError: invalid slug.
+        FileNotFoundError: no such dossier.
+    """
     r = _scripts.resolve_root(root)
     _scripts.dossier_dir(r, slug)
     return [Reading(i, t.strip()) for i, t in _prefs().readings_of(r, slug)]
 
 
 def intake_digest(*, root: Path | None = None, slug: str) -> str:
-    """The ``intake_sha256`` a G-FID approval binds (problem-card.md + preferences.toml)."""
+    """The ``intake_sha256`` a G-FID approval binds (problem-card.md + preferences.toml).
+
+    Raises:
+        ValueError: invalid slug.
+        FileNotFoundError: no such dossier.
+    """
     return _scripts.gate("dossier_structure").intake_digest(_scripts.dossier_dir(_scripts.resolve_root(root), slug))
 
 
@@ -149,7 +163,8 @@ def set_preference(*, root: Path | None = None, target: str, key: str, value: ob
 def create_dossier(*, root: Path | None = None, slug: str, domain: str, readings: Iterable[str] = (),
                    dry_run: bool = False) -> PreferenceChange:
     """Start a dossier at intake: its preferences.toml (from the project defaults) and a problem-card
-    skeleton. Never overwrites an existing file.
+    skeleton. Never overwrites an existing file. A real run creates the dossier directory; files that fail the
+    preference checks after writing stay on disk (``success`` False).
 
     Args:
         root: mathAgents checkout.
@@ -160,6 +175,9 @@ def create_dossier(*, root: Path | None = None, slug: str, domain: str, readings
 
     Raises:
         ValueError: invalid slug.
+        TypeError: ``readings`` is a single string.
+        FileNotFoundError: no ``references/preferences.toml``.
+        KeyError: the project file lacks a default the new dossier needs.
     """
     _scripts.check_slug(slug)
     r = _scripts.resolve_root(root)
