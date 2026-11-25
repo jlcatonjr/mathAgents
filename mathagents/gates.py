@@ -29,6 +29,7 @@ class GatesReport:
 
     @property
     def failed(self) -> list[str]:
+        """The names of the gates whose result is not ``success``."""
         return [name for name, res in self.results.items() if not res.success]
 
 
@@ -42,6 +43,9 @@ def run_gates(*, root: Path | None = None, run_kernel: bool = False, base: str |
             be current and PASS (G-KERNEL fails when it is not).
         base: git ref for the dossier validator's append-only checks.
         conversation: current conversation id (waiver scope).
+
+    With ``run_kernel=True`` the kernel run writes ``reports/kernel/latest.json``. A gate that raises (git failing,
+    a missing charter file) stops the run; the exception propagates.
     """
     from mathagents.bindings import check_lean_bindings
     from mathagents.blueprint import check_blueprint

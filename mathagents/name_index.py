@@ -20,7 +20,8 @@ DEFAULT_INDEX = Path("reports") / "kernel" / "name-index.txt"
 
 @dataclass(frozen=True)
 class NameResolution:
-    """Where a Lean name resolved: ``source`` is ``kernel``, ``mathlib`` or None (unresolved)."""
+    """Where a Lean name resolved: ``source`` is ``kernel``, ``mathlib`` or None (unresolved); ``status`` is the
+    kernel status, set only when ``source == "kernel"``."""
 
     name: str
     source: str | None
@@ -28,6 +29,7 @@ class NameResolution:
 
     @property
     def resolved(self) -> bool:
+        """``source is not None``."""
         return self.source is not None
 
 
@@ -37,6 +39,9 @@ def build_name_index(*, root: Path | None = None, timeout: float | None = None) 
     Args:
         root: mathAgents checkout.
         timeout: seconds before the subprocess is killed (default: none).
+
+    Raises:
+        subprocess.TimeoutExpired: ``timeout`` elapsed.
     """
     return _scripts.run_script(_scripts.resolve_root(root), "build_name_index.py", timeout=timeout)
 

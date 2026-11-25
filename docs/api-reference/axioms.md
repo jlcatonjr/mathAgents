@@ -1,11 +1,12 @@
 # `mathagents.axioms`
 
-G-AX: the axiom envelope and statement-change records (spec DD-36, DD-37, DD-38).
+[G-AX](index.md#glossary): the axiom envelope and statement-change records (spec DD-36, DD-37, DD-38).
 
-Read-only by design: approving an axiom or a statement change is a human decision (DD-29), recorded by
-the operator in `references/axiom-allowlist.json` or `reports/dossiers/<slug>/gax.json`.
+Read-only by design: approving an axiom or a statement change is a human decision, recorded by the
+operator in `references/axiom-allowlist.json` or `reports/dossiers/<slug>/gax.json` (see
+[the human-decision boundary](index.md#the-human-decision-boundary-dd-29)).
 
-**CLI surface:** `references/axiom-allowlist.json (operator-edited)`
+**CLI surface:** `references/axiom-allowlist.json` (operator-edited)
 
 ## Public Surface
 
@@ -15,6 +16,11 @@ the operator in `references/axiom-allowlist.json` or `reports/dossiers/<slug>/ga
 
 The axioms G-KERNEL accepts: `base` (Lean's standard axioms named in the allowlist) and
 `approved` (human G-AX approvals). Any `problems` make the envelope unusable.
+
+**Properties:**
+
+- `allowed -> frozenset[str]`: `base | approved`, the axioms a declaration may use.
+- `usable -> bool`: True when there are no `problems`.
 
 | Field | Type |
 |---|---|
@@ -41,18 +47,26 @@ Returns `dict[str, list[str]]`.
 
 **Args:**
 
-- `root`: mathAgents checkout.
+- `root`: the checkout or instance root (see [conventions](index.md#conventions)).
 - `namespace`: restrict to declarations under this namespace.
 
 **Raises:**
 
+- `FileNotFoundError`: no kernel report.
 - `KernelReportError`: the kernel report is not usable.
 
 ### `load_axiom_envelope(*, root=None)`
 
 Returns `AxiomEnvelope`.
 
-Load `references/axiom-allowlist.json` through the same loader G-KERNEL uses.
+Load `references/axiom-allowlist.json` through the same loader G-KERNEL uses. Problems with the
+allowlist's content (no base axioms, a widened base, an approval without a complete record) are reported
+in `problems`; a file that cannot be read or parsed raises.
+
+**Raises:**
+
+- `FileNotFoundError`: no allowlist.
+- `json.JSONDecodeError`: the allowlist is not valid JSON.
 
 ### `read_gax_record(*, root=None, slug)`
 

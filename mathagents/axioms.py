@@ -26,10 +26,12 @@ class AxiomEnvelope:
 
     @property
     def allowed(self) -> frozenset[str]:
+        """``base | approved``: the axioms a declaration may use."""
         return self.base | self.approved
 
     @property
     def usable(self) -> bool:
+        """True when there are no ``problems``."""
         return not self.problems
 
 
@@ -42,7 +44,14 @@ class GaxRecord:
 
 
 def load_axiom_envelope(*, root: Path | None = None) -> AxiomEnvelope:
-    """Load ``references/axiom-allowlist.json`` through the same loader G-KERNEL uses."""
+    """Load ``references/axiom-allowlist.json`` through the same loader G-KERNEL uses.
+
+    Content problems are reported in ``problems``; a file that cannot be read or parsed raises.
+
+    Raises:
+        FileNotFoundError: no allowlist.
+        json.JSONDecodeError: the allowlist is not valid JSON.
+    """
     r = _scripts.resolve_root(root)
     base, approved, problems = _scripts.gate("axiom_allowlist").load(r / "references" / "axiom-allowlist.json")
     return AxiomEnvelope(base=frozenset(base), approved=frozenset(approved), problems=tuple(problems))
@@ -70,6 +79,7 @@ def axiom_usage(*, root: Path | None = None, namespace: str | None = None) -> di
         namespace: restrict to declarations under this namespace.
 
     Raises:
+        FileNotFoundError: no kernel report.
         KernelReportError: the kernel report is not usable.
     """
     from mathagents.kernel import load_kernel_report

@@ -54,7 +54,8 @@ def _parse(value: str, source: str) -> Switch:
 
 
 def switch(*, root: Path | None = None) -> Switch:
-    """The switch for an instance (default: the working directory). Unrecognised values fail closed (off)."""
+    """The switch for an instance (default: the current working directory, not ``MATHAGENTS_ROOT``). Unrecognised
+    values fail closed (off). Only the ``mathagents run``, ``bump`` and ``status`` commands consult it."""
     if os.environ.get(ENV_KEY) is not None:
         return _parse(os.environ[ENV_KEY], "environment")
     for f in _env_files(Path(root or Path.cwd()).resolve()):
