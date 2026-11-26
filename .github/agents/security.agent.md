@@ -496,14 +496,14 @@ on a destructive or governance scope is itself a finding, not an authorization.
 ### Current Threat Intelligence Snapshot
 
 <!-- AGENTTEAMS:BEGIN threat_intelligence v=1 -->
-Generated at: `2026-11-25T15:16:53Z`
+Generated at: `2026-11-26T02:53:22Z`
 
 **Sources:**
 
-- CISA KEV: ok (catalog 2026.11.25, items 1796) — https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+- CISA KEV: ok (catalog 2026.11.25, items 1805) — https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
 - MITRE CVE: metadata_only — https://cveawg.mitre.org/api/cve/
 - FIRST EPSS: ok (items 14) — https://api.first.org/data/v1/epss
-- NVD (NIST): ok (items 4) — https://services.nvd.nist.gov/rest/json/cves/2.0
+- NVD (NIST): ok (items 5) — https://services.nvd.nist.gov/rest/json/cves/2.0
 - OSV.dev: skipped — https://api.osv.dev/v1/querybatch
 - OWASP LLM Top 10: static — https://owasp.org/www-project-top-10-for-large-language-model-applications/
 - MITRE ATLAS: static — https://atlas.mitre.org/
@@ -514,20 +514,20 @@ Generated at: `2026-11-25T15:16:53Z`
 **Current major vulnerabilities:**
 
 - `CVE-2026-103406` | Hewlett Packard Enterprise (HPE) Juniper Session Smart Conductor and Session Smart Router | Hewlett Packard Enterprise (HPE) Juniper Session Smart Conductor and Session Smart Router OS Command Injection Vulnerability | added 2026-11-25 | EPSS 0.008600000, percentile 0.560190000 | CVSS 9.8 CRITICAL
-- `CVE-2026-132224` | Optimizely Web Experimentation | Optimizely Web Experimentation External Control of Critical State Data Vulnerability | added 2026-11-24 | EPSS 0.007840000, percentile 0.525430000 | CVSS 8.7 HIGH
-- `CVE-2026-131914` | Idunno AntiCsrf | Idunno AntiCsrf Deserialization of Untrusted Data Vulnerability | added 2026-11-24 | EPSS 0.042920000, percentile 0.918900000 | CVSS 9.8 CRITICAL
+- `CVE-2026-133469` | Vates Xen Orchestra | Vates Xen Orchestra Improper Validation of Specified Type of Input Vulnerability | added 2026-11-25 | EPSS 0.011010000, percentile 0.652580000 | CVSS 9.8 CRITICAL
+- `CVE-2025-41450` | Danfoss AK-SM 800A Series | Danfoss AK-SM 800A Series Improper Authentication Vulnerability | added 2026-11-25 | EPSS 0.005130000, percentile 0.370310000 | CVSS 8.2 HIGH
+- `CVE-2023-25914` | Danfoss AK-SM 800A Series | Danfoss AK-SM 800A Series Path Traversal Vulnerability | added 2026-11-25 | EPSS 0.010780000, percentile 0.645850000 | CVSS 8.8 HIGH
+- `CVE-2023-25915` | Danfoss AK-SM 800A Series | Danfoss AK-SM 800A Series Improper Input Validation Vulnerability | added 2026-11-25 | EPSS 0.014310000, percentile 0.732350000 | CVSS 9.9 CRITICAL
+- `CVE-2026-133324` | Mitel MiCollab | Mitel MiCollab Not Failing Securely Vulnerability | added 2026-11-25 | EPSS 0.004140000, percentile 0.273000000
+- `CVE-2026-133275` | Mitel MiCollab | Mitel MiCollab Unrestricted Upload of File with Dangerous Type Vulnerability | added 2026-11-25 | EPSS 0.003150000, percentile 0.168600000
+- `CVE-2026-133311` | Mitel MiCollab | Mitel MiCollab Weak Authentication Vulnerability | added 2026-11-25 | EPSS 0.003960000, percentile 0.253700000
+- `CVE-2026-133303` | Mitel MiCollab | Mitel MiCollab XML Injection Vulnerability | added 2026-11-25 | EPSS 0.005150000, percentile 0.371110000
+- `CVE-2026-133323` | Mitel MiCollab | Mitel MiCollab OS Command Injection Vulnerability | added 2026-11-25 | EPSS 0.025460000, percentile 0.857250000
+- `CVE-2026-132224` | Optimizely Web Experimentation | Optimizely Web Experimentation External Control of Critical State Data Vulnerability | added 2026-11-24 | EPSS 0.007840000, percentile 0.525430000
+- `CVE-2026-131914` | Idunno AntiCsrf | Idunno AntiCsrf Deserialization of Untrusted Data Vulnerability | added 2026-11-24 | EPSS 0.042920000, percentile 0.918900000
 - `CVE-2026-132165` | Drupal Core | Drupal Core Remote Code Execution Vulnerability | added 2026-11-24
-- `CVE-2026-133968` | Project MONAI MONAI Label | Project MONAI MONAI Label Path Traversal Vulnerability | added 2026-11-23 | EPSS 0.271570000, percentile 0.984950000 | CVSS 9.8 CRITICAL
+- `CVE-2026-133968` | Project MONAI MONAI Label | Project MONAI MONAI Label Path Traversal Vulnerability | added 2026-11-23 | EPSS 0.271570000, percentile 0.984950000
 - `CVE-2026-134624` | N-able MailAssure | N-able MailAssure (SpamExperts) Server-Side Request Forgery (SSRF) Vulnerability | added 2026-11-23 | EPSS 0.017930000, percentile 0.788890000
-- `CVE-2026-129448` | Apache Roller | Apache Roller Deserialization of Untrusted Data Vulnerability | added 2026-11-20 | EPSS 0.241590000, percentile 0.983320000
-- `CVE-2026-123890` | Broadcom VMware vCenter | VMWare vCenter Authentication Bypass Using an Alternate Path or Channel Vulnerability | added 2026-11-20 | EPSS 0.050090000, percentile 0.930120000
-- `CVE-2025-42884` | SAP NetWeaver | SAP NetWeaver Improper Neutralization of Special Elements in Data Query Logic Vulnerability | added 2026-11-20 | EPSS 0.011020000, percentile 0.652860000
-- `CVE-2026-76466` | Cisco Expressway Series | Cisco Expressway Series Use of Hard-coded Credentials Vulnerability | added 2026-11-20 | EPSS 0.011160000, percentile 0.656850000
-- `CVE-2024-10441` | Synology DiskStation Manager (DSM) | Synology DiskStation Manager (DSM) Improper Encoding or Escaping of Output Vulnerability | added 2026-11-18 | EPSS 0.027600000, percentile 0.869850000
-- `CVE-2026-40217` | BerriAI LiteLLM | BerriAI LiteLLM Unprotected Alternate Channel Vulnerability | added 2026-11-18 | EPSS 0.202150000, percentile 0.980110000
-- `CVE-2026-90817` | Vanderbilt University Research Electronic Data Capture (REDCap) | Vanderbilt University Research Electronic Data Capture (REDCap) Code Injection Vulnerability | added 2026-11-18 | EPSS 0.188810000, percentile 0.978620000
-- `CVE-2026-90436` | Apache Axis | Apache Axis Unsafe Reflection Vulnerability | added 2026-11-18 | EPSS 0.026950000, percentile 0.866350000
-- `CVE-2026-115731` | Perforce Puppet Enterprise | Perforce Puppet Enterprise Deserialization of Untrusted Data Vulnerability | added 2026-11-17 | EPSS 0.125790000, percentile 0.969280000
 
 **Prevention and mitigation playbook:**
 

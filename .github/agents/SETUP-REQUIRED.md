@@ -79,9 +79,9 @@ agent files and replace with the correct value.
 ## 8. `{ADJACENT_REPO_AGENTS_PATH}`
 
 **Found in:** `references/adjacent-repos.md`
-**Context:** Written in the template (line 33): | **Agent infra path** | `{MANUAL:PIP_PACKAGE_NAME}` |
+**Context:** Written in the template (line 33): | **Agent infra path** | `{MANUAL:ADJACENT_REPO_AGENTS_PATH}` |
 
-**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
+**Action required:** Search for `{MANUAL:ADJACENT_REPO_AGENTS_PATH}` across all generated
 agent files and replace with the correct value.
 
 ---
@@ -89,9 +89,9 @@ agent files and replace with the correct value.
 ## 9. `{ADJACENT_REPO_PATH}`
 
 **Found in:** `references/adjacent-repos.md`
-**Context:** Written in the template (line 32): | **Local path**       | `{MANUAL:PIP_PACKAGE_NAME}` (use `~/` notation, not an absolute home path) |
+**Context:** Written in the template (line 32): | **Local path**       | `{MANUAL:ADJACENT_REPO_PATH}` (use `~/` notation, not an absolute home path) |
 
-**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
+**Action required:** Search for `{MANUAL:ADJACENT_REPO_PATH}` across all generated
 agent files and replace with the correct value.
 
 ---
@@ -99,9 +99,9 @@ agent files and replace with the correct value.
 ## 10. `{PROJECT_REDTEAM_NOTES}`
 
 **Found in:** `references/redteam-methodology.reference.md`
-**Context:** Written in the template (line 237): {MANUAL:PIP_PACKAGE_NAME}
+**Context:** Written in the template (line 237): {MANUAL:PROJECT_REDTEAM_NOTES}
 
-**Action required:** Search for `{MANUAL:PIP_PACKAGE_NAME}` across all generated
+**Action required:** Search for `{MANUAL:PROJECT_REDTEAM_NOTES}` across all generated
 agent files and replace with the correct value.
 
 ---

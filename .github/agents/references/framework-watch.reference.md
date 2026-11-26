@@ -24,7 +24,7 @@ re-rendered on every `--update --merge`.
 <!-- AGENTTEAMS:BEGIN framework_data v=1 -->
 > ⚠️ **UNVERIFIED DATA** — no framework doc was fetched for this snapshot (every fetch was skipped or failed). Run the daily research stage online.
 
-Generated on: `2026-11-25`
+Generated on: `2026-11-20`
 Source: https://docs.anthropic.com/en/docs/claude-code/sub-agents
 Fetch status: `skipped`
 Diff summary: `matched=0 new_upstream=0 missing_upstream=4`
