@@ -1,14 +1,14 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.2.2",
+  "agentteams_version": "1.3.0",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "a5bc8c0e930a59c5144d87814b8e256ad64b04a5",
+    "commit": "536306d2502e3db338846677f2d37489531ac8e7",
     "branch": null,
     "dirty": false,
     "on_remote": null
   },
-  "generated_at": "2026-11-21T00:53:12.446058+00:00",
+  "generated_at": "2026-11-26T02:55:41.604137+00:00",
   "project_name": "mathAgents",
   "framework": "goose",
   "project_type": "research",
@@ -40,12 +40,12 @@
   ],
   "manual_required": 7,
   "template_hashes": {
-    "universal/orchestrator.template.md": "d71641cab1e0d395",
+    "universal/orchestrator.template.md": "3ab470d4c3dc5263",
     "universal/navigator.template.md": "5a8b04969c0727df",
-    "universal/security.template.md": "9e9f79c92ba2cc24",
+    "universal/security.template.md": "266d6bf47f986c3d",
     "universal/code-hygiene.template.md": "6774a03ed3018fe6",
     "universal/adversarial.template.md": "0c7b7cb909b089a0",
-    "universal/conflict-auditor.template.md": "03a61cb6e57afeda",
+    "universal/conflict-auditor.template.md": "fe3b7e0b1deed8b8",
     "universal/conflict-resolution.template.md": "88624f165b7992e7",
     "universal/cleanup.template.md": "6a404be5ad0bfbe9",
     "universal/agent-updater.template.md": "e1801dc15c6cd557",
@@ -73,7 +73,7 @@
     "universal/security-linux-hardening.reference.template.md": "4845cf83b84615f4",
     "universal/security-macos-hardening.reference.template.md": "78fd2835ec2d8869",
     "universal/security-windows-hardening.reference.template.md": "5885668f48e4c295",
-    "universal/security-infrastructure-layers.reference.template.md": "5c4c67f28d67149b",
+    "universal/security-infrastructure-layers.reference.template.md": "a8c241fdfac16f2b",
     "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
     "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
     "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
@@ -98,7 +98,7 @@
     "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
     "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
     "workstream-expert.template.md": "19e099ff5eaf447b",
-    "copilot-instructions.template.md": "2472989d0dbf01d0",
+    "copilot-instructions.template.md": "9eace4c3c59c17cf",
     "builder/team-builder-goose.template.md": "48369eef0c577865",
     "domain/content-enricher.template.md": "25b7c467ae7a8978"
   },
@@ -593,16 +593,16 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "3f3f02a8afb471be",
+  "manifest_fingerprint": "39a912b92e71e4b5",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.reference.md": "dbdf64ab838fe52b",
-    "references/security-vulnerability-watch.json": "f9d15cea21766b3d",
-    "../../AGENTS.md": "234ad1d8b03b9bf3",
-    "security.yaml": "5c8f88866bc8c928",
+    "references/security-vulnerability-watch.reference.md": "ae35931991babcbb",
+    "references/security-vulnerability-watch.json": "8e8e97ef91bf3058",
+    "../../AGENTS.md": "e5230934a886ac44",
+    "security.yaml": "07deb0705506b1ad",
     "references/ref-lean-4-reference.md": "816fe8da794dcdc3",
     "references/ref-mathlib-reference.md": "fc8f89ad91a8d9ee",
-    "orchestrator.yaml": "1d94b67bad5526c6",
+    "orchestrator.yaml": "19d3397431fde898",
     "navigator.yaml": "da6d934045e71cbc",
     "code-hygiene.yaml": "c1d1db3d17782d04",
     "adversarial.yaml": "9c0565b9d4841b54",
@@ -643,17 +643,17 @@
     "proof-library-expert.yaml": "26a02a0d4bb24c86",
     "evaluation-expert.yaml": "8b2f8b1f38a815cb",
     "team-builder.yaml": "d1218e2775a31c97",
-    "SETUP-REQUIRED.md": "b6c16adfbb523442",
+    "SETUP-REQUIRED.md": "4d53d3a995a3b6ad",
     "content-enricher.yaml": "5af962b91b9171b4",
     "references/authorized-verify-keys/README.md": "badf32b421079acf",
-    "references/goose-capabilities-reference.md": "74b8df3f54303f18",
+    "references/goose-capabilities-reference.md": "0711b4513af6a118",
     "references/pipeline-graph.md": "662997c4f9bf7a4e"
   },
   "front_matter_baseline": {},
   "front_matter_baseline_version": 2,
   "fence_baseline": {
     "references/security-vulnerability-watch.reference.md": {
-      "threat_data": "6c7efe7d3868b8128375520fe71a77687a2f6371282cbd4947aa0054f54e2d17",
+      "threat_data": "e45af1284fa780e41632776c7cd156322171941e683e8c5f208f559bda6953b3",
       "operational_integration_process": "d0f4bee8580d904734bf5622085cd2e48005c302778e24410f92b310603e1f8a"
     },
     "../../AGENTS.md": {
@@ -664,9 +664,9 @@
       "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
       "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
-      "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
+      "constitutional_rules_baseline": "ef1e68d02dafa745d3b7a0b8addcf47e34b04561eeb2ec5767e96ef4eab4a095",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
-      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
+      "toolchain_group_rule": "b298e556b034532ccb790b7180c8ebf0d9034240d11f636e334ffbda126b425d",
       "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
@@ -674,8 +674,8 @@
     "security.yaml": {
       "security_authority": "140eca763116e14cedaffd0d8ab5c2faed93aefe356b8692fbb3132fc365451a",
       "invariant_core": "261698fd146e5c0234b49d1cdc195a7025cae1b1190fbe47cd80cc40f0492a37",
-      "security_rules_invariant": "2362166700f8439458284d01dcf48d0d84813be6b5b1198ad74bb198273abb15",
-      "threat_intelligence": "a079d3ddcf91735352fb610d25dbf14d2ffbe220a05b7f1699c7fdc031f6163c",
+      "security_rules_invariant": "0dee2b1309ba9ff72bcbb18b9186476cc411ea760454863f00e259caca8ce174",
+      "threat_intelligence": "16be05404fe25a89dc96cd6aff12552dd23fb14f8b4981dcc72185865248af39",
       "security_verdict_contract": "448cb2cfe3e558a7961eddf9c4e300d5e83c2829fb2c29e4c11873552885ff37"
     },
     "references/ref-lean-4-reference.md": {
@@ -693,7 +693,7 @@
       "authority_hierarchy": "105ad3864cb0e77d025d0f863d156c2a76f69d7c98ef773719d784fab2422a8f",
       "routing_table_rows": "0ac7eea9f8bd048470ddfe35e0b84bcf386d5eaf438f3d62886ef9f6f48cefc9",
       "update_compatibility_source_pack": "f3ecc55f62ca37bae93c4b7d182258232f697f42b6c75e377929d1e6f9a2cafc",
-      "available_workflows": "3f297798a5b72d5fbfcc0e4ef371f4ade633bc49de3efe137f60e25fea5c8f8c"
+      "available_workflows": "0ad8e0ffdef037c88ab817b1100d9a104d0ca34c3db1dfe1d9c871786c18a7b9"
     },
     "navigator.yaml": {
       "invariant_core": "e2b9c8a6f77dacbe5bcd8caebcf3c023bc67f330940aaeaacb0b1dc97b39e965",
@@ -820,13 +820,13 @@
       "review_protocol": "5dc3b5a46b2a5e82d4d313bafd9ad931635a0b28bda0e719b4163a32a5610432"
     },
     "SETUP-REQUIRED.md": {
-      "content": "b6c16adfbb523442d18139d65e04a23f85ff35591d247df014c88781920b87d8"
+      "content": "4d53d3a995a3b6addf33a851cc2d6e5368b6fdb93974b41094371fea739b8779"
     },
     "references/authorized-verify-keys/README.md": {
       "content": "badf32b421079acf99f54a9748ec8d8115e224a762329dfce074095ed50a56a6"
     },
     "references/goose-capabilities-reference.md": {
-      "content": "74b8df3f54303f1841a09b01b4c4ad1256137839f1df1d188e6316da33f1b9d0"
+      "content": "0711b4513af6a1189af595e4c01d7c125e0122caf1b8b6b11440adb9881ae010"
     },
     "references/pipeline-graph.md": {
       "content": "662997c4f9bf7a4e1a79b65e5112ecd50195bddc143a5957d0137f975cbce0f3"
@@ -928,7 +928,7 @@
       "authority_hierarchy": "105ad3864cb0e77d025d0f863d156c2a76f69d7c98ef773719d784fab2422a8f",
       "routing_table_rows": "0ac7eea9f8bd048470ddfe35e0b84bcf386d5eaf438f3d62886ef9f6f48cefc9",
       "update_compatibility_source_pack": "f3ecc55f62ca37bae93c4b7d182258232f697f42b6c75e377929d1e6f9a2cafc",
-      "available_workflows": "3f297798a5b72d5fbfcc0e4ef371f4ade633bc49de3efe137f60e25fea5c8f8c"
+      "available_workflows": "0ad8e0ffdef037c88ab817b1100d9a104d0ca34c3db1dfe1d9c871786c18a7b9"
     },
     ".goose/recipes/output-compiler.yaml": {
       "*": "f1b4803aa5f26f34bdc3d09007325c33d2b4510edeb8da7e94fe959f02e17ed9"
@@ -988,8 +988,8 @@
     ".goose/recipes/security.yaml": {
       "security_authority": "140eca763116e14cedaffd0d8ab5c2faed93aefe356b8692fbb3132fc365451a",
       "invariant_core": "261698fd146e5c0234b49d1cdc195a7025cae1b1190fbe47cd80cc40f0492a37",
-      "security_rules_invariant": "2362166700f8439458284d01dcf48d0d84813be6b5b1198ad74bb198273abb15",
-      "threat_intelligence": "a079d3ddcf91735352fb610d25dbf14d2ffbe220a05b7f1699c7fdc031f6163c",
+      "security_rules_invariant": "0dee2b1309ba9ff72bcbb18b9186476cc411ea760454863f00e259caca8ce174",
+      "threat_intelligence": "16be05404fe25a89dc96cd6aff12552dd23fb14f8b4981dcc72185865248af39",
       "security_verdict_contract": "448cb2cfe3e558a7961eddf9c4e300d5e83c2829fb2c29e4c11873552885ff37"
     },
     ".goose/recipes/statement-formalizer.yaml": {
@@ -1024,9 +1024,9 @@
       "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
       "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
-      "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
+      "constitutional_rules_baseline": "ef1e68d02dafa745d3b7a0b8addcf47e34b04561eeb2ec5767e96ef4eab4a095",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
-      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
+      "toolchain_group_rule": "b298e556b034532ccb790b7180c8ebf0d9034240d11f636e334ffbda126b425d",
       "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"

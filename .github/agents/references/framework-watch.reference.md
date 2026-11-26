@@ -22,7 +22,7 @@ authoritative source; the table below is a human-readable projection
 re-rendered on every `--update --merge`.
 
 <!-- AGENTTEAMS:BEGIN framework_data v=1 -->
-
+> ⚠️ **UNVERIFIED DATA** — no framework doc was fetched for this snapshot (every fetch was skipped or failed). Run the daily research stage online.
 
 Generated on: `2026-11-20`
 Source: https://docs.anthropic.com/en/docs/claude-code/sub-agents
