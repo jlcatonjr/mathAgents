@@ -1,14 +1,14 @@
 {
   "schema_version": "1.5",
-  "agentteams_version": "1.2.2",
+  "agentteams_version": "1.3.0",
   "agentteams_source": {
     "kind": "vcs-pin",
-    "commit": "a5bc8c0e930a59c5144d87814b8e256ad64b04a5",
+    "commit": "536306d2502e3db338846677f2d37489531ac8e7",
     "branch": null,
     "dirty": false,
     "on_remote": null
   },
-  "generated_at": "2026-11-21T00:58:03.298718+00:00",
+  "generated_at": "2026-11-26T03:00:36.898612+00:00",
   "project_name": "mathAgents",
   "framework": "codex",
   "project_type": "research",
@@ -35,12 +35,12 @@
   "files_written": [],
   "manual_required": 7,
   "template_hashes": {
-    "universal/orchestrator.template.md": "d71641cab1e0d395",
+    "universal/orchestrator.template.md": "3ab470d4c3dc5263",
     "universal/navigator.template.md": "5a8b04969c0727df",
-    "universal/security.template.md": "9e9f79c92ba2cc24",
+    "universal/security.template.md": "266d6bf47f986c3d",
     "universal/code-hygiene.template.md": "6774a03ed3018fe6",
     "universal/adversarial.template.md": "0c7b7cb909b089a0",
-    "universal/conflict-auditor.template.md": "03a61cb6e57afeda",
+    "universal/conflict-auditor.template.md": "fe3b7e0b1deed8b8",
     "universal/conflict-resolution.template.md": "88624f165b7992e7",
     "universal/cleanup.template.md": "6a404be5ad0bfbe9",
     "universal/agent-updater.template.md": "e1801dc15c6cd557",
@@ -68,7 +68,7 @@
     "universal/security-linux-hardening.reference.template.md": "4845cf83b84615f4",
     "universal/security-macos-hardening.reference.template.md": "78fd2835ec2d8869",
     "universal/security-windows-hardening.reference.template.md": "5885668f48e4c295",
-    "universal/security-infrastructure-layers.reference.template.md": "5c4c67f28d67149b",
+    "universal/security-infrastructure-layers.reference.template.md": "a8c241fdfac16f2b",
     "universal/ai-bad-habits-watch.reference.template.md": "3265a4ef0b7e5f7a",
     "universal/framework-watch.reference.template.md": "ca23bcc73afc2e2a",
     "universal/adjacent-repos.reference.template.md": "e66157a91f72492a",
@@ -93,7 +93,7 @@
     "universal/retrieval-integration.reference.template.md": "71cbf701c97a6e22",
     "universal/retrieval-trigger-contract.reference.template.md": "b5934b1f48552945",
     "workstream-expert.template.md": "19e099ff5eaf447b",
-    "copilot-instructions.template.md": "2472989d0dbf01d0",
+    "copilot-instructions.template.md": "9eace4c3c59c17cf",
     "builder/team-builder-copilot-vscode.template.md": "2754dbaacf3814d0",
     "domain/content-enricher.template.md": "25b7c467ae7a8978"
   },
@@ -577,20 +577,20 @@
     "repo-liaison",
     "git-operations"
   ],
-  "manifest_fingerprint": "0868f1ccb54adb47",
+  "manifest_fingerprint": "730261ef4c9a7fcf",
   "fingerprint_algo_version": 1,
   "file_hashes": {
-    "references/security-vulnerability-watch.json": "afe0ef6a9c1c0826",
-    "security.toml": "2cd1d018edc6729c",
+    "references/security-vulnerability-watch.json": "2cfd0ef543e29efd",
+    "security.toml": "42ecab6efeb42552",
+    "SETUP-REQUIRED.md": "4d53d3a995a3b6ad",
     "../../.agents/skills/tool-lean-4/SKILL.md": "fd8886ab95d67ed2",
     "../../.agents/skills/tool-mathlib/SKILL.md": "56f4835c4f7f93b5",
     "references/code-hygiene-rules.reference.md": "181cd5dc18b87d7f",
-    "references/security-vulnerability-watch.reference.md": "2eb9a90af2876e6a",
-    "references/framework-watch.reference.md": "2d8e8df83972c912",
-    "orchestrator.toml": "f6c6928c5519875c",
+    "references/security-vulnerability-watch.reference.md": "24c3ba1d35911bbc",
+    "orchestrator.toml": "3d61d38b8e5b1d60",
     "navigator.toml": "b05d9a19ce492a5f",
     "code-hygiene.toml": "d9558ff50a10ab04",
-    "conflict-auditor.toml": "2db9833d12660819",
+    "conflict-auditor.toml": "963a99cb20c5ad7c",
     "conflict-resolution.toml": "30ea27ab54361ffe",
     "cleanup.toml": "71aabf57e1a2d343",
     "agent-updater.toml": "c510985cf18044d8",
@@ -625,9 +625,8 @@
     "proof-dossiers-expert.toml": "7c102c62ddb05d42",
     "proof-library-expert.toml": "e1b96fc1965bc2a9",
     "evaluation-expert.toml": "749566b7b7debfd7",
-    "../../AGENTS.md": "234ad1d8b03b9bf3",
+    "../../AGENTS.md": "e5230934a886ac44",
     "team-builder.toml": "67112b2ee5aec8d9",
-    "SETUP-REQUIRED.md": "b6c16adfbb523442",
     "content-enricher.toml": "3c9084a432be8c99",
     "references/write-policy.reference.md": "d5d003ec5740b609",
     "references/mcp-need.reference.md": "15c753f1a114601e",
@@ -647,12 +646,15 @@
   "fence_baseline": {
     "security.toml": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
-      "security_rules_invariant": "45159585a582415482288ea9821ecdd62df9c53f2527e1874b1801ec9a30ea7e",
-      "threat_intelligence": "0ff1dc19c6fa019c4da355675cb2e42114379dbd266343fcffacd7abf9ce580a",
+      "security_rules_invariant": "25bcf0caef465ba752c523c4aa89c4cfd19a5863bb6c41f159fd1f51ff40d2b8",
+      "threat_intelligence": "05d3222da1057a57478ea9a9126146804f591f25410fb5688dc32ebe02c30329",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
       "codex_translation": "98cd2d9b928f75a45ab2db39f6215138e0900cfb8afccaa839d3eea5f424efcd"
+    },
+    "SETUP-REQUIRED.md": {
+      "content": "4d53d3a995a3b6addf33a851cc2d6e5368b6fdb93974b41094371fea739b8779"
     },
     "../../.agents/skills/tool-lean-4/SKILL.md": {
       "key_api_surface": "98446aeef126997088239164244a7a350b2354dcf0ab94a6368fe23b9b02e2c6",
@@ -668,18 +670,14 @@
       "content": "181cd5dc18b87d7fd21f0e3815ae057958523122b8005197f05d1bf1591b9a52"
     },
     "references/security-vulnerability-watch.reference.md": {
-      "threat_data": "6c7efe7d3868b8128375520fe71a77687a2f6371282cbd4947aa0054f54e2d17",
+      "threat_data": "e45af1284fa780e41632776c7cd156322171941e683e8c5f208f559bda6953b3",
       "operational_integration_process": "d0f4bee8580d904734bf5622085cd2e48005c302778e24410f92b310603e1f8a"
-    },
-    "references/framework-watch.reference.md": {
-      "operational_integration_process": "157d0f536d83f2a774e8b4520699ed625464572a33f1eb05f8e57498b91e1361",
-      "conformance_standard_check": "537d190f9ffb045d217e5a602dba6a0a5fafb21283aeaa0d28435edb5952c618"
     },
     "orchestrator.toml": {
       "constitutional_core": "f05ead693f33d316cc83453eb195d232f5ac76cd36d8cce45b3605e14747def4",
       "authority_hierarchy": "f62fc5859a42130d9eb619a34d174e078b8793e94e866cf9ffdb055442310310",
       "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d",
-      "codex_translation": "e33e39e0eb2f7f992292848e0d9f68c85cebc07e42d08430f7967c512d4febaf"
+      "codex_translation": "5b6df3d86850267a0476811d0b180714bc2c2f7815c1b446418713602b0d6711"
     },
     "navigator.toml": {
       "workstream_source_map": "17c14e9a0096a09da4e5a39b686c5d9c98a293e74f6e5d276419e0977fc09d81",
@@ -703,7 +701,7 @@
       "handoff_payload_codes": "38a1bcd36aa352b02b6d96b38af008454e46d34b558188c323241ef43c3f3e1a",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "14ecf29d97471cb7af3cdc3591b5fc92a2b5b3bc2c917b17050cf08734d47f35",
-      "codex_translation": "1c8da56ad34774d9407742251813c1a5317c62bd609f6ce80eaf40136e3b6d98"
+      "codex_translation": "e4238794a5a55e414635683d6cc13ebe81047e9cfe977a9729bed84daaf6b490"
     },
     "conflict-resolution.toml": {
       "memory_index_consultation": "a7a2865c4d9ffd5e2841602d8930890fdaef4f0f06ba2032628769e46090b39e",
@@ -879,18 +877,15 @@
       "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
       "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
-      "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
+      "constitutional_rules_baseline": "ef1e68d02dafa745d3b7a0b8addcf47e34b04561eeb2ec5767e96ef4eab4a095",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
-      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
+      "toolchain_group_rule": "b298e556b034532ccb790b7180c8ebf0d9034240d11f636e334ffbda126b425d",
       "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"
     },
     "team-builder.toml": {
       "codex_translation": "af8a8d3360dea77e678ef3dc6d8197dd534fddc69304797eb0f90ab14e20c110"
-    },
-    "SETUP-REQUIRED.md": {
-      "content": "b6c16adfbb523442d18139d65e04a23f85ff35591d247df014c88781920b87d8"
     },
     "content-enricher.toml": {
       "codex_translation": "b00724a4e356510e26d3e462e284c45fa322533deda771694b7bfd59ec756e6e"
@@ -945,7 +940,7 @@
       "handoff_payload_codes": "38a1bcd36aa352b02b6d96b38af008454e46d34b558188c323241ef43c3f3e1a",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "14ecf29d97471cb7af3cdc3591b5fc92a2b5b3bc2c917b17050cf08734d47f35",
-      "codex_translation": "1c8da56ad34774d9407742251813c1a5317c62bd609f6ce80eaf40136e3b6d98"
+      "codex_translation": "e4238794a5a55e414635683d6cc13ebe81047e9cfe977a9729bed84daaf6b490"
     },
     ".codex/agents/conflict-resolution.toml": {
       "memory_index_consultation": "a7a2865c4d9ffd5e2841602d8930890fdaef4f0f06ba2032628769e46090b39e",
@@ -1025,7 +1020,7 @@
       "update_compatibility_source_pack": "24662ea1c046bf2831dfa898b937114683aa5e9ca695b243aaf3241ca6ab34ea",
       "available_workflows": "bbc4993e6e885a619f72b5aa45ddb196d85278a9b0d383f2567ad254f7ddb94e",
       "write_policy": "1e245edb02f88d308dcf2e0968630e6951e399103b8bbcc7a80f969b0762e94d",
-      "codex_translation": "e33e39e0eb2f7f992292848e0d9f68c85cebc07e42d08430f7967c512d4febaf"
+      "codex_translation": "5b6df3d86850267a0476811d0b180714bc2c2f7815c1b446418713602b0d6711"
     },
     ".codex/agents/output-compiler.toml": {
       "content": "e84a70143a1ed9897e9391e83974898ff2704d72664577343538fa37b7261555",
@@ -1100,8 +1095,8 @@
     },
     ".codex/agents/security.toml": {
       "security_authority": "65c01769e1409ffda7d241cba6c2e26a321191c0418ddd4a6e64b49457fa6d63",
-      "security_rules_invariant": "45159585a582415482288ea9821ecdd62df9c53f2527e1874b1801ec9a30ea7e",
-      "threat_intelligence": "0ff1dc19c6fa019c4da355675cb2e42114379dbd266343fcffacd7abf9ce580a",
+      "security_rules_invariant": "25bcf0caef465ba752c523c4aa89c4cfd19a5863bb6c41f159fd1f51ff40d2b8",
+      "threat_intelligence": "05d3222da1057a57478ea9a9126146804f591f25410fb5688dc32ebe02c30329",
       "security_verdict_contract": "b716341cc2321f62c266f85cae69c7b639cf678396cec2d7ce4b933ea9c0b029",
       "write_policy": "344c071911ca18e2356c63a9033470a088301fb946a9e955e4463a0348f6bb83",
       "invariant_core": "ff22ac3ecdf1e94935ebec4ef2960946be13a0362b416ada020c97065d6e8f87",
@@ -1144,9 +1139,9 @@
       "tone_and_style": "d0b42a0c3d2c045dbbe4e980eb42023b1b31915d93e219545a8f78de1dcece24",
       "authority_hierarchy": "0216bd6bc0e4159c31ab200a9981b364db6d3498da1eaf69f8c129175d74766a",
       "constitutional_core": "98565878445aea43e27456f8cb1384afc511b17016cada4de5b28fb756937289",
-      "constitutional_rules_baseline": "35c8e90f8fd62e9779a26caa165b74c836aec2a58762f8607aae20225328cb67",
+      "constitutional_rules_baseline": "ef1e68d02dafa745d3b7a0b8addcf47e34b04561eeb2ec5767e96ef4eab4a095",
       "source_repositories": "c66b5d558292f94198a8b448df73b56483e59a55c28b95d80304075250af2af0",
-      "toolchain_group_rule": "4555e58798afd30feeab9190a62dd54fec914d1a2d1c8f8ae93a37464235c95d",
+      "toolchain_group_rule": "b298e556b034532ccb790b7180c8ebf0d9034240d11f636e334ffbda126b425d",
       "github_management_rule": "03ca62add9f498fdc120b8e89fd9fb81dbc813f57a2c2533fb7e1ae7bdebcf4b",
       "dev_merge_rule": "181ced5afc7d1e7e490eaf870d3bebf2e1fa0134a76b1187d335e6f169eba28b",
       "codex_write_policy": "903bf63811c39668446020c28b86f4e7b145e5530d2d159f1f307ae2f3a5d11b"

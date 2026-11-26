@@ -1,0 +1,20 @@
+{
+  "timestamp": "DATE",
+  "date": "DATE",
+  "requesting_agent": "security",
+  "author": "operator",
+  "key_id": "opr-2026-11",
+  "verdict": "PASS",
+  "effect_grants": "",
+  "effect_destructive": "false",
+  "effect_cross_repo": "false",
+  "effect_bulk": "false",
+  "action_reviewed": "release-line-agentteams-1.3",
+  "scope": "release-line-agentteams-1.3",
+  "derives_from": "release-policy-public-1.1; release-policy-public-1.1-amend-3",
+  "effect_relaxes": "",
+  "effect_targets": "toolchain.lock",
+  "conditions": "Under docs/release-policy.md \u00a73 as adopted by release-policy-public-1.1-amend-3 (sha256 a7b5def3c1fd5fa17b56eb4b205c8ee1a877ddcea85ccf76a71e7c4341b607d6), mathAgents' toolchain.lock leaves the agentteams 1.2 line for the 1.3 line: the agentteams pin may move to a verified, signed, final (not pre-release) agentteams v1.3.N tag, its peeled 40-hex commit, by the pin-move PR on main that release/1.3 is then cut from. Each such move still needs everything else \u00a73 requires (S-9 tag verification, the vulnerability search, the latest-stable rule, the @security review and its row) and the operator's merge approval at a fixed head. It does not cover a pin to any other line, it does not lift the S-10 cooldown for a non-member, and it does not authorize the render, which needs its own signed overwrite rows. It does not cover a pin-move PR that changes .github/agentteams-autosync-ref (only the autosync gate writes that file); such a PR needs its own release-line row targeting toolchain.lock and .github/agentteams-autosync-ref. It grants and relaxes nothing and takes no exception-registry slot.",
+  "conditions_verified": "rc.1 dry run 2026-11-24 (researchteam v1.3.0-rc.1: tag object 22359c74, peeled commit 26ee0611; agentteams v1.3.0: tag object 1621402d, peeled commit 536306d2; report t3-step0-logs/REPORT.md sha256 6d1321a0, private) and final tags verified 2026-11-25 (researchteam v1.3.0: tag object 68d0dcd8, peeled commit 570724f5): both verify against the release key, verify-toolchain-pin with --pin-repos exit 0 on a lockfile naming both v1.3.0 tags; Stage A on chore/pin-v130 wrote the lock after both .tag= lines were dropped (no --sync-extras)",
+  "evidence": "1.3.0 release coordination with the fleet coordinator session; @security t3-pin-130-vetting and pin-v130-stageA-review; operator step-5 rulings 2026-11-25; tmp/by-week/2026-W47/t3-pin-1.3 (private)"
+}
