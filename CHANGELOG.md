@@ -13,6 +13,60 @@ versioned here; a result's status is its G-KERNEL report.
 
 ## [Unreleased]
 
+## [1.3.0rc1] — 2026-11-26
+
+### release notes
+
+`v1.3.0-rc.1` is the first candidate of the 1.3 line, tagged on `release/1.3`, which was cut at `6deb009` (the merge of
+#49). The release:
+- moves the toolchain to the 1.3 line: researchteam `v1.3.0` and agentteams `v1.3.0`, the peeled commits of verified
+  signed tags, under the operator-signed release-line rows `release-line-agentteams-1.3` and
+  `release-line-researchteam-1.3` (release-policy amendment 3);
+- re-renders every agent surface under agentteams 1.3.0 with the operator's signed single-use overwrite rows, and aligns
+  Rule 11's wording ("or acts in bulk") across `AGENTS.md`, `.claude/CLAUDE.md` and `.github/copilot-instructions.md`;
+- rotates the operator's decision-signing key to `opr-2026-11`: the new verify key in the three stores, the still-needed
+  rows re-signed, and the toolchain-group file at sequence 5;
+- completes the API reference for 1.3.0. The public API is unchanged: the dossier gate functions now return warnings
+  they used to drop, through the `notices` fields that already existed (see Changed).
+
+**To pin this candidate:** verify the tag against `~/.config/agentteams/allowed_signers`, then pin the commit it points
+to (its peeled commit), never a branch.
+
+### Added
+- Release-policy amendment 3 (#39): the 1.3 line, its release-line rows and the lock move.
+- The decision key `opr-2026-11` in the three verify-key stores (#31), with the rows still needed re-signed under it
+  (#43) and the toolchain-group file adopted at sequence 5 (#45).
+- A complete API reference for 1.3.0 (#48): a glossary and conventions in `docs/api-reference/index.md`, the methods,
+  properties, exceptions, writer refusals and side effects each module was missing, and a corrected `cli.md`. Docstrings
+  match the pages, and `check_api_doc_parity.py --strict` passes.
+- `.github/agents/references/intentional-pins.json` (#49): the Codex sections kept at their earlier text for 1.3.0, each
+  with a review date.
+
+### Changed
+- The toolchain moved along the 1.2 line before the 1.3 move: researchteam `v1.2.1` + agentteams `v1.2.2` (#28), a
+  toolchain-group move recorded by an `@security` review. Then the 1.3 move (#49).
+- `validate_dossiers`, `require_stage` and `require_fidelity` now return the dossier validator's pin-stamp warnings in
+  `GateResult.notices` (always empty from the validator before), and `run_gates` passes them on in
+  `GatesReport.notices`, instead of dropping them (#48). The warnings never change `success`, and the wording of
+  `notices` is outside the versioned API (`STABILITY.md`), so the change is backward-compatible.
+- Every agent surface is re-rendered under agentteams 1.3.0 (#49): the security agent and its vulnerability watch, and
+  the Codex catch-up of the agentteams 1.3.0 template text.
+- An operator render helper no longer fails open when `grep -q` closes its pipe early (#37).
+- Documentation uses generic wording where it named private repositories (#35).
+
+### Known issues
+- `framework-watch.reference.md` on the four surfaces records an unverified framework snapshot dated 2026-11-20 (no
+  framework doc was fetched during the render); the next render with a successful fetch refreshes it. Accepted by an
+  operator ruling recorded as `pin-v130-r7-framework-watch-ruling`.
+- Three gaps between the Codex/Goose security files and the other surfaces predate this release and fail safe: the Codex
+  vulnerability-watch header date sits outside its refreshed fence, the Codex section manifest omits "and S-VM", and the
+  Codex and Goose security agents lack the project's S-10 first-party-pins note. The first two are to be fixed upstream in
+  agentteams' Codex projection; the third is to be fixed by a later project change.
+- Four of the Codex sections kept in `intentional-pins.json` are to be released in a 1.3.x update: the orchestrator's
+  `available_workflows` and the `git-operations`, `work-summarizer` and `team-builder` agents.
+
+**Toolchain:** agentteams `v1.3.0` at `536306d2` · researchteam `v1.3.0` at `570724f5` · Lean `leanprover/lean4:v4.34.1` · Mathlib `d13f23b`.
+
 ## [1.2.0] — 2026-11-19
 
 ### release notes
@@ -433,7 +487,8 @@ mathagents freezes at 1.0.0 on agentteams 1.0 final (decision D43). v0.2.7 is th
 
 **Toolchain:** agentteams 1.0.0rc7 (commit not recorded) · Lean `v4.34.1` · Mathlib `d13f23b`.
 
-[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/jlcatonjr/mathAgents/compare/v1.3.0-rc.1...HEAD
+[1.3.0rc1]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0...v1.3.0-rc.1
 [1.2.0]: https://github.com/jlcatonjr/mathAgents/compare/v1.2.0-rc.1...v1.2.0
 [1.2.0rc1]: https://github.com/jlcatonjr/mathAgents/compare/v1.1.0...v1.2.0-rc.1
 [1.1.0]: https://github.com/jlcatonjr/mathAgents/releases/tag/v1.1.0
