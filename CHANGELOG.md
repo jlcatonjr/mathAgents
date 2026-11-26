@@ -26,8 +26,8 @@ versioned here; a result's status is its G-KERNEL report.
   Rule 11's wording ("or acts in bulk") across `AGENTS.md`, `.claude/CLAUDE.md` and `.github/copilot-instructions.md`;
 - rotates the operator's decision-signing key to `opr-2026-11`: the new verify key in the three stores, the still-needed
   rows re-signed, and the toolchain-group file at sequence 5;
-- completes the API reference for 1.3.0. The public API is unchanged: one function family now returns warnings it used
-  to drop, through a field that already existed (see Changed).
+- completes the API reference for 1.3.0. The public API is unchanged: the dossier gate functions now return warnings
+  they used to drop, through the `notices` fields that already existed (see Changed).
 
 **To pin this candidate:** verify the tag against `~/.config/agentteams/allowed_signers`, then pin the commit it points
 to (its peeled commit), never a branch.
@@ -45,12 +45,13 @@ to (its peeled commit), never a branch.
 ### Changed
 - The toolchain moved along the 1.2 line before the 1.3 move: researchteam `v1.2.1` + agentteams `v1.2.2` (#28), a
   toolchain-group move recorded by an `@security` review. Then the 1.3 move (#49).
-- `validate_dossiers`, `require_stage`, `require_fidelity` and `run_gates` now return the dossier validator's pin-stamp
-  warnings in `GateResult.notices` instead of dropping them (#48). The warnings never change `success`; the field
-  already existed and was always empty, so the change is backward-compatible.
+- `validate_dossiers`, `require_stage` and `require_fidelity` now return the dossier validator's pin-stamp warnings in
+  `GateResult.notices` (always empty from the validator before), and `run_gates` passes them on in
+  `GatesReport.notices`, instead of dropping them (#48). The warnings never change `success`, and the wording of
+  `notices` is outside the versioned API (`STABILITY.md`), so the change is backward-compatible.
 - Every agent surface is re-rendered under agentteams 1.3.0 (#49): the security agent and its vulnerability watch, and
   the Codex catch-up of the agentteams 1.3.0 template text.
-- `scripts/operator/pause_signing_and_render.sh` no longer fails open when `grep -q` closes its pipe early (#37).
+- An operator render helper no longer fails open when `grep -q` closes its pipe early (#37).
 - Documentation uses generic wording where it named private repositories (#35).
 
 ### Known issues
@@ -59,9 +60,10 @@ to (its peeled commit), never a branch.
   operator ruling recorded as `pin-v130-r7-framework-watch-ruling`.
 - Three gaps between the Codex/Goose security files and the other surfaces predate this release and fail safe: the Codex
   vulnerability-watch header date sits outside its refreshed fence, the Codex section manifest omits "and S-VM", and the
-  Codex and Goose security agents lack the project's S-10 first-party-pins note. The first two are fixed upstream; the
-  third by a later project change.
-- Four of the Codex sections in `intentional-pins.json` are to be released in a 1.3.x update.
+  Codex and Goose security agents lack the project's S-10 first-party-pins note. The first two are to be fixed upstream in
+  agentteams' Codex projection; the third is to be fixed by a later project change.
+- Four of the Codex sections kept in `intentional-pins.json` are to be released in a 1.3.x update: the orchestrator's
+  `available_workflows` and the `git-operations`, `work-summarizer` and `team-builder` agents.
 
 **Toolchain:** agentteams `v1.3.0` at `536306d2` · researchteam `v1.3.0` at `570724f5` · Lean `leanprover/lean4:v4.34.1` · Mathlib `d13f23b`.
 
